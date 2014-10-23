@@ -1,7 +1,9 @@
-# Introducción
-- [Agradecimientos](1-intro/1-thanks.md)
-- [Sobre este libro](1-intro/2-about-this.md)
-- [Sobre KumbiaPHP](1-intro/3-about-kumbiaphp.md)
-- [Sobre la comunidad](1-intro/4-about-community.md)
-- [¿Porque usar KumbiaPHP Framework?](5-intro/why-kumbiaphp.md)
-- [¿Qué aporta KumbiaPHP?](1-intro/6-features.md)
+# Lista de temas
+## Introducción
+* [Prefacio](intro/preface.md#prefacio) 
+  * [Agradecimietos](intro/preface.md#agradecimietos) 
+  * [Acerca del Manual](intro/preface.md#acerca-del-manual) 
+  * [Acerca del Manual](intro/preface.md#acerca-del-manual) 
+  * [Sobre la comunidad](intro/preface.md#sobre-la-comunidad) 
+  * [¿Porque usar KumbiaPHP Framework?](intro/preface.md#¿porque-usar-kumbiaphp-framework?) 
+  * [¿Qué aporta KumbiaPHP?](intro/preface.md#¿qué-aporta-kumbiaphp?) 

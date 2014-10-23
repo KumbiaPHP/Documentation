@@ -8,7 +8,7 @@ El libro de KumbiaPHP intenta comunicar, todo lo que este framework puede ayudar
 
 Esta versión del manual ha cambiado mucho de la anterior. Gracias a la comunidad se han reflejado cuestiones que se repetían en grupo, foro e IRC. También se detecto el mal uso del MVC, y no se aprovechaban las facilidades del POO. Se ha intentado mejorar esos puntos recurrentes de consulta, así como mejorar el entendimiento de uso, para que creen mejores y más mantenibles aplicaciones.
 
-##Acerca del Manual
+##Acerca de Kumbia
 KumbiaPHP es un producto latino para el mundo. Programar debe ser tan bueno como bailar y KumbiaPHP es un baile, un baile para programar. KumbiaPHP es un framework de libre uso bajo licencia new BSD. Por lo tanto, puedes usar KumbiaPHP para tus proyectos siempre y cuando tengas en cuenta la licencia. Te aconsejamos que siempre uses versiones estables y lo más recientes posibles, ya que se incluyen correcciones, nuevas funcionalidades y otras mejoras interesantes.
 
 ##Sobre la comunidad
