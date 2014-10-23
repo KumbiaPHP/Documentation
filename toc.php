@@ -35,10 +35,11 @@ function generate_toc($argc, $argv){
 }
 
 
-function toc_file($path){
+function toc_file($path, $use_path = TRUE){
     $content = file_get_contents($path);
     preg_match_all('/(#{1,})(.*)/m',$content,$salida, PREG_SET_ORDER);
     $text = '';
+    $path = $use_path?$path:'';
     foreach ($salida as $key => $value) {
         $tab   = substr(str_replace('#', '  ', $value[1]), 0, -2);
         $title = $value[2];

@@ -13,7 +13,7 @@ $instance = new Markdown();
 $text = file_get_contents($file);
 ?>
 <div class="toc">
-<?php echo $instance->text(toc_file($file));?>
+<?php echo $instance->text(toc_file($file, FALSE));?>
 </div>
 
 <?php echo $instance->text($text);?>
