@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+include 'autoload.php';
 $file =  ($argc < 1 || !isset($argv[1]))? NULL: $argv[1];
 
 if(empty($file) || !is_file($file)){
@@ -42,7 +43,8 @@ function toc_file($path){
     foreach ($salida as $key => $value) {
         $tab   = substr(str_replace('#', '  ', $value[1]), 0, -2);
         $title = $value[2];
-        echo "$tab*$title \n";
+        $id    = Markdown::generateId($title);
+        echo "$tab* [$title]($path#$id) \n";
 
     }
 }
