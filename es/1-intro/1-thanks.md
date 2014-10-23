@@ -1,2 +1,0 @@
-#Agradecimientos
-Este manual es para agradecer a los que con su tiempo y apoyo, en gran o en poca medida, han ayudado a que este framework sea cada día mejor. A toda la comunidad que rodea a KumbiaPHP, con sus preguntas, notificaciones de errores (Bug’s), aportes, críticas, etc., a todos ellos ¡Gracias!.

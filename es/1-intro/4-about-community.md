@@ -1,3 +1,0 @@
-#Sobre la comunidad
-La comunidad de KumbiaPHP esta formada en su gran mayoría por gente hispano-latina, de la cual nace un framework completamente en español. Y donde radica su mayor diferencia respecto a otros frameworks que son, de forma nativa, anglosajones. Por otra parte se ha intentado, con el tiempo, aportar nuevos sistemas de comunicación, así que se cuenta con una lista de correo, el foro, canal de IRC y una WiKi. Esperamos que todo esto haga que la comunidad sea una parte importante y vital para enriquecer y mejorar KumbiaPHP.
-Puedes encontrar más información en [[www.kumbiaphp.com]]
