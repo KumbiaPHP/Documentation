@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^(.+\.md)$ index.php?file=$1 [L]
