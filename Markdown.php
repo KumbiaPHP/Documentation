@@ -9,7 +9,9 @@ class Markdown extends ParsedownExtra{
     }
 
     static public function generateId($title){
-        return str_replace(' ', '-', strtolower($title));        
+        return  str_replace(' ',  '-', 
+            str_replace(array('(', ')', '?', '¿'), '', strtolower($title))
+        );        
     }
 
 }
