@@ -1,5 +1,6 @@
 {
     "require": {
-        "erusev/parsedown-extra": "dev-master"
+        "erusev/parsedown-extra": "dev-master",
+        "mustangostang/spyc" : "dev-master"
     }
 }
