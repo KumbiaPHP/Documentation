@@ -4,33 +4,23 @@ include 'autoload.php';
 function generate_toc($argc, $argv){
     $file =  ($argc < 1 || !isset($argv[1]))? NULL: $argv[1];
     if(empty($file) || !is_file($file)){
-        die("$file is not a valid");
+        die("$file is not a valid\n ");
     }
     $dir = dirname(realpath($file));
     chdir($dir);
-    $tab = 0;
-    $file = new SplFileObject(basename($file));
+    $data = spyc_load_file($file);
     $current = $dir;
-    echo '# '. $file->current();
-    $file->next();
-    while ($file->valid()) {
-        $line = $file->current();
-        $trim = trim($line);
-        if(empty($trim))continue;
-        $part = explode(':', $line);
-        $name  = trim($part[0]);
-        if(is_dir($name)){
-            if(count($part)!=2)
-                die('Syntaxys Error');
-            $title = trim($part[1]);
-            $current = $name;
-            echo "## $title\n";
-        }elseif(is_file("$current/$name")){
-            echo toc_file("$current/$name");
-        }else{
-            die("Invalid file o dir $name\n");
+    echo "# {$data[0]} \n";
+    unset($data[0]);
+   foreach($data as $value) {
+        if(!is_array($value)){
+            die("Syntaxys error\n");
         }
-        $file->next();
+        list($title, $node) = each($value);
+        echo "\n## $title\n";
+        foreach ($node as $name) {
+            echo toc_file("$name");
+        }
     }
 }
 

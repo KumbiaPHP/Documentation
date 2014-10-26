@@ -1,4 +1,0 @@
-Lista de temas
-intro: Introducción
-    preface.md
-    mvc.md
