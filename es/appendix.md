@@ -1,4 +1,3 @@
-
 #  Apendices
 
 ##  Integracion de jQuery y KumbiaPHP
@@ -19,7 +18,7 @@ Firefox o algun navegador que use la consola de WebKit como Google Chrome.
 
 ##  CRUD
 
-###  Introduccion
+###  Introducción
 
 Este ejemplo nos permitira de manera sencilla conocer y entender la
 implementacion de un CRUD (Create, Read, Update y Delete en ingles) sin la
@@ -32,36 +31,29 @@ saldra junto a la 1.0 solo se usara lo nuevo y se eliminara lo desaconsejado.
 
 ###  Configurando database.ini
 
-Configurar el archivo [databases.ini](http://www.google.com/url?q=http%3A%2F%2
-Fwiki.kumbiaphp.com%2FKumbiaPHP_Framework_Versi%25C3%25B3n_1.0_Spirit%23databa
-ses.ini&sa=D&sntz=1&usg=AFQjCNHjE968gBBA1aLTpuNMKazt20CvTA) , con los datos y
-motor de Base de Datos a utilizar.
+Configurar el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) ,
+con los datos y motor de Base de Datos a utilizar.
 
 ###  Modelo
 
 Crear el Modelo el cual esta viene dado por la definicion de una tabla en la
 BD, para efecto del ejemplo creamos la siguiente tabla.
 
+```sql
 CREATE TABLE menus
-
 (
-
 id           int            unique not null auto_increment,
-
 nombre       varchar(100),
-
 titulo       varchar(100)   not null,
-
 primary key(id)
-
 )  
-  
----  
+```  
   
 Vamos ahora a definir el modelo el cual nos permite interactuar con la BD.
 
 [app]/models/menus.php:
 
+```php
 <?php  
 class  Menus extends  ActiveRecord  
 {  
@@ -74,8 +66,7 @@ class  Menus extends  ActiveRecord
       return  $this-> paginate ( "page: $page" , "per_page: $ppage" , 'order: id desc' );   
   }  
 }  
-  
----  
+```  
   
 ###  Controller
 
@@ -85,6 +76,7 @@ todas las operaciones CRUD que necesitamos.
 
 [app]/controllers/menus_controller.php:
 
+```php
 <?php  
 /**  
 * Carga del modelo Menus...   
@@ -173,15 +165,14 @@ class  MenusController extends  AppController {
       return  Router:: redirect ();   
   }  
 }  
-  
----  
+``` 
   
 ###  Vistas
 
 Agregamos las vistas...
 
 [app]/views/menus/index.phtml
-
+```php
 <div class="content">  
   <?php   echo  View:: content (); ?>  
   <h3>Menus</h3>  
@@ -202,11 +193,11 @@ clasic,....
   <?php   if ($listMenus-> next ) echo  Html:: linkAction (
 "index/$listMenus->next/" , 'Proximo >>' ); ?>  
 </div>  
-  
----  
+```  
   
 [app]/views/menus/create.phtml
 
+```php
 <?php  View:: content (); ?>  
 <h3>Crear menu<h3>  
   
@@ -221,51 +212,37 @@ clasic,....
       <?php   echo  Form:: submit ( 'Agregar' ) ?>   
   
 <?php   echo  Form:: close () ?>  
-  
----  
-  
+```
+
+```php 
 [app]/views/menus/edit.phtml
 
 <?php  View:: content (); ?>  
 <h3>Editar menu<h3>  
-  
 <?php   echo  Form:: open (); // por defecto llama a la misma url ?>  
-  
-      <label>Nombre   
-      <?php   echo  Form:: text ( 'menus.nombre' ) ?> </label>   
-  
-      <label>Titulo   
-      <?php   echo  Form:: text ( 'menus.titulo' ) ?> </label>   
-  
-      <?php   echo  Form:: hidden ( 'menus.id' ) ?>   
-      <?php   echo  Form:: submit ( 'Actualizar' ) ?>   
-  
+  <label>Nombre  <?php   echo  Form:: text ( 'menus.nombre' ) ?> </label>   
+  <label>Titulo  <?php   echo  Form:: text ( 'menus.titulo' ) ?> </label>   
+  <?php   echo  Form:: hidden ( 'menus.id' ) ?>   
+  <?php   echo  Form:: submit ( 'Actualizar' ) ?>   
 <?php   echo  Form:: close () ?>  
+```  
   
----  
   
 ###  Probando el CRUD
 
 Ahora solo resta probar todo el codigo que hemos generado, en este punto es
-importante conocer el comportamiento de las [URL's en KumbiaPHP](http://www.go
-ogle.com/url?q=http%3A%2F%2Fwiki.kumbiaphp.com%2FHola_Mundo_KumbiaPHP_Framewor
-k%23KumbiaPHP_URLS&sa=D&sntz=1&usg=AFQjCNH9nqC8mfE0Jx4NdG1JnSC8s9YQkw) .
+importante conocer el comportamiento de las [URL's en KumbiaPHP](http://wiki.kumbiaphp.com/Hola_Mundo_KumbiaPHP_Framework#KumbiaPHP_URLS) .
 
-  * index es la accion para listar [http://localhost/menus/index/](http://www.google.com/url?q=http%3A%2F%2Flocalhost%2Fmenus%2Findex%2F&sa=D&sntz=1&usg=AFQjCNGIk8TDpjhuI5_CiY5xLfI56HS8dQ)
-
+  * index es la accion para listar http://localhost/menus/index/
 NOTA: index/ se puede pasar de forma implicita o no.  KumbiaPHP en caso que no
-se le pase una accion, buscara por defecto un index, es decir si colocamos: [h
-ttp://localhost/menus/](http://www.google.com/url?q=http%3A%2F%2Flocalhost%2Fm
-enus%2F&sa=D&sntz=1&usg=AFQjCNFxftStjVbHNKPUDlYtQYoiboFbyA)
-
-  * create crea un menu en la Base de Datos [http://localhost/menus/create/](http://www.google.com/url?q=http%3A%2F%2Flocalhost%2Fmenus%2Fcreate%2F&sa=D&sntz=1&usg=AFQjCNHC_HzY4vdGBzvbEbSyhCKb7dwmvA)
+se le pase una accion, buscara por defecto un index, es decir si colocamos:
+http://localhost/menus/
+  * create crea un menu en la Base de Datos http://localhost/menus/create/
   * Las acciones del y edit a ambas se debe entrar desde el index, ya que reciben el parametros a editar o borrar segun el caso.
 
-* * *
+##  Aplicacion en producción
 
-##  Aplicacion en produccion
-
-* * *
+TODO
 
 ##  Partials de paginacion
 
@@ -378,7 +355,7 @@ View :: partial ( 'paginators/simple' ,  false ,   array ( 'page'   =>   $page
 Supongamos que queremos paginar una lista de usuarios.
 
 Para el modelo Usuario en models/usuario.php:
-
+```php
 <?php  
 class  Usuario extends  ActiveRecord  
 {  
@@ -394,11 +371,11 @@ class  Usuario extends  ActiveRecord
   }  
 }  
 ?>  
-  
----  
+```  
   
 Para el controlador UsuarioController en controllers/usuario_controller.php:
 
+```php
 <?php  
 Load:: models ( 'usuario' );  
   
@@ -417,8 +394,7 @@ class  UsuarioController extends  AppController
   }  
 }  
 ?>  
-  
----  
+```
   
 Y en la vista views/usuario/page.phtml
 
