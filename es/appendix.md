@@ -437,6 +437,9 @@ Posiblemente habra 2 versiones:
 
 1.0 = sin lo deprecated más limpia y rápida, para empezar nuevas apps
 
+ 0.5 | beta1 | beta2 v0.9 | v1.0
+ --- | ----- | ---------- | ----
+
 Flash::success() ahora Flash::valid()
 
 Flash::notice() ahora Flash::info()
@@ -457,11 +460,13 @@ compatible en ambos casos
 
 Application
 
-ControllerBase 0.5  => ApplicationController beta1 => AppController beta2
+ 0.5 | beta1 | beta2 v0.9 | v1.0
+ --- | ----- | ---------- | ----
+ControllerBase | ApplicationController | AppController | AppController
+public function init() | protected function initialize() |protected function initialize() | protected function initialize()
+render_view() | render_view() | View::select() | View::select()
 
-public function init 0.5  => protected function initialize beta2
 
-render_view 0.5  => View::select beta2
 
 Models
 
