@@ -1,4 +1,4 @@
-#  Apendices
+#  Apéndices
 
 ##  Integración de jQuery y KumbiaPHP
 
