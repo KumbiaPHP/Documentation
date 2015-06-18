@@ -212,10 +212,8 @@ clasic,....
   
 <?php   echo  Form:: close () ?>  
 ```
-
-```php 
 [app]/views/menus/edit.phtml
-
+```php 
 <?php  View:: content (); ?>  
 <h3>Editar menu<h3>  
 <?php   echo  Form:: open (); // por defecto llama a la misma url ?>  
