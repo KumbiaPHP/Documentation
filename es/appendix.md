@@ -458,7 +458,7 @@ formatos de vista alternativos.
 ###  Lista de cambios entre versiones: si no se especifica beta1 es que es
 compatible en ambos casos
 
-Application
+#### Application
 
  0.5 | beta1 | beta2 v0.9 | v1.0
  --- | ----- | ---------- | ----
@@ -468,19 +468,20 @@ render_view() | render_view() | View::select() | View::select()
 
 
 
-Models
+#### Models
 
-public $mode 0.5  => public $database beta1 y beta2
+ 0.5 | beta1 | beta2 v0.9 | v1.0
+ --- | ----- | ---------- | ----
+public $mode | public $database | public $database |public $database
 
-Callbacks
+#### Callbacks
 
-public function initialize 0.5  => protected function initialize beta2
-
-public function finalize 0.5  => protected function finalize beta2
-
-public function before_filter 0.5  => protected function before_filter beta2
-
-public function after_filter 0.5  => protected function after_filter beta2
+ 0.5 | beta1 | beta2 v0.9 | v1.0
+ --- | ----- | ---------- | ----
+public function init()  | protected function initialize() | protected function initialize() | protected function initialize()
+public function finalize() | | protected function finalize() | protected function finalize()
+public function before_filter()| | protected function before_filter() | protected function before_filter() 
+public function after_filter() | | protected function after_filter() | protected function after_filter()
 
 boot.ini se elimina en beta2
 
