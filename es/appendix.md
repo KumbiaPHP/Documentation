@@ -255,7 +255,7 @@ propios partials para paginar en las vistas.
 
 Vista de paginacion clasica.
 
-![](images/image07.jpg)
+![](../images/image07.jpg)
 
 Resultado Final
 
@@ -293,7 +293,7 @@ url: url para la accion  que efectua  la paginacion , por defecto
   
 ###  Extended
 
-![](images/image00.jpg)
+![](../images/image00.jpg)
 
 Resultado Final
 
@@ -331,7 +331,7 @@ url:  url para la acción  que efectua  la paginación , por defecto
   
 ###  Simple
 
-![](images/image11.jpg)
+![](../images/image11.jpg)
 
 Resultado Final
 
