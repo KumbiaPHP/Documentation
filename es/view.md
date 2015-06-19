@@ -101,8 +101,8 @@ El controlador: `saludo_controller.php`
 
 ```php
 <?php  
-class  SaludoController extends AppController {  
-    public function  hola(){   
+class SaludoController extends AppController {  
+    public function hola(){   
            Flash::valid('Hola Mundo');   
    }  
 }  
@@ -169,9 +169,9 @@ En el controlador:
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
+class SaludoController extends AppController {  
     public function  hola(){   
-            // Selecciona el template 'mi_template.phtml'   
+           // Selecciona el template 'mi_template.phtml'   
            View::template('mi_template');   
    }  
 }  
@@ -183,9 +183,9 @@ NULL como argumento a View::template() .
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
+class SaludoController extends AppController {  
     public function  hola(){   
-            // No utilizar template   
+           // No utilizar template   
            View::template(NULL);   
    }  
 }  
@@ -247,7 +247,7 @@ nombre del partial.
 
 Ejemplo:
 
-views/_shared/partials/cabecera.phtml
+`views/_shared/partials/cabecera.phtml`
 
 ```php
 <h1>Template de Saludo</h1>  
@@ -267,9 +267,9 @@ Ejemplo utilizando un partial en un template:
    <title>Ejemplo</title>  
 </head>  
 <body>  
-    <?php  View::partial('cabecera') ?>   
+    <?php View::partial('cabecera') ?>   
   
-    <?php  View::content() ?>   
+    <?php View::content() ?>   
 </body>  
 </html>  
 ``` 
@@ -315,9 +315,9 @@ siguiente manera en el controlador:
 
 ```php
 <?php  
-class  UsuarioController extends  AppController {  
+class UsuarioController extends AppController {  
     public function  nuevo(){   
-            // Selecciona la vista   
+           // Selecciona la vista   
            View::select('clasificado/formulario');   
    }  
 }  
@@ -330,7 +330,7 @@ siguiente manera ya sea en vista o en template:
 
 ```php
 <h1>Nuevo Usuario</h1>  
-<?php  View::partial('usuario/formulario') ?>  
+<?php View::partial('usuario/formulario') ?>  
 ``` 
   
 ### Ejemplo de agrupacion de template
@@ -340,9 +340,9 @@ de la siguiente manera en el controlador:
 
 ```php
 <?php  
-class  AdministradorController extends  AppController {  
+class AdministradorController extends AppController {  
     protected function  before_filter(){   
-            // Selecciona el template   
+           // Selecciona el template   
            View::template('usuario/administrador');   
    }  
 }  
@@ -363,9 +363,9 @@ completas para el usuario.
 Ejemplo:
 ```php
 <?php  
-class  UsuarioController extends AppController {  
+class UsuarioController extends AppController {  
     public function  index(){   
-            // Establece el tipo de respuesta   
+           // Establece el tipo de respuesta   
            View::response('json');   
    }  
 }  
@@ -390,9 +390,9 @@ Para cachear una vista se utiliza el metodo View::cache()  en el controlador.
 
 ```php
 <?php  
-class  UsuarioController extends AppController {  
-    public function  index(){   
-            // Indica el tiempo de cache de la vista   
+class UsuarioController extends AppController {  
+    public function index(){   
+           // Indica el tiempo de cache de la vista   
            View::cache('+20 days');   
    }  
 }
@@ -414,8 +414,8 @@ una vista en un grupo especifico.
 ```php
 <?php  
 class UsuarioController extends AppController {  
-    public function  index(){   
-            // Indica el tiempo de cache de la vista   
+    public function index(){   
+           // Indica el tiempo de cache de la vista   
            View::cache('+20 days' ,'view' ,'miGrupo');   
    }  
 }  
@@ -431,8 +431,8 @@ cacheado el template.
 ```php
 <?php  
 class UsuarioController extends AppController {  
-    public function  index(){   
-            // Indica el tiempo de cache de template   
+    public function index(){   
+           // Indica el tiempo de cache de template   
            View::cache('+20 days' , 'template');   
    }  
 }  
