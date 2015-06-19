@@ -40,8 +40,8 @@ el metodo View::select()  en el controlador. Por ejemplo:
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
-    public function  saludo(){   
+class SaludoController extends AppController {  
+    public function saludo(){   
            View::select('hola');   
    }  
 }
@@ -55,8 +55,8 @@ argumento de View::select() .
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
-    public function  index(){   
+class SaludoController extends AppController {  
+    public function index(){   
            View::select(NULL);   
    }  
 }  
@@ -76,7 +76,7 @@ en la vista. Ejemplo:
 El controlador: `controllers/saludo_controller.php`
 ```php
 <?php  
-class  SaludoController extends  AppController{  
+class SaludoController extends AppController{  
     public function  hola(){   
            $this->usuario  = 'Mundo' ;   
    }  
@@ -202,7 +202,7 @@ cargados como variables de ambito local en el template. Ejemplo:
 En el controlador saludo_controller.php
 ```php
 <?php  
-class  SaludoController extends  AppController {  
+class SaludoController extends AppController {  
     public function  hola(){   
            Flash::valid('Hola Mundo');   
   
@@ -222,7 +222,7 @@ En el template saludo.phtml
 <!DOCTYPE html>  
 <html>  
 <head>  
-   <title> <?php echo $titulo ?> </title>  
+   <title> <?php echo $titulo ?></title>  
 </head>  
 <body>  
    <h1>Template de Saludo</h1>  
@@ -316,7 +316,7 @@ siguiente manera en el controlador:
 ```php
 <?php  
 class UsuarioController extends AppController {  
-    public function  nuevo(){   
+    public function nuevo(){   
            // Selecciona la vista   
            View::select('clasificado/formulario');   
    }  
@@ -341,7 +341,7 @@ de la siguiente manera en el controlador:
 ```php
 <?php  
 class AdministradorController extends AppController {  
-    protected function  before_filter(){   
+    protected function before_filter(){   
            // Selecciona el template   
            View::template('usuario/administrador');   
    }  
@@ -364,7 +364,7 @@ Ejemplo:
 ```php
 <?php  
 class UsuarioController extends AppController {  
-    public function  index(){   
+    public function index(){   
            // Establece el tipo de respuesta   
            View::response('json');   
    }  
