@@ -1,22 +1,22 @@
 # La Vista
 
-KumbiaPHP posee un sistema de presentacion basado en Vistas (Views) que viene
-siendo el tercer componente del sistema MVC como se vio en la seccion "
-Modelo, Vista, Controlador ", en este sentido las vistas son plantillas de
-codigo reutilizable que sirven para mostrar los datos al usuario y se
+KumbiaPHP proporciona un sistema de presentación, basado en Vistas (Views) que viene
+siendo el tercer componente del sistema MVC, como se vio en la seccion "
+Modelo, Vista, Controlador ". Las vistas son plantillas de
+código reutilizable que sirven para mostrar los datos al usuario y se
 encuentran ubicadas en el directorio app/views/ .
 
-Es buena practica de desarrollo que las vistas contengan una cantidad minima
-de codigo en PHP para que sea suficientemente entendible para un diseñador Web
-y ademas, para dejar a las vistas solo las tareas de visualizar los resultados
+Es buena práctica de desarrollo, que las vistas contengan una cantidad mínima
+de código en PHP, para que sea suficientemente entendible para un diseñador Web.
+Para dejar a las vistas, sólo las tareas de visualizar los resultados
 generados por los controladores y presentar las capturas de datos para
 usuarios.
 
-El manejador de vistas implementa el patron de diseño de vista en dos pasos,
+El manejador de vistas implementa el patrón de diseño de vista en dos pasos,
 el cual consiste en dividir el proceso de mostrar una vista en dos partes: la
 primera parte es utilizar una vista o «view» asociada a una accion del
 controlador para convertir los datos que vienen del modelo en logica de
-presentacion sin especificar ningun formato especifico y la segunda es
+presentacion sin especificar ningun formato específico y la segunda es
 establecer el formato de presentacion a traves de una plantilla o «template».
 
 Asimismo tanto las vistas de accion como las plantillas pueden utilizar vistas
