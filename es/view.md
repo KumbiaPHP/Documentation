@@ -62,13 +62,13 @@ class SaludoController extends AppController {
 }  
 ```  
   
-Para finalizar este apartado cabe destacar que tanto las vistas de accion, los
+Para finalizar este apartado, cabe destacar que tanto las vistas de accion, los
 templates y los partials son vistas, pero por comodidad se suele referir a la
 vista de accion sencillamente bajo el nombre de «vista».
 
 ## Pasando datos a la vista
 
-Para pasar datos a la vista estos deben cargarse como atributos publicos del
+Para pasar datos a la vista estos deben cargarse como atributos públicos del
 controlador y luego de que se ejecute la accion, el manejador de vistas
 cargara los atributos publicos del controlador como variables de ambito local
 en la vista. Ejemplo:
