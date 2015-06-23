@@ -1,26 +1,26 @@
 #Instalar KumbiaPHP
 
-En esta seccion, se explican los pasos a seguir, para poner a funcionar el
+En esta sección, se explican los pasos a seguir, para poner a funcionar el
 framework en nuestro ambiente de desarrollo.
 
 ## Requisitos
 
-Como se menciono arriba KumbiaPHP es muy facil  y en este sentido los
-requerimientos para hacer funcionar el framework son minimos, a continuacion
+Como se menciono arriba KumbiaPHP es muy fácil  y en este sentido los
+requerimientos para hacer funcionar el framework son mínimos, a continuación
 se listan:
 
-  * Interprete PHP (version 5.2.2 o superior).
+  * Interprete PHP (versión 5.2.2 o superior).
   * Servidor Web con soporte de reescritura de URL (Apache, Cherokee, Lighttpd, Internet Information Server (IIS)).
   * Manejador de base de datos soportado por KumbiaPHP.
 
 Para instalar KumbiaPHP Framework, se debe descargar su archivo comprimido
-desde la seccion de descarga http://www.kumbiaphp.com/blog/manuales-y-descargas/ para
-obtener la version mas reciente del framework. Una vez descargado el archivo,
-es esencial asegurarse que tiene la extension .tgz para usuarios Linux y .zip
-para usuarios de Windows, ya que de otro modo no se descomprimira
+desde la sección de descarga http://www.kumbiaphp.com/blog/manuales-y-descargas/ para
+obtener la versión mas reciente del framework. Una vez descargado el archivo,
+es esencial asegurarse que tiene la extensión .tgz para usuarios Linux y .zip
+para usuarios de Windows, ya que de otro modo no se descomprimirá
 correctamente.
 
-A continuacion se descomprime su contenido en el directorio raiz del servidor
+A continuación se descomprime su contenido en el directorio raíz del servidor
 web (DocumentRoot). Para asegurar cierta uniformidad en el documento, en este
 capitulo se supone que se ha descomprimido el paquete del framework en el
 directorio kumbiaphp/ . Teniendo una estructura como la siguiente:
@@ -35,8 +35,8 @@ directorio kumbiaphp/ . Teniendo una estructura como la siguiente:
   
 ## Configurar Servidor Web
 
-KumbiaPHP Framework utiliza un modulo para la reescritura de URLs haciendolas
-mas comprensibles y faciles de recordar en nuestras aplicaciones. Por esto, el
+KumbiaPHP Framework utiliza un modulo para la reescritura de URLs haciéndolas
+mas comprensibles y fáciles de recordar en nuestras aplicaciones. Por esto, el
 modulo debe ser configurado e instalado, en este sentido debe chequear que el
 modulo este habilitado, en las siguientes secciones se explica como hacer.
 
@@ -71,7 +71,7 @@ Como usuario administrador editamos el siguiente archivo.
   
 Para que los .htaccess tengan efectos, se ha de sustituir
 *AllowOverride None*
-por *AllowOverride All*, de esta manera Apache podra interpretar estos archivos.
+por *AllowOverride All*, de esta manera Apache puede interpretar estos archivos.
 
 Hecho esto, queda reiniciar el servicio de apache.
 
@@ -79,21 +79,21 @@ Hecho esto, queda reiniciar el servicio de apache.
  >/etc/init.d/apache2 restart  
 ```
 
-A continuacion, se prueba todas las configuraciones realizadas mediante la
+A continuación, se prueba todas las configuraciones realizadas mediante la
 siguiente URL.
 
 http://localhost/kumbiaphp/  
 
   
-Si todo ha ido bien, deberias ver una pagina de bienvenida como la que se
-muestra en la figura 2.1, con lo que la instalacion rapida se puede dar por
+Si todo ha ido bien, debería ver una página de bienvenida como la que se
+muestra en la figura 2.1, con lo que la instalación rápida se puede dar por
 concluida.
 
 ![](images/image12.png)
 
-Figura 2.1: Instalacion Exitosa de KumbiaPHP
+Figura 2.1: Instalación Exitosa de KumbiaPHP
 
-Esto es un entorno de pruebas el cual esta pensado para que practiques con
+Esto es un entorno de pruebas el cual esta pensado para practicar con
 KumbiaPHP en un servidor local, no para desarrollar aplicaciones complejas que
 terminan siendo publicadas en la web.
 
@@ -101,19 +101,19 @@ terminan siendo publicadas en la web.
 
 ReWrite es un modulo de apache que permite reescribir las urls que han
 utilizado nuestros usuarios. KumbiaPHP Framework encapsula esta complejidad
-permitiendonos usar URLs bonitas o limpias como las que vemos en blogs o en
+permitiendo usar URLs bonitas o limpias como las que vemos en blogs o en
 muchos sitios donde no aparecen los ?, los & ni las extensiones del servidor
 (.php, .asp, .aspx, etc).
 
-Ademas de esto, con mod-rewrite  KumbiaPHP puede proteger nuestras
+Además de esto, con mod-rewrite  KumbiaPHP puede proteger nuestras
 aplicaciones ante la posibilidad de que los usuarios puedan ver los
 directorios del proyecto y puedan acceder a archivos de clases, modelos,
-logica, etc., sin que sean autorizados.
+lógica, etc., sin que sean autorizados.
 
-Con mod-rewrite  el unico directorio que pueden ver los usuarios es el
+Con mod-rewrite  el único directorio que pueden ver los usuarios es el
 contenido del directorio publico (public) del servidor web, el resto permanece
-oculto y solo puede ser visualizado cuando ha realizado una peticion en forma
-correcta y tambien es correcto segun nuestra logica de aplicacion. Cuando
-escribes direcciones utilizando este tipo de URLs, estas ayudando tambien a
-los motores de busqueda a indexar mejor tu informacion.
+oculto y solo puede ser visualizado cuando ha realizado una petición en forma
+correcta y también es correcto según nuestra lógica de aplicación. Cuando
+escribes direcciones utilizando este tipo de URLs, estas ayudando también a
+los motores de búsqueda a indexar mejor tu información.
 
