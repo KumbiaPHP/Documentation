@@ -1,22 +1,22 @@
 # La Vista
 
-KumbiaPHP posee un sistema de presentacion basado en Vistas (Views) que viene
-siendo el tercer componente del sistema MVC como se vio en la seccion "
-Modelo, Vista, Controlador ", en este sentido las vistas son plantillas de
-codigo reutilizable que sirven para mostrar los datos al usuario y se
+KumbiaPHP proporciona un sistema de presentación, basado en Vistas (Views) que viene
+siendo el tercer componente del sistema MVC, como se vio en la seccion "
+Modelo, Vista, Controlador ". Las vistas son plantillas de
+código reutilizable que sirven para mostrar los datos al usuario y se
 encuentran ubicadas en el directorio app/views/ .
 
-Es buena practica de desarrollo que las vistas contengan una cantidad minima
-de codigo en PHP para que sea suficientemente entendible para un diseñador Web
-y ademas, para dejar a las vistas solo las tareas de visualizar los resultados
+Es buena práctica de desarrollo, que las vistas contengan una cantidad mínima
+de código en PHP, para que sea suficientemente entendible para un diseñador Web.
+Para dejar a las vistas, sólo las tareas de visualizar los resultados
 generados por los controladores y presentar las capturas de datos para
 usuarios.
 
-El manejador de vistas implementa el patron de diseño de vista en dos pasos,
+El manejador de vistas implementa el patrón de diseño de vista en dos pasos,
 el cual consiste en dividir el proceso de mostrar una vista en dos partes: la
 primera parte es utilizar una vista o «view» asociada a una accion del
 controlador para convertir los datos que vienen del modelo en logica de
-presentacion sin especificar ningun formato especifico y la segunda es
+presentacion sin especificar ningun formato específico y la segunda es
 establecer el formato de presentacion a traves de una plantilla o «template».
 
 Asimismo tanto las vistas de accion como las plantillas pueden utilizar vistas
@@ -40,9 +40,9 @@ el metodo View::select()  en el controlador. Por ejemplo:
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
-    public   function  saludo(){   
-           View:: select ( 'hola' );   
+class SaludoController extends AppController {  
+    public function saludo(){   
+           View::select('hola');   
    }  
 }
 ```  
@@ -55,38 +55,38 @@ argumento de View::select() .
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
-    public   function  index(){   
-           View:: select ( NULL );   
+class SaludoController extends AppController {  
+    public function index(){   
+           View::select(NULL);   
    }  
 }  
 ```  
   
-Para finalizar este apartado cabe destacar que tanto las vistas de accion, los
+Para finalizar este apartado, cabe destacar que tanto las vistas de accion, los
 templates y los partials son vistas, pero por comodidad se suele referir a la
 vista de accion sencillamente bajo el nombre de «vista».
 
 ## Pasando datos a la vista
 
-Para pasar datos a la vista estos deben cargarse como atributos publicos del
+Para pasar datos a la vista estos deben cargarse como atributos públicos del
 controlador y luego de que se ejecute la accion, el manejador de vistas
 cargara los atributos publicos del controlador como variables de ambito local
 en la vista. Ejemplo:
 
-El controlador: controllers/saludo_controller.php
+El controlador: `controllers/saludo_controller.php`
 ```php
 <?php  
-class  SaludoController extends  AppController{  
-    public   function  hola(){   
-           $this-> usuario  = 'Mundo' ;   
+class SaludoController extends AppController{  
+    public function  hola(){   
+           $this->usuario  = 'Mundo' ;   
    }  
 }  
 ```  
   
   
-La vista: views/saludo/hola.phtml
+La vista: `views/saludo/hola.phtml`
 ```php
-Hola <?php   echo  $usuario ?>  
+Hola <?php echo $usuario ?>  
 ```  
   
 ## Buffer de salida
@@ -97,22 +97,22 @@ principalmente los echo o print que efectue el usuario y asimismo los mensajes
 Flash. Al invocar View::content()  se muestra el contenido del buffer de
 salida en el lugar donde fue invocado.
 
-El controlador: s aludo_controller.php
+El controlador: `saludo_controller.php`
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
-    public   function  hola(){   
-           Flash:: valid ( 'Hola Mundo' );   
+class SaludoController extends AppController {  
+    public function hola(){   
+           Flash::valid('Hola Mundo');   
    }  
 }  
 ```
   
-La vista: hola.phtml
+La vista: `hola.phtml`
 
 ```php
 Saludo realizado:  
-<?php  View:: content () ?>  
+<?php View::content() ?>  
 ```
   
 ## Template
@@ -145,7 +145,7 @@ desea mostrar la vista, tal como se indico en la seccion 4.2 .
 
 Ejemplo:
 
-views/_shared/templates/ejemplo.phtml
+`views/_shared/templates/ejemplo.phtml`
 ```php
 <!DOCTYPE html>  
 <html>  
@@ -155,7 +155,7 @@ views/_shared/templates/ejemplo.phtml
 <body>  
    <h1>Template de Ejemplo</h1>  
   
-    <?php  View:: content () ?>   
+    <?php View::content() ?>   
 </body>  
 </html>  
 ```
@@ -169,10 +169,10 @@ En el controlador:
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
-    public   function  hola(){   
-            // Selecciona el template 'mi_template.phtml'   
-           View:: template ( 'mi_template' );   
+class SaludoController extends AppController {  
+    public function  hola(){   
+           // Selecciona el template 'mi_template.phtml'   
+           View::template('mi_template');   
    }  
 }  
 ```  
@@ -183,10 +183,10 @@ NULL como argumento a View::template() .
 
 ```php
 <?php  
-class  SaludoController extends  AppController {  
-    public   function  hola(){   
-            // No utilizar template   
-           View:: template ( NULL );   
+class SaludoController extends AppController {  
+    public function  hola(){   
+           // No utilizar template   
+           View::template(NULL);   
    }  
 }  
 ```  
@@ -202,16 +202,16 @@ cargados como variables de ambito local en el template. Ejemplo:
 En el controlador saludo_controller.php
 ```php
 <?php  
-class  SaludoController extends  AppController {  
-    public   function  hola(){   
-           Flash:: valid ( 'Hola Mundo' );   
+class SaludoController extends AppController {  
+    public function  hola(){   
+           Flash::valid('Hola Mundo');   
   
             // Pasando el titulo para la pagina   
-           $this-> titulo  = 'Saludando al Mundo' ;   
+           $this->titulo  = 'Saludando al Mundo';   
   
             /* No se utilizara vista, por lo tanto la   
                     salida sera del buffer y template */   
-           View:: select ( NULL , 'saludo' );   
+           View::select(NULL, 'saludo');   
    }  
 }  
 ```
@@ -222,12 +222,12 @@ En el template saludo.phtml
 <!DOCTYPE html>  
 <html>  
 <head>  
-   <title> <?php   echo  $titulo ?> </title>  
+   <title> <?php echo $titulo ?></title>  
 </head>  
 <body>  
    <h1>Template de Saludo</h1>  
   
-    <?php  View:: content () ?>   
+    <?php View::content() ?>   
 </body>  
 </html>  
 ```  
@@ -247,7 +247,7 @@ nombre del partial.
 
 Ejemplo:
 
-views/_shared/partials/cabecera.phtml
+`views/_shared/partials/cabecera.phtml`
 
 ```php
 <h1>Template de Saludo</h1>  
@@ -267,9 +267,9 @@ Ejemplo utilizando un partial en un template:
    <title>Ejemplo</title>  
 </head>  
 <body>  
-    <?php  View:: partial ( 'cabecera' ) ?>   
+    <?php View::partial('cabecera') ?>   
   
-    <?php  View:: content () ?>   
+    <?php View::content() ?>   
 </body>  
 </html>  
 ``` 
@@ -285,16 +285,16 @@ ambito local del partial.
 
 Ejemplo:
 
-views/partials/cabecera.phtml
+`views/partials/cabecera.phtml`
 
 ```php
-<h1>Titulo: <?php echo $titulo ?></h1>  
+<h1>Título: <?php echo $titulo ?></h1>  
 ```  
   
-views/ejemplo/index.phtml
+`views/ejemplo/index.phtml`
 
 ```php
-<?php  View:: partial ( 'cabecera' , FALSE , array ( 'titulo'  => 'Ejemplo' ))
+<?php  View::partial('cabecera' ,FALSE ,array('titulo' =>'Ejemplo'))
 ?>  
 
 <p>  
@@ -315,10 +315,10 @@ siguiente manera en el controlador:
 
 ```php
 <?php  
-class  UsuarioController extends  AppController {  
-    public   function  nuevo(){   
-            // Selecciona la vista   
-           View:: select ( 'clasificado/formulario' );   
+class UsuarioController extends AppController {  
+    public function nuevo(){   
+           // Selecciona la vista   
+           View::select('clasificado/formulario');   
    }  
 }  
 ```
@@ -330,7 +330,7 @@ siguiente manera ya sea en vista o en template:
 
 ```php
 <h1>Nuevo Usuario</h1>  
-<?php  View:: partial ( 'usuario/formulario' ) ?>  
+<?php View::partial('usuario/formulario') ?>  
 ``` 
   
 ### Ejemplo de agrupacion de template
@@ -340,10 +340,10 @@ de la siguiente manera en el controlador:
 
 ```php
 <?php  
-class  AdministradorController extends  AppController {  
-    protected   function  before_filter(){   
-            // Selecciona el template   
-           View:: template ( 'usuario/administrador' );   
+class AdministradorController extends AppController {  
+    protected function before_filter(){   
+           // Selecciona el template   
+           View::template('usuario/administrador');   
    }  
 }  
 ```
@@ -363,10 +363,10 @@ completas para el usuario.
 Ejemplo:
 ```php
 <?php  
-class  UsuarioController extends  AppController {  
-    public   function  index(){   
-            // Establece el tipo de respuesta   
-           View:: response ( 'json' );   
+class UsuarioController extends AppController {  
+    public function index(){   
+           // Establece el tipo de respuesta   
+           View::response('json');   
    }  
 }  
 ``` 
@@ -390,10 +390,10 @@ Para cachear una vista se utiliza el metodo View::cache()  en el controlador.
 
 ```php
 <?php  
-class  UsuarioController extends  AppController {  
-    public   function  index(){   
-            // Indica el tiempo de cache de la vista   
-           View:: cache ( '+20 days' );   
+class UsuarioController extends AppController {  
+    public function index(){   
+           // Indica el tiempo de cache de la vista   
+           View::cache('+20 days');   
    }  
 }
 ```  
@@ -413,10 +413,10 @@ una vista en un grupo especifico.
 
 ```php
 <?php  
-class  UsuarioController extends  AppController {  
-    public   function  index(){   
-            // Indica el tiempo de cache de la vista   
-           View:: cache ( '+20 days' , 'view' , 'miGrupo' );   
+class UsuarioController extends AppController {  
+    public function index(){   
+           // Indica el tiempo de cache de la vista   
+           View::cache('+20 days' ,'view' ,'miGrupo');   
    }  
 }  
 ```
@@ -430,10 +430,10 @@ cacheado el template.
 
 ```php
 <?php  
-class  UsuarioController extends  AppController {  
-    public   function  index(){   
-            // Indica el tiempo de cache de template   
-           View:: cache ( '+20 days' , 'template' );   
+class UsuarioController extends AppController {  
+    public function index(){   
+           // Indica el tiempo de cache de template   
+           View::cache('+20 days' , 'template');   
    }  
 }  
 ```
@@ -449,9 +449,8 @@ Para cachear partials se debe indicar como segundo argumento al invocar
 View::partial()  el tiempo durante el cual se cacheara.
 
 ```php
-<?php  View:: partial ( 'usuario' , '+1 day' ) ?>    
-<?php  View:: partial ( 'usuario' , '+1 day' , array ( 'nombre'  => 'pepe' ))
-?>  
+<?php  View::partial('usuario' ,'+1 day') ?>    
+<?php  View::partial('usuario' ,'+1 day' ,array('nombre'=>'pepe')) ?>  
 ```
   
 ## Helpers
@@ -487,7 +486,7 @@ img ($src, $alt=NULL, $attrs = NULL)
   
 /*Ejemplo*/
 
-echo  Html :: img ( 'spin.gif' , 'una imagen' ) ;   //se muestra la imagen
+echo Html::img('spin.gif' ,'una imagen');   //se muestra la imagen
 spin.gif que se encuentra dentro de "/public/img/"
 
 //con el artibuto alt 'una imagen'  
@@ -508,8 +507,8 @@ Html::link ($action, $text, $attrs = NULL)
 ```php 
 /*Ejemplo*/
 
-echo  Html :: link ( 'pages/show/kumbia/status' , 'Configuracion' ) ;   //se
-muestra un link con el texto 'Configuracion'  
+echo Html::link('pages/show/kumbia/status' ,'Configuración');   //se
+muestra un link con el texto 'Configuración'  
 ```
   
 ####  Html::lists()
@@ -522,7 +521,7 @@ $type por defecto ul, y si no ol
 
 $attrs atributos adicionales
 ```php
-Html::lists($array, $type = 'ul', $attrs = NULL)   
+Html::lists($array ,$type = 'ul' ,$attrs = NULL)   
   
 /*Ejemplo*/
 
@@ -559,9 +558,9 @@ defecto: mm
 
 ```php
 Html::gravatar($email, $alt='gravatar', $size=40, $default='mm')  
-echo  Html :: gravatar (   $email   ) ;   // Simple
-echo  Html :: link (  Html :: gravatar ( $email ) ,   $url ) ;   // Un gravatar que es un link
-echo  Html :: gravatar (   $email ,   $name ,   20 ,   'http://www.example.com/default.jpg ') ;
+echo Html::gravatar($email);   // Simple
+echo Html::link(Html::gravatar($email), $url);   // Un gravatar que es un link
+echo Html::gravatar($email ,$name , 20 , 'http://www.example.com/default.jpg');
 //Completo   
 ``` 
   
@@ -571,8 +570,8 @@ Incluye los archivos CSS que previamente fueron cargados a la lista mediante
 Tag::css()
 
 ```php
-Tag :: css ( 'bienvenida' ) ;     //Pone en lista un CSS (app/public/css/bienvenida.css)
-echo  Html :: includeCss () ;   //Adiciona los recursos enlazados de la clase en el proyecto  
+Tag::css('bienvenida');     //Pone en lista un CSS (app/public/css/bienvenida.css)
+echo Html::includeCss();   //Adiciona los recursos enlazados de la clase en el proyecto  
 ```
     
 ####  Html::meta()
@@ -587,9 +586,9 @@ $attrs atributos adicionales del tag
 Html::meta($content, $attrs = NULL)   
   
 ```php
-Html :: meta ( 'Kumbiaphp-team' , "name = 'Author'" ) ;  
+Html::meta('Kumbiaphp-team' ,"name = 'Author'");  
 //Agrega: <meta content="Kumbiaphp-team" name = 'Author' />
-Html :: meta ( 'text/html; charset=UTF-8' , "http-equiv = 'Content-type'" ) ;  
+Html::meta('text/html; charset=UTF-8' ,"http-equiv = 'Content-type'");  
 //Agrega: <meta content="text/html; charset=UTF-8" http-equiv = 'Content-type'/>  
 ```
   
@@ -598,9 +597,9 @@ Html :: meta ( 'text/html; charset=UTF-8' , "http-equiv = 'Content-type'" ) ;
 Agrega los metatag que previamente se habian agregado
 
 ```php
-Html :: meta ( 'Kumbiaphp-team' , "name = 'Author'" ) ;
-Html :: meta ( 'text/html; charset=UTF-8' , "http-equiv = 'Content-type'" ) ;
-echo  Html :: includeMetatags () ;   //Visualiza <meta content="Kumbiaphp-team" name = 'Author'/>
+Html::meta ( 'Kumbiaphp-team' , "name = 'Author'" ) ;
+Html::meta ( 'text/html; charset=UTF-8' , "http-equiv = 'Content-type'" ) ;
+echo Html::includeMetatags () ;   //Visualiza <meta content="Kumbiaphp-team" name = 'Author'/>
 ```
   
 ####  Html::headLink()

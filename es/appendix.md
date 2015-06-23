@@ -1,15 +1,15 @@
-#  Apendices
+#  Apéndices
 
-##  Integracion de jQuery y KumbiaPHP
+##  Integración de jQuery y KumbiaPHP
 
-KumbiaPHP provee de una integracion con el Framework de DOM en JavaScript,
+KumbiaPHP provee de una integración con el Framework de DOM en JavaScript,
 jQuery
 
 ###  KDebug
 
 KDebug es un nuevo objeto incorporado al plugins de integracion
 KumbiaPHP/jQuery que permite una depuracion del codigo en tiempo de
-desarrollo. Con solo un parametro se puede aplicar un log que permite ver en
+desarrollo. Con solo un parámetro se puede aplicar un log que permite ver en
 consola ( mientras esta este disponible, sino usara alert) que permite un
 mejor control de la ejecuccion.
 
@@ -20,14 +20,13 @@ Firefox o algun navegador que use la consola de WebKit como Google Chrome.
 
 ###  Introducción
 
-Este ejemplo nos permitira de manera sencilla conocer y entender la
-implementacion de un CRUD (Create, Read, Update y Delete en ingles) sin la
-necesidad de un Scaffold (StandardForm) y un manejo correcto del MVC en
-KumbiaPHP.
+Este ejemplo, permite de manera sencilla conocer y entender la
+implementación de un CRUD (Create, Read, Update y Delete en ingles) sin la
+necesidad de un Scaffold y un manejo correcto del MVC en KumbiaPHP.
 
 El CRUD de la beta1 sigue funcionando igual en la beta2, pero queda
-desaconsejado. En la version 1.0 se podra usar de las 2 maneras. Y la 1.2 que
-saldra junto a la 1.0 solo se usara lo nuevo y se eliminara lo desaconsejado.
+desaconsejado. En la version 1.0 se puede usar de las 2 maneras. Y la 1.2 que
+saldrá junto a la 1.0 sólo usa el nuevo y se elimina lo desaconsejado.
 
 ###  Configurando database.ini
 
@@ -81,7 +80,7 @@ todas las operaciones CRUD que necesitamos.
 /**  
 * Carga del modelo Menus...   
 */   
-Load:: models ( 'menus' );  
+Load:: models ( 'menus' );// No necesario en v1.0
   
 class  MenusController extends  AppController {  
   /**  
@@ -213,10 +212,8 @@ clasic,....
   
 <?php   echo  Form:: close () ?>  
 ```
-
-```php 
 [app]/views/menus/edit.phtml
-
+```php 
 <?php  View:: content (); ?>  
 <h3>Editar menu<h3>  
 <?php   echo  Form:: open (); // por defecto llama a la misma url ?>  
@@ -230,7 +227,7 @@ clasic,....
   
 ###  Probando el CRUD
 
-Ahora solo resta probar todo el codigo que hemos generado, en este punto es
+Ahora solo resta probar todo el código que hemos generado, en este punto es
 importante conocer el comportamiento de las [URL's en KumbiaPHP](http://wiki.kumbiaphp.com/Hola_Mundo_KumbiaPHP_Framework#KumbiaPHP_URLS) .
 
   * index es la accion para listar http://localhost/menus/index/
@@ -240,11 +237,11 @@ http://localhost/menus/
   * create crea un menu en la Base de Datos http://localhost/menus/create/
   * Las acciones del y edit a ambas se debe entrar desde el index, ya que reciben el parametros a editar o borrar segun el caso.
 
-##  Aplicacion en producción
+##  Aplicación en producción
 
 TODO
 
-##  Partials de paginacion
+##  Partials de paginación
 
 Como complemento para el paginador de ActiveRecord, a traves de vistas
 parciales se implementan los tipos de paginacion mas comunes. Estos se ubican
@@ -256,7 +253,7 @@ propios partials para paginar en las vistas.
 
 Vista de paginacion clasica.
 
-![](images/image07.jpg)
+![](../images/image07.jpg)
 
 Resultado Final
 
@@ -269,84 +266,84 @@ show:  numero de paginas que se mostraran en el paginador, por defecto 10.
 url:  url para la accion que efectua la paginacion, por defecto
 "module/controller/page/" y se envia por parametro el numero de pagina.
 
-View :: partial ( 'paginators/classic' ,  false ,   array ( 'page'   =>
-$page ,   'show'   =>   8 ,   'url'   =>   'usuario/lista' ));  
+`View :: partial ( 'paginators/classic' ,  false ,   array ( 'page'   =>
+$page ,   'show'   =>   8 ,   'url'   =>   'usuario/lista' ));` 
   
 ---  
   
 ###  Digg
 
-Vista de paginacion estilo digg.
+Vista de paginación estilo digg.
 
-Parametros de configuracion:
+Parámetros de configuración:
 
 page: objeto obtenido al invocar al paginador.
 
-show: numero de paginas  que se mostraran  en el paginador, por defecto 10.
+show: número de páginas  que muestra el paginador, por defecto 10.
 
 url: url para la accion  que efectua  la paginacion , por defecto
 "module/controller/page/" y se envia  por parametro el numero de pagina.
 
-View :: partial ( 'paginators/digg' ,  false ,   array ( 'page'   =>   $page ,
-'show'   =>   8 ,   'url'   =>   'usuario/lista' ));  
+`View :: partial ( 'paginators/digg' ,  false ,   array ( 'page'   =>   $page ,
+'show'   =>   8 ,   'url'   =>   'usuario/lista' ));`  
   
 ---  
   
 ###  Extended
 
-![](images/image00.jpg)
+![](../images/image00.jpg)
 
 Resultado Final
 
-Vista de paginacion extendida.
+Vista de paginación extendida.
 
-Parametros de configuracion:
+Parámetros de configuración:
 
 page:  objeto obtenido al invocar al paginador.
 
 url:  url para la accion  que efectua  la paginacion , por defecto
 "module/controller/page/" y se envia  por parametro el numero de pagina.
 
-View :: partial ( 'paginators/extended' ,  false ,   array ( 'page'   =>
-$page ,   'url'   =>   'usuario/lista' ));  
+`View :: partial ( 'paginators/extended' ,  false ,   array ( 'page'   =>
+$page ,   'url'   =>   'usuario/lista' ));`
   
 ---  
   
 ###  Punbb
 
-Vista de paginacion estilo punbb.
+Vista de paginación estilo punbb.
 
-Parametros de configuracion:
+Parámetros de configuración:
 
 page:  objeto obtenido al invocar al paginador.
 
-show:  numero de paginas  que se mostraran  en el paginador, por defecto 10.
+show:  número de páginas  que muestra el paginador, por defecto 10.
 
-url:  url para la accion  que efectua  la paginacion , por defecto
-"module/controller/page/" y se envia  por parametro  el numero de pagina.
+url:  url para la acción  que efectua  la paginación , por defecto
+"module/controller/page/" y se envia  por parámetro  el número de página.
 
-View :: partial ( 'paginators/punbb' ,  false ,   array ( 'page'   =>   $page
-,   'show'   =>   8 ,   'url'   =>   'usuario/lista' ));  
+`View :: partial ( 'paginators/punbb' ,  false ,   array ( 'page'   =>   $page
+,   'show'   =>   8 ,   'url'   =>   'usuario/lista' ));`  
   
 ---  
   
 ###  Simple
 
-![](images/image11.jpg)
+![](../images/image11.jpg)
 
 Resultado Final
 
-Vista de paginacion simple.
+Vista de paginación simple.
 
-Parametros de configuracion:
+Parámetros de configuración:
 
 page:  objeto obtenido al invocar al paginador.
 
-url:  url para la accion  que efectua  la paginacion , por defecto
-"module/controller/page/" y se envia  por parametro el numero de pagina.
+url:  url para la acción  que efectua  la paginación , por defecto
+"module/controller/page/" y se envia  por parámetro el número de página.
 
-View :: partial ( 'paginators/simple' ,  false ,   array ( 'page'   =>   $page
-,   'url'   =>   'usuario/lista' ));  
+`View :: partial ( 'paginators/simple' ,  false ,   array ( 'page'   =>   $page
+,   'url'   =>   'usuario/lista' ));`  
   
 ---  
   
@@ -370,14 +367,14 @@ class  Usuario extends  ActiveRecord
       return  $this-> paginate ( "page: $page" , 'per_page: 5' );   
   }  
 }  
-?>  
+ 
 ```  
   
 Para el controlador UsuarioController en controllers/usuario_controller.php:
 
 ```php
 <?php  
-Load:: models ( 'usuario' );  
+Load:: models ( 'usuario' ); //No es necesario en v1.0
   
 class  UsuarioController extends  AppController  
 {  
@@ -393,7 +390,7 @@ class  UsuarioController extends  AppController
       $this-> page  = $Usuario-> ver ($page);   
   }  
 }  
-?>  
+
 ```
   
 Y en la vista views/usuario/page.phtml
@@ -428,15 +425,18 @@ $page)); ?>
 
 ##  Deprecated
 
-##  Metodos y clases que se usaban en versiones anteriores y que aun
-funcionan. Pero que quedan desaconsejadas y que no funcionaran en el futuro
-(proxima beta o version final):
+##  Métodos y clases que se usaban en versiones anteriores y que aun
+funcionan. Pero que quedan desaconsejadas y que no funcionarán en el futuro
+(próxima beta o version final):
 
 Posiblemente habra 2 versiones:
 
-beta2 con lo deprecated para facilitar migracion
+0.9 = 100% compatible beta2, con lo deprecated para facilitar migración
 
-beta2.2 sin lo deprecated mas limpia y rapida, para empezar nuevas apps
+1.0 = sin lo deprecated más limpia y rápida, para empezar nuevas apps
+
+ 0.5 | beta1 | beta2 v0.9 | v1.0
+ --- | ----- | ---------- | ----
 
 Flash::success() ahora Flash::valid()
 
@@ -456,27 +456,30 @@ formatos de vista alternativos.
 ###  Lista de cambios entre versiones: si no se especifica beta1 es que es
 compatible en ambos casos
 
-Application
+#### Application
 
-ControllerBase 0.5  => ApplicationController beta1 => AppController beta2
+ 0.5 | beta1 | beta2 v0.9 | v1.0
+ --- | ----- | ---------- | ----
+ControllerBase | ApplicationController | AppController | AppController
+public function init() | protected function initialize() |protected function initialize() | protected function initialize()
+render_view() | render_view() | View::select() | View::select()
 
-public function init 0.5  => protected function initialize beta2
 
-render_view 0.5  => View::select beta2
 
-Models
+#### Models
 
-public $mode 0.5  => public $database beta1 y beta2
+ 0.5 | beta1 | beta2 v0.9 | v1.0
+ --- | ----- | ---------- | ----
+public $mode | public $database | public $database |public $database
 
-Callbacks
+#### Callbacks
 
-public function initialize 0.5  => protected function initialize beta2
-
-public function finalize 0.5  => protected function finalize beta2
-
-public function before_filter 0.5  => protected function before_filter beta2
-
-public function after_filter 0.5  => protected function after_filter beta2
+ 0.5 | beta1 | beta2 v0.9 | v1.0
+ --- | ----- | ---------- | ----
+public function init()  | protected function initialize() | protected function initialize() | protected function initialize()
+public function finalize() | | protected function finalize() | protected function finalize()
+public function before_filter()| | protected function before_filter() | protected function before_filter() 
+public function after_filter() | | protected function after_filter() | protected function after_filter()
 
 boot.ini se elimina en beta2
 
