@@ -105,7 +105,8 @@ Cuando el desarrollador ha definido sus objetos de datos (tablas), atributos y r
 
 *Nota de libertad*
 
->El desarrollador tiene el poder de decidir si usa esta recomendación de nombrado de tablas. En KumbiaPHP no es una transgresión usar otros nombres de tabla. La recomendación anterior está ligada a la una práctica usual respecto del nombre de la clsae del ORM, para optimizar el tiempo de desarrollo en cuestiones importantes, y no en escribir consultas. KumbiaPHP enlaza el nombre de clase ORM con el nombre de archivo php y sin más espera una correlación entre este último y un nombre de tabla en la base de datos (sin la extensión claramente)
+>El desarrollador tiene el poder de decidir si usa esta recomendación de nombrado de tablas. En KumbiaPHP no es una transgresión usar otros nombres para definir dichos elementos. En sí, se entrega este consejo para seguir una práctica usual respecto del nombre de la clase del ORM, y de ese modo optimizar el tiempo de desarrollo en cuestiones importantes, y no en escribir consultas o gestionar el estado de las conexiones.
+Cuando se usa modelos que heredan de algún ORM KumbiaPHP enlaza el nombre de clase con el nombre de archivo php y sin más espera una correlación entre este último y la tabla en la base de datos (sin la extensión claramente)
 
 
 
