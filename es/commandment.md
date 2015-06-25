@@ -122,7 +122,7 @@ La recomendación de los "kumbieros" es nombrar el archivo de clase con el mismo
 
 Siguiendo el ejemplo de la tabla producto, debería existir un archivo de modelo llamado producto.php dentro de la carpeta app/models. Nótese que el nombre del archivo php es también el nombre en singular y en minúscula de la tabla.
 
-La definición de clase dentro del archivo php debe verse inicialmente como se presenta a continuación*:
+La definición de clase dentro del archivo php debe verse inicialmente como se presenta a continuación:
 
 ```php
 <?php
