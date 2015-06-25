@@ -1,37 +1,43 @@
 #Recomendaciones Kumbiónicas
 Esta sección tiene como objetivo presentarle al desarrollador recién llegado consejos y atajos que le serán de utilidad al momento de usar KumbiaPHP framework en su quehacer cotidiano.
 
-La intención es ayudar al desarrollador a lograr un exitoso lanzamiento de su aplicación, en el menor tiempo y con el menor esfuerzo posible.
+La intención es ayudarle a lograr un exitoso lanzamiento de su aplicación, en el menor tiempo y con el menor esfuerzo posible.
 
 ##Recomendación de arquitectura o diseño
-KumbiaPHP es un framework que te da bastante espacio para expresarte como desarrollador, pero por eso queremos darte algunos consejos que harán tu ciclo de trabajo más eficiente.
+KumbiaPHP es un framework que le da bastante espacio para expresarse como desarrollador. Por lo mismo es que se ha concentrado en este documento los consejos que harán su ciclo de trabajo más eficiente.
 
 ###MVC en resumen
-En primer lugar, un modelo es una clase que abstrae una tabla de la base de datos (o varias, o una vista) para que puedas consultar y/o manipular su contenido sin tener que escrbir SQL para todo.
+MVC es el acrónimo de una arquitectura para el desarrollo de aplicaciones que divide la misma en tres componentes: Modelos, Vistas y Controladores.
 
-Una vista es un archivo de presentación de contenido HTML, ya sea como elemento informativo o para requerir interacción del usuario vía enlaces o formularios.
+En primer lugar, un modelo es una clase que le permite gestionar la lógica de negocio de su aplicación. En este sentido, éstas pueden tener relación con la manipulación y consumo de información desde un origen de datos, encargarse de la gestión de notificaciones por correo, manipulación del sistema de archivos entre otros tantos quehaceres que tengan relación con el sentido de su aplicación. La mayor parte del tiempo se crean clases de modelo para abstraer operaciones sobre orígenes de datos (por ejemplo con ActiveRecord o LiteRecord).
 
-Un controlador debería ser sólo el pegamento entre lo que las vistas solicitan, y lo que los modelos pueden entregar como elementos de dato.
+Una vista es un elemento de presentación de contenido, el que puede ser de cualquier tipo: texto, html, json, xml, excel, pdf, imágenes, streaming, música, entre otros. Las vistas son los elementos consumibles de la aplicación, así como también los encargados de interactuar con los usuarios (humanos o electrónicos)
 
-Y entonces, una buena aplicación "kumbiera" o en cualquier otro framework es aquella que tiene modelos que hacen el trabajo de la lógica del negocio, cálculos y ese tipo de cosas con datos, controladores que hacen peticiones y vistas que muentran contenido de datos solicitados por los controladores a los modelos.
+Un controlador debería ser sólo el pegamento entre lo que las vistas solicitan, y lo que los modelos pueden entregar según sea su naturaleza (datos, notificaciones de correo, acceso a archivos, etc.)
 
-En resumen: **controladores delgados, modelos gordos**.
+Y entonces, una buena aplicación "kumbiera" o en cualquier otro framework es aquella que tiene modelos que hacen el trabajo de lógica del negocio ( cálculos, gestión de datos, de archivos, de recursos), controladores que hacen peticiones y vistas que muentran contenido de los elementos solicitados por los controladores a los modelos.
 
-##Convenciones relativas a la base de datos
-Esta primera sección tiene que ver con la forma en la que el desarrollador define sus objetos de datos, atributos y restricciones de integridad en su motor de base de datos.
+Una buena práctica es tener **controladores delgados y modelos gordos**.
+
+Esto resume un poco el ecosistema de las aplicaciones bajo una arquitectura MVC.
+
+A continuación se presentará consejos prácticos references a la creación de objetos de base de datos.
+
+##Convenciones para base de datos
+Esta sección tiene que ver con la forma en la que el desarrollador define sus objetos de datos, atributos y restricciones de integridad en su motor de base de datos.
 
 ###Nombres para objetos de datos
 Una buena práctica de los "kumbieros" tiene relación con el nombrado de las tablas de la base de datos. Como KumbiaPHP es un framework que utiliza OOP (programación orientada a objetos), la primera recomendación es usar nombres en singular y en minúscula para nombrar cada una de las tablas (tal como si fueran nombres de clases).
 
-Por ejemplo, en un sitio de comercio existen productos,  usuarios, compras, proveedores, etc. Siguiendo la recomendación, los nombres de tabla deberían ser: producto, usuario, compra y proveedor.
+Por ejemplo, en un sitio de comercio existen productos, usuarios, compras, proveedores, etc. Siguiendo la recomendación, los nombres de tabla deberían ser: producto, usuario, compra y proveedor.
 
 Cuando se tiene datos que se relacionan en cardinalidad muchos a muchos (por ejemplo un jugador puede pertenecer a muchos equipos en el tiempo, y un equipo puede tener muchos jugadores), la recomendación es crear la tabla de relación usando ambos nombres en orden alfabético, separados por un guión bajo (underscore, _ ) En el ejemplo se tendría como nombre de tabla de relación equipo_jugador.
 
 ### Atributos de las tablas
 #### Atributos clave
-Una convención de muchos frameworks para el nombrado del atributo clave es usar una columna llamada id, que sea de tipo numérico (sin decimales) y que sea auto_incremental.
+Una convención de muchos frameworks para el nombrado del atributo clave es usar una columna llamada id, que sea de tipo numérico (sin decimales) y que sea auto_incremental (serial, identity, autonumérico).
 
-A modo de ejemplo, la tabla usuario puede definirse similar a como se muestra a continuación:
+A modo de ejemplo, usando MySQL o MariaDB, la tabla usuario puede definirse como se muestra a continuación:
 ```sql
  CREATE TABLE usuario (
    id int not null primary key auto_increment,
@@ -42,11 +48,12 @@ A modo de ejemplo, la tabla usuario puede definirse similar a como se muestra a 
    actualizado_in datetime not null
 );
 
-   ```
-Con esta convención sobre el atributo clave el desarrollador siempre tendrá un identificador único sobre el cual referirte a la tupla (registro, o fila), ya sea para manipular o consultar su contenido.
+```
+
+Con esta convención sobre el atributo clave el desarrollador siempre tendrá un identificador único sobre el cual referirse a la tupla (registro, o fila), ya sea para manipular o consultar su contenido.
 
 #### Claves foráneas
-Las claves foráneas también tienen una convención que es común en muchos frameworks (y también en KumbiaPHP). El atributo clave debe llamarse como el nombre de la tabla de origen, seguido de un guión bajo (undersore), y finalmente la palabra id. En el ejemplo de la tienda de comercio, un producto es provisto por un único proveedor, así que la tabla producto debe contener un campo foráneo que referencie a la tabla proveedor. Así la definición de la tabla productos podría verse como la siguiente figura:
+Las claves foráneas también tienen una convención que es común en muchos frameworks (y obviamente en KumbiaPHP). El atributo clave debe llamarse como el nombre de la tabla de origen, seguido del sufijo "_id" (sin comillas). En el ejemplo de la tienda de comercio, un producto es adquirido a un único proveedor, por lo que la tabla producto debe contener un campo foráneo que referencie a la tabla proveedor. Así la definición de la tabla productos podrá verse como:
 
 ```sql
 CREATE TABLE producto (
@@ -65,7 +72,7 @@ CREATE TABLE producto (
 ```
 
 
-La tabla proveedor prodía parecerse a la siguiente definición:
+La tabla proveedor tendrá, como ejemplo, la siguiente definición:
 ```sql
 CREATE TABLE proveedor (
   id int not null primary key auto_increment,
@@ -77,7 +84,8 @@ CREATE TABLE proveedor (
 );
 ```
 
-El caso del ejemplo de la relación muchos a muchos entre jugador y equipo podría tener un esquema de creación sql como el que sigue:
+
+El caso del ejemplo de la relación muchos a muchos entre jugador y equipo se podrá tener un esquema de ejemplo como el que sigue:
 ```sql
 CREATE TABLE equipo_jugador (
   id bigint not null primary key auto_increment,
@@ -92,28 +100,28 @@ CREATE TABLE equipo_jugador (
 );
 ```
 
-Cuando el desarrollador ha definido sus objetos de datos (tablas), atributos y restricciones de integridad referencial, lo ideal es seguir con la definición de las clases del ORM que se harán cargo de la gestión de las tablas y sus datos.
+Cuando el desarrollador ha definido sus objetos de datos (tablas), atributos y restricciones de integridad referencial, lo ideal es seguir con la definición de las clases modelo que gestionarán el acceso y manipulación de los datos. Se recomienda usar modelos que hereden de algún tipo de ORM. En KumbiaPHP existe ActiveRecord y LiteRecord.
 
 
 *Nota de libertad*
 
->Como desarrollador tienes el poder de decidir si usas esta recomendación de nombrado de tablas o no. Para KumbiaPHP no es una transgresión si usas otros nombres de tabla, o si acaso usas prefijos. La recomendación anterior está ligada a la una práctica usual respecto del nombre de la clsae del ORM, con tal que no tengas que reescribir cuestiones que funcionan de manera predeterminada. KumbiaPHP enlaza el nombre de clase ORM con el nombre de archivo php y sin más espera una correlación entre este último y un nombre de tabla en la base de datos (sin la extensión claramente)
+>El desarrollador tiene el poder de decidir si usa esta recomendación de nombrado de tablas. En KumbiaPHP no es una transgresión usar otros nombres de tabla. La recomendación anterior está ligada a la una práctica usual respecto del nombre de la clsae del ORM, para optimizar el tiempo de desarrollo en cuestiones importantes, y no en escribir consultas. KumbiaPHP enlaza el nombre de clase ORM con el nombre de archivo php y sin más espera una correlación entre este último y un nombre de tabla en la base de datos (sin la extensión claramente)
 
 
 
 ##Recomendaciones sobre escritura de código
-**Esta es una recomendación de gran utilidad**. Es ideal mantener un cierto estándard de códificación al momento de escribir las aplicaciones. Los "kumbieros" te sugerimos la lectura del siguiente artículo que va directo en apoyo a tus labores de desarrollo:
+**Esta es una recomendación de gran utilidad**. Es ideal apegarse a una norma de códificación al momento de escribir las aplicaciones. Los "kumbieros" le sugieren la lectura del siguiente artículo que va directo en apoyo a sus labores de desarrollo individual, y aún más en el trabajo colectivo:
 [Estándares de codificación en PHP.](http://www.codejobs.biz/es/blog/2013/02/19/estandares-de-codificacion-en-php-psr0-psr1-psr2-y-psr3#sthash.QGpAA00m.dpbs)
 
 
 ##Convenciones sobre clases ORM
-Asumiendo que el desarrollador ha creado las tablas en singular, entonces la creación de los archivos de modelo debería ser sencilla para él.
+Asumiendo que el desarrollador ha creado las tablas en singular, entonces la creación de los archivos de modelo será una tarea sencilla.
 
 La recomendación de los "kumbieros" es nombrar el archivo de clase con el mismo nombre de la tabla en la base de datos.
 
-Siguiendo el ejemplo de la tabla producto, debería existir un modelo llamado producto.php dentro de la carpeta app/models. Nótese que el nombre del archivo php es también el nombre en singular y en minúscula de la tabla.
+Siguiendo el ejemplo de la tabla producto, debería existir un archivo de modelo llamado producto.php dentro de la carpeta app/models. Nótese que el nombre del archivo php es también el nombre en singular y en minúscula de la tabla.
 
-La definición de clase dentro del archivo php debería verse más o menos como se presenta a continuación*:
+La definición de clase dentro del archivo php debe verse inicialmente como se presenta a continuación*:
 
 ```php
 <?php
@@ -125,7 +133,7 @@ La definición de clase dentro del archivo php debería verse más o menos como 
 
 *Nota: Se ha usado herencia sobre ActRecord que es parte de los nuevos componentes de acceso a datos con los que estará provisto KumbiaPHP. Se puede ver cómo instalar dichos componentes en el repositorio [KumbiaPHP/ActiveRecord](https://github.com/KumbiaPHP/ActiveRecord)*
 
-Para el caso de ejemplo de la tabla de relación entre equipo y jugador, el nombre del archivo de modelo sigue la misma recomendación anterior, es decir, el nombre de la tabla en singular y minúsculas: equipo_jugador.php. La definición de clase cambia un poco, y debe verse como sigue:
+Para el caso de ejemplo de la tabla de relación entre equipo y jugador, el nombre del archivo de modelo sigue la misma recomendación anterior, es decir, el nombre de la tabla en singular y minúsculas: equipo_jugador.php. La definición de clase debe verse como sigue:
 
 ```php
 <?php
@@ -147,9 +155,9 @@ En el ejemplo de comercio, la tabla compra tiene una tabla asociada que se llama
 ```
 
 ##Convenciones para controladores
-Los controladores no necesariamente tienen reglas fijas de nombre. No hay correlación de carga de elementos entre el nombre del controller y otras clases, dado que el core de KumbiaPHP genera autoload bajo demanda para las clases de modelos, ayudantes (helpers), y librerías.
+Los controladores no necesariamente tienen reglas fijas de nombre. No hay correlación de carga de elementos entre el nombre del controller y otras clases, dado que el core de KumbiaPHP genera autoload bajo demanda para los modelos, ayudantes (helpers), y librerías (vendors).
 
-De todos modos, es una buena práctica "kumbiera" nombrar los controladores con **el mismo nombre de la tabla en plural**. Por consiguiente, el nombre de archivo para el controlador que gestiona los proveedores debería ser proveedores_controller.php (ubicado en app/controllers/). Un ejemplo de controlador básico debería ir de forma similar a como se ve la siguiente figura:
+De todos modos, es una buena práctica "kumbiera" nombrar los controladores con **el mismo nombre del modelo, pero en plural**. Por consiguiente, el nombre de archivo para el controlador que gestiona los proveedores debería ser proveedores_controller.php (ubicado en app/controllers/). Un ejemplo de controlador básico debería ir de forma similar a como se ve la siguiente figura:
 
 ```php
 <?php
@@ -160,20 +168,39 @@ De todos modos, es una buena práctica "kumbiera" nombrar los controladores con 
       $this->proveedores = Proveedor::all();
     }
 
-    public function show($id)
+    public function ver($id)
     {
       $this->proveedor = Proveedor($id);
     }
 
-    public function edit($id)
+    public function agregar()
+    {
+      if (Input::hasPost('proveedor')) {
+        if ((new Proveedor)->create(Input::post('proveedor'))) {
+          Flash::valid('Proveedor creado exitosamente!');
+          Input::delete('proveedor');
+        }
+      }
+    }
+
+    public function editar($id)
     {
       if (Input::hasPost('proveedor')) {
         if ((new Proveedor)->update(Input::post('proveedor'))) {
           Flash::valid('Proveedor actualizado exitosamente!');
-          return Redirect::to(); //ir a index
         }
       }
       $this->proveedor = Proveedor($id);
+    }
+
+    public function eliminar($id)
+    {
+      if (new Proveedor)->delete($id)) {
+        Flash::valid('Proveedor eliminado exitosamente!');
+      } else {
+        Flash::error('Proveedor no pudo ser eliminado!');
+      }
+      return Redirect::to(); //predeterminadamente a la acción index
     }
   }
 ```
@@ -183,4 +210,4 @@ De todos modos, es una buena práctica "kumbiera" nombrar los controladores con 
 >Como ya se mencionó con anterioridad, el nombre de los controladores no liga autocarga de modelos, así que le recomendamos que use los nombres de controlador para definir claramente la estructura de su aplicación web, y de igual manera lo haga con las vistas.
 
 ##Convenciones para vistas
-Las vistas son los archivos de presentación de nuestros datos y contenidos. KumbiaPHP usa de forma predeterminada archivos con extensión phtml. Las vistas, de manera predeterminada, deben corresponder con **el nombre del método que ha sido creado en el controlador**. En el caso de nuestro ejemplo para el controllador que gestiona los proveedores el desarrollador debería crearuna carpeta llamada **app/views/proveedor**, y en ella debería alojar tres archivos llamados **index.phtml**, **show.phtml** y **edit.phtml**.
+Las vistas son los archivos de presentación de las solicitudes que se realizar a los modelos por intermedio de los controladores. KumbiaPHP usa de forma predeterminada archivos con extensión phtml para las vistas que entregan HTML. Las vistas, de manera predeterminada, deben corresponder con **el nombre del método/acción que ha sido creado en el controlador**. En el caso del ejemplo para el controlador que gestiona los proveedores el desarrollador debe crear una carpeta llamada **app/views/proveedores**, y en ella alojar los archivos llamados **index.phtml**, **ver.phtml**, **agregar.phtml**, y **editar.phtml**. Note que la acción eliminar no tiene vista porque al ejecutarse la petición, hará redirección a la vista predeterminada (index). De todos modos, puede existir vista de eliminar si el desarrollador lo estima conveniente, con la intención de mostrar primero el elemento a quitar, y en él incluir un botón o enlace que confirme la eliminación por el usuario.
