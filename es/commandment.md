@@ -1,27 +1,38 @@
 #Recomendaciones Kumbiónicas
-Esta sección tiene como objetivo presentarle al desarrollador recién llegado consejos y atajos que le serán de utilidad al momento de usar KumbiaPHP framework en su quehacer cotidiano.
+Esta sección tiene como objetivo presentarle consejos y atajos al desarrollador recién llegado, los que serán de utilidad al momento de usar KumbiaPHP framework en su quehacer cotidiano.
 
 La intención es ayudarle a lograr un exitoso lanzamiento de su aplicación, en el menor tiempo y con el menor esfuerzo posible.
 
-##Recomendación de arquitectura o diseño
+Este documento cubre los siguientes aspectos:
++ Recomendaciones de diseño de la aplicación
++ Convenciones para bases de datos
++ Recomendaciones sobre escritura de código
++ Convenciones sobre clases ORM
++ Convenciones para controladores
++ Convenciones para vistas
+
+
+##Recomendación de diseño de la aplicación
 KumbiaPHP es un framework que le da bastante espacio para expresarse como desarrollador. Por lo mismo es que se ha concentrado en este documento los consejos que harán su ciclo de trabajo más eficiente.
 
-###MVC en resumen
+###Breve resumen de MVC
 MVC es el acrónimo de una arquitectura para el desarrollo de aplicaciones que divide la misma en tres componentes: Modelos, Vistas y Controladores.
 
-En primer lugar, un modelo es una clase que le permite gestionar la lógica de negocio de su aplicación. En este sentido, éstas pueden tener relación con la manipulación y consumo de información desde un origen de datos, encargarse de la gestión de notificaciones por correo, manipulación del sistema de archivos entre otros tantos quehaceres que tengan relación con el sentido de su aplicación. La mayor parte del tiempo se crean clases de modelo para abstraer operaciones sobre orígenes de datos (por ejemplo con ActiveRecord o LiteRecord).
+Cada uno de los componentes cumple un rol fundamental dentro de la arquitectura, por lo que es necesario que el desarrollador conozca las funcionalidades de cada uno de ellos.
 
-Una vista es un elemento de presentación de contenido, el que puede ser de cualquier tipo: texto, html, json, xml, excel, pdf, imágenes, streaming, música, entre otros. Las vistas son los elementos consumibles de la aplicación, así como también los encargados de interactuar con los usuarios (humanos o electrónicos)
+**El modelo** es el componente (normalmente traducido en clases) que le permite gestionar la lógica de negocio de su aplicación. En este sentido, estos pueden proveer métodos para la edición y consumo de información desde un origen de datos, encargarse de la gestión de notificaciones por correo, manipulación del sistema de archivos entre otros tantos quehaceres que tengan relación con el sentido de su aplicación. La mayor parte del tiempo se crean clases de modelo para abstraer operaciones sobre orígenes de datos (por ejemplo con ActiveRecord o LiteRecord).
 
-Un controlador debería ser sólo el pegamento entre lo que las vistas solicitan, y lo que los modelos pueden entregar según sea su naturaleza (datos, notificaciones de correo, acceso a archivos, etc.)
+**Una vista** es un elemento de presentación de contenido, el que puede ser de cualquier tipo: texto, html, json, xml, excel, pdf, imágenes, streaming, música, entre otros. Las vistas son los elementos consumibles de la aplicación, así como también los encargados de interactuar con los usuarios (humanos o electrónicos)
 
-Y entonces, una buena aplicación "kumbiera" o en cualquier otro framework es aquella que tiene modelos que hacen el trabajo de lógica del negocio ( cálculos, gestión de datos, de archivos, de recursos), controladores que hacen peticiones y vistas que muentran contenido de los elementos solicitados por los controladores a los modelos.
+**Un controlador** debería ser sólo el pegamento entre lo que las vistas solicitan, y lo que los modelos pueden entregar según sea su naturaleza (datos, notificaciones de correo, acceso a archivos, etc.)
 
-Una buena práctica es tener **controladores delgados y modelos gordos**.
+Y entonces, una buena aplicación "kumbiera" o en cualquier otro framework es aquella que *tiene modelos que hacen el trabajo de lógica del negocio ( cálculos, gestión de datos, de archivos, de recursos), controladores que hacen peticiones y vistas que muentran contenido de los elementos solicitados por los controladores a los modelos*.
 
-Esto resume un poco el ecosistema de las aplicaciones bajo una arquitectura MVC.
+*Una práctica favorable es mantener los controladores con el mínimo código necesario (controladores flacos), y modelos que encapsulan la lógica del negocio (modelos gordos)*
 
-A continuación se presentará consejos prácticos references a la creación de objetos de base de datos.
+Con lo anterior cerramos la sección de recomendaciones de diseño de la aplicación. Acto seguido podrá encontrar consejos relacionados con la creación de entidades, atributos, claves, entre otros (elementos de base de datos)
+
+
 
 ##Convenciones para base de datos
 Esta sección tiene que ver con la forma en la que el desarrollador define sus objetos de datos, atributos y restricciones de integridad en su motor de base de datos.
@@ -100,7 +111,11 @@ CREATE TABLE equipo_jugador (
 );
 ```
 
-Cuando el desarrollador ha definido sus objetos de datos (tablas), atributos y restricciones de integridad referencial, lo ideal es seguir con la definición de las clases modelo que gestionarán el acceso y manipulación de los datos. Se recomienda usar modelos que hereden de algún tipo de ORM. En KumbiaPHP existe ActiveRecord y LiteRecord.
+#### Atributos de fecha automáticos
+El ORM de KumbiaPHP gestiona automáticamente ciertos atributos para referirse a la fecha de creación de una tupla (registro, fila), y a la fecha de la última actualización de dicho elemento. Para que las tuplas de las tablas puedan administrar esos valores de fecha existen dos sufijos que son especiales para ese tipo de campos: "_at" e "_in". El sufijo "_at" (sin comillas) sirve para referirse a la fecha de creación de un registro. En los ejemplos de tablas anteriores, existe el atributo "creado_at". Por otro lado, el sufijo "_in", permite mantener la fecha/hora de la última actualización de la tupla. En las tablas de ejemplo encontrará "actualizado_in".
+
+
+Cuando el desarrollador ya ha definido sus objetos de datos (tablas), atributos y restricciones de integridad referencial, lo ideal es seguir con la definición de las clases modelo que gestionarán el acceso y manipulación de los datos. Se recomienda usar modelos que hereden de algún tipo de ORM. En KumbiaPHP existe ActiveRecord y LiteRecord.
 
 
 *Nota de libertad*
@@ -134,6 +149,7 @@ La definición de clase dentro del archivo php debe verse inicialmente como se p
 
 *Nota: Se ha usado herencia sobre ActRecord que es parte de los nuevos componentes de acceso a datos con los que estará provisto KumbiaPHP. Se puede ver cómo instalar dichos componentes en el repositorio [KumbiaPHP/ActiveRecord](https://github.com/KumbiaPHP/ActiveRecord)*
 
+
 Para el caso de ejemplo de la tabla de relación entre equipo y jugador, el nombre del archivo de modelo sigue la misma recomendación anterior, es decir, el nombre de la tabla en singular y minúsculas: equipo_jugador.php. La definición de clase debe verse como sigue:
 
 ```php
@@ -155,10 +171,11 @@ En el ejemplo de comercio, la tabla compra tiene una tabla asociada que se llama
   }
 ```
 
+
 ##Convenciones para controladores
 Los controladores no necesariamente tienen reglas fijas de nombre. No hay correlación de carga de elementos entre el nombre del controller y otras clases, dado que el core de KumbiaPHP genera autoload bajo demanda para los modelos, ayudantes (helpers), y librerías (vendors).
 
-De todos modos, es una buena práctica "kumbiera" nombrar los controladores con **el mismo nombre del modelo, pero en plural**. Por consiguiente, el nombre de archivo para el controlador que gestiona los proveedores debería ser proveedores_controller.php (ubicado en app/controllers/). Un ejemplo de controlador básico debería ir de forma similar a como se ve la siguiente figura:
+De todos modos, es una buena práctica "kumbiera" nombrar los controladores con **el mismo nombre del modelo, pero en plural**. Por consiguiente, el nombre de archivo para el controlador que gestiona los proveedores debería ser proveedores_controller.php (ubicado en app/controllers/). Un ejemplo de controlador que gestiona datos (CRUD) debería ser similar a la siguiente figura:
 
 ```php
 <?php
@@ -210,5 +227,12 @@ De todos modos, es una buena práctica "kumbiera" nombrar los controladores con 
 
 >Como ya se mencionó con anterioridad, el nombre de los controladores no liga autocarga de modelos, así que le recomendamos que use los nombres de controlador para definir claramente la estructura de su aplicación web, y de igual manera lo haga con las vistas.
 
+
 ##Convenciones para vistas
 Las vistas son los archivos de presentación de las solicitudes que se realizar a los modelos por intermedio de los controladores. KumbiaPHP usa de forma predeterminada archivos con extensión phtml para las vistas que entregan HTML. Las vistas, de manera predeterminada, deben corresponder con **el nombre del método/acción que ha sido creado en el controlador**. En el caso del ejemplo para el controlador que gestiona los proveedores el desarrollador debe crear una carpeta llamada **app/views/proveedores**, y en ella alojar los archivos llamados **index.phtml**, **ver.phtml**, **agregar.phtml**, y **editar.phtml**. Note que la acción eliminar no tiene vista porque al ejecutarse la petición, hará redirección a la vista predeterminada (index). De todos modos, puede existir vista de eliminar si el desarrollador lo estima conveniente, con la intención de mostrar primero el elemento a quitar, y en él incluir un botón o enlace que confirme la eliminación por el usuario.
+
+
+##Palabras al cierre
+Hasta aquí llega este pequeño documento de apoyo a los nuevos desarrolladores que se integran al trabajo con KumbiaPHP Framework. Esperamos que usted pueda encontrar en KumbiaPHP un compañero fiel a la hora de plantear sus soluciones web. Ante cualquier tipo de dudas le recomendamos leer la documentación, revisar la wiki, comunicarse en el grupo de google, o visitar el canal de IRC. Estos datos de referencia puede encontrarlos directamente en el sitio web del framework: [www.kumbiaphp.com](http://www.kumbiaphp.com). Si desea contribuir en cualquiera de los proyectos puede dirigirse al sitio del proyecto alojado en github: (https://github.com/KumbiaPHP): todas las manos son bienvenidas.
+
+Le deseamos un feliz descubrimiento y que pueda sacar provecho del trabajo de nuestros desarrolladores, los encargados de las pruebas, documentadores, y la comunidad.
