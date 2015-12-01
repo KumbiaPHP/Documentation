@@ -5,7 +5,7 @@ framework en nuestro ambiente de desarrollo.
 
 ## Requisitos
 
-Como se menciono arriba KumbiaPHP es muy fácil  y en este sentido los
+Como se mencionó arriba KumbiaPHP es muy fácil y en este sentido los
 requerimientos para hacer funcionar el framework son mínimos, a continuación
 se listan:
 
@@ -24,23 +24,24 @@ A continuación se descomprime su contenido en el directorio raíz del servidor
 web (DocumentRoot). Para asegurar cierta uniformidad en el documento, en este
 capitulo se supone que se ha descomprimido el paquete del framework en el
 directorio kumbiaphp/ . Teniendo una estructura como la siguiente:
+```
+-- KumbiaPHP-master  
+    |-- core  
+    |-- default  
+        |-- app  
+        |-- public  
+        |-- .htaccess  
+        `-- index.php  
+```
 
-`-- 1.0
-    |-- core    
-    |-- default
-        |-- app
-        |-- index.php
-        |-- .htaccess
-        `-- public  
-  
 ## Configurar Servidor Web
 
-KumbiaPHP Framework utiliza un modulo para la reescritura de URLs haciéndolas
+KumbiaPHP Framework utiliza un módulo para la reescritura de URLs haciéndolas
 mas comprensibles y fáciles de recordar en nuestras aplicaciones. Por esto, el
-modulo debe ser configurado e instalado, en este sentido debe chequear que el
-modulo este habilitado, en las siguientes secciones se explica como hacer.
+módulo debe ser configurado e instalado, en este sentido debe chequear que el
+módulo esté habilitado, en las siguientes secciones se explica como hacerlo.
 
-### Habitando mod_rewrite de Apache en GNU/Linux (Debian, Ubuntu y Derivados)
+### Habilitando mod_rewrite de Apache en GNU/Linux (Debian, Ubuntu y derivados)
 
 Nos aseguramos de activar el mod_rewrite  de esta manera y como usuario
 administrador desde la consola.
@@ -89,29 +90,29 @@ Si todo ha ido bien, debería ver una página de bienvenida como la que se
 muestra en la figura 2.1, con lo que la instalación rápida se puede dar por
 concluida.
 
-![](images/image12.png)
+![](../images/image12.png)
 
-Figura 2.1: Instalación Exitosa de KumbiaPHP
+Figura 2.1: Instalación exitosa de KumbiaPHP
 
 Esto es un entorno de pruebas el cual esta pensado para practicar con
 KumbiaPHP en un servidor local, no para desarrollar aplicaciones complejas que
 terminan siendo publicadas en la web.
 
-### ¿Por que es importante el Mod-Rewrite?
+### ¿Por qué es importante el Mod-Rewrite?
 
-ReWrite es un modulo de apache que permite reescribir las urls que han
+ReWrite es un módulo de apache que permite reescribir las urls que han
 utilizado nuestros usuarios. KumbiaPHP Framework encapsula esta complejidad
 permitiendo usar URLs bonitas o limpias como las que vemos en blogs o en
 muchos sitios donde no aparecen los ?, los & ni las extensiones del servidor
 (.php, .asp, .aspx, etc).
 
-Además de esto, con mod-rewrite  KumbiaPHP puede proteger nuestras
+Además de esto, con mod-rewrite KumbiaPHP puede proteger nuestras
 aplicaciones ante la posibilidad de que los usuarios puedan ver los
 directorios del proyecto y puedan acceder a archivos de clases, modelos,
 lógica, etc., sin que sean autorizados.
 
 Con mod-rewrite  el único directorio que pueden ver los usuarios es el
-contenido del directorio publico (public) del servidor web, el resto permanece
+contenido del directorio público (public) del servidor web, el resto permanece
 oculto y solo puede ser visualizado cuando ha realizado una petición en forma
 correcta y también es correcto según nuestra lógica de aplicación. Cuando
 escribes direcciones utilizando este tipo de URLs, estas ayudando también a
