@@ -167,7 +167,7 @@ controlador.
 
 Tomemos la URL:
 
-http://www.dominio.com/noticias/ver/12/
+http://www.example.com/noticias/ver/12/
    
   
   * El Controlador: noticias
