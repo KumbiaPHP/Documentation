@@ -41,16 +41,6 @@ odelo_Vista_Controlador&sa=D&sntz=1&usg=AFQjCNFo6Rn8nbUjHG5f8Qqa__2nYwMDjg) .
 
 ###  El Modelo extiende el ActiveRecord
 
-KumbiaPHP  usa POO (Programación orientada a objetos) , así que ActiveRecord
-es una clase que ya lleva métodos listos para usar. Estos métodos  facilitan
-al usuario el manejo de las tablas de las bases de datos; entre ellos están
-los siguientes: find, find_all, save, update, etc.
-
-El Modelo extiende la clase ActiveRecord  para que el usuario pueda añadir sus
-propios métodos, y así encapsular la lógica.
-
-###  El Modelo extiende el ActiveRecord
-
 KumbiaPHP usa POO (Programación orientada a objetos), así que ActiveRecord es
 una clase que ya lleva métodos listos para usar. Estos métodos facilitan al
 usuario el manejo de las tablas de las bases de datos; entre ellos están los
@@ -383,14 +373,14 @@ from producto, factura  where factura.codigo = 1124 \
 
 ### Promedios, máximo y mínimo
 
-#### avg()
+#### average()
 
 Realiza el cálculo del promedio sobre los valores numéricos del atributo de
 alguna entidad, emula la función de agrupamiento avg en el lenguaje SQL.
 
-$promedio = Load:: model ( 'producto' )-> avg ( "precio" );
-$promedio = Load:: model ( 'producto' )-> avg ( "precio" , "conditions: estado =
-'A'" );
+$promedio = Load:: model ( 'producto' )-> average ( "precio" );
+$promedio = Load:: model ( 'producto' )-> average ( "precio" ,
+"conditions: estado = 'A'" );
 
 #### maximum()
 
