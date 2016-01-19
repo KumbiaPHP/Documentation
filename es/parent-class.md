@@ -1,8 +1,8 @@
-#  7 Clases padre
+#  Clases padre
 
-##  7.1 AppController
+## AppController
 
-##  7.2 ActiveRecord
+## ActiveRecord
 
 Es la principal clase para la administración y funcionamiento de modelos.
 ActiveRecord  es una implementación de este patrón de programación y esta muy
@@ -20,7 +20,7 @@ $cliente -> save ();
   
 ---  
   
-###  7.2.1. Ventajas del ActiveRecord
+### Ventajas del ActiveRecord
 
   * Se trabajan las entidades del Modelo mas Naturalmente como objetos.
   * Las acciones como Insertar, Consultar, Actualizar, Borrar, etc. de una entidad del Modelo están encapsuladas así que se reduce el código y se hace mas fácil de mantener.
@@ -29,7 +29,7 @@ $cliente -> save ();
   * Menos "detalles", más práctico y util
   * ActiveRecord protege en un gran porcentaje de ataques de SQL inyection que puedan llegar a sufrir tus aplicaciones escapando caracteres que puedan facilitar estos ataques.
 
-###  7.2.2. Crear un Modelo en Kumbia PHP Framework
+### Crear un Modelo en Kumbia PHP Framework
 
 Lo primero es crear un archivo en el directorio models con el mismo nombre de
 la relación en la base de datos. Por ejemplo: models/clientes.php  Luego
@@ -55,7 +55,7 @@ class  TipoDeCliente extends  ActiveRecord {
   
 ---  
   
-###  7.2.3. Columnas y Atributos
+### Columnas y Atributos
 
 Objetos ActiveRecord  corresponden a registros en una tabla de una base de
 datos. Los objetos poseen atributos que corresponden a los campos en estas
@@ -113,7 +113,7 @@ $album-> save ();
   
 ---  
   
-###  7.2.4.        Llaves Primarias y el uso de IDs
+### Llaves Primarias y el uso de IDs
 
 En los ejemplos mostrados de KumbiaPHP siempre se trabaja una columna llamada
 id como llave primaria de nuestras tablas. Tal vez, esto no siempre es
@@ -133,7 +133,7 @@ tabla album del ejemplo anterior la convención nos dice que id es la llave
 primaria de esta tabla pero además nos dice que hay una llave foránea a la
 tabla artista en su campo id.
 
-###  7.2.5. Convenciones en ActiveRecord
+### Convenciones en ActiveRecord
 
 ActiveRecord posee una serie de convenciones que le sirven para asumir
 distintas cualidades y relacionar un modelo de datos. Las convenciones son las
@@ -174,7 +174,7 @@ este utilizando.
 
 ...
 
-#  8 Libs de KumbiaPHP
+#  Libs de KumbiaPHP
 
 Kumbiaphp lleva clases listas para usar, pero recordad que podéis crearos
 vuestras propias clases para reutilizarlas en vuestros proyectos.También
