@@ -1,4 +1,4 @@
-#  6 Scaffold
+# Scaffold
 
 ##  Introduccion
 
