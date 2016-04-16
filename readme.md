@@ -3,7 +3,7 @@
 - [Borrador para la 0.9](es/index.md)
 - Draft for 0.9 version (We need colaborations :( )
 
-## Enlace para la traducción al ingles
+## Enlace para la traducción al inglés
 https://crowdin.com/project/kumbiaphp-doc
 
-www.kumbiaphp.com
+
