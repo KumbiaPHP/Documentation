@@ -1,28 +1,28 @@
-# Apéndices
+# Appendices
 
-## Integración de jQuery y KumbiaPHP
+## Integration of jQuery and KumbiaPHP
 
-KumbiaPHP provee de una integración con el Framework de DOM en JavaScript, jQuery
+KumbiaPHP provides integration with the JavaScript Framework jQuery
 
 ### KDebug
 
 KDebug es un nuevo objeto incorporado al plugins de integracion KumbiaPHP/jQuery que permite una depuracion del codigo en tiempo de desarrollo. Con solo un parámetro se puede aplicar un log que permite ver en consola ( mientras esta este disponible, sino usara alert) que permite un mejor control de la ejecuccion.
 
-No es necesario pero si recomendable usar Firebug si se trabaja en Mozilla Firefox o algun navegador que use la consola de WebKit como Google Chrome.
+It is not necessary but if you want to use Firebug if you are working in Mozilla Firefox or any browser that uses WebKit as Google Chrome console.
 
 ## CRUD
 
-### Introducción
+### Intro
 
-Este ejemplo, permite de manera sencilla conocer y entender la implementación de un CRUD (Create, Read, Update y Delete en ingles) sin la necesidad de un Scaffold y un manejo correcto del MVC en KumbiaPHP.
+This example allows easy to know and understand the implementation of a CRUD (Create, Read, Update and Delete) without the need of a Scaffold and a correct handling of the MVC in KumbiaPHP.
 
 El CRUD de la beta1 sigue funcionando igual en la beta2, pero queda desaconsejado. En la version 1.0 se puede usar de las 2 maneras. Y la 1.2 que saldrá junto a la 1.0 sólo usa el nuevo y se elimina lo desaconsejado.
 
-### Configurando database.ini
+### Configuring database.ini
 
 Configurar el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) , con los datos y motor de Base de Datos a utilizar.
 
-### Modelo
+### Model
 
 Crear el Modelo el cual esta viene dado por la definicion de una tabla en la BD, para efecto del ejemplo creamos la siguiente tabla.
 
@@ -152,9 +152,9 @@ class  MenusController extends  AppController {
 }  
 ```
 
-### Vistas
+### Views
 
-Agregamos las vistas...
+We add the views...
 
 [app]/views/menus/index.phtml
 
@@ -213,19 +213,19 @@ clasic,....
 <?php   echo  Form:: close () ?>  
 ```
 
-### Probando el CRUD
+### Testing the CRUD
 
-Ahora solo resta probar todo el código que hemos generado, en este punto es importante conocer el comportamiento de las [URL's en KumbiaPHP](http://wiki.kumbiaphp.com/Hola_Mundo_KumbiaPHP_Framework#KumbiaPHP_URLS) .
+Now it only remains to try all the code that we have generated, at this point it is important to know the behavior of the [URL's in KumbiaPHP](http://wiki.kumbiaphp.com/Hola_Mundo_KumbiaPHP_Framework#KumbiaPHP_URLS).
 
 * index es la accion para listar http://localhost/menus/index/ NOTA: index/ se puede pasar de forma implicita o no. KumbiaPHP en caso que no se le pase una accion, buscara por defecto un index, es decir si colocamos: http://localhost/menus/
 * create crea un menu en la Base de Datos http://localhost/menus/create/
 * Las acciones del y edit a ambas se debe entrar desde el index, ya que reciben el parametros a editar o borrar segun el caso.
 
-## Aplicación en producción
+## Application in production
 
 TODO
 
-## Partials de paginación
+## Partials for pagination
 
 Como complemento para el paginador de ActiveRecord, a traves de vistas parciales se implementan los tipos de paginacion mas comunes. Estos se ubican en el directorio "core/views/partials/paginators" listos para ser usados. Son completamente configurables via CSS. Por supuesto, podeis crear vuestros propios partials para paginar en las vistas.
 
