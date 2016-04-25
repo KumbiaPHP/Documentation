@@ -1,4 +1,4 @@
-#El Controlador
+Controlador
 
 En KumbiaPHP Framework, la capa del controlador, contiene el código que une
 la lógica de negocio con la presentación. Está dividida en varios componentes
