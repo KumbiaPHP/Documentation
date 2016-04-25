@@ -186,13 +186,13 @@ En el template saludo.phtml
 
 ## Partial
 
-Los partials o «vistas parciales» son fragmentos de vistas que son compartidas por distintas vistas, de manera que constituyen logica de presentacion reutilizable en la aplicacion. Por lo general los partials son elementos como: menus, cabecera, pie de pagina, formularios, entre otros.
+Partials or "partial views" are fragments of views that are shared by different views, so they are reusable presentation logic in the application. Por lo general los partials son elementos como: menus, cabecera, pie de pagina, formularios, entre otros.
 
 ### How to create un partial?
 
 To build a new partial you must create a file with extension .phtml in the directory views/_shared/partials/ which must correspond with the name of the partial.
 
-Ejemplo:
+Example:
 
 `views/_shared/partials/cabecera.phtml`
 
@@ -202,9 +202,9 @@ Ejemplo:
 
 ### How to use a partial?
 
-Para utilizar un partial se debe invocar el metodo View::partial() indicando como argumento el partial deseado y la vista parcial se mostrara en el lugar donde se invoco.
+To use a partial method should invoke the View::partial() as an argument indicating the desired partial and partial view is displayed in the place where I was invoked.
 
-Ejemplo utilizando un partial en un template:
+Example using a partial in a template:
 
 ```php
 <!DOCTYPE html>  
@@ -220,7 +220,7 @@ Ejemplo utilizando un partial en un template:
 </html>  
 ```
 
-Cabe destacar que los partial se pueden utilizar tanto en vistas de accion, templates e incluso dentro de otros partials.
+Importantly, the partial can be used both in view of action, templates and even within other partials.
 
 ### Send data to the partials
 

@@ -4,11 +4,11 @@ Luego que explicamos los pasos para configurar KumbiaPHP y ver su pantalla de bi
 
 ## Hello KumbiaPHP!
 
-Ahora escribiremos el famoso "¡Hola Mundo!" pero con un pequeño cambio: Diremos "¡Hola KumbiaPHP!". Pensando en esto, recordemos el modelo MVC, segun esto, KumbiaPHP debería aceptar una petición, que busca en controlador y, en este, una acción que atiende la petición. Luego, KumbiaPHP utiliza esta información de controlador y acción para buscar la vista asociada a la petición.
+Now write the famous "Hello World!" but with a small change: say "Hello KumbiaPHP!". Pensando en esto, recordemos el modelo MVC, segun esto, KumbiaPHP debería aceptar una petición, que busca en controlador y, en este, una acción que atiende la petición. Luego, KumbiaPHP utiliza esta información de controlador y acción para buscar la vista asociada a la petición.
 
 ## Controller
 
-Ahora agregamos contenido al controlador app/controllers/saludo_controller.php
+Now add content to the controller app/controllers/controller/saludo_controller.php
 
 ```php
 <?php

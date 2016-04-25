@@ -29,7 +29,7 @@ KumbiaPHP Framework uses a module to rewrite URLs, making them more understandab
 
 ### Enabling mod_rewrite of Apache on GNU/Linux (Debian, Ubuntu and derivatives)
 
-Nos aseguramos de activar el mod_rewrite de esta manera y como usuario administrador desde la consola.
+We made sure to activate mod_rewrite in this way and as an administrator user from the console.
 
 ```bash
   > a2enmod rewrite
@@ -37,9 +37,9 @@ Nos aseguramos de activar el mod_rewrite de esta manera y como usuario administr
   Run '/etc/init.d/apache2 restart' to activate new configuration!
 ```
 
-Lo anterior indica que se ha habilitado el mod_rewrite de Apache, pero aun falta indicarle a Apache que interprete los archivos .htaccess que son los encargados de hacer uso del rewrite y a su vez tienen las reglas de reescritura de las URLs.
+This indicates that is enabled Apache mod_rewrite, but there is still tell Apache to interpret the .htaccess files that are responsible for the rewrite use and in turn have the rules rewrite URLs.
 
-Como usuario administrador editamos el siguiente archivo.
+As an administrator user edit the next file.
 
 ```bash
  > vi /etc/apache2/sites-enabled/000-default  

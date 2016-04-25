@@ -203,7 +203,7 @@ Consider a part of the code, the cache console, whose functionality was explaine
 
 ### Console::input
 
-Este método de la clase Console, permite leer una entrada desde el terminal, se caracteriza por intentar leer la entrada hasta que esta sea valida.
+This method of the Console class, allows you to read an input from the terminal, characterized by trying to read the entry until it is valid.
 
 `Console::input($message, $values = null)`
 
