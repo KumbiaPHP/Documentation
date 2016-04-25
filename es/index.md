@@ -30,7 +30,7 @@
 
 ## Componentes MCV
 - [El Controlador](controller.md#el-controlador)
-  - [3.1.        Controlador Frontal](controller.md#3.1.--------controlador-frontal)
+  - [Controlador Frontal](controller.md#3.1.--------controlador-frontal)
     - [3.1.1.        Destripando el Front Controller](controller.md#3.1.1.--------destripando-el-front-controller)
     - [3.1.2.        Front Controller por defecto](controller.md#3.1.2.--------front-controller-por-defecto)
     - [3.1.3.        Constantes de KumbiaPHP](controller.md#3.1.3.--------constantes-de-kumbiaphp)
