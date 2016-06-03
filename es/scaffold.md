@@ -1,6 +1,6 @@
 # Scaffold
 
-##  Introduccion
+##  Introducción
 
 Para empezar es importante saber, que el Scaffold se utilizo hasta la versión
 estable de Kumbiaphp 0.5 y que al salir la versión de Kumbiaphp 1.0 Spirit
@@ -32,10 +32,6 @@ servidores 4GL para servicios al Cliente. Scaffolding se hizo popular gracias
 al framework "Ruby on Rails", que ha sido adaptado a otros frameworks,
 incluyendo Django, Monorail, KumbiaPHP framework entre otros.
 
-Tomado de: [Scaffolding Kumbiaphp](http://www.google.com/url?q=http%3A%2F%2Fwi
-ki.kumbiaphp.com%2FScaffolding&sa=D&sntz=1&usg=AFQjCNF7nZ0tDO_67b3jkf_GpSdGae1
-qsA)
-
 ##  Objetivo
 
 Crear un CRUD 100% Funcional con tan solo 2 lineas de código en mi controller.
@@ -46,9 +42,7 @@ y arma todo el CRUD.
 ##  Primeros Pasos
 
 Para realizar nuestro primer Scaffold, vamos a utilizar el mismo modelo que
-trabajamos en el [CRUD para KumbiaPHP Beta2](http://www.google.com/url?q=http%
-3A%2F%2Fwiki.kumbiaphp.com%2FBeta2_CRUD_en_KumbiaPHP_Framework&sa=D&sntz=1&usg
-=AFQjCNHge4lK8sUvkHneMSUSVC2OZEvvcw) , y que tiene por nombre menus.
+trabajamos en el [CRUD para KumbiaPHP Beta2](http://wiki.kumbiaphp.com/Beta2_CRUD_en_KumbiaPHP_Framework) , y que tiene por nombre menus.
 
 Modelo
 
@@ -56,11 +50,14 @@ Crear el modelo, como de costumbre apuntando siempre a la clase ActiveRecord.
 
 [app]/models/menus.php:
 
+```php
 <?php  
-class  Menus extends  ActiveRecord{  
+class  Menus extends  ActiveRecord
+{  
   
-}  
-  
+}
+
+``` 
 ---  
   
 ##  Controlador
@@ -70,11 +67,15 @@ y SI a la clase ScaffoldController.
 
 [app]/controllers/menus_controller.php:
 
-<?php  
-class  MenusController extends  ScaffoldController{  
+```php
+<?php
+
+class  MenusController extends  ScaffoldController
+{  
   public  $model = 'menus' ;  
-}  
-  
+}
+
+```
 ---  
   
 Aquí terminan nuestros primeros pasos. No es necesario NADA MÁS. Tendremos por
