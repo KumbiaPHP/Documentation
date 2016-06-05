@@ -8,22 +8,21 @@ Each console is composed of a set of commands, each command can receive sequenti
 
 ## How to use the console
 
-Para utilizar la consola debes ejecutar el despachador de comandos de consola de KumbiaPHP en un terminal, ubicarte en el directorio " app" de tu aplicacion y ejecutar la instruccion acorde al siguiente formato:
+To use the console you must run the command dispatcher console KumbiaPHP in a terminal, place you in the "app" directory of your application and execute the instruction according to the following format:
 
-`php ../../core/console/kumbia.php [ consola ] [ comando ] [ arg ] [ \--arg_nom
-] =valor`
+`php .../../core/console/kumbia.php [console] [command] [arg] [\--arg_name] = value`
 
 * * *
 
-Si no se especifica el comando ha ejecutar, entonces se ejecutará el comando " main " de la consola.
+If the command to execute is not specified, then the "main" console command is executed.
 
-También es posible indicar la ruta al directorio app de la aplicación explícitamente por medio del argumento con nombre " path ".
+It is also possible to specify the path to the app directory of the application by the argument explicitly named "path".
 
-Ejemplos:
+Examples:
 
-`php ../../core/console/kumbia.php cache clean --driver=sqlite`
+`php .../../core/console/kumbia.php cache clean --driver=sqlite`
 
-`php kumbia.php cache clean --driver=sqlite --path="/var/www/app"`
+`php kumbia.php cache clean --driver=sqlite --path="/ var/www/app"`
 
 ## KumbiaPHP consoles
 
@@ -45,7 +44,7 @@ This console allows you to perform control over the cache of application.
 
 ### Example:
 
-### php ../../core/console/kumbia.php cache clean
+### php .../../core/console/kumbia.php cache clean
 
 * * *
 
@@ -55,7 +54,7 @@ Removes an element from the cache.
 
 Sequential arguments:
 
-- i d: id de elemento en cache.
+- id: id element in the cache.
 - group: name of group to which belongs the element, specifying no value, then use the 'default' group.
 
 Named arguments:
@@ -64,7 +63,7 @@ Named arguments:
 
 Example:
 
-`php ../../core/console/kumbia.php cache remove vista1 mis_vistas`
+`php ../../core/console/kumbia.php cache remove viewclient my_views`
 
 * * *
 
@@ -82,7 +81,7 @@ Sequential arguments:
 
 Example:
 
-`php ../../core/console/kumbia.php model create venta_vehiculo`
+`php ../../core/console/kumbia.php model create simple_auth`
 
 * * *
 
@@ -96,7 +95,7 @@ Sequential arguments:
 
 Example:
 
-`php ../../core/console/kumbia.php model delete venta_vehiculo`
+`php ../../core/console/kumbia.php model delete simple_auth`
 
 * * *
 
@@ -114,7 +113,7 @@ Sequential arguments:
 
 Example:
 
-`php ../../core/console/kumbia.php controller create venta_vehiculo`
+`php ../../core/console/kumbia.php controller create product_sales`
 
 * * *
 
@@ -128,7 +127,7 @@ Sequential arguments:
 
 Example:
 
-`php ../../core/console/kumbia.php controller delete venta_vehiculo`
+`php ../../core/console/kumbia.php controller delete product_sales`
 
 * * *
 
@@ -207,12 +206,12 @@ This method of the Console class, allows you to read an input from the terminal,
 
 `Console::input($message, $values = null)`
 
-$message (string): mensaje a mostrar al momento de solicitar la entrada.
+$message (string): message to be displayed when this method requests an entry.
 
-$values (array): conjunto de valores validos para la entrada.
+$values (array): set of valid values for entry.
 
-Ejemplo:
+Example:
 
-`$valor = Console::input('¿Desea continuar?', array('s', 'n'));`
+`$answer = Console:input ('Continue?', array ('s ', 'n'));`
 
 * * *

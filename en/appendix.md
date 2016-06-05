@@ -24,7 +24,7 @@ Configure the databases.ini with data and the db engine to be used.
 
 ### Model
 
-Crear el Modelo el cual esta viene dado por la definicion de una tabla en la BD, para efecto del ejemplo creamos la siguiente tabla.
+Create the Model that defines the table in the database, for complementing the example we create the follow table.
 
 ```sql
 CREATE TABLE menus (id int not null auto_increment, name varchar (100) unique, title varchar (100) not null, primary key (id))  
@@ -221,11 +221,11 @@ $page ,   'show'   =>   8 ,   'url'   =>   'usuario/lista' ));`
 
 Vista de paginación estilo digg.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained by invoking the paginated.
 
-show: número de páginas que muestra el paginador, por defecto 10.
+show: number of pages showing the paginated, default 10.
 
 url: url para la accion que efectua la paginacion , por defecto "module/controller/page/" y se envia por parametro el numero de pagina.
 
@@ -238,7 +238,7 @@ url: url para la accion que efectua la paginacion , por defecto "module/controll
 
 ![](../images/image00.jpg)
 
-Resultado Final
+Final result
 
 Vista de paginación extendida.
 
@@ -291,25 +291,23 @@ url: url para la acción que efectua la paginación , por defecto "module/contro
 
 ### Ejemplo de uso
 
-Supongamos que queremos paginar una lista de usuarios.
+Suppose we want to paginate a list of users.
 
-Para el modelo Usuario en models/usuario.php:
+For Model user in models/usuario.php:
 
 ```php
-<?php  
-class  Usuario extends  ActiveRecord  
-{  
-  /**  
-    * Muestra los usuarios de cinco en cinco utilizando paginador   
-    *   
-    * @param int $page   
-    * @return object   
-    **/   
-  public   function  ver($page=1)  
-  {  
-      return  $this-> paginate ( "page: $page" , 'per_page: 5' );   
-  }  
-}  
+<?php  class Usuario extends ActiveRecord 
+ {   
+ /**     
+ * Muestra los usuarios de cinco en cinco utilizando paginador      
+ *      
+ * @param int $page       
+ * @return object      
+ **/    
+ public function ver($page=1)    {       
+ return $this-> paginate ( "page: $page" , 'per_page: 5' );     
+} 
+ }  
 
 ```
 
@@ -336,7 +334,7 @@ class  UsuarioController extends  AppController
 
 ```
 
-Y en la vista views/usuario/page.phtml
+And in the view views/user/page.phtml
 
 <table>
   <tr>
@@ -605,7 +603,7 @@ javascript_include_tag 0.5 => 'Tag::js beta2
 
 stylesheet_link_tag 0.5 => 'Tag::css beta2
 
-### Cambio en las rutas entre versiones:
+### Change on routes between versions:
 
 # 0.5 => 1.0 beta1
 

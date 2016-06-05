@@ -1,10 +1,10 @@
 # My first app with KumbiaPHP
 
-Luego que explicamos los pasos para configurar KumbiaPHP y ver su pantalla de bienvenida, se viene hacer el primer ejemplo el cual tiene como objetivo entender elementos básicos al momento de utilizar el framework que sirvan para entender la arquitectura MVC (Modelo-Vista-Controlador).
+After you are ready with the KumbiaPHP installation, you can see the welcome page. Now it is time to create your first Hello World application. The goal is that you understand the basic components of the MVC (Model-View-Controller) architecture.
 
 ## Hello KumbiaPHP!
 
-Now write the famous "Hello World!" but with a small change: say "Hello KumbiaPHP!". Pensando en esto, recordemos el modelo MVC, segun esto, KumbiaPHP debería aceptar una petición, que busca en controlador y, en este, una acción que atiende la petición. Luego, KumbiaPHP utiliza esta información de controlador y acción para buscar la vista asociada a la petición.
+Now write the famous "Hello World!" but with a small change: say "Hello KumbiaPHP!". Thinking about this, we have to remember the MVC model, according to this, KumbiaPHP should accept a request, looking for a controller and in the controller it self looking for an action that serves the request. Then, KumbiaPHP uses that information to find the view associated with the request.
 
 ## Controller
 

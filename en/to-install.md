@@ -54,30 +54,30 @@ As an administrator user edit the next file.
 </Directory>  
 ```
 
-Para que los .htaccess tengan efectos, se ha de sustituir *AllowOverride None* por *AllowOverride All*, de esta manera Apache puede interpretar estos archivos.
+So that the .htaccess have effects, must replace *AllowOverride None* by *AllowOverride All* this way Apache can interpret these files.
 
-Hecho esto, queda reiniciar el servicio de apache.
+That done, restart the apache service.
 
 ```bash
  >/etc/init.d/apache2 restart  
 ```
 
-A continuación, se prueba todas las configuraciones realizadas mediante la siguiente URL.
+Next, test all settings made by the following URL.
 
 http://localhost/kumbiaphp/
 
-Si todo ha ido bien, debería ver una página de bienvenida como la que se muestra en la figura 2.1, con lo que la instalación rápida se puede dar por concluida.
+If all has gone well, you should see a welcome page as the one shown in Figure 2.1, so quick installation can be finished.
 
 ![](../images/image12.png)
 
-Figura 2.1: Instalación exitosa de KumbiaPHP
+Figure 2.1: Successful installation of KumbiaPHP
 
-Esto es un entorno de pruebas el cual esta pensado para practicar con KumbiaPHP en un servidor local, no para desarrollar aplicaciones complejas que terminan siendo publicadas en la web.
+This is an environment test which is intended to practice with KumbiaPHP on a local server, not to develop complex applications that end up being published on the web.
 
 ### Why is important Mod-Rewrite?
 
-ReWrite es un módulo de apache que permite reescribir las urls que han utilizado nuestros usuarios. KumbiaPHP Framework encapsula esta complejidad permitiendo usar URLs bonitas o limpias como las que vemos en blogs o en muchos sitios donde no aparecen los ?, los & ni las extensiones del servidor (.php, .asp, .aspx, etc).
+ReWrite is an apache module that allows you to rewrite urls that our users have used. KumbiaPHP Framework encapsulates this complexity by allowing to use beautiful URLs or clean like that you see in blogs or in places where they do not appear the?, the & or server extensions (.php, .asp, .aspx, etc).
 
-Además de esto, con mod-rewrite KumbiaPHP puede proteger nuestras aplicaciones ante la posibilidad de que los usuarios puedan ver los directorios del proyecto y puedan acceder a archivos de clases, modelos, lógica, etc., sin que sean autorizados.
+In addition, with mod-rewrite KumbiaPHP can protect our applications to the possibility that users can see the project directories and can access class files, models, logic, etc., unless they are authorized.
 
-Con mod-rewrite el único directorio que pueden ver los usuarios es el contenido del directorio público (public) del servidor web, el resto permanece oculto y solo puede ser visualizado cuando ha realizado una petición en forma correcta y también es correcto según nuestra lógica de aplicación. Cuando escribes direcciones utilizando este tipo de URLs, estas ayudando también a los motores de búsqueda a indexar mejor tu información.
+With mod-rewrite the only directory that users can see is public directory (public) of the web server content, the rest remains hidden and only can be viewed when you have made a request to properly and is also correct according to our application logic. When you write addresses using this type of URLs, are also helping the search engines to better index your information.

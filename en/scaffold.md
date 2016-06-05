@@ -1,6 +1,6 @@
 # Scaffold
 
-## Introduction
+## Introducción
 
 To begin, it is important to know, that the Scaffold was used until the stable release 0.5 Kumbiaphp and that leaving Kumbiaphp version 1.0 Spirit beta 1 will leave aside, to create a new one more customizable and maintainable.
 
@@ -12,8 +12,6 @@ Scaffold es un método de meta-programación para construir aplicaciones de soft
 
 Scaffolding es la evolución de códigos generadores de bases de datos desde ambientes más desarrollados, como ser CASE Generator de Oracle y otros tantos servidores 4GL para servicios al Cliente. Scaffolding se hizo popular gracias al framework "Ruby on Rails", que ha sido adaptado a otros frameworks, incluyendo Django, Monorail, KumbiaPHP framework entre otros.
 
-Tomado de: \[Scaffolding Kumbiaphp\](http://www.google.com/url?q=http%3A%2F%2Fwi ki.kumbiaphp.com%2FScaffolding&sa=D&sntz=1&usg=AFQjCNF7nZ0tDO_67b3jkf_GpSdGae1 qsA)
-
 ## Objective
 
 Crear un CRUD 100% Funcional con tan solo 2 lineas de código en mi controller.
@@ -22,7 +20,7 @@ KumbiaPHP toma como por arte de magia, los parámetros indicados en mi TABLA y a
 
 ## Getting Started
 
-Para realizar nuestro primer Scaffold, vamos a utilizar el mismo modelo que trabajamos en el \[CRUD para KumbiaPHP Beta2\](http://www.google.com/url?q=http% 3A%2F%2Fwiki.kumbiaphp.com%2FBeta2_CRUD_en_KumbiaPHP_Framework&sa=D&sntz=1&usg =AFQjCNHge4lK8sUvkHneMSUSVC2OZEvvcw) , y que tiene por nombre menus.
+Para realizar nuestro primer Scaffold, vamos a utilizar el mismo modelo que trabajamos en el [CRUD para KumbiaPHP Beta2](http://wiki.kumbiaphp.com/Beta2_CRUD_en_KumbiaPHP_Framework) , y que tiene por nombre menus.
 
 Modelo
 
@@ -30,10 +28,14 @@ Crear el modelo, como de costumbre apuntando siempre a la clase ActiveRecord.
 
 [app]/models/menus.php:
 
+```php
 <?php  
-class Menus extends ActiveRecord{
+class  Menus extends  ActiveRecord
+{  
 
 }
+
+```
 
 * * *
 
@@ -43,10 +45,15 @@ Crear el Controlador en este ejemplo, NO apuntaremos a la clase AppController y 
 
 [app]/controllers/menus_controller.php:
 
-<?php  
-class MenusController extends ScaffoldController{  
-public $model = 'menus' ;  
+```php
+<?php
+
+class  MenusController extends  ScaffoldController
+{  
+  public  $model = 'menus' ;  
 }
+
+```
 
 * * *
 
