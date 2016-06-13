@@ -532,11 +532,11 @@ $array contenido de la lista
 $type por defecto ul, y si no ol
 
 $attrs atributos adicionales
-```php
-Html::lists($array, $type = 'ul', $attrs = NULL)   
+`php
+Html::lists($array, $type = 'ul', $attrs = NULL)` 
   
 /*Ejemplo*/
-
+```
 $ar = array(
   'Abdomen'    =>   'Abdomen' ,
   'Brazos'     =>   'Brazos' ,
