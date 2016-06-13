@@ -1103,8 +1103,8 @@ $class clases adicionales para el link
 
 $attrs $attrs atributos adicionales
 
-Js::link ($action, $text, $confirm = '¿Esta Seguro?', $class = NULL, $attrs =
-NULL)  
+ `Js::link ($action, $text, $confirm = '¿Esta Seguro?', $class = NULL, $attrs =
+NULL)`
   
 ```php
 <?php echo Js::link('usuario/eliminar/5', 'Eliminar') ?>  
@@ -1133,8 +1133,8 @@ $class clases adicionales para el link
 
 $attrs $attrs atributos adicionales
 
-Js::linkAction($action, $text, $confirm = '¿Esta Seguro?', $class = NULL,
-$attrs = NULL)  
+ `Js::linkAction($action, $text, $confirm = '¿Esta Seguro?', $class = NULL,
+$attrs = NULL)` 
   
 ```php
 <?php echo Js::linkAction('eliminar/5', 'Eliminar'); ?>  
@@ -1154,7 +1154,7 @@ $class clases adicionales para el link
 
 $attrs atributos adicionales
 
-Js::submit ($text, $confirm = '¿Esta Seguro?', $class = NULL, $attrs = NULL)  
+ `Js::submit ($text, $confirm = '¿Esta Seguro?', $class = NULL, $attrs = NULL)` 
   
 ```php
 <?php echo Js::submit('Guardar') ?>  
@@ -1174,7 +1174,7 @@ $class clases adicionales para el link
 
 $attrs atributos adicionales
 
-Js::submitImage($img $confirm = '¿Esta Seguro?', $class = NULL, $attrs = NULL)  
+ `Js::submitImage($img $confirm = '¿Esta Seguro?', $class = NULL, $attrs = NULL)` 
   
 ```php  
 <?php echo Js::submitImage('botones/guardar.png') ?>  
@@ -1201,7 +1201,7 @@ $class clases adicionales
 
 $attrs atributos adicionales
 
-Ajax::link ($action, $text, $update, $class=NULL, $attrs=NULL)  
+ `Ajax::link ($action, $text, $update, $class=NULL, $attrs=NULL)` 
    
   
 Como ejemplo, crea un enlace que al pulsar emita un saludo. Con el fin
@@ -1259,7 +1259,7 @@ $class clases adicionales
 
 $attrs atributos adicionales
 
-Ajax::linkAction ($action, $text, $update, $class=NULL, $attrs=NULL)  
+ `Ajax::linkAction ($action, $text, $update, $class=NULL, $attrs=NULL)` 
     
 ```php  
 <?php echo Ajax::linkAction('hola', 'Mostrar Saludo', 'capa_saludo') ?>  
