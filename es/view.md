@@ -568,8 +568,8 @@ $size Tamaño del gravatar. Un numero de 1 a 512. Por defecto: 40
 $default URL gravatar por defecto si no existe, o un default de gravatar. Por
 defecto: mm
 
+`Html::gravatar($email, $alt='gravatar', $size=40, $default='mm')`
 ```php
-Html::gravatar($email, $alt='gravatar', $size=40, $default='mm')  
 echo Html::gravatar($email);   // Simple
 echo Html::link(Html::gravatar($email), $url);   // Un gravatar que es un link
 echo Html::gravatar($email ,$name , 20 , 'http://www.example.com/default.jpg');
