@@ -26,7 +26,8 @@ capitulo se supone que se ha descomprimido el paquete del framework en el
 directorio kumbiaphp/ . Teniendo una estructura como la siguiente:
 ```
 -- KumbiaPHP-master  
-    |-- core  
+    |-- core 
+    |-- vendors 
     |-- default  
         |-- app  
         |-- public  
@@ -86,8 +87,7 @@ siguiente URL.
 http://localhost/kumbiaphp/  
 
   
-Si todo ha ido bien, debería ver una página de bienvenida como la que se
-muestra en la figura 2.1, con lo que la instalación rápida se puede dar por
+Si todo ha ido bien, debería ver una página de bienvenida, con lo que la instalación rápida se puede dar por
 concluida.
 
 ![](../images/image12.png)
@@ -99,6 +99,66 @@ KumbiaPHP en un servidor local, no para desarrollar aplicaciones complejas que
 terminan siendo publicadas en la web.
 
 ## Configurar Nginx
+
+Using `$_SERVER['PATH_INFO']` as source of URIs:
+
+```
+server {
+    listen      80;
+    server_name localhost.dev;
+    root        /var/www/kumbiaphp;
+    index       index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php;
+    }
+
+    location ~ \.php {
+        fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
+        fastcgi_index /index.php;
+
+        include fastcgi_params;
+        fastcgi_split_path_info       ^(.+\.php)(/.+)$;
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+}
+```
+
+Using `$_GET['_url']` as source of URIs:
+
+```
+server {
+    listen      80;
+    server_name localhost.dev;
+    root        /var/www/kumbiaphp;
+    index       index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?_url=$uri&$args;
+    }
+
+    location ~ \.php {
+        fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
+        fastcgi_index /index.php;
+
+        include fastcgi_params;
+        fastcgi_split_path_info       ^(.+\.php)(/.+)$;
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+}
+```
 
 
 ### ¿Por qué es importante el Mod-Rewrite?

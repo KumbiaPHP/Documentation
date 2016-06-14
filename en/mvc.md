@@ -1,6 +1,6 @@
 # Model, View, Controller (MVC)
 
-## What MVC is?
+## ¿Qué es MVC?
 
 In 1979, Trygve Reenskaug developed an architecture for creating interactive applications. In his design there are three components: models, views and controllers. The MVC model allows the separation of the application layers in interface, model and logic control. Programming in layers, is a style of programming where the primary goal is the separation of presentation design from the business logic. A basic example of this is separation of the data layer from the presentation layer (user interfase).
 
@@ -8,7 +8,7 @@ The main advantage of this style is that development can be performed at various
 
 En una aplicación Web una petición se realiza usando HTTP y es enviado al controlador. El controlador puede interactuar de muchas formas con el modelo, luego el primero llama a la respectiva vista la cual obtiene el estado del modelo que es enviado desde el controlador y lo muestra al usuario.
 
-## How KumbiaPHP apply the MVC?
+## ¿Cómo KumbiaPHP aplica el MVC?
 
 KumbiaPHP Framework aprovecha los mejores patrones de programación orientada a la Web en especial el patrón MVC (Modelos, Vistas, Controladores). A continuación se describe el funcionamiento general de este paradigma en KumbiaPHP.
 
@@ -32,7 +32,7 @@ Por ejemplo, si usted tiene una aplicación que corra tanto en equipos de escrit
 
 Finalmente, el modelo abstrae la lógica de datos, que hace a los modelos independientes de las vistas. La implementación de este modelo es muy liviana mediante pequeñas convenciones se puede lograr mucho poder y funcionalidad.
 
-## Caso practico (CAMBIAR EJEMPLO)
+## Caso práctico (CAMBIAR EJEMPLO)
 
 Para entender mejor, veamos un ejemplo de como una arquitectura MVC trabaja para añadir al carrito. Primero, el usuario interactúa con la interfaz seleccionando un producto y presionando un botón, esto probablemente valida un formulario y envía una petición al servidor.
 

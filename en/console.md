@@ -2,13 +2,13 @@
 
 ## Intro
 
-The console is a tool for command line, allowing to perform automated within the scope of your app. In this sense KumbiaPHP includes the following consoles: Cache, Model and Controller.
+La consola, es una herramienta de linea de comandos de KumbiaPHP, que permite realizar tareas automatizadas en el ámbito de tu aplicación. In this sense KumbiaPHP includes the following consoles: Cache, Model and Controller.
 
 Each console is composed of a set of commands, each command can receive sequential arguments and named arguments. To indicate a named argument is must precede the prefix "\--" to the argument.
 
 ## How to use the console
 
-To use the console you must run the command dispatcher console KumbiaPHP in a terminal, place you in the "app" directory of your application and execute the instruction according to the following format:
+Para utilizar la consola debes ejecutar el despachador de comandos de consola de KumbiaPHP en un terminal, ubicarte en el directorio " app" de tu aplicación y ejecutar la instrucción acorde al siguiente formato:
 
 `php .../../core/console/kumbia.php [console] [command] [arg] [\--arg_name] = value`
 
@@ -137,10 +137,10 @@ Example:
 
 To develop your consoles you should consider the following:
 
-- Consoles that you develop for your application should be located in the directory "app/extensions/console".
+- Las consolas que desarrolles para tu aplicación deben estar ubicadas en el directorio "app/extensions/console".
 - The file should have the suffix "_console" as well as the class the "Console" suffix.
-- Each console command is equivalent to a class method.
-- Named arguments that are sent when you invoke a command are received in the first argument of the method corresponding to the command.
+- Cada comando de la consola equivale a un método de la clase.
+- Los argumentos con nombre que son enviados al invocar un comando se reciben en el primer argumento del método correspondiente al comando.
 - Sequential arguments, which are sent to invoke a command, are received as arguments to the invoked method subsequent to the first argument.
 - If he it is not specified the command to run, run by default the "main" method of the class.
 - Classes Load, Config and Util are loaded automatically to the console.
