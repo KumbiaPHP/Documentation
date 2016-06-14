@@ -40,10 +40,12 @@ el método View::select()  en el controlador. Por ejemplo:
 
 ```php
 <?php  
-class SaludoController extends AppController {  
-    public function saludo(){   
+class SaludoController extends AppController
+{  
+    public function saludo()
+    {   
            View::select('hola');   
-   }  
+    }  
 }
 ```  
   
@@ -55,10 +57,12 @@ argumento de View::select() .
 
 ```php
 <?php  
-class SaludoController extends AppController {  
-    public function index(){   
+class SaludoController extends AppController
+{  
+    public function index()
+    {   
            View::select(NULL);   
-   }  
+    }  
 }  
 ```  
   
@@ -76,10 +80,12 @@ en la vista. Ejemplo:
 El controlador: `controllers/saludo_controller.php`
 ```php
 <?php  
-class SaludoController extends AppController{  
-    public function  hola(){   
+class SaludoController extends AppController
+{  
+    public function  hola()
+    {   
            $this->usuario  = 'Mundo' ;   
-   }  
+    }  
 }  
 ```  
   
@@ -101,10 +107,12 @@ El controlador: `saludo_controller.php`
 
 ```php
 <?php  
-class SaludoController extends AppController {  
-    public function hola(){   
+class SaludoController extends AppController
+{  
+    public function hola()
+    {   
            Flash::valid('Hola Mundo');   
-   }  
+    }  
 }  
 ```
   
@@ -169,11 +177,13 @@ En el controlador:
 
 ```php
 <?php  
-class SaludoController extends AppController {  
-    public function  hola(){   
+class SaludoController extends AppController
+{  
+    public function  hola()
+    {   
            // Selecciona el template 'mi_template.phtml'   
            View::template('mi_template');   
-   }  
+    }  
 }  
 ```  
   
@@ -183,11 +193,13 @@ NULL como argumento a View::template() .
 
 ```php
 <?php  
-class SaludoController extends AppController {  
-    public function  hola(){   
+class SaludoController extends AppController
+{  
+    public function  hola()
+    {   
            // No utilizar template   
            View::template(NULL);   
-   }  
+    }  
 }  
 ```  
   
@@ -202,8 +214,10 @@ cargados como variables de ámbito local en el template. Ejemplo:
 En el controlador saludo_controller.php
 ```php
 <?php  
-class SaludoController extends AppController {  
-    public function  hola(){   
+class SaludoController extends AppController
+{  
+    public function  hola()
+    {   
            Flash::valid('Hola Mundo');   
   
             // Pasando el titulo para la pagina   
@@ -212,7 +226,7 @@ class SaludoController extends AppController {
             /* No se utilizara vista, por lo tanto la   
                     salida sera del buffer y template */   
            View::select(NULL, 'saludo');   
-   }  
+    }  
 }  
 ```
   
@@ -294,8 +308,7 @@ Ejemplo:
 `views/ejemplo/index.phtml`
 
 ```php
-<?php  View::partial('cabecera' ,FALSE ,array('titulo' =>'Ejemplo'))
-?>  
+<?php View::partial('cabecera', false, array('titulo' =>'Ejemplo')) ?>  
 
 <p>  
 Este es un ejemplo  
@@ -315,11 +328,13 @@ siguiente manera en el controlador:
 
 ```php
 <?php  
-class UsuarioController extends AppController {  
-    public function nuevo(){   
+class UsuarioController extends AppController
+{  
+    public function nuevo()
+    {   
            // Selecciona la vista   
            View::select('clasificado/formulario');   
-   }  
+    }  
 }  
 ```
   
@@ -340,7 +355,8 @@ de la siguiente manera en el controlador:
 
 ```php
 <?php  
-class AdministradorController extends AppController {  
+class AdministradorController extends AppController
+{  
     protected function before_filter(){   
            // Selecciona el template   
            View::template('usuario/administrador');   
@@ -363,11 +379,13 @@ completas para el usuario.
 Ejemplo:
 ```php
 <?php  
-class UsuarioController extends AppController {  
-    public function index(){   
+class UsuarioController extends AppController
+{  
+    public function index()
+    {   
            // Establece el tipo de respuesta   
            View::response('json');   
-   }  
+    }  
 }  
 ``` 
   
@@ -390,11 +408,13 @@ Para cachear una vista se utiliza el método View::cache()  en el controlador.
 
 ```php
 <?php  
-class UsuarioController extends AppController {  
-    public function index(){   
+class UsuarioController extends AppController
+{  
+    public function index()
+    {   
            // Indica el tiempo de cache de la vista   
            View::cache('+20 days');   
-   }  
+    }  
 }
 ```  
   
@@ -413,11 +433,13 @@ una vista en un grupo especifico.
 
 ```php
 <?php  
-class UsuarioController extends AppController {  
-    public function index(){   
+class UsuarioController extends AppController
+{  
+    public function index()
+    {   
            // Indica el tiempo de cache de la vista   
            View::cache('+20 days' ,'view' ,'miGrupo');   
-   }  
+    }  
 }  
 ```
   
@@ -430,11 +452,13 @@ cacheado el template.
 
 ```php
 <?php  
-class UsuarioController extends AppController {  
-    public function index(){   
+class UsuarioController extends AppController
+{  
+    public function index()
+    {   
            // Indica el tiempo de cache de template   
-           View::cache('+20 days' , 'template');   
-   }  
+           View::cache('+20 days', 'template');   
+    }  
 }  
 ```
   
@@ -449,8 +473,8 @@ Para cachear partials se debe indicar como segundo argumento al invocar
 View::partial() el tiempo durante el cual estará cacheado.
 
 ```php
-<?php  View::partial('usuario' ,'+1 day') ?>    
-<?php  View::partial('usuario' ,'+1 day' ,array('nombre'=>'pepe')) ?>  
+<?php View::partial('usuario', '+1 day') ?>    
+<?php View::partial('usuario', '+1 day', array('nombre'=>'pepe')) ?>  
 ```
   
 ## Helpers
@@ -465,12 +489,12 @@ helpers y colocarlos en app/extensions/helpers/. Y después usarlos
 tranquilamente en sus views, KumbiaPHP se encarga de cargar transparente mente
 sus helpers así como los uses.
 
-### Clase Html
+### Html
 
 Clase con métodos estáticos con la que podemos crear etiquetas HTML
 optimizadas respetando las convenciones de KumbiaPHP.
 
-####  Html::img()
+#### Html::img()
 
 Permite incluir una imagen
 
@@ -492,7 +516,7 @@ spin.gif que se encuentra dentro de "/public/img/"
 //con el artibuto alt 'una imagen'  
 ``` 
   
-####  Html::link()
+#### Html::link()
 
 Permite incluir un link
 
@@ -511,7 +535,7 @@ echo Html::link('pages/show/kumbia/status' ,'Configuración');   //se
 muestra un link con el texto 'Configuración'  
 ```
   
-####  Html::lists()
+#### Html::lists()
 
 Crea una lista html a partir de un array
 
@@ -524,26 +548,27 @@ $attrs atributos adicionales
 Html::lists($array ,$type = 'ul' ,$attrs = NULL)   
   
 /*Ejemplo*/
-
-$ar   =   array (
-  'Abdomen'   =>   'Abdomen' ,
-  'Brazos'   =>   'Brazos' ,
-  'Cabeza'   =>   'Cabeza' ,
-  'Cuello'   =>   'Cuello' ,
-  'Genitales'   =>   'Genitales' ,
-  'Piernas'   =>   'Piernas' ,
-  'Torax'   =>   'Torax' ,
-  'Otros'   =>   'Otros' ) ;
+```
+$ar = array(
+  'Abdomen'    =>   'Abdomen' ,
+  'Brazos'     =>   'Brazos' ,
+  'Cabeza'     =>   'Cabeza' ,
+  'Cuello'     =>   'Cuello' ,
+  'Genitales'  =>   'Genitales' ,
+  'Piernas'    =>   'Piernas' ,
+  'Torax'      =>   'Torax' ,
+  'Otros'      =>   'Otros'
+   );
 //$ar el array que contiene los items de la lista
-echo  Html :: lists ( $ar ,   $type   =   'ol' ) ;   //Muestra una lista
+echo  Html::lists($ar, $type = 'ol');   //Muestra una lista
 <ol></ol>
-$ar2   =   array ( 'Abdomen' , 'Brazos' , 'Cabeza' , 'Cuello' , 'Genitales' ,
-'Piernas' , 'Torax' , 'Otros' ) ;
-echo  Html :: lists ( $ar2 ,   $type   =   'ol' ) ;   //Muestra una lista
+$ar2 = array('Abdomen', 'Brazos', 'Cabeza', 'Cuello', 'Genitales',
+'Piernas', 'Torax', 'Otros');
+echo  Html::lists($ar2 , $type = 'ol');   //Muestra una lista
 <ol></ol>  
 ``` 
   
-####  Html::gravatar()
+#### Html::gravatar()
 
 Incluye imágenes de gravatar.com
 
@@ -556,15 +581,15 @@ $size Tamaño del gravatar. Un numero de 1 a 512. Por defecto: 40
 $default URL gravatar por defecto si no existe, o un default de gravatar. Por
 defecto: mm
 
+`Html::gravatar($email, $alt='gravatar', $size=40, $default='mm')`
 ```php
-Html::gravatar($email, $alt='gravatar', $size=40, $default='mm')  
 echo Html::gravatar($email);   // Simple
 echo Html::link(Html::gravatar($email), $url);   // Un gravatar que es un link
 echo Html::gravatar($email ,$name , 20 , 'http://www.example.com/default.jpg');
 //Completo   
 ``` 
   
-####  Html::includeCss()
+#### Html::includeCss()
 
 Incluye los archivos CSS que previamente fueron cargados a la lista mediante
 Tag::css()
@@ -574,7 +599,7 @@ Tag::css('bienvenida');     //Pone en lista un CSS (app/public/css/bienvenida.cs
 echo Html::includeCss();   //Adiciona los recursos enlazados de la clase en el proyecto  
 ```
     
-####  Html::meta()
+#### Html::meta()
 
 Crea un metatag y lo agrega a una lista estática que será añadida más adelante
 mediante Html::includeMetatags();
@@ -592,17 +617,17 @@ Html::meta('text/html; charset=UTF-8' ,"http-equiv = 'Content-type'");
 //Agrega: <meta content="text/html; charset=UTF-8" http-equiv = 'Content-type'/>  
 ```
   
-####  Html::includeMetatags()
+#### Html::includeMetatags()
 
 Agrega los metatag que previamente se habían agregado
 
 ```php
-Html::meta ( 'Kumbiaphp-team' , "name = 'Author'" ) ;
-Html::meta ( 'text/html; charset=UTF-8' , "http-equiv = 'Content-type'" ) ;
-echo Html::includeMetatags () ;   //Visualiza <meta content="Kumbiaphp-team" name = 'Author'/>
+Html::meta ('Kumbiaphp-team' , "name = 'Author'");
+Html::meta ('text/html; charset=UTF-8' , "http-equiv = 'Content-type'");
+echo Html::includeMetatags();   //Visualiza <meta content="Kumbiaphp-team" name = 'Author'/>
 ```
   
-####  Html::headLink()
+#### Html::headLink()
 
 Agrega un elemento de vinculo externo de tipo [<link> ](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de
 enlaces (para poder ser visualizado se requiere de Html::includeHeadLinks() de
@@ -615,7 +640,7 @@ $attrs atributos adicionales
 ```php
 Html::headLink($href, $attrs = NULL)  
   
-Html :: headlink ( 'http://www.kumbiaphp.com/public/style.css' , "rel='stylesheet',type='text/css' media='screen'" ) ;
+Html::headlink('http://www.kumbiaphp.com/public/style.css', "rel='stylesheet',type='text/css' media='screen'");
 //Se agrega a la cola de links el enlace a un recurso externo, en este caso la hoja de estilo ubicada en "http://www.kumbiaphp.com/public/style.css"
 
 /*Agrega a la cola de links "<link rel="alternate" type="application/rss+xml"
@@ -623,16 +648,16 @@ title="KumbiaPHP Framework RSS Feed" href="http://www.kumbiaphp.com/blog/fee
 d/" />" con lo cual
 podemos incluir un feed sin usar las convenciones de kumbiaphp */
 
-Html :: headlink ( 'http://www.kumbiaphp.com/blog/feed/' , "rel='alternate'
-type='application/rss+xml' title='KumbiaPHP Framework RSS Feed'" ) ;
+Html::headlink('http://www.kumbiaphp.com/blog/feed/', "rel='alternate'
+type='application/rss+xml' title='KumbiaPHP Framework RSS Feed'");
 
-Html :: headlink ( 'http://www.kumbiaphp.com/favicon.ico' , "rel='shortcut
-icon',type='image/x-icon'" ) ;   //Agrega la etiqueta <link> para usar un favicon externo
+Html::headlink('http://www.kumbiaphp.com/favicon.ico' , "rel='shortcut
+icon',type='image/x-icon'");   //Agrega la etiqueta <link> para usar un favicon externo
 
-echo  Html :: includeHeadLinks () ;   //Muestra los links que contiene la cola  
+echo  Html::includeHeadLinks();   //Muestra los links que contiene la cola  
 ```
 
-####  Html::headLinkAction()
+#### Html::headLinkAction()
 
 Agrega un elemento de vinculo interno de tipo [<link>](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de
 enlaces (para poder ser visualizado se requiere de Html::includeHeadLinks() de
@@ -650,12 +675,12 @@ title="KumbiaPHP Framework RSS Feed" href="http://www.kumbiaphp.com/blog/fee
 d/" />" con lo cual podemos incluir un feed usando las convenciones de KumbiaPHP.
 Siendo 'articulos/feed' el nombre de la vista con el contenido del feed */
 
-Html :: headLinkAction ( 'articulos/feed' ,   "rel='alternate'
-type='application/rss+xml' title='KumbiaPHP Framework RSS Feed'" ) ;
-echo  Html :: includeHeadLinks () ;   //Muestra los links que contiene la cola  
+Html::headLinkAction('articulos/feed', "rel='alternate'
+type='application/rss+xml' title='KumbiaPHP Framework RSS Feed'");
+echo  Html::includeHeadLinks();   //Muestra los links que contiene la cola  
 ```  
   
-####  Html::headLinkResource()
+#### Html::headLinkResource()
 
 Agrega un elemento de vinculo a un recurso interno con la etiqueta [<link> ](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de enlaces (para poder ser visualizado se requiere de
 Html::includeHeadLinks())
@@ -668,24 +693,24 @@ Html::headLinkResource($resource, $attrs = NULL)
    
 ```php
 //Agrega la etiqueta <link> para usar un favicon interno ubicado en el directorio '/public/'
-Html :: headLinkResource ( 'favicon.ico' , "rel='shortcut
-icon',type='image/x-icon'" ) ;   
-echo  Html :: includeHeadLinks () ;   //Muestra los links que contiene la cola  
+Html::headLinkResource('favicon.ico', "rel='shortcut
+icon', type='image/x-icon'");   
+echo Html::includeHeadLinks();   //Muestra los links que contiene la cola  
 ```
   
-####  Html::includeHeadLinks()
+#### Html::includeHeadLinks()
 
 Incluye los links que previamente se pusieron en cola
 
 ```php
-Html :: headlink ( 'http://www.kumbiaphp.com/favicon.ico' , "rel='shortcut
-icon',type='image/x-icon'" ) ;   //Agrega la etiqueta <link> para usar un favicon externo
+Html::headlink('http://www.kumbiaphp.com/favicon.ico', "rel='shortcut
+icon', type='image/x-icon'");   //Agrega la etiqueta <link> para usar un favicon externo
 
-Html :: headLinkAction ( 'articulos/feed' , "rel='alternate' type='application/rss+xml' title='KumbiaPHP Framework RSS Feed'" ) ;
-echo  Html :: includeHeadLinks () ;  
+Html::headLinkAction('articulos/feed', "rel='alternate' type='application/rss+xml' title='KumbiaPHP Framework RSS Feed'");
+echo  Html::includeHeadLinks();  
 ```  
   
-### Clase Tag
+### Tag
 
 Esta clase nos va a permitir adicionar archivos JS y CSS a nuestro proyecto,
 bien sean archivos que se encuentren en nuestro servidor o en un servidor
@@ -694,21 +719,20 @@ externo. Cambien vamos a poder hacer
 Las funciones de esta clase son de tipo estatificas, lo que nos permite usarlas
 directamente de la forma como se presentan a continuación.
 
-####  Tag::css()
+#### Tag::css()
 
 Incluye un archivo CSS a la lista
 
 ```php
-Tag :: css ( 'bienvenida' ) ;     //Pone en lista un CSS (app/public/css/bienvenida.css)
-echo  Html :: includeCss () ;   //Adiciona los recursos enlazados de la clase en el proyecto  
+Tag::css ('bienvenida');     //Pone en lista un CSS (app/public/css/bienvenida.css)
+echo  Html::includeCss();   //Adiciona los recursos enlazados de la clase en el proyecto  
 ```
   
-####  Tag::js()
+#### Tag::js()
 
 Incluye un archivo JavaScript a la vista, partial o template
 ```php
-<?php  
-echo  Tag:: js ( 'jquery/jquery.kumbiaphp' ); //Adiciona un archivo javascript (/app/public/javascript/jquery/jquery.kumbiaphp.js)  
+<?= Tag::js('jquery/jquery.kumbiaphp'); //Adiciona un archivo javascript (/app/public/javascript/jquery/jquery.kumbiaphp.js)  
 ?>  
 ```
 
@@ -716,7 +740,7 @@ echo  Tag:: js ( 'jquery/jquery.kumbiaphp' ); //Adiciona un archivo javascript (
 
 Clase para el manejo y la creación de formularios
 
-####  Form::open()
+#### Form::open()
 
 Crea una etiqueta de formulario
 
@@ -731,11 +755,11 @@ Form::open($action = NULL, $method = 'POST', $attrs = NULL)
   
 ```php 
 /*Ejemplo*/  
-<?php   echo  Form:: open (); ?> //inicia un formulario que enviara los datos a la acción que corresponde al controller actual  
-<?php   echo  Form:: open ( 'usuarios/nuevo' ); ?>  //inicia un formulario que enviara los datos al controller 'usuarios' y la acción 'nuevo'  
+<?= Form::open() ?> //inicia un formulario que enviara los datos a la acción que corresponde al controller actual  
+<?= Form::open('usuarios/nuevo') ?>  //inicia un formulario que enviara los datos al controller 'usuarios' y la accion 'nuevo'  
 ```
   
-####  Form::openMultipart()
+#### Form::openMultipart()
 
 Crea una etiqueta de formulario multipart, este es ideal para formularios que
 contienen campos de subida de archivos
@@ -750,22 +774,22 @@ Form::openMultipart ($action = NULL, $attrs = NULL)
 ```php
 /*Ejemplo*/
 //inicia un formulario multipart que enviara los datos a la acción que corresponde a la vista actual
-echo  Form :: openMultipart () ;
+echo Form::openMultipart();
 //inicia un formulario multipart que enviara los datos al controller 'usuario' y la acción 'nuevo'  
-echo  Form :: openMultipart ( 'usuarios/nuevo' ) ; 
+echo Form::openMultipart('usuarios/nuevo'); 
 ```
   
-####  Form::close()
+#### Form::close()
 
 Crea una etiqueta de cierre de formulario
 
 ```php
 /*Ejemplo*/
-echo  Form :: close () ;
+echo Form::close();
 //crea una etiqueta de cierre de formulario </form>  
 ```  
   
-####  Form::input()
+#### Form::input()
 
 Crea un campo de tipo input
 
@@ -777,10 +801,10 @@ Form::input($attrs = NULL, $content = NULL)
   
 ```php
 /*Ejemplo*/
-echo  Form :: input ( 'nombre' ) ;  
+echo Form::input('nombre');  
 ```
   
-####  Form::text()
+#### Form::text()
 
 Crea un campo de tipo input
 
@@ -799,14 +823,14 @@ Form::text($field, $attrs = NULL, $value = NULL)
 ```php
 /*Ejemplo*/
 //crea un campo de tipo texto con el parámetro name= "nombre", id = "nombre"
-echo  Form :: text ( 'nombre' ) ;
+echo Form::text('nombre');
 //crea un campo de tipo texto con el parámetro name= "usuario[nombre]", id = "usuario.nombre"
-echo  Form :: text ( 'usuario.nombre' ) ;   
+echo Form::text('usuario.nombre');   
 //crea un campo de tipo texto con el parámetro name= "nombre", id = "nombre", class= "caja", value = "55"  
-echo  Form :: text ( 'nombre' , "class= 'caja'" , '55' ) ;   
+echo Form::text('nombre', "class='caja'", '55');   
 ```
   
-####  Form::pass()
+#### Form::pass()
 
 Crea un campo de tipo Password
 
@@ -820,11 +844,11 @@ Form::pass($field, $attrs = NULL, $value = NULL)
   
 ```php  
 /*Ejemplo*/
-echo  Form :: pass ( 'password' ) ;   //crea un campo de tipo password con el
+echo Form::pass('password');   //crea un campo de tipo password con el
 parámetro name= "password"  
 ```
   
-####  Form::textarea()
+#### Form::textarea()
 
 Crea un textarea
 
@@ -837,10 +861,10 @@ $value valor inicial para el textarea
 Form::textarea($field, $attrs = NULL, $value = NULL)  
   
 ```php
-echo  Form :: textarea ( 'detalles' ) ;   //Crea un textarea  
+echo Form::textarea('detalles');   //Crea un textarea  
 ```
   
-####  Form::label()
+#### Form::label()
 
 Crea un label y lo asocia a un campo
 
@@ -855,11 +879,11 @@ Form::label($text, $field, $attrs = NULL)
 ```php
 //Crea un label
 para el campo nombre con el texto 'nombre de usuario:'
-echo  Form :: label ( 'nombre de usuario:' , 'nombre' ) ;  
-echo  Form :: text ( 'nombre' ) ;  
+echo Form::label('nombre de usuario:', 'nombre');  
+echo Form::text('nombre');  
 ```  
   
-####  Form::hidden()
+#### Form::hidden()
 
 Crea un campo hidden (campo oculto)
 
@@ -872,10 +896,10 @@ $value valor inicial para el campo oculto
 Form::hidden($field, $attrs = NULL, $value = NULL)  
   
 ```php
-echo  Form :: hidden ( 'id' , NULL , 12 ) ;   //Crea un campo oculto con el name="id" y el value="12"  
+echo Form::hidden('id', null, 12);   //Crea un campo oculto con el name="id" y el value="12"  
 ```
   
-####  Form::dbSelect()
+#### Form::dbSelect()
 
 Crea campo Select que toma los valores de objetos de ActiveRecord, para esta
 versión del framework el uso de este helper ha sido simplificado. Ya no es
@@ -902,12 +926,12 @@ Vista
 
 ```php
 //la forma mas facil, carga el modelo(campo) y muestra el primer campo despues del pk(id)
-echo  Form :: dbSelect ( 'usuarios.campo_id' ) ;
+echo Form::dbSelect('usuarios.campo_id');
 //muestra el campo y lo ordena ascendentemente    
-echo  Form :: dbSelect ( 'usuarios.campo_id', 'campo' ) ;  
+echo Form::dbSelect('usuarios.campo_id', 'campo');  
 ```
   
-####  Form::select()
+#### Form::select()
 
 Crea un campo Select (un combobox)
 
@@ -922,9 +946,9 @@ $value valor inicial para el campo
 Form::select($field, $data, $attrs = NULL, $value = NULL)  
   
 ```php
-$ar2   =   array ( 'Abdomen' , 'Brazos' , 'Cabeza' , 'Cuello' , 'Genitales' , 'Piernas' , 'Torax' , 'Otros' ) ;
+$ar2 = array('Abdomen', 'Brazos', 'Cabeza', 'Cuello', 'Genitales', 'Piernas', 'Torax', 'Otros');
 //Crea un campo Select (un combobox) con el nombre 'region' y teniendo preseleccionado 'Cuello'  
-echo  Form :: Select ( 'region' ,   $ar2 , NULL, 'Cuello' ) ;   
+echo Form::Select('region', $ar2, null, 'Cuello');   
  ```  
   
 Resultado:
@@ -938,11 +962,11 @@ Resultado:
   
 Otra Posibilidad:
 ```php
-$ar2   =   array ( 'Abdomen' => 'Abdomen' , 'Brazos' => 'Brazos' , 'Cabeza' =>
-'Cabeza' , 'Cuello' => 'Cuello' , 'Genitales' => 'Genitales' , 'Piernas' =>
-'Piernas' , 'Torax' => 'Torax' , 'Otros' => 'Otros' ) ;
+$ar2 = array('Abdomen' => 'Abdomen', 'Brazos' => 'Brazos', 'Cabeza' =>
+'Cabeza', 'Cuello' => 'Cuello', 'Genitales' => 'Genitales', 'Piernas' =>
+'Piernas', 'Torax' => 'Torax', 'Otros' => 'Otros');
 
-echo  Form :: Select ( 'region' ,   $ar2 , NULL, 'Cuello' ) ;  
+echo Form::Select('region', $ar2, null, 'Cuello');  
 ```
   
 Resultado:
@@ -954,7 +978,7 @@ Resultado:
 </select>  
 ```
   
-####  Form::file()
+#### Form::file()
 
 Crea campo File para subir archivos, el formulario se debe abrir con
 Form::openMultipart()
@@ -966,12 +990,12 @@ $attrs atributos de campo
 Form::file($field, $attrs = NULL)  
   
 ```php  
-echo  Form :: openMultipart () ;   //Abre el formulario multipart
-echo  Form :: file ( 'subir' ) ;  crear el campo para subir archivos
-echo  Form :: close () ;   //Cierra el formulario  
+echo Form::openMultipart();   //Abre el formulario multipart
+echo Form::file('subir');  //Crear el campo para subir archivos
+echo Form::close();   //Cierra el formulario  
 ```
   
-####  Form::button()
+#### Form::button()
 
 Crea un botón
 
@@ -982,10 +1006,10 @@ $attrs atributos del botón
 Form::button($text, $attrs = NULL)  
     
 ```php
-echo  Form :: button ( 'calcular' ) ;   //Crea un botón con el texto 'calcular'  
+echo Form::button('calcular');   //Crea un botón con el texto 'calcular'  
 ```  
   
-####  Form::submitImage()
+#### Form::submitImage()
 
 Crea un botón de tipo imagen siguiendo las convenciones de KumbiaPHP, la
 imagen deberá estar dentro del directorio '/public/img/'
@@ -997,10 +1021,10 @@ $attrs atributos del botón
 Form::submitImage($img, $attrs = NULL)  
   
 ```php  
-echo  Form :: submitImage ( 'botones/edit.gif' ) ;   //Crea un botón con la imagen 'botones/edit.gif'  
+echo Form::submitImage('botones/edit.gif');   //Crea un botón con la imagen 'botones/edit.gif'  
 ```
   
-####  Form::submit()
+#### Form::submit()
 
 Crea un botón de submit para el formulario actual
 
@@ -1011,10 +1035,10 @@ $attrs atributos del botón
 Form::submit($text, $attrs = NULL)  
   
 ```php
-echo  Form :: submit ( 'enviar' ) ;   //Crea un botón con el texto 'enviar'  
+echo Form::submit('enviar');   //Crea un botón con el texto 'enviar'  
 ```
   
-####  Form::reset()
+#### Form::reset()
 
 Crea un botón reset para el formulario actual
 
@@ -1025,11 +1049,11 @@ $attrs atributos del botón
 Form::reset($text, $attrs = NULL)  
   
 ```php
-echo  Form :: reset ( 'reiniciar' ) ;   //Crea un botón con el texto
+echo Form::reset('reiniciar');   //Crea un botón con el texto
 'reiniciar'  
 ```
   
-####  Form::check()
+#### Form::check()
 
 Crea un checkbox
 
@@ -1050,7 +1074,7 @@ echo  Form :: check ( 'recuerdame' , '1' , '' , true ) ;
 echo  Form :: check ( 'recuerdame' , '1' , '' , false ) ;     
 ```
   
-####  Form::radio()
+#### Form::radio()
 
 Crea un radio button
 
@@ -1067,16 +1091,16 @@ Form::radio($field, $value, $attrs = NULL, $checked = NULL)
 ```php  
 $on   =   'masculino' ;
 //<input id="rdo1" name="rdo" type="radio" value="masculino" checked="checked">
-echo  Form :: radio ( "rdo" ,   'masculino' ,  NULL ,  TRUE ) ;  
+echo Form::radio("rdo", 'masculino', null, true);  
 //<input id="rdo2" name="rdo" type="radio" value="femenino">  
-echo  Form :: radio ( "rdo" ,   'femenino' ) ; 
+echo Form::radio("rdo", 'femenino'); 
 ```  
   
-###  Js
+### Js
 
 Este helper ofrece algunas implementaciones que utilizan javascript simple.
 
-####  Js::link ()
+#### Js::link ()
 
 Crea un enlace que al pulsar muestra un diálogo de confirmación para
 redireccionamiento a la ruta indicada.
@@ -1091,22 +1115,22 @@ $class clases adicionales para el link
 
 $attrs $attrs atributos adicionales
 
-Js::link ($action, $text, $confirm = '¿Está Seguro?', $class = NULL, $attrs =
-NULL)  
+ `Js::link ($action, $text, $confirm = '¿Está Seguro?', $class = NULL, $attrs =
+NULL)`
   
 ```php
-<?php echo Js::link('usuario/eliminar/5', 'Eliminar'); ?>  
+<?= Js::link('usuario/eliminar/5', 'Eliminar') ?>  
 ```
   
 Si desea aplicar una clase de estilo al enlace debe indicarlo en el argumento
 $class .
 
 ```php  
-<?php echo Js::link('usuario/eliminar/5', 'Eliminar', '¿Está seguro de esta
+<?= Js::link('usuario/eliminar/5', 'Eliminar', '¿Está seguro de esta
 operación?', 'b_eliminar') ?>  
 ```
   
-####  Js::linkAction ()
+#### Js::linkAction ()
 
 Crea un enlace que al pulsar muestra un diálogo de confirmación para
 redireccionamiento a la acción indicada.
@@ -1121,8 +1145,8 @@ $class clases adicionales para el link
 
 $attrs $attrs atributos adicionales
 
-Js::linkAction($action, $text, $confirm = '¿Está Seguro?', $class = NULL,
-$attrs = NULL)  
+ `Js::linkAction($action, $text, $confirm = '¿Está Seguro?', $class = NULL,
+$attrs = NULL)` 
   
 ```php
 <?php echo Js::linkAction('eliminar/5', 'Eliminar'); ?>  
@@ -1130,7 +1154,7 @@ $attrs = NULL)
 <?php echo Js::linkAction('eliminar/5', 'Eliminar', '¿Está seguro de esta operacion?', 'b_eliminar') ?>  
 ```  
   
-####  Js::submit ()
+#### Js::submit ()
 
 Crea un botón submit que al pulsar muestra un diálogo de confirmación.
 
@@ -1142,15 +1166,15 @@ $class clases adicionales para el link
 
 $attrs atributos adicionales
 
-Js::submit ($text, $confirm = '¿Está Seguro?', $class = NULL, $attrs = NULL)  
+ `Js::submit ($text, $confirm = '¿Está Seguro?', $class = NULL, $attrs = NULL)` 
   
 ```php
 <?php echo Js::submit('Guardar') ?>  
-//Si desea aplicar una clase de estilo al botón debe indicarlo en el argumento $class .
-<?php echo Js::submit('Guardar', '¿Está Seguro?', 'boton_guardar') ?>  
+//Si desea aplicar una clase de estilo al boton debe indicarlo en el argumento $class .
+<?= Js::submit('Guardar', '¿Está Seguro?', 'boton_guardar') ?>  
 ```
   
-####  Js::submitImage ()
+#### Js::submitImage ()
 
 Crea un botón tipo image que al pulsar muestra un diálogo de confirmación.
 
@@ -1162,19 +1186,19 @@ $class clases adicionales para el link
 
 $attrs atributos adicionales
 
-Js::submitImage($img $confirm = '¿Está Seguro?', $class = NULL, $attrs = NULL)  
+ `Js::submitImage($img $confirm = '¿Está Seguro?', $class = NULL, $attrs = NULL)` 
   
 ```php  
 <?php echo Js::submitImage('botones/guardar.png') ?>  
 //Si desea aplicar una clase de estilo al botón debe indicarlo en el argumento $class .
-<?php echo Js::submitImage('botones/guardar', '¿Está Seguro?', 'boton_guardar') ?>  
+<?= Js::submitImage('botones/guardar', '¿Está Seguro?', 'boton_guardar') ?>  
 ```  
   
-###  Ajax
+### Ajax
 
 Este helper ofrece implementaciones para facilitar la integración con AJAX.
 
-####  Ajax::link()
+#### Ajax::link()
 
 Crea un enlace que actualiza la capa indicada con el contenido producto de la
 petición web.
@@ -1189,7 +1213,7 @@ $class clases adicionales
 
 $attrs atributos adicionales
 
-Ajax::link ($action, $text, $update, $class=NULL, $attrs=NULL)  
+ `Ajax::link ($action, $text, $update, $class=NULL, $attrs=NULL)` 
    
   
 Como ejemplo, crea un enlace que al pulsar emita un saludo. Con el fin
@@ -1225,14 +1249,14 @@ views/saludo/index.phtml
   
 Al acceder a la acción index  del controlador saludo  se tiene:
 
-![](images/image10.png)
+![](../images/image10.png)
 
 Luego de pulsar el enlace se coloca el resultado de la petición ajax en la
 capa.
 
-![](images/image01.png)
+![](../images/image01.png)
 
-####  Ajax::linkAction()
+#### Ajax::linkAction()
 
 Crea un enlace a una acción del controlador actual que actualiza la capa
 indicada con el contenido producto de la petición web.
@@ -1247,10 +1271,10 @@ $class clases adicionales
 
 $attrs atributos adicionales
 
-Ajax::linkAction ($action, $text, $update, $class=NULL, $attrs=NULL)  
+ `Ajax::linkAction ($action, $text, $update, $class=NULL, $attrs=NULL)` 
     
 ```php  
-<?php echo Ajax::linkAction('hola', 'Mostrar Saludo', 'capa_saludo') ?>  
+<?= Ajax::linkAction('hola', 'Mostrar Saludo', 'capa_saludo') ?>  
 ```
 Por supuesto... aun falta a esta documentación, por el momento les recomiendo
 que revisen el CRUD de la versión 1.0 beta 2 allí podrán ver otros cambios,
