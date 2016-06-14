@@ -10,7 +10,7 @@ requerimientos para hacer funcionar el framework son mínimos, a continuación
 se listan:
 
   * Interprete PHP (versión 5.2.2 o superior).
-  * Servidor Web con soporte de reescritura de URL (Apache, Cherokee, Lighttpd, Internet Information Server (IIS)).
+  * Servidor Web con soporte de reescritura de URL (Apache, Nginx, Cherokee, Lighttpd, Internet Information Server (IIS)).
   * Manejador de base de datos soportado por KumbiaPHP.
 
 Para instalar KumbiaPHP Framework, se debe descargar su archivo comprimido
@@ -34,7 +34,7 @@ directorio kumbiaphp/ . Teniendo una estructura como la siguiente:
         `-- index.php  
 ```
 
-## Configurar Servidor Web
+## Configurar Apache
 
 KumbiaPHP Framework utiliza un módulo para la reescritura de URLs haciéndolas
 mas comprensibles y fáciles de recordar en nuestras aplicaciones. Por esto, el
@@ -97,6 +97,9 @@ Figura 2.1: Instalación exitosa de KumbiaPHP
 Esto es un entorno de pruebas el cual esta pensado para practicar con
 KumbiaPHP en un servidor local, no para desarrollar aplicaciones complejas que
 terminan siendo publicadas en la web.
+
+## Configurar Nginx
+
 
 ### ¿Por qué es importante el Mod-Rewrite?
 
