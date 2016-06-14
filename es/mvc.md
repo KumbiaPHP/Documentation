@@ -1,6 +1,6 @@
 #Modelo, Vista, Controlador (MVC)
 
-## ¿Que es MVC?
+## ¿Qué es MVC?
 
 En 1979, Trygve Reenskaug desarrollo una arquitectura para desarrollar
 aplicaciones interactivas. En este diseño existen tres partes: modelos,
@@ -25,7 +25,7 @@ controlador. El controlador puede interactuar de muchas formas con el modelo,
 luego el primero llama a la respectiva vista la cual obtiene el estado del
 modelo que es enviado desde el controlador y lo muestra al usuario.
 
-## ¿Como KumbiaPHP aplica el MVC?
+## ¿Cómo KumbiaPHP aplica el MVC?
 
 KumbiaPHP Framework aprovecha los mejores patrones de programación orientada a
 la Web en especial el patrón MVC (Modelos, Vistas, Controladores). A
@@ -72,7 +72,7 @@ Finalmente, el modelo abstrae la lógica de datos, que hace a los modelos
 independientes de las vistas. La implementación de este modelo es muy liviana
 mediante pequeñas convenciones se puede lograr mucho poder y funcionalidad.
 
-## Caso practico (CAMBIAR EJEMPLO)
+## Caso práctico (CAMBIAR EJEMPLO)
 
 Para entender mejor, veamos un ejemplo de como una arquitectura MVC trabaja
 para añadir al carrito. Primero, el usuario interactúa con la interfaz
