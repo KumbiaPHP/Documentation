@@ -102,7 +102,7 @@ terminan siendo publicadas en la web.
 
 Usando `$_SERVER['PATH_INFO']`:
 
-```
+```nginx
 server {
     listen      80;
     server_name localhost.dev;
@@ -133,7 +133,7 @@ server {
 
 Usando `$_GET['_url']`:
 
-```
+```nginx
 server {
     listen      80;
     server_name localhost.dev;
