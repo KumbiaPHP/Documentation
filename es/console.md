@@ -4,7 +4,7 @@
 ##  Introducción
 
 La consola, es una herramienta de linea de comandos de KumbiaPHP, que permite
-realizar tareas automatizadas en el ámbito de tu aplicacion. En este sentido
+realizar tareas automatizadas en el ámbito de tu aplicación. En este sentido
 KumbiaPHP incluye las siguientes consolas: Cache, Model y Controller.
 
 Cada consola esta compuesta por un conjunto de comandos, cada comando puede
@@ -15,7 +15,7 @@ argumento con nombre se debe anteceder el prefijo " \--"  al argumento.
 
 Para utilizar la consola debes ejecutar el despachador de comandos de consola
 de KumbiaPHP en un terminal, ubicarte en el directorio " app"  de tu
-aplicacion y ejecutar la instruccion acorde al siguiente formato:
+aplicación y ejecutar la instrucción acorde al siguiente formato:
 
 `php ../../core/console/kumbia.php [ consola ] [ comando ] [ arg ] [ \--arg_nom
 ] =valor`
@@ -149,10 +149,10 @@ Ejemplo:
 
 Para desarrollar tus consolas debes de considerar lo siguiente:
 
-  * Las consolas que desarrolles para tu aplicacion deben estar ubicadas en el directorio "app/extensions/console".
+  * Las consolas que desarrolles para tu aplicación deben estar ubicadas en el directorio "app/extensions/console".
   * El archivo debe tener el sufijo "_console" y de igual manera la clase el sufijo "Console".
-  * Cada comando de la consola equivale a un metodo de la clase.
-  * Los argumentos con nombre que son enviados al invocar un comando se reciben en el primer argumento del metodo correspondiente al comando.
+  * Cada comando de la consola equivale a un método de la clase.
+  * Los argumentos con nombre que son enviados al invocar un comando se reciben en el primer argumento del método correspondiente al comando.
   * Los argumentos secuenciales, que son enviados al invocar un comando, se reciben como argumentos del método invocado posteriores al primer argumento.
   * Si no se especifica el comando a ejecutar, se ejecutará de manera predeterminada el método "main" de la clase.
   * Las clases  Load ,  Config y Util;  son cargadas automáticamente para la consola.
