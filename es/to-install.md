@@ -9,7 +9,7 @@ Como se mencionó arriba KumbiaPHP es muy fácil y en este sentido los
 requerimientos para hacer funcionar el framework son mínimos, a continuación
 se listan:
 
-  * Interprete PHP (versión 5.2.2 o superior).
+  * Interprete PHP versión 5.4 o superior.
   * Servidor Web con soporte de reescritura de URL (Apache, Nginx, Cherokee, Lighttpd, Internet Information Server (IIS)).
   * Manejador de base de datos soportado por KumbiaPHP.
 
