@@ -100,7 +100,7 @@ terminan siendo publicadas en la web.
 
 ## Configurar Nginx
 
-Using `$_SERVER['PATH_INFO']` as source of URIs:
+Usando `$_SERVER['PATH_INFO']`:
 
 ```
 server {
@@ -114,7 +114,8 @@ server {
     }
 
     location ~ \.php {
-        fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
+        #fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
+        fastcgi_pass  127.0.0.1:9000;
         fastcgi_index /index.php;
 
         include fastcgi_params;
@@ -130,7 +131,7 @@ server {
 }
 ```
 
-Using `$_GET['_url']` as source of URIs:
+Usando `$_GET['_url']`:
 
 ```
 server {
@@ -144,7 +145,8 @@ server {
     }
 
     location ~ \.php {
-        fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
+        #fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
+        fastcgi_pass  127.0.0.1:9000;
         fastcgi_index /index.php;
 
         include fastcgi_params;
