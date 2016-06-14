@@ -8,7 +8,7 @@ para entender la arquitectura MVC (Modelo-Vista-Controlador).
 ## ¡Hola KumbiaPHP!
 
 Ahora escribiremos el famoso "¡Hola Mundo!" pero con un pequeño cambio:
-Diremos "¡Hola KumbiaPHP!". Pensando en esto, recordemos el modelo MVC, segun
+Diremos "¡Hola KumbiaPHP!". Pensando en esto, recordemos el modelo MVC, según
 esto, KumbiaPHP debería aceptar una petición, que busca en controlador y,
 en este, una acción que atiende la petición. Luego, KumbiaPHP utiliza esta
 información de controlador y acción para buscar la vista asociada a la
@@ -40,7 +40,7 @@ controladora, además existe el método hola().
 Para poder ver la salida que envía el controlador, es necesario crear la vista
 asociada a la acción. Primero, creamos un directorio con el mismo nombre de
 nuestro controlador (en este caso debe llamarse saludo), y dentro de este
-estan todas las vistas asociadas a las acciones que necesiten mostrar alguna
+están todas las vistas asociadas a las acciones que necesiten mostrar alguna
 información. En nuestro ejemplo llamamos a una acción llamada hola; por lo
 tanto, creamos un archivo llamado *app/views/saludo/hola.phtml*. Una vez creado
 este archivo, le agregamos un poco de contenido:
