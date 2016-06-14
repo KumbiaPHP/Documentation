@@ -1237,12 +1237,12 @@ views/saludo/index.phtml
   
 Al acceder a la accion index  del controlador saludo  se tiene:
 
-![](images/image10.png)
+![](../images/image10.png)
 
 Luego de pulsar el enlace se coloca el resultado de la peticion ajax en la
 capa.
 
-![](images/image01.png)
+![](../images/image01.png)
 
 ####  Ajax::linkAction()
 
