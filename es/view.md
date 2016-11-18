@@ -125,11 +125,11 @@ Saludo realizado:
   
 ## Template
 
-Los templates constituyen la capa mas externa de la vista que se mostrara
+Los templates constituyen la capa mas externa de la vista que se mostrará
 luego de ejecutar una acción del controlador, de manera que permite establecer
 el formato de presentación apropiado para la vista.
 
-Cuando se habla de formato no se refiere unicamente al tipo de documento, si
+Cuando se habla de formato no se refiere únicamente al tipo de documento, si
 no también a elementos como cabeceras y menús. Por ende el template esta
 compuesto por aquellos elementos que en conjunto son utilizados para la
 presentación de diversas vistas, dando de esta manera un formato de
@@ -251,7 +251,7 @@ En el template saludo.phtml
 Los partials o «vistas parciales» son fragmentos de vistas que son compartidas
 por distintas vistas, de manera que constituyen lógica de presentación
 reutilizable en la aplicación. Por lo general los partials son elementos como:
-menús, cabecera, pie de pagina, formularios, entre otros.
+menús, cabecera, pie de página, formularios, entre otros.
 
 ### ¿Cómo crear un partial?
 
@@ -270,8 +270,8 @@ Ejemplo:
 ### ¿Cómo utilizar un partial?
 
 Para utilizar un partial se debe invocar el método View::partial()  indicando
-como argumento el partial deseado y la vista parcial se mostrara en el lugar
-donde se invoco.
+como argumento el partial deseado y la vista parcial se mostrará en el lugar
+donde se invocó.
 
 Ejemplo utilizando un partial en un template:
 ```php
@@ -294,7 +294,7 @@ templates e incluso dentro de otros partials.
 ### Pasando datos a los partials
 
 Para pasar datos a un partial, estos se deben indicar en un array asociativo
-donde cada clave con su correspondiente valor se cargaran como variables en el
+donde cada clave con su correspondiente valor se cargarán como variables en el
 ámbito local del partial.
 
 Ejemplo:
@@ -389,17 +389,17 @@ class UsuarioController extends AppController
 }  
 ``` 
   
-En este ejemplo se mostrara la vista index.json.phtml .
+En este ejemplo se mostrará la vista index.json.phtml .
 
 ## Uso de cache en las vistas
 
 El manejador de vistas proporciona mecanismos a través de los cuales las
 vistas, los partials y los templates se pueden cachear, el usuario indica el
 tiempo durante el cual estos estarán almacenados en la cache de manera que el
-manejador de vistas cargara estos elementos sin necesidad de procesarlos,
+manejador de vistas cargará estos elementos sin necesidad de procesarlos,
 aumentando el rendimiento de la aplicación.
 
-En este sentido para indicar el tiempo de cache se sigue el formato de la
+En este sentido para indicar el tiempo de caché se sigue el formato de la
 función strtotime de PHP. Ejemplo: '+1 week';
 
 ### Cache de vistas
@@ -425,11 +425,11 @@ datos pasados a la vista pueden de igual manera ser requeridos en el template.
 
 Las vistas cacheadas se pueden almacenar en grupos. Los grupos son muy
 interesantes, ya que se puede borrar la cache por grupos también. Ejemplo:
-guardar cache de posts en un grupo, al crear, editar o borrar un post, podemos
-borrar la cache de ese grupo, para que se regenere la cache.
+guardar caché de posts en un grupo, al crear, editar o borrar un post, podemos
+borrar la caché de ese grupo, para que se regenere la caché.
 
-En este caso es necesario indicar en el método View::cache()  que se cacheara
-una vista en un grupo especifico.
+En este caso es necesario indicar en el método View::cache()  que se cacheará
+una vista en un grupo específico.
 
 ```php
 <?php  
@@ -446,7 +446,7 @@ class UsuarioController extends AppController
 ### Cache de templates
 
 Cachear un template consiste en cachear en conjunto tanto la vista y template
-para una url especifica. Para cachear un template se usa el método
+para una url específica. Para cachear un template se usa el método
 View::cache()  en el controlador indicando el tiempo durante el cual estará
 cacheado el template.
 
@@ -463,7 +463,7 @@ class UsuarioController extends AppController
 ```
   
 Cabe destacar que para aumentar el rendimiento no se ejecuta la acción en el
-controlador, debido a que mostrar el template es el ultimo paso que realiza el
+controlador, debido a que mostrar el template es el último paso que realiza el
 manejador de vistas para mostrar la vista al usuario y en este paso ya todos
 los datos enviados a la vista y template han sido utilizados.
 
@@ -486,7 +486,7 @@ KumbiaPHP ya viene con helpers creados.
 
 Pero lo realmente útil, es que los usuarios se pueden crear sus propios
 helpers y colocarlos en app/extensions/helpers/. Y después usarlos
-tranquilamente en sus views, KumbiaPHP se encarga de cargar transparente mente
+tranquilamente en sus views, KumbiaPHP se encarga de cargar transparentemente
 sus helpers así como los uses.
 
 ### Html
@@ -629,7 +629,7 @@ echo Html::includeMetatags();   //Visualiza <meta content="Kumbiaphp-team" name 
   
 #### Html::headLink()
 
-Agrega un elemento de vinculo externo de tipo [<link> ](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de
+Agrega un elemento de vínculo externo de tipo [<link> ](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de
 enlaces (para poder ser visualizado se requiere de Html::includeHeadLinks() de
 modo similar que Html::includeCss())
 
@@ -659,7 +659,7 @@ echo  Html::includeHeadLinks();   //Muestra los links que contiene la cola
 
 #### Html::headLinkAction()
 
-Agrega un elemento de vinculo interno de tipo [<link>](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de
+Agrega un elemento de vínculo interno de tipo [<link>](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de
 enlaces (para poder ser visualizado se requiere de Html::includeHeadLinks() de
 modo similar que Html::includeCss()) respetando las convenciones de KumbiaPHP.
 
@@ -682,7 +682,7 @@ echo  Html::includeHeadLinks();   //Muestra los links que contiene la cola
   
 #### Html::headLinkResource()
 
-Agrega un elemento de vinculo a un recurso interno con la etiqueta [<link> ](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de enlaces (para poder ser visualizado se requiere de
+Agrega un elemento de vínculo a un recurso interno con la etiqueta [<link> ](http://html.conclase.net/w3c/html401-es/struct/links.html#h-12.3) a la cola de enlaces (para poder ser visualizado se requiere de
 Html::includeHeadLinks())
 
 $resource ubicación del recurso en public
@@ -714,9 +714,9 @@ echo  Html::includeHeadLinks();
 
 Esta clase nos va a permitir adicionar archivos JS y CSS a nuestro proyecto,
 bien sean archivos que se encuentren en nuestro servidor o en un servidor
-externo. Cambien vamos a poder hacer
+externo. También vamos a poder hacer
 
-Las funciones de esta clase son de tipo estatificas, lo que nos permite usarlas
+Las funciones de esta clase son de tipo estáticas, lo que nos permite usarlas
 directamente de la forma como se presentan a continuación.
 
 #### Tag::css()
@@ -755,8 +755,8 @@ Form::open($action = NULL, $method = 'POST', $attrs = NULL)
   
 ```php 
 /*Ejemplo*/  
-<?= Form::open() ?> //inicia un formulario que enviara los datos a la acción que corresponde al controller actual  
-<?= Form::open('usuarios/nuevo') ?>  //inicia un formulario que enviara los datos al controller 'usuarios' y la accion 'nuevo'  
+<?= Form::open() ?> //inicia un formulario que enviará los datos a la acción que corresponde al controller actual  
+<?= Form::open('usuarios/nuevo') ?>  //inicia un formulario que enviará los datos al controller 'usuarios' y la acción 'nuevo'  
 ```
   
 #### Form::openMultipart()
@@ -773,9 +773,9 @@ Form::openMultipart ($action = NULL, $attrs = NULL)
   
 ```php
 /*Ejemplo*/
-//inicia un formulario multipart que enviara los datos a la acción que corresponde a la vista actual
+//inicia un formulario multipart que enviará los datos a la acción que corresponde a la vista actual
 echo Form::openMultipart();
-//inicia un formulario multipart que enviara los datos al controller 'usuario' y la acción 'nuevo'  
+//inicia un formulario multipart que enviará los datos al controller 'usuario' y la acción 'nuevo'  
 echo Form::openMultipart('usuarios/nuevo'); 
 ```
   
@@ -907,7 +907,7 @@ necesario instanciar el modelo.
 
 $field nombre del modelo y campo pk (bajo la convención modelo.campo_id)
 
- $show campo que se mostrara
+ $show campo que se mostrará
 
  $data array de valores, array('modelo','m e todo','param')
 
@@ -1151,7 +1151,7 @@ $attrs = NULL)`
 ```php
 <?php echo Js::linkAction('eliminar/5', 'Eliminar'); ?>  
 //Si desea aplicar una clase de estilo al enlace debe indicarlo en el argumento $class
-<?php echo Js::linkAction('eliminar/5', 'Eliminar', '¿Está seguro de esta operacion?', 'b_eliminar') ?>  
+<?php echo Js::linkAction('eliminar/5', 'Eliminar', '¿Está seguro de esta operación?', 'b_eliminar') ?>  
 ```  
   
 #### Js::submit ()
@@ -1170,7 +1170,7 @@ $attrs atributos adicionales
   
 ```php
 <?php echo Js::submit('Guardar') ?>  
-//Si desea aplicar una clase de estilo al boton debe indicarlo en el argumento $class .
+//Si desea aplicar una clase de estilo al botón debe indicarlo en el argumento $class .
 <?= Js::submit('Guardar', '¿Está Seguro?', 'boton_guardar') ?>  
 ```
   
@@ -1247,7 +1247,7 @@ views/saludo/index.phtml
 ?>  
 ```
   
-Al acceder a la acción index  del controlador saludo  se tiene:
+Al acceder a la acción index  del controlador saludo se tiene:
 
 ![](../images/image10.png)
 
