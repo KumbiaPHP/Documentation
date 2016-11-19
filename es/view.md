@@ -1258,6 +1258,6 @@ $attrs atributos adicionales
 ```php  
 <?= Ajax::linkAction('hola', 'Mostrar Saludo', 'capa_saludo') ?>  
 ```
-Por supuesto... aun falta a esta documentación, por el momento les recomiendo
+Por supuesto... aún falta a esta documentación, por el momento les recomiendo
 que revisen el CRUD de la versión 1.0 beta 2 allí podrán ver otros cambios,
 estos se documentarán muy pronto [CRUD Beta2 KumbiaPHP](http://wiki.kumbiaphp.com/Beta2_CRUD_en_KumbiaPHP_Framework)
