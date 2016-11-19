@@ -3,30 +3,22 @@
 
 ##  Introducción
 
-La consola, es una herramienta de linea de comandos de KumbiaPHP, que permite
-realizar tareas automatizadas en el ámbito de tu aplicación. En este sentido
-KumbiaPHP incluye las siguientes consolas: Cache, Model y Controller.
+La consola, es una herramienta de línea de comandos de KumbiaPHP, que permite realizar tareas automatizadas en el ámbito de tu aplicación. En este sentido KumbiaPHP incluye las siguientes consolas: Cache, Model y Controller.
 
-Cada consola esta compuesta por un conjunto de comandos, cada comando puede
-recibir argumentos secuenciales  y argumentos con nombre . Para indicar un
-argumento con nombre se debe anteceder el prefijo " \--"  al argumento.
+Cada consola está compuesta por un conjunto de comandos, cada comando puede recibir argumentos secuenciales  y argumentos con nombre . Para indicar un argumento con nombre se debe anteceder el prefijo " \--"  al argumento.
 
-##  Como utilizar la Consola
+##  ¿Cómo utilizar la Consola?
 
-Para utilizar la consola debes ejecutar el despachador de comandos de consola
-de KumbiaPHP en un terminal, ubicarte en el directorio " app"  de tu
-aplicación y ejecutar la instrucción acorde al siguiente formato:
+Para utilizar la consola debes ejecutar el despachador de comandos de consola de KumbiaPHP en un terminal, ubicarte en el directorio " app"  de tu aplicación y ejecutar la instrucción acorde al siguiente formato:
 
 `php ../../core/console/kumbia.php [ consola ] [ comando ] [ arg ] [ \--arg_nom
 ] =valor`
-  
----  
-  
-Si no se especifica el comando ha ejecutar, entonces se ejecutará el comando "
-main " de la consola.
 
-También es posible indicar la ruta al directorio app  de la aplicación
-explícitamente por medio del argumento con nombre " path ".
+---  
+
+Si no se especifica el comando a ejecutar, entonces se ejecutará el comando "main " de la consola.
+
+También es posible indicar la ruta al directorio app  de la aplicación explícitamente por medio del argumento con nombre " path ".
 
 Ejemplos:
 
@@ -55,16 +47,16 @@ Esta consola permite realizar tareas de control sobre la cache de aplicación.
 ###  Ejemplo:
 
 ###  php ../../core/console/kumbia.php cache clean  
-  
+
 ---  
-  
+
 ####  remove [id] [group]
 
 Elimina un elemento de la cache.
 
 Argumentos secuenciales:
 
-  * i d:  id de elemento en cache.
+  * id:  id de elemento en cache.
   * group: nombre de grupo al que pertenece el elemento, si no se especifica valor, entonces se utilizará el grupo 'default'.
 
 Argumentos con nombre:
@@ -74,9 +66,9 @@ Argumentos con nombre:
 Ejemplo:
 
 `php ../../core/console/kumbia.php cache remove vista1 mis_vistas`
-  
+
 ---  
-  
+
 ###  Model
 
 Permite manipular modelos de la aplicación.
@@ -93,9 +85,9 @@ Argumentos secuenciales:
 Ejemplo:
 
 `php ../../core/console/kumbia.php model create venta_vehiculo`
-  
+
 ---  
-  
+
 ####  delete [model]
 
 Elimina un modelo.
@@ -106,18 +98,17 @@ Argumentos secuenciales:
 
 Ejemplo:
 
-`php ../../core/console/kumbia.php model delete venta_vehiculo` 
-  
+`php ../../core/console/kumbia.php model delete venta_vehiculo`
+
 ---  
-  
+
 ###  Controller
 
 Permite manipular controladores de la aplicación.
 
 ####  create [controller]
 
-Crea un controlador utilizando como base la plantilla ubicada en
-'core/console/generators/controller.php'.
+Crea un controlador utilizando como base la plantilla ubicada en 'core/console/generators/controller.php'.
 
 Argumentos secuenciales:
 
@@ -126,9 +117,9 @@ Argumentos secuenciales:
 Ejemplo:
 
 `php ../../core/console/kumbia.php controller create venta_vehiculo`
-  
+
 ---  
-  
+
 ####  delete [controller]
 
 Elimina un controlador.
@@ -140,9 +131,9 @@ Argumentos secuenciales:
 Ejemplo:
 
 `php ../../core/console/kumbia.php controller delete venta_vehiculo`
-  
+
 ---  
-  
+
 ##
 
 ##  Desarrollando tus Consolas
@@ -155,13 +146,12 @@ Para desarrollar tus consolas debes de considerar lo siguiente:
   * Los argumentos con nombre que son enviados al invocar un comando se reciben en el primer argumento del método correspondiente al comando.
   * Los argumentos secuenciales, que son enviados al invocar un comando, se reciben como argumentos del método invocado posteriores al primer argumento.
   * Si no se especifica el comando a ejecutar, se ejecutará de manera predeterminada el método "main" de la clase.
-  * Las clases  Load ,  Config y Util;  son cargadas automáticamente para la consola.
+  * Las clases  Load, Config y Util;  son cargadas automáticamente para la consola.
   * Las constantes APP_PATH, CORE_PATH y  PRODUCTION; se encuentran definidas para el entorno de la consola.  
 
 Ejemplo:
 
-Consideremos una parte del código, de la consola cache, cuya funcionalidad fue
-explicada en la sección anterior.
+Consideremos una parte del código, de la consola cache, cuya funcionalidad fue explicada en la sección anterior.
 
 ```
 <?php
@@ -213,20 +203,19 @@ class CacheConsole
 }
 
 ```
-  
+
 ###  Console::input
 
-Este método de la clase Console, permite leer una entrada desde el terminal,
-se caracteriza por intentar leer la entrada hasta que esta sea valida.
+Este método de la clase Console, permite leer una entrada desde el terminal, se caracteriza por intentar leer la entrada hasta que esta sea válida.
 
 `Console::input($message, $values = null)`
 
 $message (string): mensaje a mostrar al momento de solicitar la entrada.
 
-$values (array): conjunto de valores validos para la entrada.
+$values (array): conjunto de valores válidos para la entrada.
 
 Ejemplo:
 
 `$valor = Console::input('¿Desea continuar?', array('s', 'n'));`
-  
+
 ---  
