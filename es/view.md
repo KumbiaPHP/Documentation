@@ -7,7 +7,7 @@ De ese modo las vistas sólo harán las tareas de visualizar los resultados gene
 
 El manejador de vistas implementa el patrón de diseño de vista en dos pasos: le primero es utilizar una vista o «view» asociada a una acción del controlador para convertir los datos que vienen del modelo en lógica de presentación sin especificar ningún formato específico; el segundo paso es establecer el formato de presentación a través de una plantilla o «template».
 
-Asímismo tanto las vistas de acción como las plantillas pueden utilizar vistas parciales o «partials». Estas vistas parciales son fragmentos de vistas que son compartidas por distintas vistas, de manera que constituyen lógica de presentación reutilizable en la aplicación. Ejemplos: menús, cabeceras, pies de página, entre otros.
+Asimismo tanto las vistas de acción como las plantillas pueden utilizar vistas parciales o «partials». Estas vistas parciales son fragmentos de vistas que son compartidas por distintas vistas, de manera que constituyen lógica de presentación reutilizable en la aplicación. Ejemplos: menús, cabeceras, pies de página, entre otros.
 
 KumbiaPHP favorece siempre los convenios, y asume los siguientes respecto a las vistas:
 
@@ -82,7 +82,7 @@ Hola <?php echo $usuario ?>
 
 Para mostrar el contenido del buffer de salida se hace uso del método
 View::content() , donde el contenido del buffer de salida lo constituye
-principalmente los echo o print que efectúe el usuario y asímismo los mensajes
+principalmente los echo o print que efectúe el usuario y asimismo los mensajes
 Flash. Al invocar View::content() se muestra el contenido del buffer de
 salida en el lugar donde fue invocado.
 
@@ -112,7 +112,7 @@ Los templates constituyen la capa más externa de la vista que se mostrará
 luego de ejecutar una acción del controlador, de manera que permite establecer
 el formato de presentación apropiado para la vista.
 
-Cuando se habla de formato no se refiere unicamente al tipo de documento, si
+Cuando se habla de formato no se refiere únicamente al tipo de documento, si
 no también a elementos como cabeceras y menús. Por ende el template está
 compuesto por aquellos elementos que en conjunto son utilizados para la
 presentación de diversas vistas, dando de esta manera un formato de
@@ -170,7 +170,7 @@ class SaludoController extends AppController
 }  
 ```  
 
-Asímismo es posible indicar al manejador de vistas que no utilice ningún
+Asimismo es posible indicar al manejador de vistas que no utilice ningún
 template y por lo tanto muestre solamente la vista, para esto se debe pasar
 NULL como argumento a View::template() .
 
@@ -372,7 +372,7 @@ class UsuarioController extends AppController
 }  
 ```
 
-En este ejemplo se mostrara la vista index.json.phtml .
+En este ejemplo se mostrará la vista index.json.phtml .
 
 ## Uso de cache en las vistas
 
@@ -382,7 +382,7 @@ tiempo durante el cual estos estarán almacenados en la cache de manera que el
 manejador de vistas cargará estos elementos sin necesidad de procesarlos,
 aumentando el rendimiento de la aplicación.
 
-En este sentido para indicar el tiempo de cache se sigue el formato de la
+En este sentido para indicar el tiempo de caché se sigue el formato de la
 función strtotime de PHP. Ejemplo: '+1 week';
 
 ### Cache de vistas
@@ -407,12 +407,12 @@ datos pasados a la vista pueden de igual manera ser requeridos en el template.
 #### Grupos de vistas en cache
 
 Las vistas cacheadas se pueden almacenar en grupos. Los grupos son muy
-interesantes, ya que se puede borrar la cache por grupos también. Ejemplo:
-guardar cache de posts en un grupo, al crear, editar o borrar un post, podemos
-borrar la cache de ese grupo, para que se regenere la cache.
+interesantes, ya que se puede borrar la caché por grupos también. Ejemplo:
+guardar caché de posts en un grupo, al crear, editar o borrar un post, podemos
+borrar la caché de ese grupo, para que se regenere la misma.
 
-En este caso es necesario indicar en el método View::cache()  que se cacheara
-una vista en un grupo especifico.
+En este caso es necesario indicar en el método View::cache()  que se cacheará
+una vista en un grupo específico.
 
 ```php
 <?php  
@@ -429,7 +429,7 @@ class UsuarioController extends AppController
 ### Cache de templates
 
 Cachear un template consiste en cachear en conjunto tanto la vista y template
-para una url especifica. Para cachear un template se usa el método
+para una url específica. Para cachear un template se usa el método
 View::cache()  en el controlador indicando el tiempo durante el cual estará
 cacheado el template.
 
@@ -698,7 +698,7 @@ Esta clase nos va a permitir adicionar archivos JS y CSS a nuestro proyecto,
 bien sean archivos que se encuentren en nuestro servidor o en un servidor
 externo.
 
-Las funciones de esta clase son de tipo estatificas, lo que nos permite usarlas
+Las funciones de esta clase son de tipo estáticas, lo que nos permite usarlas
 directamente de la forma como se presentan a continuación.
 
 #### Tag::css()
@@ -737,8 +737,8 @@ Form::open($action = NULL, $method = 'POST', $attrs = NULL)
 
 ```php
 /*Ejemplo*/  
-<?= Form::open() ?> //inicia un formulario que enviara los datos a la acción que corresponde al controller actual  
-<?= Form::open('usuarios/nuevo') ?>  //inicia un formulario que enviara los datos al controller 'usuarios' y la accion 'nuevo'  
+<?= Form::open() ?> //inicia un formulario que enviará los datos a la acción que corresponde al controller actual  
+<?= Form::open('usuarios/nuevo') ?>  //inicia un formulario que enviará los datos al controller 'usuarios' y la acción 'nuevo'  
 ```
 
 #### Form::openMultipart()
@@ -1133,7 +1133,7 @@ $attrs = NULL)`
 ```php
 <?php echo Js::linkAction('eliminar/5', 'Eliminar'); ?>  
 //Si desea aplicar una clase de estilo al enlace debe indicarlo en el argumento $class
-<?php echo Js::linkAction('eliminar/5', 'Eliminar', '¿Está seguro de esta operacion?', 'b_eliminar') ?>  
+<?php echo Js::linkAction('eliminar/5', 'Eliminar', '¿Está seguro de esta operación?', 'b_eliminar') ?>  
 ```  
 
 #### Js::submit ()
@@ -1152,7 +1152,7 @@ $attrs atributos adicionales
 
 ```php
 <?php echo Js::submit('Guardar') ?>  
-//Si desea aplicar una clase de estilo al boton debe indicarlo en el argumento $class .
+//Si desea aplicar una clase de estilo al botón debe indicarlo en el argumento $class .
 <?= Js::submit('Guardar', '¿Está Seguro?', 'boton_guardar') ?>  
 ```
 
