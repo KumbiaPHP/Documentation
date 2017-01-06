@@ -93,6 +93,7 @@ flexibilidad al momento de crear rutas (paths) en el framework.
 
 Constante que contiene la ruta absoluta al directorio donde se encuentra la
 aplicación (app), por ejemplo:
+
 ```php
 echo APP_PATH; 
 //la salida es: /var/www/kumbiaphp/default/app/ 
@@ -103,8 +104,10 @@ encuentre bajo el árbol de directorio de la aplicación, por ejemplo si quiere
 incluir un archivo que esta en el directorio app/libs/test.php  la forma de
 hacerlo seria.
 
+```php
 include_once APP_PATH.'libs/test.php' ;
-  
+```
+
 #### CORE_PATH
 
 Constante que contiene la ruta absoluta al directorio donde se encuentra el
@@ -144,7 +147,7 @@ Las acciones son la parte fundamental en la aplicación, puesto que contienen
 el flujo en que la aplicación actuará ante ciertas peticiones. Las acciones
 utilizan el modelo y definen variables para la vista. Cuando se realiza una
 petición web en una aplicación KumbiaPHP, la URL define una acción y los
-parámetros de la petición. Ver sección 2.1.3.4
+parámetros de la petición. Ver sección [KumbiaPHP y sus URLs](first-app.md#kumbiaphp-y-sus-urls)
 
 Las acciones son métodos de una clase controladora llamada ClassController que
 hereda de la clase AppController y pueden o no ser agrupadas en módulos.
@@ -196,8 +199,7 @@ Es importante notar la relación que guardan los parámetros enviados por URL
 con la acción. En este sentido KumbiaPHP tiene una característica, que hace
 seguro el proceso de ejecutar las acciones y es que se limita el envío de
 parámetros tal como se define en la método (acción). Lo que indica que todos
-los parámetros enviados por URL son argumentos que recibe la acción. ver
-sección 2.1.3.4
+los parámetros enviados por URL son argumentos que recibe la acción. Ver sección [KumbiaPHP y sus URLs](first-app.md#kumbiaphp-y-sus-urls)
 
 En el ejemplo anterior se definió en la acción *ver($id)* un sólo parámetro,
 esto quiere decir que si no se envía ese parámetro o se intentan enviar más
@@ -213,7 +215,7 @@ onal, en la figura 3.1 vera la excepción generada por KumbiaPHP.
 
 ![](../images/image13.png)
 
-Figura 3.1: Excepción de Parámetros erróneos.
+Figura 3.1: Excepción de número de parámetros erróneos.
 
 Siguiendo en el mismo ejemplo imaginemos que requerimos que la ejecución de la
 acción *hola()* obvie la cantidad de parámetros enviados por URL, para esto
@@ -310,14 +312,12 @@ darle el comportamiento deseado.
 #### initialize()
 
 KumbiaPHP llama al método *initialize()*  antes de ejecutar el controlador y se
-encuentra definido para ser usado en la clase AppController (ver sección
-3.3.3).
+encuentra definido para ser usado en la clase AppController. [Ver sección AppController](controller.md#clase-appcontroller).
 
 ####  finalize()
 
 KumbiaPHP llama al método *finalize()* después de ejecutar el controlador y se
-encuentra definido para ser usado en la clase AppController (ver sección
-3.3.3).
+encuentra definido para ser usado en la clase AppController. [Ver sección AppController](controller.md#clase-appcontroller).
 
 ###  Filtros de Acciones
 
