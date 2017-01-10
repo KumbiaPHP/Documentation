@@ -15,21 +15,21 @@ siguientes: find(), find_first(), save(), update(), etc.
 
 Ejemplo con KumbiaPHP 0.9
 
-```
+```php
 <?php
 //KumbiaPHP 0.9
 $cliente = Load::model('cliente'); 
-$cliente->nit = "808111827-2" ; 
+$cliente->nit = "808111827-2"; 
 $cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
 $cliente->save(); 
 ```
 
 Ejemplo con KumbiaPHP 1.0
-```
+```php
 <?php
 //KumbiaPHP 1.0
 $cliente = new Cliente(); 
-$cliente->nit = "808111827-2" ; 
+$cliente->nit = "808111827-2"; 
 $cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
 $cliente->save(); 
 ``` 
