@@ -19,7 +19,7 @@
 ## Otros componentes
 
 - [ActiveRecord](active-record.md)
-- [Clases padre](parent-class.md#7-clases-padre)
+- [Clases padre](parent-class.md#clases-padre)
 - [Consola](console.md#la-consola)
 
 ## Apéndices
