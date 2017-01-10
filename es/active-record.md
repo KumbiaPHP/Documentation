@@ -502,6 +502,16 @@ $max = (new Producto)->maximum("precio");
 $max = (new Producto)->maximum("fecha_compra", "conditions: estado = 'A'");
 ```
 
+#### minimun()
+
+Realiza el cálculo del valor mínimo sobre los valores del atributo de alguna
+entidad, emula la función de agrupamiento min en el lenguaje SQL.
+
+```php
+$min = (new Producto)->minimun("precio");
+$min = (new Producto)->minimun("fecha_compra", "conditions: estado = 'A'");
+```
+
 ### Creación, actualización y borrado de registros
 
 #### create()
