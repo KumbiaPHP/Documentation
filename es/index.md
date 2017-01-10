@@ -169,7 +169,7 @@
         - [begin()](active-record.md#begin)
         - [rollback()](active-record.md#rollback)
       - [Otros métodos](active-record.md#otros-métodos)      
-        - [sql](active_record.md#sql-string-sql)
+        - [sql](active-record.md#sql-string-sql)
       - [Callbacks](active_record.md#callbacks)
         - [Introducción](active_record.md#introducción)
         - [before_validation](active_record.md#before_validation)
