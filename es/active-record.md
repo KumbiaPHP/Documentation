@@ -1145,16 +1145,16 @@ En la vista *lista.phtml*
 
 ```php
 <table>
-<tr>
-<th>id</th>
-<th>nombre</th>
-</tr>
-<?php foreach($page->items as $p): ?>
-<tr>
-<td><?php echo $p->id ?></td>
-<td><?php echo h($p->nombre) ?></td>
-</tr>
-<?php endforeach; ?>
+    <tr>
+        <th>id</th>
+        <th>nombre</th>
+    </tr>
+    <?php foreach($page->items as $p): ?>
+    <tr>
+        <td><?php echo $p->id ?></td>
+        <td><?php echo h($p->nombre) ?></td>
+    </tr>
+    <?php endforeach; ?>
 </table>
 <br>
 <?php if($page->prev) echo link_to('usuario/lista/prev', 'Anterior') ?>
