@@ -18,14 +18,14 @@
 
 ## Otros componentes
 
+- [ActiveRecord](active-record.md)
 - [Clases padre](parent-class.md#7-clases-padre)
 - [Consola](console.md#la-consola)
 
 ## Apéndices
 
-
 - [Apéndices](appendix.md#apendices)
 
 
-[Lista de temas](index.md)
+[Lista detallada de temas](index.md)
 
