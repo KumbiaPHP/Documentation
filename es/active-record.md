@@ -15,21 +15,21 @@ siguientes: find(), find_first(), save(), update(), etc.
 
 Ejemplo con KumbiaPHP 0.9
 
-```
+```php
 <?php
 //KumbiaPHP 0.9
 $cliente = Load::model('cliente'); 
-$cliente->nit = "808111827-2" ; 
+$cliente->nit = "808111827-2"; 
 $cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
 $cliente->save(); 
 ```
 
 Ejemplo con KumbiaPHP 1.0
-```
+```php
 <?php
 //KumbiaPHP 1.0
 $cliente = new Cliente(); 
-$cliente->nit = "808111827-2" ; 
+$cliente->nit = "808111827-2"; 
 $cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
 $cliente->save(); 
 ``` 
@@ -500,6 +500,16 @@ entidad, emula la función de agrupamiento max en el lenguaje SQL.
 ```php
 $max = (new Producto)->maximum("precio");
 $max = (new Producto)->maximum("fecha_compra", "conditions: estado = 'A'");
+```
+
+#### minimum()
+
+Realiza el cálculo del valor mínimo sobre los valores del atributo de alguna
+entidad, emula la función de agrupamiento min en el lenguaje SQL.
+
+```php
+$min = (new Producto)->minimum("precio");
+$min = (new Producto)->minimum("fecha_compra", "conditions: estado = 'A'");
 ```
 
 ### Creación, actualización y borrado de registros
@@ -1145,16 +1155,16 @@ En la vista *lista.phtml*
 
 ```php
 <table>
-<tr>
-<th>id</th>
-<th>nombre</th>
-</tr>
-<?php foreach($page->items as $p): ?>
-<tr>
-<td><?php echo $p->id ?></td>
-<td><?php echo h($p->nombre) ?></td>
-</tr>
-<?php endforeach; ?>
+    <tr>
+        <th>id</th>
+        <th>nombre</th>
+    </tr>
+    <?php foreach($page->items as $p): ?>
+    <tr>
+        <td><?php echo $p->id ?></td>
+        <td><?php echo h($p->nombre) ?></td>
+    </tr>
+    <?php endforeach; ?>
 </table>
 <br>
 <?php if($page->prev) echo link_to('usuario/lista/prev', 'Anterior') ?>
