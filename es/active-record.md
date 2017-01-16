@@ -1088,70 +1088,89 @@ $page = $this->Usuario->paginate('per_page: 5', 'page: 1');
 
 Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, aprovecharemos la persistencia de datos del controlador para hacer una paginación inmune a inyección sql.
 
-En el controlador *usuario_controller.php*:
+El modelo *usuario.php*:
 
 ```php
-class UsuarioController extends ApplicationController {
-  private $_per_page = 7;
-  /**
-  * Formulario de busqueda
-  **/
-  public function buscar() {
-    $this->nullify('page', 'conditions');
-  }
-  /**
-  * Paginador
-  **/
-  public function lista($page='') {
-    /**
-    * Cuando se efectua la busqueda por primera vez
-    **/
-    if($this->has_post('usuario')) {
-      $usuario = $this->post('usuario', 'trim', 'addslashes');
-      if($usuario['nombre']) {
-        $this->conditions = “ nombre LIKE '%{$usuario['nombre']}%' ”;
-      }
-      /**
-      * Paginador con condiciones o sin condiciones
-      **/
-      if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this>_per_page”, 'page: 1');
-      } else {
-        $this->page = $this->Usuario->paginate(“per_page: $this>_per_page”, 'page: 1');
-      }
-    } elseif($page='next' && isset($this->page) && $this->page->next) {
-       /**
-       * Paginador de pagina siguiente
-       **/
-      if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this>_per_page”, “page: {$this->page->next}”);
-      } else {
-         $this->page = $this->Usuario->paginate(“per_page: $this->_per_page”, “page: {$this->page->next}”);
-      }
-    } elseif($page='prev' && isset($this->page) && $this->page->prev) {
-      /**
-      * Paginador de pagina anterior
-      **/
-      if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this->_per_page”, “page: {$this->page->prev}”);
-    } else {
-       $this->page = $this->Usuario->paginate(“per_page: $this->_per_page”, “page: {$this->page->prev}”);
-    }
-  }
- }
+<?php
+class Usuario extends ActiveRecord {
+    
 }
 ```
 
-En la vista *buscar.pthml*
+
+En el controlador *usuario_controller.php*:
 
 ```php
-<?php echo form_tag('usuario/lista') ?>
-<?php echo text_field_tag('usuario.nombre') ?>
-<?php echo submit_tag('Consultar') ?>
-<?php echo end_form_tag() ?>
+<?php
+
+class UsuarioController extends AppController{
+    
+    public $page_title = 'Daily Backend Manager';
+
+    private $_per_page = 10;
+
+    /**
+     * Formulario de busqueda
+     * */
+    public function index() {
+        Input::delete();
+    }
+
+    /**
+     * Paginador
+     * */
+    public function listar($page = '') {
+        
+        $usuario = new Usuario();
+        /**
+         * Cuando se efectua la búsqueda por primera vez
+         * */
+        if (Input::hasPost('usuario')) {
+            $data = Input::post('usuario');
+            if ($data['nombre']) {
+                $this->conditions = " nombre LIKE '%{$data['nombre']}%' ";
+            }
+            /**
+             * Paginador con condiciones o sin condiciones
+             * */
+            if (isset($this->conditions) && $this->conditions) {
+                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", 'page: 1');
+            } else {
+                $this->page = $usuario->paginate("per_page: $this>_per_page", 'page: 1');
+            }
+        } elseif ($page = 'next' && isset($this->page) && $this->page->next) {
+            /**
+             * Paginador de pagina siguiente
+             * */
+            if (isset($this->conditions) && $this->conditions) {
+                $this->page = $usuario->paginate($this->conditions, "per_page: $this>_per_page", "page: {$this->page->next}");
+            } else {
+                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->next}");
+            }
+        } elseif ($page = 'prev' && isset($this->page) && $this->page->prev) {
+            /**
+             * Paginador de pagina anterior
+             * */
+            if (isset($this->conditions) && $this->conditions) {
+                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", "page: {$this->page->prev}");
+            } else {
+                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->prev}");
+            }
+        }
+    }
+}
 ```
 
-En la vista *lista.phtml*
+En la vista *index.pthml*
+
+```php
+<?= Form::open('usuario/listar') ?>
+<?= Form::text('usuario.nombre') ?>
+<?= Form::submit('Consultar') ?>
+<?= Form::close() ?>
+```
+
+En la vista *listar.phtml*
 
 ```php
 <table>
@@ -1159,14 +1178,14 @@ En la vista *lista.phtml*
         <th>id</th>
         <th>nombre</th>
     </tr>
-    <?php foreach($page->items as $p): ?>
-    <tr>
-        <td><?php echo $p->id ?></td>
-        <td><?php echo h($p->nombre) ?></td>
-    </tr>
+    <?php foreach ($page->items as $p): ?>
+        <tr>
+            <td><?= $p->id ?></td>
+            <td><?=h($p->nombre) ?></td>
+        </tr>
     <?php endforeach; ?>
 </table>
 <br>
-<?php if($page->prev) echo link_to('usuario/lista/prev', 'Anterior') ?>
-<?php if($page->next) echo ' | ' . link_to('usuario/lista/next', 'Siguiente') ?>
+<?php if ($page->prev) echo Html::linkAction('listar/prev', 'Anterior') ?>
+<?php if ($page->next) echo ' | ' . Html::linkAction('listar/next', 'Siguiente') ?>
 ```
