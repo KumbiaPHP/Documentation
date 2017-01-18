@@ -1106,8 +1106,8 @@ class UsuarioController extends ApplicationController {
     /**
     * Cuando se efectua la busqueda por primera vez
     **/
-    if($this->has_post('usuario')) {
-      $usuario = $this->post('usuario', 'trim', 'addslashes');
+    if(Input::hasPost('usuario')) {
+      $usuario = Input::post('usuario');
       if($usuario['nombre']) {
         $this->conditions = “ nombre LIKE '%{$usuario['nombre']}%' ”;
       }
@@ -1145,10 +1145,11 @@ class UsuarioController extends ApplicationController {
 En la vista *buscar.pthml*
 
 ```php
-<?php echo form_tag('usuario/lista') ?>
-<?php echo text_field_tag('usuario.nombre') ?>
-<?php echo submit_tag('Consultar') ?>
-<?php echo end_form_tag() ?>
+<?= Form::open('usuario/lista') ?>
+<?= Form::text('usuario.nombre') ?>
+<?= Form::submit('Consultar') ?>
+<?= Form::close() ?>
+
 ```
 
 En la vista *lista.phtml*
@@ -1161,12 +1162,12 @@ En la vista *lista.phtml*
     </tr>
     <?php foreach($page->items as $p): ?>
     <tr>
-        <td><?php echo $p->id ?></td>
-        <td><?php echo h($p->nombre) ?></td>
+        <td><?= $p->id ?></td>
+        <td><?= h($p->nombre) ?></td>
     </tr>
     <?php endforeach; ?>
 </table>
 <br>
-<?php if($page->prev) echo link_to('usuario/lista/prev', 'Anterior') ?>
-<?php if($page->next) echo ' | ' . link_to('usuario/lista/next', 'Siguiente') ?>
+<?php if($page->prev) echo Html::linkAction('lista/prev', 'Anterior') ?>
+<?php if($page->next) echo ' | ' . Html::linkAction('lista/next', 'Siguiente') ?>
 ```
