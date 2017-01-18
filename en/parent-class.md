@@ -2,78 +2,32 @@
 
 ## AppController
 
-## ActiveRecord
+## View
 
-It is the main class for the Administration and operation of models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by the functionality of its analog avaiable in Ruby on Rails. ActiveRecord provides object-relational layer that strictly follows the standard ORM: tables in classes, objects records, and fields in attributes. Facilitates the understanding of the code associated with the database and encapsulates the logic specified making it easier to use for the programmer.
+...
 
-<?php  
-$cliente = Load:: model ( 'cliente' );  
-$cliente -> nit = "808111827-2" ; $cliente -> razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ" $cliente -> save (); \--- ### Ventajas del ActiveRecord * Se trabajan las entidades del Modelo mas Naturalmente como objetos. * Las acciones como Insertar, Consultar, Actualizar, Borrar, etc. de una entidad del Modelo están encapsuladas así que se reduce el código y se hace mas fácil de mantener. * Código más fácil de Entender y Mantener * Reducción del uso del SQL en un 80%, con lo que se logra un alto porcentaje de independencia del motor de base de datos. * Menos "detalles", más práctico y util * ActiveRecord protege en un gran porcentaje de ataques de SQL inyection que puedan llegar a sufrir tus aplicaciones escapando caracteres que puedan facilitar estos ataques. ### Crear un Modelo en Kumbia PHP Framework Lo primero es crear un archivo en el directorio models con el mismo nombre de la relación en la base de datos. Por ejemplo: models/clientes.php Luego creamos una clase con el nombre de la tabla extendiendo alguna de las clases para modelos. Ejemplo: 
+# Libs de KumbiaPHP
 
-<?php  
-class  Cliente extends  ActiveRecord {  
-}  
-  
----  
-  
-Si lo que se desea es crear un modelo de una clase que tiene nombre compuesto
-por ejemplo la clase Tipo de Cliente , por convención en nuestra base de datos
-esta tabla debe llamarse: tipo_de_cliente  y el archivo:
-models/tipo_de_cliente.php y el código de este modelo es el siguiente:
+Kumbiaphp lleva clases listas para usar, pero recordad que podéis crearos vuestras propias clases para reutilizarlas en vuestros proyectos.También podéis usar clases externas a KumbiaPHP, como se explica en el próximo capítulo.
 
-<?php  
-class  TipoDeCliente extends  ActiveRecord {  
-}  
-  
----  
-  
-### Columnas y Atributos
+## Cache
 
-Objetos ActiveRecord  corresponden a registros en una tabla de una base de
-datos. Los objetos poseen atributos que corresponden a los campos en estas
-tablas. La clase ActiveRecord  automáticamente obtiene la definición de los
-campos de las tablas y los convierte en atributos de la clase asociada. A esto
-es lo que nos referíamos con mapeo objeto relacional.
+Un cache es un conjunto de datos duplicados de otros originales, con la propiedad de que los datos originales son costosos de acceder, normalmente en tiempo, respecto a la copia en la cache.
 
-Miremos la tabla Álbum:
+El cache de datos esta implementado en KumbiaPHP utilizando los patrones de diseño factory y singleton. Para hacer uso de la cache es necesario tener permisos de escritura en el directorio "cache" (solamente en el caso de los manejadores "sqlite" y "file").
 
-CREATE TABLE album (
+Cada cache es controlada por un manejador de cache. El sistema de cache de KumbiaPHP actualmente posee los siguientes manejadores:
 
-id INTEGER NOT NULL AUTO_INCREMENT,  
-nombre VARCHAR(100) NOT NULL,  
-fecha DATE NOT NULL,  
-valor DECIMAL(12,2) NOT NULL,  
-artista_id INTEGER NOT NULL,  
-estado CHAR(1),  
-PRIMARY KEY(id)
+* APC : utiliza Alternative PHP Cache.
+* file : cache en archivos, estos se almacenan en el directorio cache y compatible con todos los sistemas operativos.
+* nixfile : cache en archivos, estos se almacenan en el directorio cache y compatible solo con sistemas operativos \*nix (linux, freebsd, entre otros). Esta cache es mas rapida que la cache «file».
+* sqlite : cache utilizando base de datos SqLite y esta se ubica en el directorio cache.
 
-)  
-  
----  
-  
-Podemos crear un ActiveRecord  que mapee esta tabla:
+Para obtener un manejador de cache se debe utilizar el método «driver» que proporciona la clase Cache.
 
-<?php  
-class  Album extends  ActiveRecord {  
-}  
-  
----  
-  
-Una instancia de esta clase sera un objeto con los atributos de la tabla
-album:
+### driver($driver=null)
 
-<?php  
-  
-$album = Load:: model ( 'album' );  
-$album-> id = 2; $album-> nombre = "Going Under"; $album-> save (); \--- O con... 
-
-<?php  
-
-  
-Load:: models ( 'album' );  
-  
-$album = new  Album();  
-$album-> id = 2; $album-> nombre = "Going Under"; $album-> save (); \--- ### Llaves Primarias y el uso de IDs En los ejemplos mostrados de KumbiaPHP siempre se trabaja una columna llamada id como llave primaria de nuestras tablas. Tal vez, esto no siempre es practico a su parecer, de pronto al crear la tabla clientes la columna de numero de identificación seria una excelente elección, pero en caso de cambiar este valor por otro tendría problemas con el dato que este replicado en otras relaciones (ejemplo facturas), además de esto tendría que validar otras cosas relacionadas con su naturaleza. KumbiaPHP propone el uso de ids como llaves primarias con esto se automatiza muchas tareas de consulta y proporciona una forma de referirse unívocamente a un registro en especial sin depender de la naturaleza de un atributo especifico. Usuarios de Rails se sentirán familiarizados con esta característica. Esta particularidad también permite a KumbiaPHP entender el modelo entidad relación leyendo los nombres de los atributos de las tablas. Por ejemplo en la tabla album del ejemplo anterior la convención nos dice que id es la llave primaria de esta tabla pero además nos dice que hay una llave foránea a la tabla artista en su campo id. ### Convenciones en ActiveRecord ActiveRecord posee una serie de convenciones que le sirven para asumir distintas cualidades y relacionar un modelo de datos. Las convenciones son las siguientes: id Si ActiveRecord encuentra un campo llamado id , ActiveRecord asumira que se trata de la llave primaria de la entidad y que es auto-numérica. tabla_id Los campos terminados en _id indican relaciones foráneas a otras tablas, de esta forma se puede definir fácilmente las relaciones entre las entidades del modelo: Un campo llamado clientes_id en una tabla indica que existe otra tabla llamada clientes y esta contiene un campo id que es foránea a este. campo_at Los campos terminados en _at indican que son fechas y posee la funcionalidad extra que obtienen el valor de fecha actual en una inserción created_at es un campo fecha campo_in Los campos terminados en _in indican que son fechas y posee la funcionalidad extra que obtienen el valor de fecha actual en una actualización modified_in es un campo fecha NOTA: Los campos _at y _in deben ser de tipo fecha (date) en la RDBMS que se este utilizando. ## View ... # Libs de KumbiaPHP Kumbiaphp lleva clases listas para usar, pero recordad que podéis crearos vuestras propias clases para reutilizarlas en vuestros proyectos.También podéis usar clases externas a KumbiaPHP, como se explica en el próximo capítulo. ## Cache Un cache es un conjunto de datos duplicados de otros originales, con la propiedad de que los datos originales son costosos de acceder, normalmente en tiempo, respecto a la copia en la cache. El cache de datos esta implementado en KumbiaPHP utilizando los patrones de diseño factory y singleton. Para hacer uso de la cache es necesario tener permisos de escritura en el directorio "cache" (solamente en el caso de los manejadores "sqlite" y "file"). Cada cache es controlada por un manejador de cache. El sistema de cache de KumbiaPHP actualmente posee los siguientes manejadores: * APC : utiliza Alternative PHP Cache. * file : cache en archivos, estos se almacenan en el directorio cache y compatible con todos los sistemas operativos. * nixfile : cache en archivos, estos se almacenan en el directorio cache y compatible solo con sistemas operativos *nix (linux, freebsd, entre otros). Esta cache es mas rapida que la cache «file». * sqlite : cache utilizando base de datos SqLite y esta se ubica en el directorio cache. Para obtener un manejador de cache se debe utilizar el método «driver» que proporciona la clase Cache. ### driver($driver=null) Este método permite obtener un manejador de cache especifico (APC, file, nixfile, sqlite, memsqlite). Si no se indica, se obtiene el manejador de cache por defecto indicado en el config.ini. 
+Este método permite obtener un manejador de cache especifico (APC, file, nixfile, sqlite, memsqlite). Si no se indica, se obtiene el manejador de cache por defecto indicado en el config.ini.
 
 <?php  
 // cache por defecto  
@@ -96,7 +50,7 @@ $data = Cache::driver()->get('saludo'); if(!$data) { Cache::driver()->save('Hola
 
 ### end ($save=true)
 
-End caching output buffer indicating if it should be kept or not in the cache.
+Termina cacheo de buffer de salida indicando si se debe guardar o no en la cache.
 
 * * *
 
@@ -108,17 +62,17 @@ La clase Logger para el manejo de \[Log\](http://www.google.com/url?q=http%3A%2F
 
 * * *
 
-The previous statement will output the following:
+La salida de la instrucción anterior sera lo siguiente:
 
-\[Thu, 05 Feb 09 15:19:39-0500\]\[ERROR\] Error message
+\[Thu, 05 Feb 09 15:19:39 -0500\]\[ERROR\] Mensaje de Error
 
-By default the log files have the name logDDMMYYY.txt this name can be changed if we so wish it through an additional parameter to the method.
+Por defecto los archivos log tienen el siguiente nombre logDDMMYYY.txt este nombre puede ser cambiado si así lo deseamos a través de un parámetro adicional al método.
 
 <?php  Logger:: error ( 'Mensaje de Error' , 'mi_log' ) ?>
 
 * * *
 
-You can see the second parameter now the file will be named mi_log.txt
+Se puede apreciar el segundo parámetro ahora el archivo tendrá como nombre mi_log.txt
 
 ### Logger::warning ($msg);
 

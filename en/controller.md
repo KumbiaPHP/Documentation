@@ -72,21 +72,24 @@ the output is: /var/www/kumbiaphp/default/app /
 
 With this constant it is possible to use it to include files that is under the directory tree of the application, for example if you want to include a file that is in the app / directory libs / test.php the way to do it.
 
-include_once APP_PATH.'libs/test.php';
+```php
+include_once APP_PATH.'libs/test.php' ;
+```
 
 #### CORE_PATH
 
-Constant that contains the absolute path to the directory where you will find the core of KumbiaPHP. for example:
+Constante que contiene la ruta absoluta al directorio donde se encuentra el core de KumbiaPHP. por ejemplo:
 
 ```php
-echo CORE_PATH; the output is: /var/www/kumbiaphp/core /
+echo CORE_PATH;
+//la salida es: /var/www/kumbiaphp/core/
 ```
 
-To include files under this directory tree, it is the same procedure as that described for the constant APP_PATH.
+Para incluir archivos que se encuentre bajo este árbol de directorios, es el mismo procedimiento que se explicó para la constante APP_PATH.
 
 #### PUBLIC_PATH
 
-Constant that contains the URL for the browser (browser) and points to the directory public/ to link images, style sheets, scripts and all that is path to the browser.
+Constante que contiene la URL para el navegador (browser) y apunta al directorio *public/* para enlazar imágenes, CSS, JavaScript y todo lo que sea ruta para el navegador.
 
 ```php
 //Genera un link que ira al 
@@ -104,13 +107,13 @@ css/style.css"/>
 
 ## The actions
 
-Actions are the main part in the application, since containing flow in which the application will act to certain requests. The actions use the model and defined variables to the view. When you make a web request on a KumbiaPHP application, the URL defines an action and the parameters of the request. See section 2.1.3.4
+Las acciones son la parte fundamental en la aplicación, puesto que contienen el flujo en que la aplicación actuará ante ciertas peticiones. Las acciones utilizan el modelo y definen variables para la vista. Cuando se realiza una petición web en una aplicación KumbiaPHP, la URL define una acción y los parámetros de la petición. Ver sección [KumbiaPHP y sus URLs](first-app.md#kumbiaphp-y-sus-urls)
 
-Actions are methods of a controller class called ClassController that inherits from the AppController class and may or may not be grouped into modules.
+Las acciones son métodos de una clase controladora llamada ClassController que hereda de la clase AppController y pueden o no ser agrupadas en módulos.
 
 ### Actions and views
 
-Whenever an action is executed, KumbiaPHP then seeks a view with the same name of the action. This behavior is defined by default. Normally requests must respond to the customer who has requested it, then if we have an action called *saludo()* there should be a view associated with this action called *saludo.phtml*. Habrá un capítulo más extenso dedicado a la explicación de las vistas en KumbiaPHP.
+Cada vez que se ejecuta una acción, KumbiaPHP busca entonces una vista (view) con el mismo nombre de la acción. Este comportamiento se ha definido por defecto. Normalmente las peticiones deben dar una respuesta al cliente que la ha solicitado, entonces si tenemos una acción llamada *saludo()* debe existir una vista asociada a esta acción llamada *saludo.phtml*. Habrá un capítulo más extenso dedicado a la explicación de las vistas en KumbiaPHP.
 
 ### Get values from an action
 
@@ -120,9 +123,9 @@ Tomemos la URL:
 
 http://www.example.com/noticias/ver/12/
 
-- El Controlador: noticias
-- La accion: ver
-- Parametros: 12
+- Controller: News
+- Action: show
+- Parameters: 12
 
 ```php
 <?php
@@ -143,7 +146,7 @@ class NoticiasController extends AppController{
 }
 ```
 
-Es importante notar la relación que guardan los parámetros enviados por URL con la acción. En este sentido KumbiaPHP tiene una característica, que hace seguro el proceso de ejecutar las acciones y es que se limita el envío de parámetros tal como se define en la método (acción). Lo que indica que todos los parámetros enviados por URL son argumentos que recibe la acción. ver sección 2.1.3.4
+Es importante notar la relación que guardan los parámetros enviados por URL con la acción. En este sentido KumbiaPHP tiene una característica, que hace seguro el proceso de ejecutar las acciones y es que se limita el envío de parámetros tal como se define en la método (acción). Lo que indica que todos los parámetros enviados por URL son argumentos que recibe la acción. Ver sección [KumbiaPHP y sus URLs](first-app.md#kumbiaphp-y-sus-urls)
 
 En el ejemplo anterior se definió en la acción *ver($id)* un sólo parámetro, esto quiere decir que si no se envía ese parámetro o se intentan enviar más parámetros adicionales KumbiaPHP lanza una excepción (en producción muestra un error 404). Este comportamiento es por defecto en el framework y se puede cambiar para determinados escenarios según el propósito de nuestra aplicación para la ejecución de una acción.
 
@@ -151,7 +154,7 @@ Tomando el ejemplo «Hola Mundo» ponga en práctica lo antes explicado y lo har
 
 ![](../images/image13.png)
 
-Figura 3.1: Excepción de Parámetros erróneos.
+Figura 3.1: Excepción de número de parámetros erróneos.
 
 Siguiendo en el mismo ejemplo imaginemos que requerimos que la ejecución de la acción *hola()* obvie la cantidad de parámetros enviados por URL, para esto solo tenemos que indicarle a KumbiaPHP mediante el atributo $limit_params que descarte el número de parámetros que se pasan por URL.
 
@@ -180,7 +183,7 @@ Figura 3.2: Descartando la cantidad de parámetros de la acción.
 
 ### Conventions
 
-KumbiaPHP controllers must carry the following conventions and features:
+Los controladores en KumbiaPHP deben llevar las siguientes convenciones y características:
 
 El archivo debe ser creado solo en el directorio *app/controllers/*. El archivo debe tener el nombre del controlador y la terminación *_controller.php*, por ejemplo *saludo_controller.php*.
 
@@ -188,14 +191,14 @@ El archivo debe contener la clase controladora con el mismo nombre del archivo e
 
 ### Controller creation
 
-Now we practice as seen above and create a controller (controller) called Saludo.
+Ahora ponemos en práctica lo visto anteriormente y crearemos un controlador (controller) llamado saludo.
 
 ```php
 <?php
-/**
-* Controller Saludo
-*/
-class SaludoController extends AppController{
+/** 
+ * Controller Saludo
+ */ 
+class SaludoController extends AppController {
 }
 ```
 
@@ -211,30 +214,30 @@ La clase AppController esta definida en *app/libs/app_controller.php* es una cla
 
 Los controladores en KumbiaPHP poseen unos métodos útiles que permiten realizar comprobaciones antes y después de ejecutar un controlador y una acción, los filtros pueden ser entendidos como un mecanismo de seguridad en los cuales se puede cambiar el procesamiento de la petición según se requiera (por ejemplo verificar si un usuarios se encuentra autenticado en el sistema).
 
-KumbiaPHP runs filters in a logical order, to handle checks at the level of the entire application or on particularities of controller.
+KumbiaPHP corre los filtros en un orden lógico, para manipular comprobaciones, a nivel de toda la aplicación o bien en particularidades de un controlador.
 
 ### Controllers filters
 
 Los filtros de controladores se ejecutan antes y después de un controlador son útiles para comprobaciones a nivel de aplicación, como por ejemplo verificar el modulo que se esta intentando acceder, sesiones de usuarios, etc. Igualmente se puede usar para proteger nuestro controlador de información inadecuada.
 
-Filters are methods which we overwrite (feature POO) to give you the desired behavior.
+Los filtros son métodos los cuales sobrescribimos (característica POO) para darle el comportamiento deseado.
 
 #### initialize()
 
-KumbiaPHP call *initialize()* method before executing the handler and is defined to be used in the AppController class (see section 3.3.3).
+KumbiaPHP llama al método *initialize()* antes de ejecutar el controlador y se encuentra definido para ser usado en la clase AppController. [Ver sección AppController](controller.md#clase-appcontroller).
 
 #### finalize()
 
-KumbiaPHP call *initialize()* method before executing the handler and is defined to be used in the AppController class (see section 3.3.3).
+KumbiaPHP llama al método *finalize()* después de ejecutar el controlador y se encuentra definido para ser usado en la clase AppController. [Ver sección AppController](controller.md#clase-appcontroller).
 
 ### Action filters
 
-Action filters are executed before and after an action are useful for checks at the controller level, as for example to verify that a request is asynchronous, changing types of response, etc. Igualmente se puede usar para proteger nuestra acción de información inadecuada que sea enviada a ellos.
+Los filtros de acciones se ejecutan antes y después de una acción son útiles para comprobaciones a nivel de controller, como por ejemplo verificar que una petición es asíncrona, cambiar tipos de respuesta, etc. Igualmente se puede usar para proteger nuestra acción de información inadecuada que sea enviada a ellos.
 
 #### before_filter()
 
-KumbiaPHP *before_filter ()* method called before executing the action the controller, and is useful to check if a request is asynchronous among others.
+KumbiaPHP llama al método *before_filter()* antes de ejecutar la acción del controlador y es útil para verificar si una petición es asíncrona entre otros.
 
 #### after_filter()
 
-KumbiaPHP *after_filter ()* method called after executing the action the controller, and is useful to change values of session among others.
+KumbiaPHP llama al método *after_filter()* después de ejecutar la acción del controlador y es útil para cambiar valores de sesión entre otros.

@@ -18,11 +18,12 @@
 
 ## Other Components
 
-- [Parent classes](parent-class.md#7-clases-padre)
-- [Console](console.md#la-consola)
+- [ActiveRecord](active-record.md)
+- [Clases padre](parent-class.md#clases-padre)
+- [Consola](console.md#la-consola)
 
 ## Appendices
 
 - [Appendices](appendix.md#apendices)
 
-[Topics List](index.md)
+[Lista detallada de temas](index.md)

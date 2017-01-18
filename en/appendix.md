@@ -6,7 +6,7 @@ KumbiaPHP provides integration with the JavaScript Framework jQuery
 
 ### KDebug
 
-KDebug es un nuevo objeto incorporado al plugins de integración KumbiaPHP/jQuery que permite una depuración del código en tiempo de desarrollo. Con solo un parámetro se puede aplicar un log que permite ver en consola ( mientras esta este disponible, sino usara alert) que permite un mejor control de la ejecución.
+KDebug es un nuevo objeto incorporado al plugins de integración KumbiaPHP/jQuery que permite una depuración del código en tiempo de desarrollo. Con solo un parámetro se puede aplicar un log que permite ver en consola (mientras esta este disponible, sino usara alert) que permite un mejor control de la ejecución.
 
 No es necesario pero si recomendable usar Firebug si se trabaja en Mozilla Firefox o algún navegador que use la consola de WebKit como Google Chrome.
 
@@ -432,94 +432,12 @@ compatible en ambos casos
 
 #### Callbacks
 
-<table>
-  <tr>
-    <th>
-      0.5
-    </th>
-    
-    <th>
-      beta1
-    </th>
-    
-    <th>
-      beta2 v0.9
-    </th>
-    
-    <th>
-      v1.0
-    </th>
-  </tr>
-  
-  <tr>
-    <td>
-      public function init()
-    </td>
-    
-    <td>
-      protected function initialize()
-    </td>
-    
-    <td>
-      protected function initialize()
-    </td>
-    
-    <td>
-      protected function initialize()
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      public function finalize()
-    </td>
-    
-    <td>
-    </td>
-    
-    <td>
-      protected function finalize()
-    </td>
-    
-    <td>
-      protected function finalize()
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      public function before_filter()
-    </td>
-    
-    <td>
-    </td>
-    
-    <td>
-      protected function before_filter()
-    </td>
-    
-    <td>
-      protected function before_filter()
-    </td>
-  </tr>
-  
-  <tr>
-    <td>
-      public function after_filter()
-    </td>
-    
-    <td>
-    </td>
-    
-    <td>
-      protected function after_filter()
-    </td>
-    
-    <td>
-      protected function after_filter()
-    </td>
-  </tr>
-</table>
+| 0.5                             | beta1                           | beta2 v0.9                         | v1.0                               |
+| ------------------------------- | ------------------------------- | ---------------------------------- | ---------------------------------- |
+| public function init()          | protected function initialize() | protected function initialize()    | protected function initialize()    |
+| public function finalize()      |                                 | protected function finalize()      | protected function finalize()      |
+| public function before_filter() |                                 | protected function before_filter() | protected function before_filter() |
+| public function after_filter()  |                                 | protected function after_filter()  | protected function after_filter()  |
 
 boot.ini se elimina en beta2
 
