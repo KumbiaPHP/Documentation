@@ -245,7 +245,9 @@ show: número de páginas que se mostraran en el paginador, por defecto 10.
 
 url: url para la accion que efectúa la pacciona, por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-`View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));`
+```php 
+View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+```
 
 * * *
 
@@ -261,7 +263,9 @@ show: number of pages showing the paginated, default 10.
 
 url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-`View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));`
+```php 
+View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+```
 
 * * *
 
@@ -279,7 +283,9 @@ page: objeto obtenido al invocar al paginador.
 
 url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-`View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));`
+```php 
+View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));
+```
 
 * * *
 
@@ -295,7 +301,9 @@ show: número de páginas que muestra el paginador, por defecto 10.
 
 url: url para la acción que efectúa la paginación, por defecto "module/controller/page/" y se envia por parámetro el número de página.
 
-`View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));`
+```php 
+View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+```
 
 * * *
 
@@ -313,7 +321,9 @@ page: objeto obtenido al invocar al paginador.
 
 url: url para la acción que efectua la paginación , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-`View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));`
+```php 
+View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));
+```
 
 * * *
 
