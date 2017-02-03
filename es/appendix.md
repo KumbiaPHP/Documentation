@@ -193,8 +193,7 @@ Agregamos las vistas...
   <?php endforeach ?>
   </ul>
   
-   // ejemplo manual de paginado, existen partials listos en formato digg,
-clasic,...
+   // ejemplo manual de paginado, existen partials listos en formato digg, clasic,...
   <?php if($listMenus->prev) echo Html::linkAction("index/$listMenus->prev/", '<< Anterior |') ?> 
   <?php if($listMenus->next) echo Html::linkAction("index/$listMenus->next/", 'Proximo >>') ?> 
 </div>
