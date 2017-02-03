@@ -1,7 +1,7 @@
 #Manual de KumbiaPHP Framework Versión 1.0 Spirit
 
-- [Borrador para la 1.0](es/index.md)
-- Draft for 1.0 version (We need colaborations :( )
+- [Borrador para la 1.0](es/)
+- [Draft for 1.0 version](en/) (We need colaborations :( )
 
 ## Enlace para la traducción al inglés
 https://crowdin.com/project/kumbiaphp-doc
