@@ -68,6 +68,7 @@ class Menus extends ActiveRecord
         return $this->paginate("page: $page", "per_page: $ppage", 'order: id desc');
     }
 }
+
 ```  
   
 ### Controller
