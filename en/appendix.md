@@ -1,8 +1,8 @@
-# Appendices
+# Apéndices
 
-## Integration of jQuery and KumbiaPHP
+## Integración de jQuery y KumbiaPHP
 
-KumbiaPHP provides integration with the JavaScript Framework jQuery
+KumbiaPHP provee de una integración con el Framework de DOM en JavaScript, jQuery
 
 ### KDebug
 
@@ -12,25 +12,31 @@ No es necesario pero si recomendable usar Firebug si se trabaja en Mozilla Firef
 
 ## CRUD
 
-### Intro
+### Introducción
 
-This example allows easy understanding of the implementation of a CRUD (Create, Read, Update and Delete) without the need of a Scaffold, doing a correct handling of the MVC in KumbiaPHP.
+Este ejemplo, permite de manera sencilla conocer y entender la implementación de un CRUD (Create, Read, Update y Delete en ingles) sin la necesidad de un Scaffold y un manejo correcto del MVC en KumbiaPHP.
 
-The CRUD of the beta1 still works like on the beta2, but we don't recommend it's use. En la versión 1.0 se puede usar de las 2 maneras. The 1.2 version will not include deprecated content. If you need to use it anyway, stick to version 1.0 or update your code.
+El CRUD de la beta1 sigue funcionando igual en la beta2, pero queda desaconsejado. En la versión 1.0 se puede usar de las 2 maneras. Y la 1.2 que saldrá junto a la 1.0 sólo usa el nuevo y se elimina lo desaconsejado.
 
-### Configuring database.ini
+### Configurando database.ini
 
-Configure the databases.ini with data and the db engine to be used.
+Configurar el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) , con los datos y motor de Base de Datos a utilizar.
 
-### Model
+### Modelo
 
 Crear el Modelo el cual esta viene dado por la definición de una tabla en la BD, para efecto del ejemplo creamos la siguiente tabla.
 
 ```sql
-CREATE TABLE menus (id int not null auto_increment, name varchar (100) unique, title varchar (100) not null, primary key (id))  
+CREATE TABLE menus
+(
+id           int            unique not null auto_increment,
+nombre       varchar(100),
+titulo       varchar(100)   not null,
+primary key(id)
+)  
 ```
 
-Now we define the model that controls DB interaction.
+Vamos ahora a definir el modelo el cual nos permite interactuar con la BD.
 
 [app]/models/menus.php:
 
@@ -55,7 +61,7 @@ class Menus extends ActiveRecord
 
 ### Controller
 
-The controller handles client requests and replies (ie, a browser). In this controller we must define all the CRUD actions/functions we need.
+El controlador es encargado de atender las peticiones del cliente (ej. browser) y a su vez de darle una respuesta. En este controller vamos a definir todas las operaciones CRUD que necesitamos.
 
 [app]/controllers/menus_controller.php:
 
@@ -65,7 +71,7 @@ The controller handles client requests and replies (ie, a browser). In this cont
 * Carga del modelo Menus...   
 */   
 // Load::models( 'menus' );// Necesario en versiones < 0.9 
-  
+
 class MenusController extends AppController
 {
     /**
@@ -77,7 +83,7 @@ class MenusController extends AppController
     {
          $this->listMenus = (new Menus)->getMenus($page);
     }
- 
+
     /**
      * Crea un Registro
      */
@@ -103,11 +109,11 @@ class MenusController extends AppController
                 Input::delete();
                 return;
             }
- 
+
             Flash::error('Falló Operación');
         }
     }
- 
+
     /**
      * Edita un Registro
      *
@@ -116,10 +122,10 @@ class MenusController extends AppController
     public function edit($id)
     {
         $menu = new Menus();
- 
+
         //se verifica si se ha enviado el formulario (submit)
         if (Input::hasPost('menus')) {
- 
+
             if ($menu->update(Input::post('menus'))) {
                  Flash::valid('Operación exitosa');
                 //enrutando por defecto al index del controller
@@ -131,9 +137,9 @@ class MenusController extends AppController
 
         //Aplicando la autocarga de objeto, para comenzar la edición
         $this->menus = $menu->find_by_id((int) $id);
- 
+
     }
- 
+
     /**
      * Eliminar un menú
      *
@@ -154,29 +160,29 @@ class MenusController extends AppController
 
 ```
 
-### Views
+### Vistas
 
-We add the views...
+Agregamos las vistas...
 
 [app]/views/menus/index.phtml
 
 ```php
 <div class="content">
-  <?php View::content() ?>
+  <?php View::content() ?> 
   <h3>Menús</h3>
   <ul>
-  <?php foreach($listMenus->items as $item) : ?>
+  <?php foreach($listMenus->items as $item) : ?> 
   <li>
-      <?= Html::linkAction("edit/$item->id/", 'Editar') ?>
-      <?= Html::linkAction("del/$item->id/", 'Borrar') ?>
+      <?= Html::linkAction("edit/$item->id/", 'Editar') ?> 
+      <?= Html::linkAction("del/$item->id/", 'Borrar') ?> 
       <strong><?= $item->nombre ?> - <?= $item->titulo ?></strong>
   </li>
   <?php endforeach ?>
   </ul>
 
    // ejemplo manual de paginado, existen partials listos en formato digg, clasic,...
-  <?php if($listMenus->prev) echo Html::linkAction("index/$listMenus->prev/", '<< Anterior |') ?>
-  <?php if($listMenus->next) echo Html::linkAction("index/$listMenus->next/", 'Proximo >>') ?>
+  <?php if($listMenus->prev) echo Html::linkAction("index/$listMenus->prev/", '<< Anterior |') ?> 
+  <?php if($listMenus->next) echo Html::linkAction("index/$listMenus->next/", 'Proximo >>') ?> 
 </div>
 ```
 
@@ -186,7 +192,7 @@ We add the views...
 <?php View::content() ?>
 <h3>Crear menú<h3>
 
-<?= Form::open(); // por defecto llama a la misma url ?>  
+<?= Form::open(); // por defecto llama a la misma url ?> 
 
       <label>Nombre
       <?= Form::text('menus.nombre') ?></label>
@@ -194,25 +200,25 @@ We add the views...
       <label>Titulo
       <?= Form::text('menus.titulo') ?></label>
 
-      <?= Form::submit('Agregar') ?>
+      <?= Form::submit('Agregar') ?> 
 
-<?= Form::close() ?>
+<?= Form::close() ?> 
 ```
 
 [app]/views/menus/edit.phtml
 
 ```php
-<?php View::content() ?>
+<?php View::content() ?> 
 <h3>Editar menú<h3>
 <?= Form::open(); // por defecto llama a la misma url ?>
   <label>Nombre <?= Form::text('menus.nombre') ?></label>
   <label>Titulo <?= Form::text('menus.titulo') ?></label>
-  <?= Form::hidden('menus.id') ?>
-  <?= Form::submit('Actualizar') ?>
+  <?= Form::hidden('menus.id') ?> 
+  <?= Form::submit('Actualizar') ?> 
 <?= Form::close() ?>
 ```
 
-### Testing the CRUD
+### Probando el CRUD
 
 Ahora sólo resta probar todo el código que hemos generado, en este punto es importante conocer el comportamiento de las [URL's en KumbiaPHP](http://wiki.kumbiaphp.com/Hola_Mundo_KumbiaPHP_Framework#KumbiaPHP_URLS) .
 
@@ -220,13 +226,13 @@ Ahora sólo resta probar todo el código que hemos generado, en este punto es im
 * create crea un menú en la Base de Datos http://localhost/menus/create/
 * Las acciones del y edit a ambas se debe entrar desde el index, ya que reciben el parámetros a editar o borrar según el caso.
 
-## Application in production
+## Aplicación en producción
 
-TODO: Complete "Application in production"
+TODO
 
-## Partials for pagination
+## Partials de paginación
 
-Como complemento para el paginado de ActiveRecord, a través de vistas parciales se implementan los tipos de pacciona mas comunes. Them are on the path "core/views/partials/paginators" and are ready to use. Son completamente configurables vía CSS. Por supuesto, podéis crear vuestros propios partials para paginar en las vistas.
+Como complemento para el paginado de ActiveRecord, a través de vistas parciales se implementan los tipos de pacciona mas comunes. Estos se ubican en el directorio "core/views/partials/paginators" listos para ser usados. Son completamente configurables vía CSS. Por supuesto, podéis crear vuestros propios partials para paginar en las vistas.
 
 ### Classic
 
@@ -234,17 +240,17 @@ Vista de paginado clásica.
 
 ![](../images/image07.jpg)
 
-Final result
+Resultado Final
 
 Parámetros de configuración:
 
-page: object obtained from paginator.
+page: objeto obtenido al invocar al paginador.
 
 show: número de páginas que se mostraran en el paginador, por defecto 10.
 
 url: url para la accion que efectúa la pacciona, por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-```php 
+```php
 View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
 ```
 
@@ -254,15 +260,15 @@ View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8,
 
 Vista de paginación estilo digg.
 
-Configuration parameters:
+Parámetros de configuración:
 
-page: object obtained by invoking the paginated.
+page: objeto obtenido al invocar al paginador.
 
-show: number of pages showing the paginated, default 10.
+show: número de páginas que muestra el paginador, por defecto 10.
 
 url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-```php 
+```php
 View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
 ```
 
@@ -272,7 +278,7 @@ View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url
 
 ![](../images/image00.jpg)
 
-Final result
+Resultado Final
 
 Vista de paginación extendida.
 
@@ -282,7 +288,7 @@ page: objeto obtenido al invocar al paginador.
 
 url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-```php 
+```php
 View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));
 ```
 
@@ -300,7 +306,7 @@ show: número de páginas que muestra el paginador, por defecto 10.
 
 url: url para la acción que efectúa la paginación, por defecto "module/controller/page/" y se envia por parámetro el número de página.
 
-```php 
+```php
 View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
 ```
 
@@ -320,7 +326,7 @@ page: objeto obtenido al invocar al paginador.
 
 url: url para la acción que efectua la paginación , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-```php 
+```php
 View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));
 ```
 
@@ -328,9 +334,9 @@ View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuar
 
 ### Ejemplo de uso
 
-Suppose we want to paginate a list of users.
+Supongamos que queremos paginar una lista de usuarios.
 
-For Model user in models/usuario.php:
+Para el modelo Usuario en models/usuario.php:
 
 ```php
 <?php  
@@ -371,7 +377,7 @@ class UsuarioController extends AppController
 
 ```
 
-And in the view views/user/page.phtml
+Y en la vista views/usuario/page.phtml
 
 ```php
 <table>
@@ -547,7 +553,7 @@ javascript_include_tag 0.5 => 'Tag::js beta2
 
 stylesheet_link_tag 0.5 => 'Tag::css beta2
 
-### Change on routes between versions:
+### Cambio en las rutas entre versiones:
 
 # 0.5 => 1.0 beta1
 
