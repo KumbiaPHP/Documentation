@@ -1,4 +1,4 @@
-# View
+# La Vista
 
 KumbiaPHP proporciona un sistema de presentación, basado en Vistas (Views) que viene siendo el tercer componente del sistema MVC, como vimos en la sección "Modelo, Vista, Controlador ". Las vistas son plantillas de código reutilizable que sirven para mostrar los datos al usuario y se encuentran ubicadas en el directorio app/views/ .
 
@@ -13,7 +13,7 @@ KumbiaPHP favorece siempre los convenios, y asume los siguientes respecto a las 
 - Todos los archivos de vistas deben tener la extensión .phtml .
 - Cada controlador tiene un directorio de vistas asociado cuyo nombre coincide con el nombre del controlador en notación smallcase. Por ejemplo: si posees un controlador cuya clase se denomina «PersonalTecnicoController» ésta por convenio tiene un directorio de vistas «personal_tecnico».
 - Cada vez que se ejecuta una acción se intenta cargar una vista cuyo nombre es el mismo que el de la acción ejecutada.
-- The templates must be located in the directory views/_shared/templates.
+- Los templates deben ubicarse en el directorio views/_shared/templates .
 - Las vistas parciales (partials) deben ubicarse en el directorio views/_shared/partials .
 - Por defecto se utiliza el template «default» para mostrar las vistas de acción.
 
@@ -32,7 +32,7 @@ class SaludoController extends AppController
 
 De esta manera luego de que se ejecute la acción «saludo» se mostrará la vista saludo/hola.phtml utilizando el template default .
 
-If you do not want to show a view, you must only pass NULL as an argument of View::select().
+En caso de que no desee mostrar una vista, solamente debe pasar NULL como argumento de View::select() .
 
 ```php
 <?php  
@@ -47,11 +47,11 @@ class SaludoController extends AppController
 
 Para finalizar este apartado, cabe destacar que tanto las vistas de acción, los templates y los partials son vistas, pero por comodidad se suele referir a la vista de acción sencillamente bajo el nombre de «vista».
 
-## Send data to the view
+## Pasando datos a la vista
 
-Para pasar datos a la vista estos deben cargarse como atributos públicos del controlador y luego de que se ejecute la acción, el manejador de vistas cargará los atributos públicos del controlador como variables de ámbito local en la vista. Example:
+Para pasar datos a la vista estos deben cargarse como atributos públicos del controlador y luego de que se ejecute la acción, el manejador de vistas cargará los atributos públicos del controlador como variables de ámbito local en la vista. Ejemplo:
 
-Controller: `controllers/greeting_controller.php`
+El controlador: `controllers/saludo_controller.php`
 
 ```php
 <?php  
@@ -64,17 +64,17 @@ class SaludoController extends AppController
 }  
 ```
 
-View: `views/greeting/hello.phtml`
+La vista: `views/saludo/hola.phtml`
 
 ```php
-Hello <?php echo $user?>  
+Hola <?php echo $usuario ?>  
 ```
 
-## Output buffer
+## Buffer de salida
 
 Para mostrar el contenido del buffer de salida se hace uso del método View::content() , donde el contenido del buffer de salida lo constituye principalmente los echo o print que efectúe el usuario y asimismo los mensajes Flash. Al invocar View::content() se muestra el contenido del buffer de salida en el lugar donde fue invocado.
 
-Controller: `greeting_controller.php`
+El controlador: `saludo_controller.php`
 
 ```php
 <?php  
@@ -87,10 +87,10 @@ class SaludoController extends AppController
 }  
 ```
 
-View: `hello.phtml`
+La vista: `hola.phtml`
 
 ```php
-Do greeting:  
+Saludo realizado:  
 <?php View::content() ?>  
 ```
 
@@ -108,18 +108,18 @@ Como se explicó anteriormente al inicio del cápitulo " La Vista ", el manejado
 
 En consecuencia, como la vista de acción procesada se acumula en el buffer de salida es necesario invocar el método View::content() en el lugar donde se desea mostrar la vista, tal como indicamos en la sección " Buffer de salida " .
 
-Example:
+Ejemplo:
 
-`views/_shared/templates/example.phtml`
+`views/_shared/templates/ejemplo.phtml`
 
 ```php
 <!DOCTYPE html>  
 <html>  
 <head>  
-   <title>Example Template</title>  
+   <title>Template de Ejemplo</title>  
 </head>  
 <body>  
-   <h1>;Example Template</h1>  
+   <h1>Template de Ejemplo</h1>  
 
     <?php View::content() ?>   
 </body>  
@@ -130,7 +130,7 @@ Example:
 
 Para seleccionar el template a utilizar se debe invocar el método View::template() pasando como argumento el template a utilizar. Ejemplo:
 
-Controller:
+En el controlador:
 
 ```php
 <?php  
@@ -158,11 +158,11 @@ class SaludoController extends AppController
 }  
 ```
 
-### Send data to the template
+### Pasando datos al template
 
 Como se vio en la sección " Pasando datos a la vista ", los atributos públicos del controlador se cargan como variables de ámbito local en la vista. Como mostrar el template, constituye el segundo paso para mostrar la vista completa, los atributos públicos del controlador estarán de igual manera cargados como variables de ámbito local en el template. Ejemplo:
 
-In the greeting_controller.php controller
+En el controlador saludo_controller.php
 
 ```php
 <?php  
@@ -182,16 +182,16 @@ class SaludoController extends AppController
 }  
 ```
 
-In the saludo.phtml template
+En el template saludo.phtml
 
 ```php
 <!DOCTYPE html>  
 <html>  
 <head>  
-   <title> <?php echo $title ?></title>  
+   <title> <?php echo $titulo ?></title>  
 </head>  
 <body>  
-   <h1>Greeting Template</h1>  
+   <h1>Template de Saludo</h1>  
 
     <?php View::content() ?>   
 </body>  
@@ -206,28 +206,28 @@ Los partials o «vistas parciales» son fragmentos de vistas que son compartidas
 
 Para construir un nuevo partial se debe crear un archivo con extensión .phtml en el directorio views/_shared/partials/ el cual debe corresponder con el nombre del partial.
 
-Example:
+Ejemplo:
 
-`views/_shared/partials/header.phtml`
+`views/_shared/partials/cabecera.phtml`
 
 ```php
-<h1>Greeting Template</h1>  
+<h1>Template de Saludo</h1>  
 ```
 
 ### ¿Cómo utilizar un partial?
 
 Para utilizar un partial se debe invocar el método View::partial() indicando como argumento el partial deseado. La vista parcial se mostrará en el lugar donde se invocó.
 
-Example using a partial in a template:
+Ejemplo utilizando un partial en un template:
 
 ```php
 <!DOCTYPE html>  
 <html>  
 <head>  
-   <title>Example</title>  
+   <title>Ejemplo</title>  
 </head>  
 <body>  
-    <?php View::partial('header') ?>   
+    <?php View::partial('cabecera') ?>   
 
     <?php View::content() ?>   
 </body>  
@@ -236,19 +236,19 @@ Example using a partial in a template:
 
 Cabe destacar que los partial se pueden utilizar tanto en vistas de acción, templates e incluso dentro de otros partials.
 
-### Send data to the partials
+### Pasando datos a los partials
 
 Para pasar datos a un partial, estos se deben indicar en un array asociativo donde cada clave con su correspondiente valor se cargarán como variables en el ámbito local del partial.
 
-Example:
+Ejemplo:
 
-`views/partials/header.phtml`
+`views/partials/cabecera.phtml`
 
 ```php
-<h1>Title: <?php echo $title ?></h1>  
+<h1>Título: <?php echo $titulo ?></h1>  
 ```
 
-`views/example/index.phtml`
+`views/ejemplo/index.phtml`
 
 ```php
 <?php View::partial('cabecera', false, array('titulo' =>'Ejemplo')) ?>  
@@ -258,13 +258,13 @@ Este es un ejemplo
 </p>  
 ```
 
-## Grouping in directories
+## Agrupando en directorios
 
-In KumbiaPHP views, partials and templates can be grouped into directories, using the spacer «/» in the route.
+En KumbiaPHP tanto las vistas, los partials y los templates pueden agruparse en directorios, utilizando el separador «/» en la ruta .
 
 ### Ejemplo de agrupación de vista
 
-View views/user/advertisement/form.phtml, is used follows in the controller:
+La vista views/usuario/clasificado/fomulario.phtml , se utiliza de la siguiente manera en el controlador:
 
 ```php
 <?php  
@@ -280,16 +280,16 @@ class UsuarioController extends AppController
 
 ### Ejemplo de agrupación de partial
 
-The partial views/_shared/partials/user/form.phtml, is used in the following manner either in view or template:
+El partial views/_shared/partials/usuario/formulario.phtml , se utiliza de la siguiente manera ya sea en vista o en template:
 
 ```php
-<h1>New User</h1>  
-<?php View::partial('user/form') ?>  
+<h1>Nuevo Usuario</h1>  
+<?php View::partial('usuario/formulario') ?>  
 ```
 
 ### Ejemplo de agrupación de template
 
-The template views/_shared/templates/user/admin.phtml, is used follows in the handler:
+El template views/_shared/templates/usuario/administrador.phtml , se utiliza de la siguiente manera en el controlador:
 
 ```php
 <?php  
@@ -302,13 +302,13 @@ class AdministradorController extends AppController
 }  
 ```
 
-## Response types
+## Tipos de respuestas
 
-The types of responses are used to establish various view formats. For example: xml, json and pdf.
+Los tipos de respuestas son utilizados para establecer distintos formatos de la vista. Por ejemplo: xml, json y pdf.
 
 Para establecer un tipo de respuesta se debe invocar el método View::response() indicando la respuesta deseada, una vez que se indica el tipo de respuesta este es automáticamente colocado como extensión del archivo de vista. En consecuencia utilizar los tipos de respuestas en conjunto a los template constituyen una potente herramienta para generación de vistas completas para el usuario.
 
-Example:
+Ejemplo:
 
 ```php
 <?php  
@@ -324,13 +324,13 @@ class UsuarioController extends AppController
 
 En este ejemplo se mostrará la vista index.json.phtml .
 
-## Use of cache in views
+## Uso de cache en las vistas
 
 El manejador de vistas proporciona mecanismos a través de los cuales las vistas, los partials y los templates se pueden cachear. El usuario indica el tiempo durante el cual estos estarán almacenados en la cache de manera que el manejador de vistas cargará estos elementos sin necesidad de procesarlos, aumentando el rendimiento de la aplicación.
 
 En este sentido para indicar el tiempo de caché se sigue el formato de la función strtotime de PHP. Ejemplo: '+1 week';
 
-### Cache views
+### Cache de vistas
 
 Para cachear una vista se utiliza el método View::cache() en el controlador.
 
@@ -348,9 +348,9 @@ class UsuarioController extends AppController
 
 Cabe destacar que la acción en el controlador se ejecuta, debido a que los datos pasados a la vista pueden de igual manera ser requeridos en el template.
 
-#### Groups of views in cache
+#### Grupos de vistas en cache
 
-You can store the cached views in groups. Los grupos son muy interesantes, ya que se puede borrar la caché por grupos también. Ejemplo: guardar caché de posts en un grupo, al crear, editar o borrar un post, podemos borrar la caché de ese grupo, para que se regenere la misma.
+Las vistas cacheadas se pueden almacenar en grupos. Los grupos son muy interesantes, ya que se puede borrar la caché por grupos también. Ejemplo: guardar caché de posts en un grupo, al crear, editar o borrar un post, podemos borrar la caché de ese grupo, para que se regenere la misma.
 
 En este caso es necesario indicar en el método View::cache() que se cacheará una vista en un grupo específico.
 
@@ -366,7 +366,7 @@ class UsuarioController extends AppController
 }  
 ```
 
-### Cache templates
+### Cache de templates
 
 Cachear un template consiste en cachear en conjunto tanto la vista y template para una url específica. Para cachear un template se usa el método View::cache() en el controlador indicando el tiempo durante el cual estará cacheado el template.
 
@@ -384,7 +384,7 @@ class UsuarioController extends AppController
 
 Cabe destacar que para aumentar el rendimiento no se ejecuta la acción en el controlador, debido a que mostrar el template es el último paso que realiza el manejador de vistas para mostrar la vista al usuario y en este paso ya todos los datos enviados a la vista y template han sido utilizados.
 
-### Cache of partials
+### Cache de partials
 
 Para cachear partials se debe indicar como segundo argumento al invocar View::partial() el tiempo durante el cual estará cacheado.
 
@@ -397,7 +397,7 @@ Para cachear partials se debe indicar como segundo argumento al invocar View::pa
 
 Los helpers (ayudas) se usan en los views. Encapsulan código en métodos para su fácil reuso.
 
-KumbiaPHP already comes with helpers created.
+KumbiaPHP ya viene con helpers creados.
 
 Pero lo realmente útil, es que los usuarios pueden crear sus propios helpers y colocarlos en app/extensions/helpers/. Y después usarlos tranquilamente en sus views. KumbiaPHP cargará transparentemente sus helpers así como los uses.
 
@@ -407,49 +407,53 @@ Clase con métodos estáticos con la que podemos crear etiquetas HTML optimizada
 
 #### Html::img()
 
-It allows you to include an image
+Permite incluir una imagen
 
-$src image path
+$src ruta de la imagen
 
-$alt attribute alt for image
+$alt atributo alt para la imagen
 
-$attrs additional attributes
+$attrs atributos adicionales
 
-Html::img ($src, $alt = NULL, $attrs = NULL)
+img ($src, $alt=NULL, $attrs = NULL)
 
 ```php
-<br />/ * Example * / 
+<br />/*Ejemplo*/
 
-echo Html:img('spin.gif'_,'an_imagen');   //the image spin.gif located inside of "/ public/img /"
-//with alt artibute 'an image'  
+echo Html::img('spin.gif' ,'una imagen');   //se muestra la imagen
+spin.gif que se encuentra dentro de "/public/img/"
+
+//con el artibuto alt 'una imagen'  
 ```
 
 #### Html::link()
 
-It allows you to include a link
+Permite incluir un link
 
 $action ruta a la acción
 
-$texto text to show
+$text texto a mostrar
 
-$attrs additional attributes
+$attrs atributos adicionales
 
 Html::link ($action, $text, $attrs = NULL)
 
 ```php
-/ * Example * / 
-echo html:link('pages/show/kumbia/status'_,'Configuration'); //shows a link with the text 'Configuration'  
+/*Ejemplo*/
+
+echo Html::link('pages/show/kumbia/status' ,'Configuración');   //se
+muestra un link con el texto 'Configuración'  
 ```
 
 #### Html::lists()
 
-It creates a html list from an array
+Crea una lista html a partir de un array
 
-$array contents of the list
+$array contenido de la lista
 
-$type default ul, and not ol
+$type por defecto ul, y si no ol
 
-$attrs additional attributes
+$attrs atributos adicionales
 
 ```php
 Html::lists($array ,$type = 'ul' ,$attrs = NULL)   
@@ -459,11 +463,11 @@ Html::lists($array ,$type = 'ul' ,$attrs = NULL)
 
 $ar = array( 'Abdomen' => 'Abdomen' , 'Brazos' => 'Brazos' , 'Cabeza' => 'Cabeza' , 'Cuello' => 'Cuello' , 'Genitales' => 'Genitales' , 'Piernas' => 'Piernas' , 'Torax' => 'Torax' , 'Otros' => 'Otros' ); //$ar el array que contiene los items de la lista echo Html::lists($ar, $type = 'ol'); //Muestra una lista
 
-
+<ol></ol>
 
 $ar2 = array('Abdomen', 'Brazos', 'Cabeza', 'Cuello', 'Genitales', 'Piernas', 'Torax', 'Otros'); echo Html::lists($ar2 , $type = 'ol'); //Muestra una lista
 
-
+<ol></ol>
 
     <br />#### Html::gravatar()
     
@@ -491,8 +495,8 @@ $ar2 = array('Abdomen', 'Brazos', 'Cabeza', 'Cuello', 'Genitales', 'Piernas', 'T
 Incluye los archivos CSS que previamente fueron cargados a la lista mediante Tag::css()
 
 ```php
-Tag:css('welcome'); //Put in list a CSS (app/public/css/welcome.css)
-echo Html:includeCss; //Add linked resources of the class in the project   
+Tag::css('bienvenida');     //Pone en lista un CSS (app/public/css/bienvenida.css)
+echo Html::includeCss();   //Adiciona los recursos enlazados de la clase en el proyecto  
 ```
 
 #### Html::meta()
@@ -506,10 +510,10 @@ $attrs atributos adicionales del tag
 Html::meta($content, $attrs = NULL)
 
 ```php
-HTML:meta('Kumbiaphp-team'_,"name_=_'Author'");  
-//Added: <meta content = "Kumbiaphp-team" name = 'Author' />
-Html:meta('text/html;_charset=UTF-8'_,"http-equiv_=_'Content-type'");
-//Added: <meta content = "text/html; Charset = UTF-8 "http-equiv = 'Content-type' />  
+Html::meta('Kumbiaphp-team' ,"name = 'Author'");  
+//Agrega: <meta content="Kumbiaphp-team" name = 'Author' />
+Html::meta('text/html; charset=UTF-8' ,"http-equiv = 'Content-type'");  
+//Agrega: <meta content="text/html; charset=UTF-8" http-equiv = 'Content-type'/>  
 ```
 
 #### Html::includeMetatags()
@@ -561,7 +565,7 @@ Agrega un elemento de vínculo interno de tipo [
 
 $href dirección url del recurso a enlazar
 
-$attrs additional attributes
+$attrs atributos adicionales
 
 Html::headLinkAction($action, $attrs = NULL)
 
