@@ -1,4 +1,4 @@
-# Parent classes
+# Clases padre
 
 ## AppController
 
