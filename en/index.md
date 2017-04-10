@@ -37,7 +37,7 @@
   - [Views](crud.md#views)
   - [Testing the CRUD](crud.md#testing-the-crud)
 
-## MCV components
+## MVC components
 
 - [Controller](controller.md#el-controlador) 
   - [Controlador Frontal](controller.md#controlador-frontal) 
