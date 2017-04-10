@@ -1,6 +1,6 @@
-# La Consola
+# The console
 
-## Introducción
+## Intro
 
 La consola, es una herramienta de línea de comandos de KumbiaPHP, que permite realizar tareas automatizadas en el ámbito de tu aplicación. En este sentido KumbiaPHP incluye las siguientes consolas: Cache, Model y Controller.
 
@@ -10,8 +10,7 @@ Cada consola está compuesta por un conjunto de comandos, cada comando puede rec
 
 Para utilizar la consola debes ejecutar el despachador de comandos de consola de KumbiaPHP en un terminal, ubicarte en el directorio " app" de tu aplicación y ejecutar la instrucción acorde al siguiente formato:
 
-`php ../../core/console/kumbia.php [ consola ] [ comando ] [ arg ] [ \--arg_nom
-] =valor`
+`php .../../core/console/kumbia.php [console] [command] [arg] [\--arg_name] = value`
 
 * * *
 
@@ -19,135 +18,135 @@ Si no se especifica el comando a ejecutar, entonces se ejecutará el comando "ma
 
 También es posible indicar la ruta al directorio app de la aplicación explícitamente por medio del argumento con nombre " path ".
 
-Ejemplos:
+Examples:
 
-`php ../../core/console/kumbia.php cache clean --driver=sqlite`
+`php .../../core/console/kumbia.php cache clean --driver=sqlite`
 
-`php kumbia.php cache clean --driver=sqlite --path="/var/www/app"`
+`php kumbia.php cache clean --driver=sqlite --path="/ var/www/app"`
 
-## Consolas de KumbiaPHP
+## KumbiaPHP consoles
 
 ### Cache
 
-Esta consola permite realizar tareas de control sobre la cache de aplicación.
+This console allows you to perform control over the cache of application.
 
 #### clean \[group\] \[--driver\]
 
-### Permite limpiar la cache.
+### Allows you to clean the cache.
 
-### Argumentos secuenciales:
+### Sequential arguments:
 
-- group: nombre de grupo de elementos de cache que se eliminará, si no se especifica valor, entonces se limpiará toda la cache.
+- group: group name of cache items that will be deleted, if value is not specified, then clean all cache.
 
-### Argumentos con nombre:
+### Named arguments:
 
-- driver: manejador de cache correspondiente a la cache a limpiar (nixfile, file, sqlite, APC), si no se especifica, entonces se toma el manejador de cache predeterminado.
+- driver: driver cache corresponding to the cache cleaning (nixfile, file, sqlite, APC), if not specified, then the cache manager taken default.
 
-### Ejemplo:
+### Example:
 
-### php ../../core/console/kumbia.php cache clean
+### php .../../core/console/kumbia.php cache clean
 
 * * *
 
 #### remove \[id\] \[group\]
 
-Elimina un elemento de la cache.
+Removes an element from the cache.
 
-Argumentos secuenciales:
+Sequential arguments:
 
 - id: id de elemento en cache.
-- group: nombre de grupo al que pertenece el elemento, si no se especifica valor, entonces se utilizará el grupo 'default'.
+- group: name of group to which belongs the element, specifying no value, then use the 'default' group.
 
-Argumentos con nombre:
+Named arguments:
 
-- driver: manejador de cache correspondiente a la cache a limpiar (nixfile, file, sqlite, APC).
+- driver: driver cache corresponding to the cache cleaning (nixfile, file, sqlite, APC).
 
-Ejemplo:
+Example:
 
-`php ../../core/console/kumbia.php cache remove vista1 mis_vistas`
+`php ../../core/console/kumbia.php cache remove viewclient my_views`
 
 * * *
 
 ### Model
 
-Permite manipular modelos de la aplicación.
+It allows you to manipulate the application models.
 
 #### create [model]
 
-Crea un modelo utilizando como base la plantilla ubicada en "core/console/generators/model.php".
+Create a model using as a base the template located at "core/console/generators/model.php".
 
-Argumentos secuenciales:
+Sequential arguments:
 
-- model: nombre de modelo en smallcase.
+- model: model name in smallcase.
 
-Ejemplo:
+Example:
 
-`php ../../core/console/kumbia.php model create venta_vehiculo`
+`php ../../core/console/kumbia.php model create simple_auth`
 
 * * *
 
 #### delete [model]
 
-Elimina un modelo.
+Delete a model.
 
-Argumentos secuenciales:
+Sequential arguments:
 
-- model: nombre de modelo en smallcase.
+- model: model name in smallcase.
 
-Ejemplo:
+Example:
 
-`php ../../core/console/kumbia.php model delete venta_vehiculo`
+`php ../../core/console/kumbia.php model delete simple_auth`
 
 * * *
 
 ### Controller
 
-Permite manipular controladores de la aplicación.
+It allows you to manipulate the application controllers.
 
 #### create [controller]
 
 Crea un controlador utilizando como base la plantilla ubicada en 'core/console/generators/controller.php'.
 
-Argumentos secuenciales:
+Sequential arguments:
 
-- controller: nombre de controlador en smallcase.
+- controller: controller name in smallcase.
 
-Ejemplo:
+Example:
 
-`php ../../core/console/kumbia.php controller create venta_vehiculo`
+`php ../../core/console/kumbia.php controller create product_sales`
 
 * * *
 
 #### delete [controller]
 
-Elimina un controlador.
+Delete controller.
 
-Argumentos secuenciales:
+Sequential arguments:
 
-- controller: nombre de controlador en smallcase.
+- controller: controller name in smallcase.
 
-Ejemplo:
+Example:
 
-`php ../../core/console/kumbia.php controller delete venta_vehiculo`
+`php ../../core/console/kumbia.php controller delete product_sales`
 
 * * *
 
 # #
 
-## Desarrollando tus Consolas
+## Developing your consoles
 
-Para desarrollar tus consolas debes de considerar lo siguiente:
+To develop your consoles you should consider the following:
 
 - Las consolas que desarrolles para tu aplicación deben estar ubicadas en el directorio "app/extensions/console".
-- El archivo debe tener el sufijo "_console" y de igual manera la clase el sufijo "Console".
+- The file should have the suffix "_console" as well as the class the "Console" suffix.
 - Cada comando de la consola equivale a un método de la clase.
 - Los argumentos con nombre que son enviados al invocar un comando se reciben en el primer argumento del método correspondiente al comando.
-- Los argumentos secuenciales, que son enviados al invocar un comando, se reciben como argumentos del método invocado posteriores al primer argumento.
-- Si no se especifica el comando a ejecutar, se ejecutará de manera predeterminada el método "main" de la clase.
+- Sequential arguments, which are sent to invoke a command, are received as arguments to the invoked method subsequent to the first argument.
+- If he it is not specified the command to run, run by default the "main" method of the class.
 - Las clases Load, Config y Util; son cargadas automáticamente para la consola.
-- Las constantes APP_PATH, CORE_PATH y PRODUCTION; se encuentran definidas para el entorno de la consola. 
+- The constants APP_PATH, CORE_PATH and PRODUCTION; they are defined for the console environment. 
 
-Ejemplo:
+Example:
 
 Consideremos una parte del código, de la consola cache, cuya funcionalidad fue explicada en la sección anterior.
 
@@ -207,12 +206,12 @@ Este método de la clase Console, permite leer una entrada desde el terminal, se
 
 `Console::input($message, $values = null)`
 
-$message (string): mensaje a mostrar al momento de solicitar la entrada.
+$message (string): message to be displayed when this method requests an entry.
 
 $values (array): conjunto de valores válidos para la entrada.
 
-Ejemplo:
+Example:
 
-`$valor = Console::input('¿Desea continuar?', array('s', 'n'));`
+`$answer = Console:input ('Continue?', array ('s ', 'n'));`
 
 * * *
