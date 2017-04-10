@@ -19,11 +19,11 @@
 ## Other Components
 
 - [ActiveRecord](active-record.md)
-- [Clases padre](parent-class.md#clases-padre)
-- [Consola](console.md#la-consola)
+- [Parent classes](parent-class.md#clases-padre)
+- [Console](console.md#la-consola)
 
 ## Appendices
 
 - [Appendices](appendix.md#apendices)
 
-[Lista detallada de temas](index.md)
+[Full topic list](index.md)

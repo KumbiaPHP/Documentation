@@ -1,83 +1,82 @@
 # ActiveRecord
 
-Es la principal clase para la administración y funcionamiento de modelos. ActiveRecord es una implementación de este patrón de programación y esta muy influenciada por la funcionalidad de su análoga en Ruby disponible en Rails. ActiveRecord proporciona la capa objeto-relacional que sigue rigurosamente el estándar ORM: Tablas en Clases, Registros en Objetos, y Campos en Atributos. Facilita el entendimiento del código asociado a base de datos y encapsula la lógica especifica haciendo más fácil de usar para el programador.
+It is the main class for the Administration and operation of models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by the functionality of its analog avaiable in Ruby on Rails. ActiveRecord provides object-relational layer that strictly follows the standard ORM: tables in classes, objects records, and fields in attributes. Facilitates the understanding of the code associated with the database and encapsulates the logic specified making it easier to use for the programmer.
 
-KumbiaPHP usa POO (Programación orientada a objetos), así que ActiveRecord es una clase que ya lleva métodos listos para usar. Estos métodos facilitan al usuario el manejo de las tablas de las bases de datos; entre ellos están los siguientes: find(), find_first(), save(), update(), etc.
+KumbiaPHP uses OOP (Object-oriented programming), so ActiveRecord is a class with ready-to-use methods. These methods make it easier for the user to manage tables in databases; Among them are the next:
 
-Ejemplo con KumbiaPHP 0.9
+Example with KumbiaPHP 0.9
 
 ```php
 <?php
 //KumbiaPHP 0.9
-$cliente = Load::model('cliente'); 
-$cliente->nit = "808111827-2"; 
-$cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
-$cliente->save(); 
+$customer = Load::model('customer'); 
+$customer->nit = "808111827-2"; 
+$customer->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
+$customer->save(); 
 ```
 
-Ejemplo con KumbiaPHP 1.0
+Example with KumbiaPHP 1.0
 
 ```php
 <?php
-//KumbiaPHP 1.0
-$cliente = new Cliente(); 
-$cliente->nit = "808111827-2"; 
-$cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
-$cliente->save(); 
+//KumbiaPHP 0.9
+$customer = new Customer(); 
+$customer->nit = "808111827-2"; 
+$customer->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
+$customer->save(); 
 ```
 
-### Ventajas del ActiveRecord
+### Advantages of ActiveRecord
 
-- Se trabajan las entidades del Modelo mas Naturalmente como objetos.
-- Las acciones como Insertar, Consultar, Actualizar, Borrar, etc. de una entidad del Modelo están encapsuladas así que se reduce el código y se hace mas fácil de mantener.
-- Código más fácil de Entender y Mantener
-- Reducción del uso del SQL en un 80%, con lo que se logra un alto porcentaje de independencia del motor de base de datos.
-- Menos "detalles", más práctico y util
-- ActiveRecord protege en un gran porcentaje de ataques de SQL inyection que puedan llegar a sufrir tus aplicaciones escapando caracteres que puedan facilitar estos ataques.
+- The entities of the Model are most naturally worked as objects.
+- Actions such as inserting, consult, update, delete, etc. of an entity of the model are encapsulated so the code is reduced and becomes more easy to maintain.
+- The code it's much more easy to learn and keep
+- The use of SQL has a 80% reduction, which achieves a high percentage of independence of the database engine.
+- without details unnecessary, the code is more practical and useful
+- "ActiveRecord" protec in a huge percent of SQL injections attacks that your apps can suffer, limited the letters that make it's.
 
-### Crear un Modelo ActiveRecord en KumbiaPHP Framework
+### How to Create an ActiveRecord in KumbiaPHP Framework?
 
-Lo primero es crear un archivo en el directorio models con el mismo nombre de la tabla en la base de datos. Por ejemplo: models/clientes.php Luego creamos una clase con el nombre de la tabla extendiendo alguna de las clases para modelos.
+The first thing is create a file in the directory "models" with the same name of the table in the database. For example: models/customers.php then create a class extended of some class for models.
 
-Ejemplo:
+Example:
 
 ```php
 <?php 
-class Cliente extends ActiveRecord { 
+class Customers extends ActiveRecord { 
 } 
 ```
 
-Si lo que se desea es crear un modelo de una clase que tiene nombre compuesto por ejemplo la clase Tipo de Cliente, por convención en nuestra base de datos esta tabla debe llamarse: tipo_de_cliente y el archivo: models/tipo_de_cliente.php y el código de este modelo es el siguiente:
+If you wanna make a model of a class has a compound name, for example the class Type Of Customer, for convention in our datebase it's must have a table called: type_of_customer and in the file: models/type_of_customer.php has the following code in the model:
 
 ```php
 <?php 
-class TipoDeCliente extends ActiveRecord { 
+class TypeOfCustomers extends ActiveRecord { 
 } 
- ```
 
-### Columnas y Atributos
 
-Objetos ActiveRecord corresponden a registros en una tabla de una base de
-datos. Los objetos poseen atributos que corresponden a los campos en estas
-tablas. La clase ActiveRecord automáticamente obtiene la definición de los
-campos de las tablas y los convierte en atributos de la clase asociada. A esto
-es lo que nos referíamos con mapeo objeto relacional.
+### Columns and Attributes
 
-Miremos la tabla Álbum:
+Objects ActiveRecord correspond to a register in a table of a 
+database. The objects have attributes that correspond to a 
+fields in it's tables. The class ActiveRecord obtain automatically 
+the definition of the fields of the tables and make convert it 
+in attributes of the class associated. This is we referred with the concept of object relational mapping.
 
-```sql
-CREATE TABLE album (
-    id INTEGER NOT NULL AUTO_INCREMENT, 
-    nombre VARCHAR(100) NOT NULL, 
-    fecha DATE NOT NULL, 
-    valor DECIMAL(12,2) NOT NULL, 
-    artista_id INTEGER NOT NULL, 
-    estado CHAR(1), 
-    PRIMARY KEY(id)
-)
+Take a look into Album table: 
+```sql 
+CREATE TABLE album (     
+id INTEGER NOT NULL AUTO_INCREMENT,     
+name VARCHAR(100) NOT NULL,     
+published_date DATE NOT NULL,     
+price DECIMAL(12,2) NOT NULL,     
+artist_id INTEGER NOT NULL,     
+status CHAR(1),     
+PRIMARY KEY(id)
+ )
 ```
 
-Podemos crear un modelo ActiveRecord que mapee esta tabla:
+We can create an ActiveRecord model that maps this table:
 
 ```php
 <?php 
@@ -85,48 +84,49 @@ class Album extends ActiveRecord {
 } 
 ```
 
-Una instancia de esta clase sera un objeto con los atributos de la tabla album:
+An instance of this class will be an object with the attributes of the table album:
 
-Ejemplo con KumbiaPHP 0.9
+Example with KumbiaPHP 0.9
 
+```php
 ```php
 <?php
 //KumbiaPHP 0.9
 $album = Load::model('album'); 
 $album->id = 2; 
-$album->nombre = "Going Under"; 
+$album->name = "Going Under"; 
 $album->save(); 
  ```
 
-Ejemplo con KumbiaPHP 1.0
+Example with KumbiaPHP 1.0
 ```php
 <?php 
  //KumbiaPHP 1.0
 $album = new Album(); 
 $album->id = 2; 
-$album->nombre = "Going Under"; 
+$album->name = "Going Under"; 
 $album->save(); 
 ```
 
-### Llaves Primarias y el uso de IDs
+### Primary keys and the use of IDs
 
-En los ejemplos mostrados de KumbiaPHP siempre se trabaja una columna llamada id como llave primaria de nuestras tablas. Tal vez, esto no siempre es practico a su parecer, de pronto al crear la tabla clientes la columna de numero de identificación seria una excelente elección, pero en caso de cambiar este valor por otro tendría problemas con el dato que este replicado en otras relaciones (ejemplo facturas), además de esto tendría que validar otras cosas relacionadas con su naturaleza. KumbiaPHP propone el uso de ids como llaves primarias con esto se automatiza muchas tareas de consulta y proporciona una forma de referirse unívocamente a un registro en especial sin depender de la naturaleza de un atributo especifico. Usuarios de Rails se sentirán familiarizados con esta característica.
+The examples shown in KumbiaPHP always works a column called id as primary key of our tables. Maybe, this is not practical every time for your seem, maybe at moment to create the customers table, the column of id would an excellent choice, but in case of change this value for another value you can found problems with the replicated data in another relations (taxes is a good example), and much more problems related the nature of the data struct. KumbiaPHP propose the use of ids has primary key with it is possible to automate many queries and provide one way to refer unequivocally to an special register without depend of the nature their attribute. Users of Rails can feel good with this features.
 
-Esta particularidad también permite a KumbiaPHP entender el modelo entidad relación leyendo los nombres de los atributos de las tablas. Por ejemplo en la tabla album del ejemplo anterior la convención nos dice que id es la llave primaria de esta tabla pero además nos dice que hay una llave foránea a la tabla artista en su campo id.
+This feature can also to KumbiaPHP understand the entity–relationship model reading the name of the attributes of the tables. For example in the table of the previous example the convention affirms that id column is the primary key in this table but also tells that there is a foreign key to the artist table in it's field id.
 
-### Convenciones en ActiveRecord
+### Conventions in ActiveRecord
 
-ActiveRecord posee una serie de convenciones que le sirven para asumir distintas cualidades y relacionar un modelo de datos. Las convenciones son las siguientes:
+ActiveRecord has a series of conventions that serve to bring the possibilities to assume different qualities and relate the data model. Conventions are the following:
 
 **id**
 
-Si ActiveRecord encuentra un campo llamado id, ActiveRecord asumira que se trata de la llave primaria de la entidad y que es auto-numérica.
+If ActiveRecord finds a field called id, ActiveRecord will take that's the primary key of entity, that it's auto incremental and numerical.
 
-**tabla_id**
+**table_id**
 
-Los campos terminados en *_id* indican relaciones foráneas a otras tablas, de esta forma se puede definir fácilmente las relaciones entre las entidades del modelo:
+The finished fields in *_id* indicate foreign relationships to other tables, thus can be easily defined relations between the entities in the model:
 
-Un campo llamado *clientes_id* en una tabla indica que existe otra tabla llamada clientes y esta contiene un campo id que es foránea a este.
+A field called *customers_id* in a table indicates that exist another table called customers and this have a field called id that is related to it.
 
 **campo_at**
 

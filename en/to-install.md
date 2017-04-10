@@ -77,7 +77,7 @@ This is an environment test which is intended to practice with KumbiaPHP on a lo
 
 ## Configure Nginx
 
-Usando `$_SERVER['PATH_INFO']`:
+Using `$_SERVER['PATH_INFO']`:
 
 ```nginx
 server {
@@ -108,7 +108,7 @@ server {
 }
 ```
 
-Usando `$_GET['_url']`:
+Using `$_GET['_url']`:
 
 ```nginx
 server {

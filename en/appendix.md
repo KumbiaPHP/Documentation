@@ -35,22 +35,18 @@ Now we define the model that controls DB interaction.
 [app]/models/menus.php:
 
 ```php
-<?php
-
-class Menus extends ActiveRecord
-{
-    /**
-      * Retorna los menús para ser paginados
-      *
-      * @param int $page  [requerido] página a visualizar
-      * @param int $ppage [opcional] por defecto 20 por página
-      */
-    public function getMenus($page, $ppage=20)
-    {
-        return $this->paginate("page: $page", "per_page: $ppage", 'order: id desc');
-    }
-}
-
+<?php  
+class Menus extends ActiveRecord  
+{  
+  /**  
+     * Retorna los menu para ser paginados   
+     *   
+     */   
+  public function getMenus($page, $ppage=20)  
+  {  
+      return $this->paginate("page: $page", "per_page: $ppage", 'order: id desc');   
+  }  
+}  
 ```
 
 ### Controller
@@ -60,98 +56,93 @@ The controller handles client requests and replies (ie, a browser). In this cont
 [app]/controllers/menus_controller.php:
 
 ```php
-<?php  
-/**  
-* Carga del modelo Menus...   
+<?php  /**  * Load model Menus...   
 */   
 // Load::models( 'menus' );// Necesario en versiones < 0.9 
-  
+
 class MenusController extends AppController
 {
-    /**
-     * Obtiene una lista para paginar los menús
-     *
-     * @param int $page [opcional]
-     */
-    public function index($page = 1)
-    {
-         $this->listMenus = (new Menus)->getMenus($page);
-    }
- 
-    /**
-     * Crea un Registro
-     */
-    public function create()
-    {
-        /**
-         * Se verifica si el usuario envío el form (submit) y si además
-         * dentro del array POST existe uno llamado "menus"
-         * el cual aplica la autocarga de objeto para guardar los
-         * datos enviado por POST utilizando autocarga de objeto
-         */
-        if (Input::hasPost('menus')) {
-            /**
-             * se le pasa al modelo por constructor los datos del form y ActiveRecord recoge esos datos
-             * y los asocia al campo correspondiente siempre y cuando se utilice la convención
-             * model.campo
-             */
-            $menu = new Menus(Input::post('menus'));
-            //En caso que falle la operación de guardar
-            if ($menu->create()) {
-                Flash::valid('Operación exitosa');
-                //Eliminamos el POST, si no queremos que se vean en el form
-                Input::delete();
-                return;
-            }
- 
-            Flash::error('Falló Operación');
-        }
-    }
- 
-    /**
-     * Edita un Registro
-     *
-     * @param int $id (requerido)
-     */
-    public function edit($id)
-    {
-        $menu = new Menus();
- 
-        //se verifica si se ha enviado el formulario (submit)
-        if (Input::hasPost('menus')) {
- 
-            if ($menu->update(Input::post('menus'))) {
-                 Flash::valid('Operación exitosa');
-                //enrutando por defecto al index del controller
-                return Redirect::to();
-            }
-            Flash::error('Falló Operación');
-            return;
-        }
+  /**  
+    * Obtiene una lista para paginar los menus   
+    */   
+  public function index($page=1)
+  {
+      $menu = new Menus();
+      $this->listMenus = $menu->getMenus($page);
+  }
 
-        //Aplicando la autocarga de objeto, para comenzar la edición
-        $this->menus = $menu->find_by_id((int) $id);
- 
-    }
- 
-    /**
-     * Eliminar un menú
-     *
-     * @param int $id (requerido)
-     */
-    public function del($id)
-    {
-        if ((new Menus)->delete((int) $id)) {
-                Flash::valid('Operación exitosa');
-        } else {
-                Flash::error('Falló Operación');
-        }
+  /**  
+    * Crea un Registro   
+    */   
+  public function  create ()
+  {
+      /**   
+        * Se verifica si el usuario envio el form (submit) y si ademas   
+        * dentro del array POST existe uno llamado "menus"   
+        * el cual aplica la autocarga de objeto para guardar los   
+        * datos enviado por POST utilizando autocarga de objeto   
+        */   
+      if (Input::hasPost('menus')) {
+          /**   
+            * se le pasa al modelo por constructor los datos del form y ActiveRecord recoge esos datos   
+            * y los asocia al campo correspondiente siempre y cuando se utilice la convencion   
+            * model.campo   
+            */   
+          $menu = new Menus(Input::post('menus'));
+          //En caso que falle la operacion de guardar   
+          if (!$menu->save()) {
+              Flash::error('No se puede crear');
+          } else {
+              Flash::valid('Añadido correctamente');
+              //Eliminamos el POST, si no queremos que se vean en el form   
+              Input::delete();
+          }
+      }
+  }
 
-        //enrutando por defecto al index del controller
-        return Redirect::to();
-    }
+  /**  
+    * Edita un Registro   
+    *   
+    * @param int $id (requerido)   
+    */   
+  public function edit($id)
+  {
+      $menu = new Menus();
+
+      //se verifica si se ha enviado el formulario (submit)   
+      if (Input::hasPost('menus')) {
+
+          if (!$menu->update(Input::post('menus'))) {
+              Flash::error('Fallo al editar');
+          } else {
+              Flash::valid('Cambio correcto');
+              //enrutando por defecto al index del controller   
+              return Router::redirect();
+          }   
+      } else {
+          //Aplicando la autocarga de objeto, para comenzar la edicion   
+          $this->menus = $menu->find((int) $id);
+      }
+  }
+
+  /**  
+    * Eliminar un menu   
+    *   
+    * @param int $id (requerido)   
+    */   
+  public function del($id)
+  {  
+      $menu = new Menus();
+      if  (!$menu->delete((int) $id)) {
+              Flash::error('Fallo al borrar');
+      } else {
+              Flash::valid('Borrado correctamente');
+      }
+
+      //enrutando por defecto al index del controller   
+      return Router::redirect();
+  }
 }
-
 ```
 
 ### Views
@@ -174,7 +165,8 @@ We add the views...
   <?php endforeach ?>
   </ul>
 
-   // ejemplo manual de paginado, existen partials listos en formato digg, clasic,...
+   // ejemplo manual de paginado, existen partials listos en formato digg,
+clasic,...
   <?php if($listMenus->prev) echo Html::linkAction("index/$listMenus->prev/", '<< Anterior |') ?>
   <?php if($listMenus->next) echo Html::linkAction("index/$listMenus->next/", 'Proximo >>') ?>
 </div>
@@ -244,9 +236,7 @@ show: número de páginas que se mostraran en el paginador, por defecto 10.
 
 url: url para la accion que efectúa la pacciona, por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-```php 
-View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
-```
+`View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));`
 
 * * *
 
@@ -262,9 +252,7 @@ show: number of pages showing the paginated, default 10.
 
 url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-```php 
-View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
-```
+`View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));`
 
 * * *
 
@@ -282,9 +270,7 @@ page: objeto obtenido al invocar al paginador.
 
 url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-```php 
-View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));
-```
+`View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));`
 
 * * *
 
@@ -300,9 +286,7 @@ show: número de páginas que muestra el paginador, por defecto 10.
 
 url: url para la acción que efectúa la paginación, por defecto "module/controller/page/" y se envia por parámetro el número de página.
 
-```php 
-View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
-```
+`View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));`
 
 * * *
 
@@ -320,9 +304,7 @@ page: objeto obtenido al invocar al paginador.
 
 url: url para la acción que efectua la paginación , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
-```php 
-View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));
-```
+`View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));`
 
 * * *
 
