@@ -24,10 +24,6 @@ Este ejemplo, permite de manera sencilla conocer y entender la
 implementación de un CRUD (Create, Read, Update y Delete en ingles) sin la
 necesidad de un Scaffold y un manejo correcto del MVC en KumbiaPHP.
 
-El CRUD de la beta1 sigue funcionando igual en la beta2, pero queda
-desaconsejado. En la versión 1.0 se puede usar de las 2 maneras. Y la 1.2 que
-saldrá junto a la 1.0 sólo usa el nuevo y se elimina lo desaconsejado.
-
 ### Configurando database.ini
 
 Configurar el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) ,
