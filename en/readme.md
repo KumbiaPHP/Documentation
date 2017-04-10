@@ -15,6 +15,7 @@
 - [Controller](controller.md#el-controlador)
 - [Models](model.md#5-modelos)
 - [View](view.md#la-vista)
+- [CRUD](crud.md)
 
 ## Other Components
 
