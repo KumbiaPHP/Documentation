@@ -1,10 +1,10 @@
-# Modelo, Vista, Controlador (MVC)
+# Model, View, Controller (MVC)
 
 ## ¿Qué es MVC?
 
-En 1979, Trygve Reenskaug desarrollo una arquitectura para desarrollar aplicaciones interactivas. En este diseño existen tres partes: modelos, vistas y controladores. El modelo MVC permite hacer la separación de las capas de interfaz, modelo y lógica de control de esta. La programación por capas, es un estilo de programación en la que el objetivo primordial es la separación de la lógica de negocios del diseño de presentación, un ejemplo básico de esto es separar la capa de datos de la capa de presentación al usuario.
+In 1979, Trygve Reenskaug developed an architecture for creating interactive applications. In his design there are three components: models, views and controllers. The MVC model allows the separation of the application layers in interface, model and logic control. Programming in layers, is a style of programming where the primary goal is the separation of presentation design from the business logic. A basic example of this is separation of the data layer from the presentation layer (user interfase).
 
-La ventaja principal de este estilo, es que el desarrollo se puede llevar a cabo en varios niveles y en caso de algún cambio solo se ataca al nivel requerido sin tener que revisar entre código mezclado. Además permite distribuir el trabajo de creación de una aplicación por niveles, de este modo, cada grupo de trabajo esta totalmente abstraído del resto de niveles, simplemente es necesario conocer la API (Interfaz de Aplicación) que existe entre niveles. La división en capas reduce la complejidad, facilita la reutilización y acelera el proceso de ensamblar o desensamblar alguna capa, o sustituirla por otra distinta (pero con la misma responsabilidad).
+The main advantage of this style is that development can be performed at various levels and in the event of any change only attacking the required level without having to review between mixed code. Además permite distribuir el trabajo de creación de una aplicación por niveles, de este modo, cada grupo de trabajo esta totalmente abstraído del resto de niveles, simplemente es necesario conocer la API (Interfaz de Aplicación) que existe entre niveles. La división en capas reduce la complejidad, facilita la reutilización y acelera el proceso de ensamblar o desensamblar alguna capa, o sustituirla por otra distinta (pero con la misma responsabilidad).
 
 En una aplicación Web una petición se realiza usando HTTP y es enviado al controlador. El controlador puede interactuar de muchas formas con el modelo, luego el primero llama a la respectiva vista la cual obtiene el estado del modelo que es enviado desde el controlador y lo muestra al usuario.
 
@@ -14,13 +14,13 @@ KumbiaPHP Framework aprovecha los mejores patrones de programación orientada a 
 
 El objetivo de este patrón es el realizar y mantener la separación entre la lógica de nuestra aplicación, los datos y la presentación. Esta separación tiene algunas ventajas importantes, como poder identificar mas fácilmente en que capa se esta produciendo un problema con solo conocer su naturaleza. Podemos crear varias presentaciones sin necesidad de escribir varias veces la misma lógica de aplicación. Cada parte funciona independiente y cualquier cambio centraliza el efecto sobre las demás, así que podemos estar seguros que una modificación en un componente no afecta las tareas en cualquier parte de la aplicación.
 
-## Más información
+## Additional information
 
-La base de KumbiaPHP es el MVC y POO, un tradicional patrón de diseño que funciona en tres capas:
+The basis of KumbiaPHP is the MVC and OOP, a traditional design pattern that works in three layers:
 
-- **Modelos:** Representan la información sobre la cual la aplicación opera, su lógica de negocio.
-- **Vistas:** Visualizan el modelo usando paginas Web e interactuando con los usuarios (en principio) de estas, una vista puede estar representada por cualquier formato salida, nos referimos a un xml, pdf, json, svg, png, etc. todo esto son vistas.
-- **Controladores:** Responden a acciones de usuario e invocan cambios en las vistas o en los modelos según sea necesario.
+- **Models:** They represent the information on which the application operates, its business logic.
+- **Views:** They displayed the model using Web pages and interacts with users (in principle). A view can be represented by any format output, we refer to xml, pdf, json, svg, png, etc. A simple view of a controller action has a phtml extension. todo esto son vistas.
+- **Controllers:** Respond to user actions (that is triggered in the views) and invoke changes in the views or models as needed.
 
 En KumbiaPHP los controladores están separados en partes, llamadas front controller y en un conjunto de acciones. Cada acción sabe como reaccionar ante un determinado tipo de petición.
 
