@@ -27,7 +27,7 @@
   - [KumbiaPHP y sus URLs](first-app.md#kumbiaphp-y-sus-urls)
   - [Agregando más contenido](first-app.md#agregando-mas-contenido)
   - [Repitiendo la Historia](first-app.md#repitiendo-la-historia)
-- [CRUD](appendix.md)
+- [CRUD](crud.md)
     - [Introducción](crud.md#introducción)
     - [Configurando database.ini](crud.md#configurando-database.ini)
     - [Modelo](crud.md#modelo)
