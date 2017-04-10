@@ -1,20 +1,20 @@
-# Modelos
+# Models
 
-En los Modelos reside la lógica de negocio (o de la aplicación). Equivocadamente, mucha gente cree que los modelos son solo para trabajar con las bases de datos.
+Models lies the logic of business (or application). Mistakenly, many people believe that the models are only for working with databases.
 
-Los modelos puedes ser de muchos tipos:
+Models can be of many types:
 
-- Crear miniaturas de imágenes
-- Consumir y usar webservices
-- Crear pasarelas Scaffold de pago
-- Usar LDAP
-- Enviar mails o consultar servidores de correo
-- Interactuar con el sistema de ficheros local o vía FTP, o cualquier otro protocolo
+- Create thumbnails of images
+- Consume and use webservices
+- Create payment gateways
+- Use LDAP
+- Send mails or check mail servers
+- Interact with the local file system or via FTP, or any other protocol
 - etc etc
 
 ## Como usar los modelos
 
-Los Modelos representan la lógica de la aplicación, y son parte fundamental para el momento que se desarrolla una aplicación, un buen uso de estos nos proporciona un gran poder al momento que se necesita escalar, mantener y reusar código en una aplicación.
+The models represent the application logic, and are a fundamental part for the moment that develops an application, a good use of these provides us a great power when needed scale, maintain and reuse the code in an application.
 
 Por lo general un mal uso de los modelos es sólo dejar el archivo con la declaración de la clase y generar toda la lógica en el controlador. Esta práctica trae como consecuencia que en primer lugar el controlador sea difícilmente entendible por alguien que intente agregar y/o modificar algo en esa funcionalidad, en segundo lugar lo poco que puedes rehusar el código en otros controladores. Eso conlleva a repetir código que hace lo mismo en otro controlador.
 
