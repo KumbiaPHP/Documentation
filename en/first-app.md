@@ -1,14 +1,14 @@
-# Mi Primera Aplicación con KumbiaPHP
+# My first app with KumbiaPHP
 
-Luego que explicamos los pasos para configurar KumbiaPHP y ver su pantalla de bienvenida, se viene hacer el primer ejemplo el cual tiene como objetivo entender elementos básicos al momento de utilizar el framework que sirvan para entender la arquitectura MVC (Modelo-Vista-Controlador).
+After you are ready with the KumbiaPHP installation, you can see the welcome page. Now it is time to create your first Hello World application. The goal is that you understand the basic components of the MVC (Model-View-Controller) architecture.
 
-## ¡Hola KumbiaPHP!
+## Hello KumbiaPHP!
 
-Ahora escribiremos el famoso "¡Hola Mundo!" pero con un pequeño cambio: Diremos "¡Hola KumbiaPHP!". Pensando en esto, recordemos el modelo MVC, según esto, KumbiaPHP debería aceptar una petición, que busca en controlador y, en este, una acción que atiende la petición. Luego, KumbiaPHP utiliza esta información de controlador y acción para buscar la vista asociada a la petición.
+Now write the famous "Hello World!" but with a small change: say "Hello KumbiaPHP!". Pensando en esto, recordemos el modelo MVC, según esto, KumbiaPHP debería aceptar una petición, que busca en controlador y, en este, una acción que atiende la petición. Then, KumbiaPHP uses that information to find the view associated with the request.
 
-## El Controlador
+## Controller
 
-Ahora agregamos contenido al controlador app/controllers/saludo_controller.php
+Now add content to the controller app/controllers/controller/saludo_controller.php
 
 ```php
 <?php
@@ -46,7 +46,7 @@ A continuación se prueba al acceder a la siguiente URL: http://localhost/kumbia
 
 ![](../images/image06.png) Figura 2.2: Contenido de la vista hola.phtml
 
-## KumbiaPHP y sus URLs
+## KumbiaPHP and URLs
 
 Para entender el funcionamiento del framework es importante entender sus URLs, la figura 2.3 muestra una URL típica en KumbiaPHP.
 
@@ -60,7 +60,7 @@ Cualquier otra información pasada por URL es tomada como parámetro de la acci�
 
 Esto es útil para evitar que tener estar enviando parámetros GET de la forma ?var=valor&var2=valor2 (esto es, de la forma tradicional como se viene utilizando PHP), la cual revela información sobre la arquitectura de software que se dispone en el servidor. Además, hacen que nuestra URL se vea mal y fea para SEO.
 
-## Agregando más contenido
+## Add more content
 
 Agregaremos algo de contenido dinámico a nuestro proyecto, para que no sea tan aburrido. Mostraremos la hora y la fecha, usando la función date() .
 
@@ -127,7 +127,7 @@ Si ahora entramos a *http://localhost/kumbiaphp/saludo/CaChi/* , nos mostrara en
 
 ![](../images/image09.png) Figura 2.6: Saludando al usuario
 
-## Repitiendo la Historia
+## Repeating history
 
 Ahora vamos otra acción llamada adios() y como su nombre indica haremos el proceso inverso a saludar, es decir despedir a los usuarios.
 
