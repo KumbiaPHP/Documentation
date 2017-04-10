@@ -2,23 +2,23 @@
 
 ## Introducción
 
-Para empezar es importante saber, que el Scaffold se utilizo hasta la versión estable de Kumbiaphp 0.5 y que al salir la versión de Kumbiaphp 1.0 Spirit beta 1 se dejo a un lado, hasta crear uno nuevo mas configurable y mantenible.
+To begin, it is important to know, that the Scaffold was used until the stable release 0.5 Kumbiaphp and that leaving Kumbiaphp version 1.0 Spirit beta 1 will leave aside, to create a new one more customizable and maintainable.
 
 Viendo la necesidad y las facilidades que el Scaffold proporciona al apoyo de aplicaciones, el equipo de desarrollo de Kumbiaphp vuelve a incorporar un nuevo para su versión KumbiaPHP beta 2, mejorando y simplificando el desempeño del Scaffold para el Framework y que sin duda aporta a un gran avance en cualquier desarrollo de aplicación para usuarios iniciados en el uso de Kumbiaphp y usuarios avanzados, entregando para todos una gama alta de posibilidades.
 
-## Concepto
+## Concept
 
 Scaffold es un método de meta-programación para construir aplicaciones de software que soportan bases de datos. Esta es una nueva técnica soportada por algunos frameworks del tipo MVC (Modelo-Vista-Controlador), donde el programador debe escribir una especificación que escriba como debe ser usada la aplicación de bases de datos. El compilador luego usara esta para generar un código que pueda usar la aplicación para leer, crear, actualizar y borrar entradas de la base de datos (algo conocido como CRUD o ABM), tratando de poner plantillas como un andamio Scaffold) en la cual construir una aplicación mas potente.
 
 Scaffolding es la evolución de códigos generadores de bases de datos desde ambientes más desarrollados, como ser CASE Generator de Oracle y otros tantos servidores 4GL para servicios al Cliente. Scaffolding se hizo popular gracias al framework "Ruby on Rails", que ha sido adaptado a otros frameworks, incluyendo Django, Monorail, KumbiaPHP framework entre otros.
 
-## Objetivo
+## Objective
 
 Crear un CRUD 100% Funcional con tan solo 2 lineas de código en mi controller.
 
 KumbiaPHP toma como por arte de magia, los parámetros indicados en mi TABLA y arma todo el CRUD.
 
-## Primeros Pasos
+## Getting Started
 
 Para realizar nuestro primer Scaffold, vamos a utilizar el mismo modelo que trabajamos en el [CRUD para KumbiaPHP Beta2](http://wiki.kumbiaphp.com/Beta2_CRUD_en_KumbiaPHP_Framework) , y que tiene por nombre menus.
 
@@ -39,7 +39,7 @@ class  Menus extends  ActiveRecord
 
 * * *
 
-## Controlador
+## Controller
 
 Crear el Controlador en este ejemplo, NO apuntaremos a la clase AppController y SI a la clase ScaffoldController.
 
@@ -59,17 +59,17 @@ class  MenusController extends  ScaffoldController
 
 Aquí terminan nuestros primeros pasos. No es necesario NADA MÁS. Tendremos por arte de magia un CRUD 100% Funcional.
 
-## Ventajas
+## Advantages
 
   1. Podremos ir cargando nuestros primeros registros en la BD
   2. Pruebas al insertar registros
   3. Avance progresivo, ya que podremos ir sustituyendo las vistas del Scaffold por mis propias vistas.
 
-## Desventaja
+## Disadvantage
 
   1. El Scaffold no es para hacer sistemas, si no para ayudar al principio de una aplicación.
 
-## Views para el scaffold
+## Views for the scaffold
 
 Por defecto usa los de views/_shared/scaffolds/kumbia/... Uno puede crear los suyos dentro de scaffolds views/_shared/scaffolds/foo/... y en el controller además del atributo $model añade; public $scaffold = 'foo';
 
