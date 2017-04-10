@@ -1,16 +1,16 @@
 # CRUD
 
-## Introducción
+## Introduction
 
-Este ejemplo, permite de manera sencilla conocer y entender la implementación de un CRUD (Create, Read, Update y Delete en inglés) sin la necesidad de un Scaffold y un manejo correcto del MVC en KumbiaPHP.
+This example allows easy understanding of the implementation of a CRUD (Create, Read, Update and Delete) without the need of a Scaffold, doing a correct handling of the MVC in KumbiaPHP.
 
-## Configurando database.ini
+## Configuring database.ini
 
-Configurar el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) , con los datos y motor de Base de Datos a utilizar.
+Configure the databases.ini with the data and the db engine to be used.
 
-## Modelo
+## Model
 
-Crear el Modelo dado por la definición de una tabla en la BD, para efecto del ejemplo creamos la siguiente tabla.
+Create the Model that defines the table in the database, for complementing the example we create the follow table.
 
 ```sql
 CREATE TABLE menus
@@ -22,7 +22,7 @@ primary key(id)
 )  
 ```
 
-Vamos ahora a definir el modelo el cual nos permite interactuar con la BD.
+We will now define the model which allows us to interact with the database.
 
 [app]/models/menus.php:
 
@@ -47,7 +47,7 @@ class Menus extends ActiveRecord
 
 ## Controller
 
-El controlador es encargado de atender las peticiones del cliente (ej. browser) y a su vez de darle una respuesta. En este controller vamos a definir todas las operaciones CRUD que necesitamos.
+The controller handles client requests and replies (ie, a browser). In this controller we must define all the CRUD actions/functions we need.
 
 [app]/controllers/menus_controller.php:
 
@@ -146,9 +146,9 @@ class MenusController extends AppController
 
 ```
 
-## Vistas
+## Views
 
-Agregamos las vistas...
+We add the views...
 
 [app]/views/menus/index.phtml
 
@@ -204,10 +204,10 @@ Agregamos las vistas...
 <?= Form::close() ?>
 ```
 
-## Probando el CRUD
+## Testing the CRUD
 
-Ahora sólo resta probar todo el código que hemos generado, en este punto es importante conocer el comportamiento de las [URL's en KumbiaPHP](http://wiki.kumbiaphp.com/Hola_Mundo_KumbiaPHP_Framework#KumbiaPHP_URLS) .
+Now it only remains to try all the code that we have generated, at this point it is important to know the behavior of the [URL's in KumbiaPHP](http://wiki.kumbiaphp.com/Hola_Mundo_KumbiaPHP_Framework#KumbiaPHP_URLS).
 
-- index es la acción para listar http://localhost/menus/index/ NOTA: index/ se puede pasar de forma implícita o no. KumbiaPHP en caso que no se le pase una accion, buscara por defecto un index, es decir si colocamos: http://localhost/menus/
-- create crea un menú en la Base de Datos http://localhost/menus/create/
-- Las acciones del y edit a ambas se debe entrar desde el index, ya que reciben el parámetros a editar o borrar según el caso.
+- index is the default action (ie, http://domain/menus/index/). Declaration of /index it's optional, because the controller would autoload /index if no other has been specified (ie, http://domain/menus/)
+- Create creates a menu in the database http://localhost/menus/create/
+- Edit and Delete actions are handled from the index in this example, because receives the data/ids to operate from the index.
