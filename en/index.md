@@ -31,10 +31,10 @@
   - [Repeating history](first-app.md#repitiendo-la-historia)
 - [CRUD](crud.md)
   - [Introduction](crud.md#introduction)
-  - [Configuring database.ini](crud.md#configuring-database.ini)
+  - [Configuring database.ini](crud.md#configuring-databaseini)
   - [Model](crud.md#model)
   - [Controller](crud.md#controller)
-  - [Viewss](crud.md#views)
+  - [Views](crud.md#views)
   - [Testing the CRUD](crud.md#testing-the-crud)
 
 ## MCV components
