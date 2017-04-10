@@ -155,20 +155,20 @@ We add the views...
 ```php
 <div class="content">
   <?php View::content() ?> 
-  <h3>Menús</h3>
+  <h3>Menus</h3>
   <ul>
   <?php foreach($listMenus->items as $item) : ?> 
   <li>
-      <?= Html::linkAction("edit/$item->id/", 'Editar') ?> 
-      <?= Html::linkAction("del/$item->id/", 'Borrar') ?> 
+      <?= Html::linkAction("edit/$item->id/", 'Edit') ?> 
+      <?= Html::linkAction("del/$item->id/", 'Delete') ?> 
       <strong><?= $item->nombre ?> - <?= $item->titulo ?></strong>
   </li>
   <?php endforeach ?>
   </ul>
 
-   // ejemplo manual de paginado, existen partials listos en formato digg, clasic,...
-  <?php if($listMenus->prev) echo Html::linkAction("index/$listMenus->prev/", '<< Anterior |') ?> 
-  <?php if($listMenus->next) echo Html::linkAction("index/$listMenus->next/", 'Proximo >>') ?> 
+   // Manual paginate example, exist partials ready in formats digg, clasic,...
+  <?php if($listMenus->prev) echo Html::linkAction("index/$listMenus->prev/", '<< Previous |') ?> 
+  <?php if($listMenus->next) echo Html::linkAction("index/$listMenus->next/", 'Next >>') ?> 
 </div>
 ```
 
@@ -176,9 +176,9 @@ We add the views...
 
 ```php
 <?php View::content() ?>
-<h3>Crear menú<h3>
+<h3>Create menu<h3>
 
-<?= Form::open(); // por defecto llama a la misma url ?> 
+<?= Form::open(); // by default the same url ?> 
 
       <label>Nombre
       <?= Form::text('menus.nombre') ?></label>
@@ -186,7 +186,7 @@ We add the views...
       <label>Titulo
       <?= Form::text('menus.titulo') ?></label>
 
-      <?= Form::submit('Agregar') ?> 
+      <?= Form::submit('Add') ?> 
 
 <?= Form::close() ?> 
 ```
@@ -195,12 +195,12 @@ We add the views...
 
 ```php
 <?php View::content() ?> 
-<h3>Editar menú<h3>
-<?= Form::open(); // por defecto llama a la misma url ?>
-  <label>Nombre <?= Form::text('menus.nombre') ?></label>
-  <label>Titulo <?= Form::text('menus.titulo') ?></label>
+<h3>Edit menu<h3>
+<?= Form::open(); // by default call the same url ?>
+  <label>Name <?= Form::text('menus.nombre') ?></label>
+  <label>Title <?= Form::text('menus.titulo') ?></label>
   <?= Form::hidden('menus.id') ?> 
-  <?= Form::submit('Actualizar') ?> 
+  <?= Form::submit('Update') ?> 
 <?= Form::close() ?>
 ```
 
