@@ -6,9 +6,9 @@
 
 ...
 
-# Libs de KumbiaPHP
+# Libs of KumbiaPHP
 
-Kumbiaphp lleva clases listas para usar, pero recordad que podéis crearos vuestras propias clases para reutilizarlas en vuestros proyectos.También podéis usar clases externas a KumbiaPHP, como se explica en el próximo capítulo.
+Kumbiaphp have ready-to-use classes, but remember that you can create your own classes to reuse them in your projects. You can also use external KumbiaPHP classes, as explained in the next chapter.
 
 ## Cache
 
