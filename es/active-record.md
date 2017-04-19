@@ -216,7 +216,7 @@ devueltos por esta.
 
 Este método nos permite hacer una consulta por medio de un SQL y el resultado
 devuelto es un array de objetos de la misma clase con los valores de los
-registros en estos. La idea es que el uso de este método sea tan común
+registros en estos. La idea es que el uso de este método no sea tan común
 en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del
 SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más
 específicos y tengamos que recurrir a su uso.
