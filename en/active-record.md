@@ -152,22 +152,22 @@ Methods to query registries:
 
 #### distinct ()
 
-Este método ejecuta una consulta de distinción única en la entidad, funciona igual que un "select unique campo" viéndolo desde la perspectiva del SQL. El objetivo es devolver un array con los valores únicos del campo especificado como parámetro.
+This method execute a distinction query in the entity, working the same as a "unique select field", in SQL. The goal is return an array with the unique values of the specified field as parameter.
 
-Sintaxis
-
-```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ])
-```
-
-Ejemplo
+Syntax
 
 ```php
-$unicos = (new Usuario)->distinct("estado");
-# array('A', 'I', 'N')  
+distinct([string $attribute_entity], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ])
 ```
 
-Los parámetros conditions, order y limit funcionan idénticamente que en el método find y permiten modificar la forma o los mismos valores de retorno devueltos por esta.
+Example
+
+```php
+$uniques = (new Users)->distinct("state");
+# array('A','I','N')  
+```
+
+The conditions parameters, order and limit work identically to in the find method and enable you modify the shape or the same return values returned by this.
 
 #### find\_all\_by\_sql (string $sql)
 
