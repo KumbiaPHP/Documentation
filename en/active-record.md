@@ -132,23 +132,23 @@ A field called *customers_id* in a table indicates that exist another table call
 
 The finished fields in *_at* indicate that are date and has the extra functionality that can obtain the value of current date insertion.
 
-*created_at* es un campo fecha
+*field_at* is a date field.
 
-**campo_in**
+**field_in**
 
-Los campos terminados en *_in* indican que son fechas y posee la funcionalidad extra que obtienen el valor de fecha actual en una actualización.
+The finished fields in *_in* indicate that are date and has the extra functionality that can obtain the value of current date update.
 
-*modified_in* es un campo fecha
+*field_in* is a date field.
 
-**Nota:** Los campos *_at* y *_in* deben ser de tipo fecha (DATE o DATETIME) en el motor de base de datos que se este utilizando.
+**Note:** The fields *_at* and *_in* must be of date type (DATE o DATETIME) in the database engine is using.
 
 ## ActiveRecord API
 
-A continuación veremos una referencia de los métodos que posee la clase ActiveRecord y su funcionalidad respectiva. Éstos se encuentran organizados alfabéticamente:
+Then will see a method reference of the ActiveRecord class and its respective functionality. These are organized alphabetically.
 
-### Consultas
+### Querys
 
-Métodos para hacer consulta de registros:
+Methods to query registries:
 
 #### distinct ()
 
