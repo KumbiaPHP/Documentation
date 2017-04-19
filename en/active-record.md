@@ -173,7 +173,7 @@ The conditions parameters, order and limit work identically to in the find metho
 
 This method allows us to do a query using SQL and the returned result is an array of objects of the same class with the values of this register. La idea es que el uso de este método sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir a su uso.
 
-Ejemplo
+Example
 
 ```php
 $usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
