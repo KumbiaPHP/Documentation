@@ -128,9 +128,9 @@ The finished fields in *_id* indicate foreign relationships to other tables, thu
 
 A field called *customers_id* in a table indicates that exist another table called customers and this have a field called id that is related to it.
 
-**campo_at**
+**field_at**
 
-Los campos terminados en *_at* indican que son fechas y posee la funcionalidad extra que obtienen el valor de fecha actual en una inserción.
+The finished fields in *_at* indicate that are date and has the extra functionality that can obtain the value of current date insertion.
 
 *created_at* es un campo fecha
 
