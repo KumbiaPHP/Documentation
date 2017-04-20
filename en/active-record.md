@@ -128,52 +128,52 @@ The finished fields in *_id* indicate foreign relationships to other tables, thu
 
 A field called *customers_id* in a table indicates that exist another table called customers and this have a field called id that is related to it.
 
-**campo_at**
+**field_at**
 
-Los campos terminados en *_at* indican que son fechas y posee la funcionalidad extra que obtienen el valor de fecha actual en una inserción.
+The finished fields in *_at* indicate that are date and has the extra functionality that can obtain the value of current date insertion.
 
-*created_at* es un campo fecha
+*field_at* is a date field.
 
-**campo_in**
+**field_in**
 
-Los campos terminados en *_in* indican que son fechas y posee la funcionalidad extra que obtienen el valor de fecha actual en una actualización.
+The finished fields in *_in* indicate that are date and has the extra functionality that can obtain the value of current date update.
 
-*modified_in* es un campo fecha
+*field_in* is a date field.
 
-**Nota:** Los campos *_at* y *_in* deben ser de tipo fecha (DATE o DATETIME) en el motor de base de datos que se este utilizando.
+**Note:** The fields *_at* and *_in* must be of date type (DATE o DATETIME) in the database engine is using.
 
 ## ActiveRecord API
 
-A continuación veremos una referencia de los métodos que posee la clase ActiveRecord y su funcionalidad respectiva. Éstos se encuentran organizados alfabéticamente:
+Then will see a method reference of the ActiveRecord class and its respective functionality. These are organized alphabetically.
 
-### Consultas
+### Querys
 
-Métodos para hacer consulta de registros:
+Methods to query registries:
 
 #### distinct ()
 
-Este método ejecuta una consulta de distinción única en la entidad, funciona igual que un "select unique campo" viéndolo desde la perspectiva del SQL. El objetivo es devolver un array con los valores únicos del campo especificado como parámetro.
+This method execute a distinction query in the entity, working the same as a "unique select field", in SQL. The goal is return an array with the unique values of the specified field as parameter.
 
-Sintaxis
-
-```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ])
-```
-
-Ejemplo
+Syntax
 
 ```php
-$unicos = (new Usuario)->distinct("estado");
-# array('A', 'I', 'N')  
+distinct([string $attribute_entity], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ])
 ```
 
-Los parámetros conditions, order y limit funcionan idénticamente que en el método find y permiten modificar la forma o los mismos valores de retorno devueltos por esta.
+Example
+
+```php
+$uniques = (new Users)->distinct("state");
+# array('A','I','N')  
+```
+
+The conditions parameters, order and limit work identically to in the find method and enable you modify the shape or the same return values returned by this.
 
 #### find\_all\_by\_sql (string $sql)
 
-Este método nos permite hacer una consulta por medio de un SQL y el resultado devuelto es un array de objetos de la misma clase con los valores de los registros en estos. La idea es que el uso de este método sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir a su uso.
+This method allows us to do a query using SQL and the returned result is an array of objects of the same class with the values of this register. La idea es que el uso de este método sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir a su uso.
 
-Ejemplo
+Example
 
 ```php
 $usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
