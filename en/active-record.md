@@ -171,15 +171,15 @@ The conditions parameters, order and limit work identically to in the find metho
 
 #### find\_all\_by\_sql (string $sql)
 
-This method allows us to do a query using SQL and the returned result is an array of objects of the same class with the values of this register. La idea es que el uso de este método no sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir a su uso.
+This method allows us to do a query using SQL and the returned result is an array of objects of the same class with the values of this register. The main idea is that the use of this method it's gonna be more unnecessary in our applications, since ActiveRecord take out the necessity of use the main SQL, but there are moments when it is necessary to be more specific and have to use this method.
 
 Example
 
 ```php
-$usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
+$users = (new User)->find_all_by_sql( "select * from users where code not in (select code from income)")
 ```
 
-En este ejemplo consultamos todos los usuarios con una sentencia where especial. La idea es que los usuarios consultados no pueden estar en la entidad ingreso.
+In this example we consulted all the users with a special sentence WHERE. The idea is that consulted users may no be in the entity income.
 
 #### find\_by\_sql (string $sql)
 
