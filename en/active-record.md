@@ -183,19 +183,19 @@ In this example we consulted all the users with a special sentence WHERE. The id
 
 #### find\_by\_sql (string $sql)
 
-Este método nos permite hacer una consulta por medio de un SQL y el resultado devuelto es un objeto que representa el resultado encontrado. La idea es que el uso de este método no sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos mas específicos y tengamos que recurrir al uso de este.
+This method allow us make a query across a SQL sentence and the result return is a object that represent the found result. The main idea is that the use of this method it's gonna be more unnecessary in our applications, since ActiveRecord take out the necessity of use the main SQL, but there are moments when it is necessary to be more specific and have to use this method.
 
-Ejemplo
+Example
 
 ```php
-$usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso) limit 1" );  
+$user = (new User)->find_by_sql( "select * from users where code not in (select code from income) limit 1" );  
 ```
 
-Este ejemplo consulta el primer usuario con una sentencia where especial. La idea es que el usuario consultado no se encuentre en la entidad ingreso.
+This example queries the first user with a sentence where special. The idea is that the user accessed is not in the State income.
 
 #### find\_first (string $sql)
 
-Sintaxis
+Syntax
 
 ```php
 find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ] )  
