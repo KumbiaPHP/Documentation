@@ -199,7 +199,7 @@ como parámetro.
 
 Sintaxis
 ```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ])
+distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
 ```
 
 Ejemplo
@@ -251,7 +251,7 @@ La idea es que el usuario consultado no se encuentre en la entidad ingreso.
 
 Sintaxis
 ```php
-find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ])  
+find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ] )  
 ```  
 
 El método "find\_first" devuelve el primer registro de una entidad o la primera
@@ -317,7 +317,7 @@ $usuario = (new Usuario)->find_first(123);
 
 Sintaxis
 ```php
-find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …], ["columns: … "])
+find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
 ```
 
 El método "find" es el principal método de búsqueda de ActiveRecord, devuelve
@@ -377,6 +377,12 @@ devueltos en la búsqueda.
 
 Nota: No es necesario usar find('id: $id'), se puede usar directamente
 find($id)
+
+Podemos ver un ejemplo para __find__ usando funciones de resumen y agrupación (aplicables también a __find_first__)
+```php
+$resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(*) as num_facturas", "group: agencia_origen, agencia_destino", "having: count(*) > 5");
+```
+
 
 #### select\_one (string $select_query)
 
@@ -454,7 +460,7 @@ $resultado = (new Producto)->find_all_by_categoria("Insumos");
 ####  count()
 
 Realiza un conteo sobre los registros de la entidad con o sin alguna condición
-adicional. Emula la función de agrupamiento count.
+adicional. Emula la función de agrupamiento count. Se puede usar los mismos parámetros que find.
 
 ```php
 $numero_registros = (new Cliente)->count();
@@ -464,7 +470,7 @@ $numero_registros = (new Cliente)->count("ciudad = 'BOGOTA'");
 #### sum()
 
 Realiza una sumatoria sobre los valores numéricos del atributo de alguna
-entidad, emula la función de agrupamiento sum en el lenguaje SQL.
+entidad, emula la función de agrupamiento sum en el lenguaje SQL. Se puede usar los mismos parámetros que find.
 
 ```php
 $suma = (new Producto)->sum("precio");
@@ -485,7 +491,7 @@ $numero = (new Producto)->count_by_sql("select count(precio) from producto, fact
 #### average()
 
 Realiza el cálculo del promedio sobre los valores numéricos del atributo de
-alguna entidad, emula la función de agrupamiento avg en el lenguaje SQL.
+alguna entidad, emula la función de agrupamiento avg en el lenguaje SQL. Se puede usar los mismos parámetros que find.
 
 ```php
 $promedio = (new Producto)->average("precio");
@@ -495,7 +501,7 @@ $promedio = (new Producto)->average("precio", "conditions: estado = 'A'");
 #### maximum()
 
 Realiza el cálculo del valor máximo sobre los valores del atributo de alguna
-entidad, emula la función de agrupamiento max en el lenguaje SQL.
+entidad, emula la función de agrupamiento max en el lenguaje SQL. Se puede usar los mismos parámetros que find.
 
 ```php
 $max = (new Producto)->maximum("precio");
@@ -505,12 +511,14 @@ $max = (new Producto)->maximum("fecha_compra", "conditions: estado = 'A'");
 #### minimum()
 
 Realiza el cálculo del valor mínimo sobre los valores del atributo de alguna
-entidad, emula la función de agrupamiento min en el lenguaje SQL.
+entidad, emula la función de agrupamiento min en el lenguaje SQL. Se puede usar los mismos parámetros que find.
 
 ```php
 $min = (new Producto)->minimum("precio");
 $min = (new Producto)->minimum("fecha_compra", "conditions: estado = 'A'");
 ```
+
+
 
 ### Creación, actualización y borrado de registros
 
