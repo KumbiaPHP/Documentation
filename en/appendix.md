@@ -6,7 +6,7 @@ KumbiaPHP provides integration with the JavaScript Framework jQuery
 
 ### KDebug
 
-KDebug es un nuevo objeto incorporado al plugins de integración KumbiaPHP/jQuery que permite una depuración del código en tiempo de desarrollo. Con solo un parámetro se puede aplicar un log que permite ver en consola (mientras esta este disponible, sino usara alert) que permite un mejor control de la ejecución.
+KDebug is a new object incorporated to the integration plugins at KumbiaPHP/JQuery that allows a debugging of the code in development time. With just one parameter you can use a log that allow see in console (while available, if not it using alert) allowing a better control of the execution.
 
 No es necesario pero si recomendable usar Firebug si se trabaja en Mozilla Firefox o algún navegador que use la consola de WebKit como Google Chrome.
 
