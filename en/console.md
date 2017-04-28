@@ -2,7 +2,7 @@
 
 ## Intro
 
-La consola, es una herramienta de línea de comandos de KumbiaPHP, que permite realizar tareas automatizadas en el ámbito de tu aplicación. En este sentido KumbiaPHP incluye las siguientes consolas: Cache, Model y Controller.
+The console, is a tool for command line of KumbiaPHP, allowing to perform automated task in the scope of your app. In this way KumbiaPHP includes the following consoles: Cache, Model and Controller.
 
 Cada consola está compuesta por un conjunto de comandos, cada comando puede recibir argumentos secuenciales y argumentos con nombre . Para indicar un argumento con nombre se debe anteceder el prefijo " \--" al argumento.
 
