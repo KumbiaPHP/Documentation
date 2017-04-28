@@ -201,12 +201,12 @@ Syntax
 find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ] )  
 ```
 
-El método "find\_first" devuelve el primer registro de una entidad o la primera ocurrencia de acuerdo a unos criterios de búsqueda u ordenamiento. Los parámetros son todos opcionales y su orden no es relevante, cuando se invoca sin parámetros devuelve el primer registro insertado en la entidad. Este método es muy flexible y puede ser usado de muchas formas:
+The "find\_first" method returns the first record of a entity or the first occurrence according to search or sorting criteria. The parameter are all optional and your order is not relevant, when invoked without parameter returns the first record inserted in the entity. This method is very flexible and can be used in many ways:
 
-Ejemplo
+Example
 
 ```php
-$usuario = (new Usuario)->find_first( "conditions: estado='A'", "order: fecha desc");
+$user = (new Users)->find_first( "conditions: state='A'", "order: date desc");
 ```
 
 En este ejemplo buscamos el primer registro cuyo estado sea igual a "A" y ordenado descendentemente, el resultado de este, se carga a la variable $usuarios. Devuelve una instancia del mismo objeto ActiveRecord en caso de éxito o false en caso contrario.
