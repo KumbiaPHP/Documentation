@@ -209,7 +209,7 @@ Example
 $user = (new Users)->find_first( "conditions: state='A'", "order: date desc");
 ```
 
-En este ejemplo buscamos el primer registro cuyo estado sea igual a "A" y ordenado descendentemente, el resultado de este, se carga a la variable $usuarios. Devuelve una instancia del mismo objeto ActiveRecord en caso de éxito o false en caso contrario.
+In this example we are looking for the first record whose status is equal to "a" and odered descending, the result of this is charged to the variable $user. Returns a instance of the same ActiveRecord object in case of success or false otherwise.
 
 Con el método find_first podemos buscar un registro en particular a partir de su id de esta forma:
 
