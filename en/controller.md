@@ -107,21 +107,21 @@ css/style.css"/>
 
 ## The actions
 
-Las acciones son la parte fundamental en la aplicación, puesto que contienen el flujo en que la aplicación actuará ante ciertas peticiones. Las acciones utilizan el modelo y definen variables para la vista. Cuando se realiza una petición web en una aplicación KumbiaPHP, la URL define una acción y los parámetros de la petición. Ver sección [KumbiaPHP y sus URLs](first-app.md#kumbiaphp-y-sus-urls)
+Actions are the main part in the application, since containing flow in which the application will act to certain requests. The actions use the model and defined variables to the view. When you make a web request on a KumbiaPHP application, the URL defines an action and the parameters of the request. See section [KumbiaPHP and their URLs](first-app.md#kumbiaphp-y-sus-urls)
 
-Las acciones son métodos de una clase controladora llamada ClassController que hereda de la clase AppController y pueden o no ser agrupadas en módulos.
+Actions are methods of a controller class called ClassController that inherits from the AppController class and may or may not be grouped into modules.
 
 ### Actions and views
 
-Cada vez que se ejecuta una acción, KumbiaPHP busca entonces una vista (view) con el mismo nombre de la acción. Este comportamiento se ha definido por defecto. Normalmente las peticiones deben dar una respuesta al cliente que la ha solicitado, entonces si tenemos una acción llamada *saludo()* debe existir una vista asociada a esta acción llamada *saludo.phtml*. Habrá un capítulo más extenso dedicado a la explicación de las vistas en KumbiaPHP.
+Whenever an action is executed, KumbiaPHP then seeks a view with the same name of the action. This behavior is defined by default. Normally requests must respond to the customer who has requested it, then if we have an action called *saludo()* there should be a view associated with this action called *saludo.phtml*. There will be more extensive chapter explaining the views on KumbiaPHP.
 
 ### Get values from an action
 
-Las URLs de KumbiaPHP están caracterizadas por tener varias partes, cada una de ellas con una función conocida. Para obtener desde un controlador los valores que vienen en la URL podemos usar algunas propiedades definidas en el controlador.
+KumbiaPHP URLs are characterized by having several parts, each with a known function. To obtain from a controller values supplied in the URL we can use some properties defined in the controller.
 
-Tomemos la URL:
+Take the URL:
 
-http://www.example.com/noticias/ver/12/
+http://www.example.com/news/show/12/
 
 - Controller: News
 - Action: show
@@ -130,31 +130,31 @@ http://www.example.com/noticias/ver/12/
 ```php
 <?php
 /** 
- * Controller Noticia
+ * Controller News
  */ 
-class NoticiasController extends AppController{
+class NewsController extends AppController{
     /** 
-     * método para ver la noticia
+     * Method to show the news
      * @param int $id
      */ 
-    public function ver($id){
-        echo $this->controller_name;//noticias   
-        echo $this->action_name;//ver   
-        //Un array con todos los parámetros enviados a la acción   
-        var_dump($this-> parameters);   
+    public function show($id){
+        echo $this->controller_name;//news
+        echo $this->action_name;//show 
+        //A array with all parameters sent to the action
+        var_dump($this->parameters);   
    }
 }
 ```
 
-Es importante notar la relación que guardan los parámetros enviados por URL con la acción. En este sentido KumbiaPHP tiene una característica, que hace seguro el proceso de ejecutar las acciones y es que se limita el envío de parámetros tal como se define en la método (acción). Lo que indica que todos los parámetros enviados por URL son argumentos que recibe la acción. Ver sección [KumbiaPHP y sus URLs](first-app.md#kumbiaphp-y-sus-urls)
+Is important to note the relationship that saved the parameters sent by the URL with the action. In this sense KumbiaPHP has a characteristic, which makes sure the process to execute the actions and is limiting the sending of parameters as defined in the method (action). This indicates that all the submitted URL parameters are arguments that receives the action. See section [KumbiaPHP and their URLs](first-app.md#kumbiaphp-y-sus-urls)
 
-En el ejemplo anterior se definió en la acción *ver($id)* un sólo parámetro, esto quiere decir que si no se envía ese parámetro o se intentan enviar más parámetros adicionales KumbiaPHP lanza una excepción (en producción muestra un error 404). Este comportamiento es por defecto en el framework y se puede cambiar para determinados escenarios según el propósito de nuestra aplicación para la ejecución de una acción.
+In the example above is defined in the action *show($id)* an only parameter, this means that if not is sends that parameter or is trying to send more parameters additional KumbiaPHP launches an exception (in production shows an error 404). This behavior is by default in the framework and is can change for certain scenarios according to the purpose of our application for the execution of an action.
 
-Tomando el ejemplo «Hola Mundo» ponga en práctica lo antes explicado y lo hará enviando parámetros adicionales al método hola($nombre) el cual sólo recibe un parámetro (el nombre) http://localhost/kumbiaphp/saludo/hola/CaChi/adici onal, en la figura 3.1 vera la excepción generada por KumbiaPHP.
+Taking the 'Hello world' example put into practice explained before and will do so by sending additional parameters to the method hello($name) which receives only one parameter (the name) http://localhost/kumbiaphp/greeting/hello/CaChi/additional, in Figure 3.1 will see that KumbiaPHP generated exception.
 
 ![](../images/image13.png)
 
-Figura 3.1: Excepción de número de parámetros erróneos.
+Figure 3.1: Exception of number of erroneous parameters.
 
 Siguiendo en el mismo ejemplo imaginemos que requerimos que la ejecución de la acción *hola()* obvie la cantidad de parámetros enviados por URL, para esto solo tenemos que indicarle a KumbiaPHP mediante el atributo $limit_params que descarte el número de parámetros que se pasan por URL.
 
