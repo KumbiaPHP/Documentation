@@ -220,13 +220,13 @@ $usuario = (new Usuario)->find_first(123);
 We get the record 123 and also returns an instance of ActiveRecord object on success, or false otherwise. KumbiaPHP generates a warning when the criteria of search for find_first returned more than one record, for this we can force to returned to only one, using the limit parameter, in this way:
 
 ```php
-$user = (new User)->find_first("conditions: status = 'A'"."limit: 1");
+$user = (new User)->find_first("conditions: state = 'A'"."limit: 1");
 ```
 
-Cuando queremos consultar, sólo algunos de los atributos de la entidad, podemos utilizar el parámetro columns:
+When we want to consult, only some of the attributes of the entity, we can use the columns parameter:
 
 ```php
-$usuario = (new Usuario)->find_first( "columns: nombre, estado");
+$user = (new User)->find_first( "columns: name, state");
 ```
 
 Cuando especificamos el primer parámetro de tipo string, ActiveRecord asumirá que son las condiciones de búsqueda para find_first:
