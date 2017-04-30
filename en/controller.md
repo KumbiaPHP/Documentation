@@ -4,8 +4,8 @@ KumbiaPHP Framework, the controller layer, contains the code that connects the b
 
 - The front controller (front controller) is the only entry point to application. Load the configuration and determines the action to execute.
 - The actions verify the integrity of petitions and prepare data required by layer of presentation.
-- Class Input and Session gives access the parameters of petitions and persistent data of user. They are used very often in the controller layer.
-- Filters are pieces of code that are executed for every request, before or after a driver even before or after an action. For example, security and validation filters are commonly used in web applications.
+- Input and Session classes provide access to the parameters of the request and the user's persistent data. They used very often in the controller layer.
+- Filters are pieces of code that are executed for every request, before or after a controller even before or after an action. For example, security and validation filters are commonly used in web applications.
 
 This chapter describes all these components. For a basic page, likely only need to write some lines of code in the action class, and that's it. The other components of the controller only used in specific situations.
 
@@ -78,7 +78,7 @@ include_once APP_PATH.'libs/test.php' ;
 
 #### CORE_PATH
 
-Constante que contiene la ruta absoluta al directorio donde se encuentra el core de KumbiaPHP. por ejemplo:
+Constant that contains the absolute path to the directory where you will find the core of KumbiaPHP. For example:
 
 ```php
 echo CORE_PATH;
