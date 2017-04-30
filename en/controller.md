@@ -92,15 +92,15 @@ To include files under this directory tree, it is the same procedure as that des
 Constant that contains the URL for the browser (browser) and points to the directory *public/* to link images, style sheets, scripts and all that is path to the browser.
 
 ```php
-//Genera un link que ira al 
-//controller: controller y action: action
-<a href=" <?php echo PUBLIC_PATH ?>controller/action/" title="Mi Link">Mi
+//Creates that will go to
+//controller: controller and action: action
+<a href=" <?php echo PUBLIC_PATH ?>controller/action/" title="My Link">Mi
 Link</a>
 
-//Enlaza una imagen que esta en public/img/imagen.jpg
-<img src="<?php echo PUBLIC_PATH ?>img/imagen.jpg" alt="Una Imagen" />
+//Link an image that is in public/img/imagen.jpg
+<img src="<?php echo PUBLIC_PATH ?>img/image.jpg" alt="An image" />
 
-//Enlaza el archivo CSS en public/css/style.css
+//Link a CSS file that is in public/css/style.css
 <link rel="stylesheet" type="text/css" href=" <?php echo PUBLIC_PATH ?>
 css/style.css"/>
 ```
