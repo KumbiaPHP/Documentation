@@ -217,10 +217,10 @@ Whit the method find_first we can search for a record in particular from his id 
 $usuario = (new Usuario)->find_first(123);
 ```
 
-We get the record 123 and also returns an instance of ActiveRecord object on success, or false otherwise. KumbiaPHP genera una advertencia cuando los criterios de búsqueda para find\_first devuelven más de un registro, para esto podemos forzar que se devuelva solamente uno, mediante el parámetro limit, de esta forma:
+We get the record 123 and also returns an instance of ActiveRecord object on success, or false otherwise. KumbiaPHP generates a warning when the criteria of search for find_first returned more than one record, for this we can force to returned to only one, using the limit parameter, in this way:
 
 ```php
-$usuario = (new Usuario)->find_first( "conditions: estado='A'", "limit: 1" );
+$user = (new User)->find_first("conditions: status = 'A'"."limit: 1");
 ```
 
 Cuando queremos consultar, sólo algunos de los atributos de la entidad, podemos utilizar el parámetro columns:
