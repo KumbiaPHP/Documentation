@@ -82,14 +82,14 @@ Constant that contains the absolute path to the directory where you will find th
 
 ```php
 echo CORE_PATH;
-//la salida es: /var/www/kumbiaphp/core/
+//the output is: /var/www/kumbiaphp/core/
 ```
 
-Para incluir archivos que se encuentre bajo este árbol de directorios, es el mismo procedimiento que se explicó para la constante APP_PATH.
+To include files under this directory tree, it is the same procedure as that described for the constant APP_PATH.
 
 #### PUBLIC_PATH
 
-Constante que contiene la URL para el navegador (browser) y apunta al directorio *public/* para enlazar imágenes, CSS, JavaScript y todo lo que sea ruta para el navegador.
+Constant that contains the URL for the browser (browser) and points to the directory *public/* to link images, style sheets, scripts and all that is path to the browser.
 
 ```php
 //Genera un link que ira al 
