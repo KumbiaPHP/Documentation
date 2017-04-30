@@ -217,7 +217,7 @@ Whit the method find_first we can search for a record in particular from his id 
 $usuario = (new Usuario)->find_first(123);
 ```
 
-Obtenemos el registro 123 e igualmente devuelve una instancia del mismo objeto ActiveRecord en caso de éxito, o false en caso contrario. KumbiaPHP genera una advertencia cuando los criterios de búsqueda para find\_first devuelven más de un registro, para esto podemos forzar que se devuelva solamente uno, mediante el parámetro limit, de esta forma:
+We get the record 123 and also returns an instance of ActiveRecord object on success, or false otherwise. KumbiaPHP genera una advertencia cuando los criterios de búsqueda para find\_first devuelven más de un registro, para esto podemos forzar que se devuelva solamente uno, mediante el parámetro limit, de esta forma:
 
 ```php
 $usuario = (new Usuario)->find_first( "conditions: estado='A'", "limit: 1" );
