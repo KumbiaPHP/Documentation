@@ -212,32 +212,32 @@ This AppController class defined in *app/libs/app_controller.php* is a very simp
 
 ## Filters
 
-Los controladores en KumbiaPHP poseen unos métodos útiles que permiten realizar comprobaciones antes y después de ejecutar un controlador y una acción, los filtros pueden ser entendidos como un mecanismo de seguridad en los cuales se puede cambiar el procesamiento de la petición según se requiera (por ejemplo verificar si un usuarios se encuentra autenticado en el sistema).
+KumbiaPHP controllers possess a few useful methods that allow to perform checks before and after executing a controller and an action, filters can be understood as a security mechanism in which the processing of the request can be changed as required (for example to check if a user is authenticated on the system).
 
-KumbiaPHP corre los filtros en un orden lógico, para manipular comprobaciones, a nivel de toda la aplicación o bien en particularidades de un controlador.
+KumbiaPHP runs filters in a logical order, to handle checks at the level of the entire application or on particularities of controller.
 
 ### Controllers filters
 
-Los filtros de controladores se ejecutan antes y después de un controlador son útiles para comprobaciones a nivel de aplicación, como por ejemplo verificar el modulo que se esta intentando acceder, sesiones de usuarios, etc. Igualmente se puede usar para proteger nuestro controlador de información inadecuada.
+Controllers filters are run before and after a driver are useful for checks at the application level, as for example check the module that is is trying to access, sessions of users, etc. It can also be used to protect our controller of inappropriate information.
 
-Los filtros son métodos los cuales sobrescribimos (característica POO) para darle el comportamiento deseado.
+Filters are methods which we overwrite (feature POO) to give you the desired behavior.
 
 #### initialize()
 
-KumbiaPHP llama al método *initialize()* antes de ejecutar el controlador y se encuentra definido para ser usado en la clase AppController. [Ver sección AppController](controller.md#clase-appcontroller).
+KumbiaPHP call *initialize()* method before executing the controller and is defined to be used in the AppController class. [See section AppController](controller.md#clase-appcontroller).
 
 #### finalize()
 
-KumbiaPHP llama al método *finalize()* después de ejecutar el controlador y se encuentra definido para ser usado en la clase AppController. [Ver sección AppController](controller.md#clase-appcontroller).
+KumbiaPHP *finalize()* method called after executing the handler and is defined to be used in the AppController class. [See section AppController](controller.md#clase-appcontroller).
 
 ### Action filters
 
-Los filtros de acciones se ejecutan antes y después de una acción son útiles para comprobaciones a nivel de controller, como por ejemplo verificar que una petición es asíncrona, cambiar tipos de respuesta, etc. Igualmente se puede usar para proteger nuestra acción de información inadecuada que sea enviada a ellos.
+Action filters are executed before and after an action are useful for checks at the controller level, as for example to verify that a request is asynchronous, changing types of response, etc. It can also be used to protect our action of inadequate information which is sent to them.
 
 #### before_filter()
 
-KumbiaPHP llama al método *before_filter()* antes de ejecutar la acción del controlador y es útil para verificar si una petición es asíncrona entre otros.
+KumbiaPHP *before_filter ()* method called before executing the action the controller, and is useful to check if a request is asynchronous among others.
 
 #### after_filter()
 
-KumbiaPHP llama al método *after_filter()* después de ejecutar la acción del controlador y es útil para cambiar valores de sesión entre otros.
+KumbiaPHP *after_filter ()* method called after executing the action the controller, and is useful to change values of session among others.
