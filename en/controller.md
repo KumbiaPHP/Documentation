@@ -161,52 +161,52 @@ Following the same example imagine that we require that the execution of the act
 ```php
 <?php
 /** 
- * Controller Saludo
+ * Greeting Controller
  */ 
-class SaludoController extends AppController {
+class GreetingController extends AppController {
     /** 
-     * Limita la cantidad correcta de
-     * parámetros de una acción 
+     * Limits the correct number 
+     * of parameters of an action
      */ 
     public $limit_params = FALSE;
-   ... métodos ...
+   ... methods...
 }
 ```
 
-Cuando tiene el valor FALSE como se explico antes, descarta la cantidad de parámetros de la acción. Ingresa a la siguiente URL [http://localhost/kumbiaph p/saludo/hola/CaChi/param2/param3/] y verá como ya no esta la excepción de la figura 3.1 y puede ver la vista de la acción como muestra la figura 3.2.
+When has the value FALSE, as explained earlier, discarded the number of parameters of the action. Enter the following URL [http://localhost/kumbiaphp/greetings/Hello/CaChi/param2/param3 /] and you will see as already is not the exception of Figure 3.1 and you can see the action view as shown in Figure 3.2.
 
 ![](../images/image03.png)
 
-Figura 3.2: Descartando la cantidad de parámetros de la acción.
+Figure 3.2: Discarding the number of parameters of the action.
 
 ## Controller conventions and creation
 
 ### Conventions
 
-Los controladores en KumbiaPHP deben llevar las siguientes convenciones y características:
+KumbiaPHP controllers must carry the following conventions and features:
 
-El archivo debe ser creado solo en el directorio *app/controllers/*. El archivo debe tener el nombre del controlador y la terminación *_controller.php*, por ejemplo *saludo_controller.php*.
+The file should be created only in the directory *app/controllers/*. The file must have the name of the controller and the suffix *_controller.php*, for example *greeting_controller.php*.
 
-El archivo debe contener la clase controladora con el mismo nombre del archivo en notación **CamelCase**. Retomando el ejemplo anterior el nombre de la clase controladora sera SaludoController.
+The file should contain the controller class with the same name of the file into notation **CamelCase**. Returning to the example above the name of the controller class will be GreetingController.
 
 ### Controller creation
 
-Ahora ponemos en práctica lo visto anteriormente y crearemos un controlador (controller) llamado saludo.
+Now we practice as seen above and create a controller (controller) called Greeting.
 
 ```php
 <?php
 /** 
- * Controller Saludo
+ * Greeting Controller
  */ 
-class SaludoController extends AppController {
+class GreetingController extends AppController {
 }
 ```
 
 ### Class AppController
 
-Es importante recordar que KumbiaPHP es un framework MVC y POO. En este sentido existe AppController y es la super clase de los controladores, todos deben heredar (extends) de esta clase para tener las propiedades (atributos) y métodos que facilitan la interacción entre la capa del modelo y presentación.
+It is important to remember that KumbiaPHP is a MVC and OOP framework. In this sense there is AppController and is the super class of controllers, all must inherit (extends) of this kind to have properties (attributes) and methods that facilitate interaction between the model and presentation layer.
 
-La clase AppController esta definida en *app/libs/app_controller.php* es una clase muy sencilla de usar y es clave dentro del MVC.
+This AppController class defined in *app/libs/app_controller.php* is a very simple class to use and is key in the MVC.
 
 ### Actions and controllers by default
 
