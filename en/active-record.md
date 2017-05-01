@@ -253,9 +253,9 @@ Syntax
 find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
 ```
 
-The "find" method is the main method of search of ActiveRecord, return all the record of a entity o the set of occurrences according the search criteria. Los parámetros son todos opcionales y su orden no es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando se invoca sin parámetros devuelve todos los registros en la entidad.
+The "find" method is the main method of search of ActiveRecord, return all the record of a entity o the set of occurrences according the search criteria. The parameters are all optional and they order is not relevant, even can be combined or omitted if is necessary. When invoke without parameters return all the records in the entity.
 
-No hay que olvidarse de incluir un espacio después de los dos puntos (:) en cada parámetro.
+Is important not forget to include a space after the colon (:) in each parameter.
 
 Ejemplo
 
