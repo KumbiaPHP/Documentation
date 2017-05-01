@@ -268,10 +268,10 @@ In this example search all the records whose state as equal to "A" and return th
 With the method find we can search the record from the particular id in this way:
 
 ```php
-$usuario = (new Usuario)->find(123);
+$user = (new User)->find(123);
 ```
 
-Obtenemos el registro 123 e igualmente devuelve una instancia del mismo objeto ActiveRecord en caso de éxito, o false en caso contrario. Como es un solo registro no devuelve un array, sino que los valores de este se cargan en la misma variable si existe el registro.
+In this case we obtain the record 123 and return a instance of the same ActiveRecord object on success, or false otherwise. Como es un solo registro no devuelve un array, sino que los valores de este se cargan en la misma variable si existe el registro.
 
 Para limitar el número de registros devueltos, podemos usar el parámetro limit:
 
