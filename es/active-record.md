@@ -197,13 +197,12 @@ find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [
 ```
 
 El método "find" es el principal método de búsqueda de ActiveRecord, devuelve
-todas los registros de una entidad o el conjunto de ocurrencias de acuerdo a
+todos los registros de una entidad o el conjunto de ocurrencias de acuerdo a
 unos criterios de búsqueda. Los parámetros son todos opcionales y su orden no
 es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando
 se invoca sin parámetros devuelve todos los registros en la entidad.
 
-No hay que olvidarse de incluir un espacio después de los dos puntos (:) en
-cada parámetro.
+Si se usan parámetros __no hay que olvidarse__ de incluir un espacio después de los dos puntos (:) luego de cada parámetro.
 
 Ejemplo
 
