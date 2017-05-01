@@ -235,25 +235,25 @@ When we specify the first parameter of string type, ActiveRecord will assume tha
 $user = (new User)->find_first("estado='A'");
 ```
 
-De esta forma podemos también deducir que estas 2 sentencias arrojarían el mismo resultado:
+In this way we can also deduct these 2 sentences return the same result:
 
 ```php
-$usuario = (new Usuario)->find_first( "id='123'" );
+$user = (new User) ->find_first("id='123'");
 ```
 
 ```php
-$usuario = (new Usuario)->find_first(123);
+$user = (new User) ->find_first(123);
 ```
 
 #### find()
 
-Sintaxis
+Syntax
 
 ```php
 find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
 ```
 
-El método "find" es el principal método de búsqueda de ActiveRecord, devuelve todas los registros de una entidad o el conjunto de ocurrencias de acuerdo a unos criterios de búsqueda. Los parámetros son todos opcionales y su orden no es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando se invoca sin parámetros devuelve todos los registros en la entidad.
+The "find" method is the main method of search of ActiveRecord, return all the record of a entity o the set of occurrences according the search criteria. Los parámetros son todos opcionales y su orden no es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando se invoca sin parámetros devuelve todos los registros en la entidad.
 
 No hay que olvidarse de incluir un espacio después de los dos puntos (:) en cada parámetro.
 
