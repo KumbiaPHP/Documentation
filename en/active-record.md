@@ -232,7 +232,7 @@ $user = (new User)->find_first( "columns: name, state");
 When we specify the first parameter of string type, ActiveRecord will assume that they are the conditions of query for find_first method:
 
 ```php
-$user = (new User)->find_first("estado='A'");
+$user = (new User)->find_first("state='A'");
 ```
 
 In this way we can also deduct these 2 sentences return the same result:
@@ -257,15 +257,15 @@ The "find" method is the main method of search of ActiveRecord, return all the r
 
 Is important not forget to include a space after the colon (:) in each parameter.
 
-Ejemplo
+Example
 
 ```php
-$usuarios = (new Usuario)->find( "conditions: estado='A'", "order: fecha desc");
+$user = (new User)->find("conditions: state='A'", "order: date desc");
 ```
 
-En este ejemplo buscamos todos los registros cuyo estado sea igual a "A" y devuelva estos ordenados descendentemente, el resultado de este es un array de objetos de la misma clase con los valores de los registros cargados en ellos. En caso de no hayan registros devuelve un array vacío.
+In this example search all the records whose state as equal to "A" and return this ordered descending, the result of this is an array of objects of the same class with the values of the records uploaded in them. If there are no records returns an empty array.
 
-Con el método find podemos buscar un registro en particular a partir de su id de esta forma:
+With the method find we can search the record from the particular id in this way:
 
 ```php
 $usuario = (new Usuario)->find(123);
