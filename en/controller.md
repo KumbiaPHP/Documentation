@@ -156,7 +156,7 @@ Taking the 'Hello world' example put into practice explained before and will do 
 
 Figure 3.1: Exception of number of erroneous parameters.
 
-Siguiendo en el mismo ejemplo imaginemos que requerimos que la ejecución de la acción *hola()* obvie la cantidad de parámetros enviados por URL, para esto solo tenemos que indicarle a KumbiaPHP mediante el atributo $limit_params que descarte el número de parámetros que se pasan por URL.
+Following the same example imagine that we require that the execution of the action *hello()* disregard the amount of parameters sent by URL, for this will only have to indicate to KumbiaPHP using the $limit_params attribute that you discard the number of parameters that are passed by URL.
 
 ```php
 <?php
