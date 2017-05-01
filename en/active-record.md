@@ -229,10 +229,10 @@ When we want to consult, only some of the attributes of the entity, we can use t
 $user = (new User)->find_first( "columns: name, state");
 ```
 
-Cuando especificamos el primer parámetro de tipo string, ActiveRecord asumirá que son las condiciones de búsqueda para find_first:
+When we specify the first parameter of string type, ActiveRecord will assume that they are the conditions of query for find_first method:
 
 ```php
-$usuario = (new Usuario)->find_first( "estado='A'" );
+$user = (new User)->find_first("estado='A'");
 ```
 
 De esta forma podemos también deducir que estas 2 sentencias arrojarían el mismo resultado:
