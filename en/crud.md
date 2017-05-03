@@ -83,63 +83,63 @@ class MenusController extends AppController
          */
         if (Input::hasPost('menus')) {
             /**
-             * se le pasa al modelo por constructor los datos del form y ActiveRecord recoge esos datos
-             * y los asocia al campo correspondiente siempre y cuando se utilice la convención
-             * model.campo
+             * the data of form is sent to model for construct and ActiveRecord collect 
+             * this data and associate to the corresponding field when it's use the convention
+             * model.field
              */
             $menu = new Menus(Input::post('menus'));
-            //En caso que falle la operación de guardar
+            //In case that the operation fail
             if ($menu->create()) {
-                Flash::valid('Operación exitosa');
-                //Eliminamos el POST, si no queremos que se vean en el form
+                Flash::valid('Success');
+                //Delete the POST, if don't wanna that it can be seen in the form
                 Input::delete();
                 return;
             }
 
-            Flash::error('Falló Operación');
+            Flash::error('Operation Fail');
         }
     }
 
     /**
-     * Edita un Registro
+     * Edit a record
      *
-     * @param int $id (requerido)
+     * @param int $id (required)
      */
     public function edit($id)
     {
         $menu = new Menus();
 
-        //se verifica si se ha enviado el formulario (submit)
+        //verify if the post as send data (submit)
         if (Input::hasPost('menus')) {
 
             if ($menu->update(Input::post('menus'))) {
-                 Flash::valid('Operación exitosa');
-                //enrutando por defecto al index del controller
+                 Flash::valid(Success');
+                //redirect por default to the index of controller
                 return Redirect::to();
             }
-            Flash::error('Falló Operación');
+            Flash::error('Operation Fail');
             return;
         }
 
-        //Aplicando la autocarga de objeto, para comenzar la edición
+        //Applied the auto load of object, for start the edition
         $this->menus = $menu->find_by_id((int) $id);
 
     }
 
     /**
-     * Eliminar un menú
+     * Delete a menu
      *
-     * @param int $id (requerido)
+     * @param int $id (require)
      */
     public function del($id)
     {
         if ((new Menus)->delete((int) $id)) {
-                Flash::valid('Operación exitosa');
+                Flash::valid('Success');
         } else {
-                Flash::error('Falló Operación');
+                Flash::error('Operation fail');
         }
 
-        //enrutando por defecto al index del controller
+        //redirect to the index of controller
         return Redirect::to();
     }
 }
