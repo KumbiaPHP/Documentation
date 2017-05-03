@@ -273,29 +273,29 @@ $user = (new User)->find(123);
 
 In this case we obtain the record 123 and return a instance of the same ActiveRecord object on success, or false otherwise. As it is a single record does not return array, instead it the values of this are loaded into the same variable if the record exists.
 
-Para limitar el número de registros devueltos, podemos usar el parámetro limit:
+For limit the number of record returned, you can use the limit parameter:
 
 ```php
-$usuarios = (new Usuario)->find("conditions: estado='A'", 'limit: 5', 'offset: 1');
+$user = (new User)->find("conditions: state='A', 'limit: 5', 'offeset: 1');
 ```
 
-Cuando queremos consultar sólo algunos de los atributos de la entidad podemos utilizar el parámetro columns :
+When we want query only some of the attributes of the entity, we can also use the parameter columns:
 
 ```php
-$usuarios = (new Usuario)->find("columns: nombre, estado");
+$user = (new User)->find("columns: name, state");
 ```
 
-Cuando especificamos el primer parámetro de tipo string, ActiveRecord asume que son las condiciones de búsqueda para find:
+When we specify the first parameter of string type, ActiveRecord assume that it is the conditions of search for find:
 
 ```php
-$usuarios = (new Usuario)->find( "estado='A'");
+$user = (new User)->find("state='A'");
 ```
 
-Se puede utilizar la propiedad count para saber cuántos registros fueron devueltos en la búsqueda.
+It's possible use the property count for know how many records were returned in the search.
 
-Nota: No es necesario usar find('id: $id'), se puede usar directamente find($id)
+Note: it is not necessary use the find('id: $id'), it's posible use directly find($id)
 
-Podemos ver un ejemplo para **find** usando funciones de resumen y agrupación (aplicables también a **find_first**)
+We can see an example for **find** using the functions of summary and grouping (it's possible also to **find_first**)
 
 ```php
 $resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(*) as num_facturas", "group: agencia_origen, agencia_destino", "having: count(*) > 5");
