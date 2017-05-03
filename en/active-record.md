@@ -313,29 +313,29 @@ In the example, we want to know the current time of the server returned from MyS
 
 #### select\_one(string $select_query) (static)
 
-This method allows us to make certain queries as execute functions in the date base engine, knowing that these return a single record. Este método se puede llamar de forma estática, esto significa que no es necesario que haya una instancia de ActiveRecord para hacer el llamado.
+This method allows us to make certain queries as execute functions in the date base engine, knowing that these return a single record. This method can be called statically, meaning that this is not necessary that exist a instance of ActiveRecord to make the call.
 
 ```php
-$current_time = ActiveRecord::select_one( "current_time");
+$current_time = ActiveRecord::select_one("current_time");
 ```
 
-En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL, podemos usar este método para esto.
+In the example, we want to know the current time returned from the MySQL server, we can use this method for this.
 
-#### exists()
+#### exist()
 
-Este método nos permite verificar si el registro existe o no en la base de datos mediante su id o una condición.
+This method, allows us verify if the record exist or not in the data base by using your id or a condition.
 
 ```php
-$usuario = new Usuario();
+$user = new User();
 
-$usuario->id  = 3;
+$user->id  = 3;
 
-if ($usuario->exists()){
-  //El usuario con id igual a 3 si existe
+if ($user->exists()){
+  //The user with the id equal to 3 exist
 }
 
-(new Usuario)->exists( "nombre='Juan Perez'")
-(new Usuario)->exists(2); // Un Usuario con id->2?
+(new User)->exists( "name='Mike Amigorena'")
+(new User)->exists(2); // Exists a user with id->2?
 ```
 
 #### find\_all\_by()
