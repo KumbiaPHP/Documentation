@@ -298,22 +298,22 @@ Note: it is not necessary use the find('id: $id'), it's posible use directly fin
 We can see an example for **find** using the functions of summary and grouping (it's possible also to **find_first**)
 
 ```php
-$resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(*) as num_facturas", "group: agencia_origen, agencia_destino", "having: count(*) > 5");
+$ressumen = (new Invoice)->find("columns: agency_origin, agency_destiny, count(*) as num_invoices", group: agency_origin, agency_destiny", "having: count(*) > 5");
 ```
 
 #### select\_one (string $select_query)
 
-Este método nos permite hacer ciertas consultas como ejecutar funciones en el motor de base de datos sabiendo que éstas devuelven un único registro.
+This method allows us to make certain queries as execute functions in the database engine knowing that these return a single record.
 
 ```php
-$current_time = (new Usuario)->select_one( "current_time");
+$current_time = (new User)->select_onde("current_time");
 ```
 
-En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL, podemos usar este método para esto.
+In the example, we want to know the current time of the server returned from MySQL, you can use this method for this.
 
 #### select\_one(string $select_query) (static)
 
-Este método nos permite hacer ciertas consultas como ejecutar funciones en el motor de base de datos, sabiendo que estas devuelven un solo registro. Este método se puede llamar de forma estática, esto significa que no es necesario que haya una instancia de ActiveRecord para hacer el llamado.
+This method allows us to make certain queries as execute functions in the date base engine, knowing that these return a single record. Este método se puede llamar de forma estática, esto significa que no es necesario que haya una instancia de ActiveRecord para hacer el llamado.
 
 ```php
 $current_time = ActiveRecord::select_one( "current_time");
