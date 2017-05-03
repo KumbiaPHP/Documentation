@@ -32,10 +32,10 @@ We will now define the model which allows us to interact with the database.
 class Menus extends ActiveRecord
 {
     /**
-      * Retorna los menús para ser paginados
+      * Return the menus for pagination
       *
-      * @param int $page  [requerido] página a visualizar
-      * @param int $ppage [opcional] por defecto 20 por página
+      * @param int $page  [required] page to see
+      * @param int $ppage [optional] for default 20 for page
       */
     public function getMenus($page, $ppage=20)
     {
