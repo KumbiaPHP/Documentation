@@ -54,14 +54,14 @@ The controller handles client requests and replies (ie, a browser). In this cont
 ```php
 <?php  
 /**  
-* Carga del modelo Menus...   
+* Load of model Menus...   
 */   
-// Load::models( 'menus' );// Necesario en versiones < 0.9 
+// Load::models( 'menus' );// Necessary for versions < 0.9 
 
 class MenusController extends AppController
 {
     /**
-     * Obtiene una lista para paginar los menús
+     * Obtain a list for pagination of menus
      *
      * @param int $page [opcional]
      */
@@ -71,15 +71,15 @@ class MenusController extends AppController
     }
 
     /**
-     * Crea un Registro
+     * Make a record
      */
     public function create()
     {
         /**
-         * Se verifica si el usuario envío el form (submit) y si además
-         * dentro del array POST existe uno llamado "menus"
-         * el cual aplica la autocarga de objeto para guardar los
-         * datos enviado por POST utilizando autocarga de objeto
+         * Verify if the user send the form(submit) and if also
+         * inner of array POST exist a variable called "menus"
+         * that which applies for the auto load  of object for save the
+         * date send for POST using auto load of object
          */
         if (Input::hasPost('menus')) {
             /**
