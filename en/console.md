@@ -4,9 +4,9 @@
 
 The console, is a tool for command line of KumbiaPHP, allowing to perform automated task in the scope of your app. In this way KumbiaPHP includes the following consoles: Cache, Model and Controller.
 
-Cada consola está compuesta por un conjunto de comandos, cada comando puede recibir argumentos secuenciales y argumentos con nombre . Para indicar un argumento con nombre se debe anteceder el prefijo " \--" al argumento.
+Each console is composed of a set of commands, each command can receive sequences arguments and named arguments. To indicate a named argument is must use the prefix "\--" to the argument.
 
-## ¿Cómo utilizar la Consola?
+## How to use the console?
 
 Para utilizar la consola debes ejecutar el despachador de comandos de consola de KumbiaPHP en un terminal, ubicarte en el directorio " app" de tu aplicación y ejecutar la instrucción acorde al siguiente formato:
 
