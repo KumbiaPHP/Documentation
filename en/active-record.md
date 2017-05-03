@@ -271,7 +271,7 @@ With the method find we can search the record from the particular id in this way
 $user = (new User)->find(123);
 ```
 
-In this case we obtain the record 123 and return a instance of the same ActiveRecord object on success, or false otherwise. Como es un solo registro no devuelve un array, sino que los valores de este se cargan en la misma variable si existe el registro.
+In this case we obtain the record 123 and return a instance of the same ActiveRecord object on success, or false otherwise. As it is a single record does not return array, instead it the values of this are loaded into the same variable if the record exists.
 
 Para limitar el número de registros devueltos, podemos usar el parámetro limit:
 
