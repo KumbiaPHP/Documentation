@@ -8,7 +8,7 @@ Each console is composed of a set of commands, each command can receive sequence
 
 ## How to use the console?
 
-Para utilizar la consola debes ejecutar el despachador de comandos de consola de KumbiaPHP en un terminal, ubicarte en el directorio " app" de tu aplicación y ejecutar la instrucción acorde al siguiente formato:
+For use of the console must be executed the dispatcher console of KumbiaPHP in a terminal, placed in the directory "app" of the application and execute the instruction according the following format:
 
 `php .../../core/console/kumbia.php [console] [command] [arg] [\--arg_name] = value`
 
