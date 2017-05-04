@@ -375,27 +375,27 @@ $num_of_records = (new Customers)->count("City = 'Bs As'");
 
 #### sum()
 
-Realiza una sumatoria sobre los valores numéricos del atributo de alguna entidad, emula la función de agrupamiento sum en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Performs a summation on the numeric values of the attribute of a entity, it emulates the function of grouping sum in the SQL syntax. It's possible use the same parameters as find method.
 
 ```php
-$suma = (new Producto)->sum("precio");
-$suma = (new Producto)->sum("precio", "conditions: estado = 'A'");
+$sum = (new Product)->sum("price");
+$sum = (new Product)->sum("price", "conditions: state = 'A'");
 ```
 
 #### count\_by\_sql()
 
-Realiza una sumatoria utilizando lenguaje SQL.
+Make a sum using SQL language.
 
 ```php
-$numero = (new Producto)->count_by_sql("select count(precio) from producto, factura  where factura.codigo = 1124 \
-    and factura.codigo_producto = producto.codigo_producto");
+$num = (new Product)->count_by_sql("select count(price) from product, taxes  where taxes.code = 1124 \
+    and taxes.code_product = product.code_product");
 ```
 
-### Promedios, máximo y mínimo
+### Averages, maximum and minimum
 
 #### average()
 
-Realiza el cálculo del promedio sobre los valores numéricos del atributo de alguna entidad, emula la función de agrupamiento avg en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Perform the calculation of the average on the numerical values of the attribute of an entity, it emulates the function of grouping avg in SQL language. You can use the same parameters to find.
 
 ```php
 $promedio = (new Producto)->average("precio");
