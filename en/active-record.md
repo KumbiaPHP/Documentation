@@ -157,7 +157,7 @@ This method execute a distinction query in the entity, working the same as a "un
 Syntax
 
 ```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
+distinct([string $attribute_entity], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
 ```
 
 Example
@@ -340,7 +340,7 @@ if ($user->exists()){
 
 #### find\_all\_by()
 
-Este método nos permite realizar una búsqueda por algún campo
+This method allows us to search by some field.
 
 ```php
 $resultado = (new Producto)->find_all_by( 'categoria', 'Insumos');
