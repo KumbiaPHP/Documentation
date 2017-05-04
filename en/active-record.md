@@ -343,34 +343,34 @@ if ($user->exists()){
 This method allows us to search by some field.
 
 ```php
-$resultado = (new Producto)->find_all_by( 'categoria', 'Insumos');
+$result = (new Product)->find_all_by( 'category', 'supplies');
 ```
 
 #### find\_by\__campo_()
 
-Este método nos permite realizar una búsqueda usando el nombre del atributo como nombre de método. Devuelve un único registro.
+This method allows us to make a search using the name of attribute as name of method. Return a single record.
 
 ```php
-$resultado = (new Producto)->find_by_categoria('Insumos');
+$result = (new Product)->find_by_category('Supplies');
 ```
 
 #### find\_all\_by\__campo_()
 
-Este método nos permite realizar una búsqueda el nombre del atributo como nombre de método. Devuelve todos los registros que coincidan con la búsqueda.
+This method allows us make a search with the name of attribute as method name. Returns all the record that match the search.
 
 ```php
-$resultado = (new Producto)->find_all_by_categoria("Insumos");
+$result = (new Product)->find_all_by_category("Supplies");
 ```
 
-### Conteos y sumatorias
+### Counts and Totals
 
 #### count()
 
-Realiza un conteo sobre los registros de la entidad con o sin alguna condición adicional. Emula la función de agrupamiento count. Se puede usar los mismos parámetros que find.
+Performs a count on the records of the entity with or without any additional conditions. It emulates the function of grouping count. It's possible use the same parameters to the find method.
 
 ```php
-$numero_registros = (new Cliente)->count();
-$numero_registros = (new Cliente)->count("ciudad = 'BOGOTA'");
+$num_of_records = (new Customers)->count();
+$num_of_records = (new Customers)->count("City = 'Bs As'");
 ```
 
 #### sum()
