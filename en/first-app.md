@@ -4,7 +4,7 @@ After you are ready with the KumbiaPHP installation, you can see the welcome pag
 
 ## Hello KumbiaPHP!
 
-Now write the famous "Hello World!" but with a small change: say "Hello KumbiaPHP!". Pensando en esto, recordemos el modelo MVC, según esto, KumbiaPHP debería aceptar una petición, que busca en controlador y, en este, una acción que atiende la petición. Then, KumbiaPHP uses that information to find the view associated with the request.
+Now write the famous "Hello World!" but with a small change: say "Hello KumbiaPHP!". Thinking about this, remember the MVC model, according to this, KumbiaPHP should accept a petition, seeking driver and, in this, an action that serves the request. Then, KumbiaPHP uses that information to find the view associated with the request.
 
 ## Controller
 
@@ -28,14 +28,10 @@ la identifica como una clase controladora, y esta hereda (extends) de la
 superclase *AppController*, con lo que adquiere las propiedades de una clase
 controladora, además existe el método hola().
 
-## La Vista
-
-Para poder ver la salida que envía el controlador, es necesario crear la vista
-asociada a la acción. Primero, creamos un directorio con el mismo nombre de
+# The view to see the output that sends the controller, it is necessary create the view associated with the action. Primero, creamos un directorio con el mismo nombre de
 nuestro controlador (en este caso debe llamarse saludo), y dentro de este
 están todas las vistas asociadas a las acciones que necesiten mostrar alguna
-información. En nuestro ejemplo llamamos a una acción llamada hola; por lo
-tanto, creamos un archivo llamado *app/views/saludo/hola.phtml*. Una vez creado
+información. In our example we call an action called Hello; Therefore, we create a file called * app/views/saludo/hola.phtml*. Una vez creado
 este archivo, le agregamos un poco de contenido:
 
 ```html
