@@ -413,14 +413,14 @@ $max = (new Product)->maximum("date_buy", "conditions: state = 'A'");
 
 #### minimum()
 
-Realiza el cálculo del valor mínimo sobre los valores del atributo de alguna entidad, emula la función de agrupamiento min en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Performs the calculation of the minimum value on the values of the attribute of a some entity, that emulates the function of SQL language min. It's can be used the same parameters of the find method.
 
 ```php
-$min = (new Producto)->minimum("precio");
-$min = (new Producto)->minimum("fecha_compra", "conditions: estado = 'A'");
+$min = (new Product)->minimum("price");
+$min = (new Product)->minimum("date_buy", "conditions: state = 'A'");
 ```
 
-### Creación, actualización y borrado de registros
+### Create, update, and deletion of records
 
 #### create()
 
