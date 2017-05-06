@@ -12,22 +12,22 @@ Kumbiaphp have ready-to-use classes, but remember that you can create your own c
 
 ## Cache
 
-Un cache es un conjunto de datos duplicados de otros originales, con la propiedad de que los datos originales son costosos de acceder, normalmente en tiempo, respecto a la copia en la cache.
+A cache is a set of duplicate data of other originals, with the property that the original data are costly to access, usually in time, with respect to the copy in the cache.
 
-El cache de datos esta implementado en KumbiaPHP utilizando los patrones de diseño factory y singleton. Para hacer uso de la cache es necesario tener permisos de escritura en el directorio "cache" (solamente en el caso de los manejadores "sqlite" y "file").
+The cache data is implemented in KumbiaPHP using factory and singleton design patterns. To make use of the cache, it is necessary to have write permissions in the "cache" directory (only in the case of the handlers "sqlite" and "file").
 
-Cada cache es controlada por un manejador de cache. El sistema de cache de KumbiaPHP actualmente posee los siguientes manejadores:
+Each cache is controlled by a cache handler. The system cache KumbiaPHP has currently the following handlers:
 
-* APC : utiliza Alternative PHP Cache.
-* file : cache en archivos, estos se almacenan en el directorio cache y compatible con todos los sistemas operativos.
-* nixfile : cache en archivos, estos se almacenan en el directorio cache y compatible solo con sistemas operativos \*nix (linux, freebsd, entre otros). Esta cache es mas rapida que la cache «file».
-* sqlite : cache utilizando base de datos SqLite y esta se ubica en el directorio cache.
+* APC: use Alternative PHP Cache.
+* file: cache files, these are stored in the directory cache and compatible with all operating systems.
+* nixfile: cache files, these are stored in the directory cache and compatible only with operating systems \*nix (linux, freebsd, and others). This cache is more fast cache «file».
+* sqlite: cache using SqLite database and this is located in the cache directory.
 
-Para obtener un manejador de cache se debe utilizar el método «driver» que proporciona la clase Cache.
+To obtain a cache handler you must use the method «driver» which provides the Cache class.
 
 ### driver($driver=null)
 
-Este método permite obtener un manejador de cache especifico (APC, file, nixfile, sqlite, memsqlite). Si no se indica, se obtiene el manejador de cache por defecto indicado en el config.ini.
+This method allows to obtain a cache handler specific (APC, file, nixfile, sqlite, memsqlite). If not indicated, gets cache handler by default indicated in the config.ini.
 
 <?php  
 // cache por defecto  
@@ -39,24 +39,22 @@ $data = Cache::driver()->get('saludo'); if(!$data) { Cache::driver()->save('Hola
 
 <?php if(Cache::driver()->start('+1 day', 'saludo')): ?> 
 
-    Hola <?php echo $usuario ?>
-    
-    <?php Cache::driver()->end() ?>
+    Hello <? php echo $usuario? > <? php Cache:driver()-> end()? >
     
 
 <?php endif; ?>
 
 * * *
 
-### end ($save=true)
+### end ($save = true)
 
-Termina cacheo de buffer de salida indicando si se debe guardar o no en la cache.
+End caching output buffer indicating if it should be kept or not in the cache.
 
 * * *
 
 ## Logger
 
-La clase Logger para el manejo de \[Log\](http://www.google.com/url?q=http%3A%2F %2Fes.wikipedia.org%2Fwiki%2FLog_\(registro\)&sa=D&sntz=1&usg=AFQjCNGft16YEbrl ayLoKbZFpNDBDXgXAA) fue reescrita de forma estática, esto quiere decir ya no es necesario crear una instancia de la clase Logger. Esta clase dispone de una variedad de métodos para manejar distintos tipos de Log.
+The Logger class for handling \[Log\] (http://www.google.com/url?q=http%3A%2F %2Fes.wikipedia.org%2Fwiki%2FLog_\(registro\) & sa = D & sntz = 1 & usg = AFQjCNGft16YEbrl ayLoKbZFpNDBDXgXAA) was rewritten statically, this means no longer necessary to create an instance of the Logger class. This class offers a variety of methods to handle different types of Log.
 
 <?php  Logger:: error ( 'Mensaje de Error' ) ?>
 
