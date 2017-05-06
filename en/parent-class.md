@@ -60,31 +60,31 @@ The Logger class for handling \[Log\] (http://www.google.com/url?q=http%3A%2F %2
 
 * * *
 
-La salida de la instrucción anterior sera lo siguiente:
+The previous statement will output the following:
 
-\[Thu, 05 Feb 09 15:19:39 -0500\]\[ERROR\] Mensaje de Error
+\[Thu, 05 Feb 09 15:19:39-0500\]\[ERROR\] Error message
 
-Por defecto los archivos log tienen el siguiente nombre logDDMMYYY.txt este nombre puede ser cambiado si así lo deseamos a través de un parámetro adicional al método.
+By default the log files have the name logDDMMYYY.txt this name can be changed if we so wish it through an additional parameter to the method.
 
 <?php  Logger:: error ( 'Mensaje de Error' , 'mi_log' ) ?>
 
 * * *
 
-Se puede apreciar el segundo parámetro ahora el archivo tendrá como nombre mi_log.txt
+You can see the second parameter now the file will be named mi_log.txt
 
-### Logger::warning ($msg);
+### Logger:warning ($msg);
 
-### Logger::error ($msg)
+### Logger:error ($msg)
 
-### Logger::debug ($msg)
+### Logger:debug ($msg)
 
-### Logger::alert ($msg)
+### Logger:alert ($msg)
 
-### Logger::critical ($msg)
+### Logger: critical ($msg)
 
-### Logger::notice ($msg)
+### Logger:notice ($msg)
 
-### Logger::info ($msg)
+### Logger:info ($msg)
 
 ### Logger::emergence ($msg)
 
