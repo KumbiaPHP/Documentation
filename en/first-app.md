@@ -28,19 +28,12 @@ la identifica como una clase controladora, y esta hereda (extends) de la
 superclase *AppController*, con lo que adquiere las propiedades de una clase
 controladora, además existe el método hola().
 
-# The view to see the output that sends the controller, it is necessary create the view associated with the action. Primero, creamos un directorio con el mismo nombre de
-nuestro controlador (en este caso debe llamarse saludo), y dentro de este
-están todas las vistas asociadas a las acciones que necesiten mostrar alguna
-información. In our example we call an action called Hello; Therefore, we create a file called * app/views/saludo/hola.phtml*. Una vez creado
-este archivo, le agregamos un poco de contenido:
-
-```html
-  <h1>¡Hola KumbiaPHP!</h1>
+# The view to see the output that sends the controller, it is necessary create the view associated with the action. First, create a directory with the same name of our driver (in this case must be called greeting), and inside it are all views associated with the actions that need to display some information. In our example we call an action called Hello; Therefore, we create a file called * app/views/saludo/hola.phtml*. Once this file is created, add you a little content: "'html < h1 > Hello KumbiaPHP! < / h1 >
 ```
 
-A continuación se prueba al acceder a la siguiente URL: http://localhost/kumbiaphp/saludo/hola/ y el resultado debe ser como muestra la figura 2.2.
+Then try to access the following URL: http://localhost/kumbiaphp/saludo/hola/ and the result must be as shown Figure 2.2.
 
-![](../images/image06.png) Figura 2.2: Contenido de la vista hola.phtml
+![](../images/image06.png) Figure 2.2: View contents of hello.phtml
 
 ## KumbiaPHP and URLs
 
@@ -50,9 +43,9 @@ Para entender el funcionamiento del framework es importante entender sus URLs, l
 
 En KumbiaPHP no existen las extensiones .php esto porque en primera instancia hay reescritura de URLs y además cuenta con un front-controller encargado de recibir todas las peticiones (mas adelante se explicara en detalle).
 
-Cualquier otra información pasada por URL es tomada como parámetro de la acción, a propósito de nuestra aplicación como muestra la figura 2.4.
+Any other information passed by URL is taken as the parameter of the action, with regard to our application as shown in Figure 2.4.
 
-![](../images/image05.png) Figura 2.4: URL con parámetros
+![](../images/image05.png) Figure 2.4: URL with parameters
 
 Esto es útil para evitar que tener estar enviando parámetros GET de la forma ?var=valor&var2=valor2 (esto es, de la forma tradicional como se viene utilizando PHP), la cual revela información sobre la arquitectura de software que se dispone en el servidor. Además, hacen que nuestra URL se vea mal y fea para SEO.
 
@@ -150,7 +143,7 @@ class SaludoController extends AppController {
 }
 ```
 
-Agregamos una nueva vista para presentar el contenido de la acción adios() y si recordamos lo que se explicó en la sección 2.1.3.3 deberíamos crear una vista *app/views/saludo/adios.phtml* con el siguiente contenido.
+Add a new view to present the contents of the action goodbye() and if we recall what was explained in the section 2.1.3.3 we should create a view *app/views/saludo/adios.phtml* with the following contents.
 
 ```php
 <h1>Ops! se ha ido :( </h1>
@@ -161,8 +154,8 @@ Si ingresa al siguiente enlace *http://localhost/kumbiaphp/saludo/adios/* se ver
 
 ![](../images/image04.png) Figura 2.7: Vista de adiós al usuario.
 
-Html::link(), es uno de los tantos helper que ofrece KumbiaPHP para facilitar al momento de programar en las vistas. Podríamos escribir el código HTML directamente, colocando *[Volver a Saludar](kumbiaphp/saludo/hola/CaChi/)*, pero esto puede conllevar a un problema, imagine que quisiera cambiar de nombre a su proyecto de kumbiaphp a demo, tendríamos que modificar todos los vínculos, los helpers de KumbiaPHP resuelven estos problemas.
+Html: link (), is one of the many helper offering KumbiaPHP to facilitate at the time of scheduled hearings. We could write the HTML code directly, by placing *[back to say hello](kumbiaphp/saludo/hola/CaChi/)*, but this can lead to a problem, imagine you would rename his project in kumbiaphp demo, we would have to modify all the links, KumbiaPHP helpers solve these problems.
 
-Para escribir el código de nuestro "¡Hola KumbiaPHP!" no necesitamos sino un controlador y una vista. No necesitamos modelos, ya que no estamos trabajando con información de una base de datos ni procesando otro tipo de información más compleja.
+To write the code of our "Hello KumbiaPHP!" don't need but a controller and a view. We don't need models, since we are not working with information from a database or other type of more complex information processing.
 
-Nos ubicamos en el directorio */path/to/kumbiaphp/app/controllers/*. Aquí están nuestros controladores (Para más detalles, lee la documentación sobre el directorio app). Para crear un controlador, es importante tener en cuenta las convenciones de nombre que utiliza el Framework. Llamaremos a nuestro controlador *saludo_controller.php*. Note el sufijo *_controller.php* esto forma parte de la convención de nombres, y hace que KumbiaPHP identifique ese archivo como un controlador.
+Nos ubicamos en el directorio */path/to/kumbiaphp/app/controllers/*. Aquí están nuestros controladores (Para más detalles, lee la documentación sobre el directorio app). Para crear un controlador, es importante tener en cuenta las convenciones de nombre que utiliza el Framework. Llamaremos a nuestro controlador *saludo_controller.php*. Note the suffix *_controller.php* this is part of the Naming Convention, and makes that KumbiaPHP identifies this file as a driver.
