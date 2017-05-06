@@ -64,8 +64,8 @@ Here complete our first steps. Don't need anything more. We will have magically 
 
 ## Views for the scaffold
 
-Por defecto usa los de views/_shared/scaffolds/kumbia/... Uno puede crear los suyos dentro de scaffolds views/_shared/scaffolds/foo/... y en el controller además del atributo $model añade; public $scaffold = 'foo';
+By default uses the views/_shared/scaffolds/kumbia /... One can create their own inside scaffolds views/_shared/scaffolds/foo /... and the controller in addition to the attribute $model added; public $scaffold = 'foo';
 
-Asi usará los views de scaffolds/foo/...
+So use the views of scaffolds/foo /...
 
-Mas importante es todavía, que uno puede crear sus views como siempre. es decir, si creas el controller MiController y creas el view en views/mi/editar.phtml (por ejemplo) usara primero el view, si no existe usa el de scaffolds. Pudiendo uno cambiar los views a su gusto donde quiera y progresivamente.
+More important still, is that one can create your views as always. i.e. If you create the controller MiController and create the view in views/mi/editar.phtml (for example) use first the view, if not usa exists on scaffolds. You can one change the views to your liking wherever and progressively.
