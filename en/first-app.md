@@ -70,7 +70,7 @@ class SaludoController extends AppController {
 }
 ```
 
-KumbiaPHP implementa las variables de instancia lo que significa que todos atributos (públicos) definidos en el controller, pasara automáticamente a la vista, en el código anterior tenemos el atributo $this->fecha este pasara a la vista como una variable llamada $fecha .
+KumbiaPHP implements the instance variables, which means that all attributes (public) defined in the controller, it happened automatically in sight, in the preceding code have the attribute $this->fecha this happened to the view as a variable called $fecha.
 
 En la vista que se creó en la sección 2.1.3.3 y agregamos.
 
@@ -158,4 +158,4 @@ Html: link (), is one of the many helper offering KumbiaPHP to facilitate at the
 
 To write the code of our "Hello KumbiaPHP!" don't need but a controller and a view. We don't need models, since we are not working with information from a database or other type of more complex information processing.
 
-Nos ubicamos en el directorio */path/to/kumbiaphp/app/controllers/*. Aquí están nuestros controladores (Para más detalles, lee la documentación sobre el directorio app). Para crear un controlador, es importante tener en cuenta las convenciones de nombre que utiliza el Framework. Llamaremos a nuestro controlador *saludo_controller.php*. Note the suffix *_controller.php* this is part of the Naming Convention, and makes that KumbiaPHP identifies this file as a driver.
+Nos ubicamos en el directorio */path/to/kumbiaphp/app/controllers/*. Here are our drivers (for more details, read the documentation on the app directory). To create a handler, it is important to keep in mind the conventions of name which uses the Framework. We will call our driver *saludo_controller.php*. Note the suffix *_controller.php* this is part of the Naming Convention, and makes that KumbiaPHP identifies this file as a driver.
