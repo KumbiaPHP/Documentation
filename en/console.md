@@ -14,9 +14,9 @@ For use of the console must be executed the dispatcher console of KumbiaPHP in a
 
 * * *
 
-Si no se especifica el comando a ejecutar, entonces se ejecutará el comando "main " de la consola.
+If not specified the command to run, then run the console command "main".
 
-También es posible indicar la ruta al directorio app de la aplicación explícitamente por medio del argumento con nombre " path ".
+It is also possible to explicitly indicate the path to the app in the application directory using the named "path" argument.
 
 Examples:
 
@@ -54,7 +54,7 @@ Removes an element from the cache.
 
 Sequential arguments:
 
-- id: id de elemento en cache.
+- id: id element in the cache.
 - group: name of group to which belongs the element, specifying no value, then use the 'default' group.
 
 Named arguments:
@@ -105,7 +105,7 @@ It allows you to manipulate the application controllers.
 
 #### create [controller]
 
-Crea un controlador utilizando como base la plantilla ubicada en 'core/console/generators/controller.php'.
+Create a controller using as a basis the located in the 'core/console/generators/controller.php' template.
 
 Sequential arguments:
 
@@ -137,60 +137,60 @@ Example:
 
 To develop your consoles you should consider the following:
 
-- Las consolas que desarrolles para tu aplicación deben estar ubicadas en el directorio "app/extensions/console".
+- Consoles that you develop for your application should be located in the directory "app/extensions/console".
 - The file should have the suffix "_console" as well as the class the "Console" suffix.
-- Cada comando de la consola equivale a un método de la clase.
-- Los argumentos con nombre que son enviados al invocar un comando se reciben en el primer argumento del método correspondiente al comando.
+- Each console command is equivalent to a class method.
+- Named arguments that are sent when you invoke a command are received in the first argument of the method corresponding to the command.
 - Sequential arguments, which are sent to invoke a command, are received as arguments to the invoked method subsequent to the first argument.
 - If he it is not specified the command to run, run by default the "main" method of the class.
-- Las clases Load, Config y Util; son cargadas automáticamente para la consola.
+- Classes Load, Config and useful; they are loaded automatically to the console.
 - The constants APP_PATH, CORE_PATH and PRODUCTION; they are defined for the console environment. 
 
 Example:
 
-Consideremos una parte del código, de la consola cache, cuya funcionalidad fue explicada en la sección anterior.
+Consider a part of the code, the cache console, whose functionality was explained in the previous section.
 
-    <?php
+    & Lt;? Php
     
-    Load::lib('cache');
+    Load :: lib ('cache');
     
-    class CacheConsole
+    Class CacheConsole
     
     {
     
-        public function clean($params, $group = FALSE)
+        Public function clean ($ params, $ group = FALSE)
     
         {
     
-            // obtiene el driver de cache
+            // get the cache driver
     
-            if (isset($params['driver'])) {
+            If (isset ($ params ['driver'])) {
     
-                $cache = Cache::driver($params['driver']);
+                $ Cache = Cache :: driver ($ params ['driver']);
     
-            } else {
+            } Else {
     
-                $cache = Cache::driver()    
+                $ Cache = Cache :: driver ()
     
             }
     
-            // limpia la cache
+            // clear the cache
     
-            if ($cache->clean($group)) {
+            If ($ cache-> clean ($ group)) {
     
-                if ($group) {
+                If ($ group) {
     
-                    echo "-> Se ha limpiado el grupo $group", PHP_EOL;
+                    Echo "-> The group $ group has been cleaned, PHP_EOL;
     
-                    } else {
+                    } Else {
     
-                    echo "-> Se ha limpiado la cache", PHP_EOL;
+                    Echo "-> The cache has been cleared", PHP_EOL;
     
                     }
     
-            } else {
+            } Else {
     
-                throw new KumbiaException('No se ha logrado eliminar el contenido');
+                Throw new KumbiaException ('Unable to delete content');
     
             }
     
@@ -202,7 +202,7 @@ Consideremos una parte del código, de la consola cache, cuya funcionalidad fue 
 
 ### Console::input
 
-Este método de la clase Console, permite leer una entrada desde el terminal, se caracteriza por intentar leer la entrada hasta que esta sea válida.
+This method of the Console class, allows you to read an input from the terminal, characterized by trying to read the entry until it is valid.
 
 `Console::input($message, $values = null)`
 
