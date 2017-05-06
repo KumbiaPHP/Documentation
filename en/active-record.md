@@ -398,17 +398,17 @@ $num = (new Product)->count_by_sql("select count(price) from product, taxes  whe
 Perform the calculation of the average on the numerical values of the attribute of an entity, it emulates the function of grouping avg in SQL language. You can use the same parameters to find.
 
 ```php
-$promedio = (new Producto)->average("precio");
-$promedio = (new Producto)->average("precio", "conditions: estado = 'A'");
+$average = (new Product)->average("price");
+$average = (new Product)->average("price", "conditions: state = 'A'");
 ```
 
 #### maximum()
 
-Realiza el cálculo del valor máximo sobre los valores del atributo de alguna entidad, emula la función de agrupamiento max en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+This method performs the calculation of the maximum value on the values of the attribute of an entity, this emulate the function of grouping max in the SQL language. Its can be used for the same parameters that find.
 
 ```php
-$max = (new Producto)->maximum("precio");
-$max = (new Producto)->maximum("fecha_compra", "conditions: estado = 'A'");
+$max = (new Product)->maximum("price");
+$max = (new Product)->maximum("date_buy", "conditions: state = 'A'");
 ```
 
 #### minimum()
