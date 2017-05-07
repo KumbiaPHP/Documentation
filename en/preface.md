@@ -6,9 +6,9 @@ This manual is for thanking those who with their time and support, in large or s
 
 ## About the Manual
 
-El libro de KumbiaPHP intenta comunicar todo lo que este framework puede ayudar en su trabajo diario como desarrollador. Le permite descubrir todos los aspectos de KumbiaPHP y aprender porque KumbiaPHP puede ser la herramienta que estaba esperando para empezar a desarrollar su proyecto. Este libro se encuentra en etapa de continuo desarrollo, diseño gráfico, revisión ortográfica y gramática, contenidos, etc. Tal como sucede con el framework, por lo cual se aconseja siempre disponer de la última versión.
+KumbiaPHP book tries to communicate everything that this framework can help in your daily work as a developer. It allows you to discover all aspects of KumbiaPHP and learn because KumbiaPHP can be the tool that was waiting to begin to develop your project. This book is in continuous development, graphic design, spelling and grammar review, content, etc. As is the case with the framework, by which it is advisable to always have the latest version.
 
-Esta versión del manual ha cambiado mucho de la anterior. Gracias a la comunidad se han reflejado cuestiones que se repetían en el grupo, en el foro y en el IRC. También se detectó el mal uso del MVC, y no se aprovechaban las facilidades del POO. Se ha intentado mejorar esos puntos recurrentes de consulta, así como mejorar el entendimiento de uso, para que creen mejores y más mantenibles aplicaciones.
+This version of the manual has changed a lot from the previous. Gracias a la comunidad se han reflejado cuestiones que se repetían en el grupo, en el foro y en el IRC. También se detectó el mal uso del MVC, y no se aprovechaban las facilidades del POO. Se ha intentado mejorar esos puntos recurrentes de consulta, así como mejorar el entendimiento de uso, para que creen mejores y más mantenibles aplicaciones.
 
 ## About KumbiaPHP
 
