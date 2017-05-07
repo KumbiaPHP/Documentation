@@ -208,7 +208,7 @@ This method of the Console class, allows you to read an input from the terminal,
 
 $message (string): message to be displayed when this method requests an entry.
 
-$values (array): conjunto de valores válidos para la entrada.
+$values (array): set of valid values for input.
 
 Example:
 
