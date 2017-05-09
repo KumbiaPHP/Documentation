@@ -424,44 +424,48 @@ $min = (new Product)->minimum("date_buy", "conditions: state = 'A'");
 
 #### create()
 
-Crea un registro a partir de los datos indicados en el modelo. Retorna boolean.
+Create a record from the data given in the model. Returns boolean.
 
 ```php
-$data = array ( "nombre" => "Cereal", "precio" => 9.99, "estado" => "A" );
-$exito = (new Producto)->create( $data );
+$data = array ( "name" => "Cereal", "price" => 9.99, "state" => "A" );
+$exito = (new Product)->create( $data );
 
-$producto = new Producto();
-$producto->nombre = "Cereal";
-$producto->precio = 9.99;
-$producto->estado = "A";
-$exito = $producto->create();
+$product = new Producto();
+$product->name = "Cereal";
+$product->price = 9.99;
+$product->state = "A";
+$succes = $product->create();
+ 
+
 ```
 
 #### save()
 
-Actualiza o crea un registro a partir de los datos indicados en el modelo. Crea el registro cuando el elemento a guardar no existe o cuando no se indica el atributo de clave primaria. Actualiza cuando el registro existe. Retorna boolean.
+Update o creates a record from the data given in the model. Make a registration when the item to save does not exist or when the primary key attribute is not indicated. Its updated when the record does exist. Return true or false.
 
 ```php
-$data = array ("nombre" => "Cereal", "precio" => 9.99, "estado" => "A" );
-$exito = (new Producto)->save( $data );
+$data = array ("name" => "Cereal", "price" => 9.99, "state" => "A" );
+$success = (new Product)->save( $data );
 
-$producto = (new Producto)->find(123);
-$producto->precio = 4.99;
-$producto->estado = "A";
-$exito = $producto->save();
+$product = (new Product)->find(123);
+$product->price = 4.99;
+$product->state = "A";
+$success = $product->save();
+ 
+
 ```
 
 #### update()
 
-Actualiza un registro a partir de los datos indicados en el modelo. Retorna boolean.
+Update a record from the given data in the model. Returns true or false.
 
 ```php
-$data = array ("nombre" => "Cereal Integral", "precio" => 8.99, "estado" => "A", "id" => 123);
-$exito = (new Producto)->update( $data );
+$data = array ("name" => "Cereal Integral", "price" => 8.99, "state" => "A", "id" => 123);
+$succes = (new Product)->update( $data );
 
-$producto = (new Producto)->find( 123 );
-$producto->estado = "C";
-$producto->update();
+$product = (new Product)->find( 123 );
+$product->state = "C";
+$product->update();
 ```
 
 #### update\_all()
