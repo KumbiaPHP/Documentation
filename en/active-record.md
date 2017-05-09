@@ -470,15 +470,15 @@ $product->update();
 
 #### update\_all()
 
-Actualiza uno o más valores dentro de uno o más registros a partir de los atributos y condiciones indicadas.
+Update one or more values inside one or more records using the attributes and conditions indicated.
 
-Ejemplos:
+Examples:
 
 ```php
-(new Producto)->update_all("precio = precio * 1.2");
+(new Product)->update_all("price = price * 1.2");
 ```
 
-Actualiza el atributo precio aumentándolo en un 20% para todos los registros de la entidad producto.
+This update the attributes price increasing the 20% for all records in the product entity.
 
 ```php
 (new Producto)->update_all("precio = precio * 1.2", "estado = 'A'", "limit: 100");
