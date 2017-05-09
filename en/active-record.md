@@ -11,7 +11,7 @@ Example with KumbiaPHP 0.9
 //KumbiaPHP 0.9
 $customer = Load::model('customer'); 
 $customer->nit = "808111827-2"; 
-$customer->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
+$customer->social_name = "Bussines XYZ";
 $customer->save(); 
 ```
 
