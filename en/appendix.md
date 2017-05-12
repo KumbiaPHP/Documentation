@@ -120,19 +120,19 @@ View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuar
 
 Suppose we want to paginate a list of users.
 
-For model User in models/user.php:
+For model User in "models/user.php":
 
 ```php
 <?php  
-class Usuario extends ActiveRecord
+class User extends ActiveRecord
 {  
   /**  
-    * Muestra los usuarios de cinco en cinco utilizando paginador
+    * Displays users five by five using "paginador"
     *
     * @param int $page
     * @return object
     **/
-  public function ver($page=1)
+  public function displayUsers($page=1)
   {
       return $this->paginate("page: $page", 'per_page: 5');
   }
@@ -140,39 +140,39 @@ class Usuario extends ActiveRecord
 
 ```
 
-Para el controlador UsuarioController en controllers/usuario_controller.php:
+For the UserController controller in "controllers/usuario_controller. php":
 
 ```php
 <?php  
-//Load::models('usuario'); //Necesario en versiones < 1.0
+//Load::models('user'); //Required in versions < 1.0
 
-class UsuarioController extends AppController
+class UserController extends AppController
 {
   /**
-    * Acción de paginado
+    * Paged action
     *
     * @param int $page
     **/
   public function page($page=1)
   {
-      $this->page = (new Usuario)->ver($page);
+      $this->page = (new Usuario)->displayUsers($page);
   }
 }
 
 ```
 
-Y en la vista views/usuario/page.phtml
+And in the view "views/user/page.phtml"
 
 ```php
 <table>
 <tr>
 <th>Id</th>
-<th>Nombre</th>
+<th>Name</th>
 </tr>
 <?php foreach($page->items as $p) : ?>
 <tr>
 <td><?= $p->id ?></td>
-<td><?= $p->nombre ?></td>
+<td><?= $p->name ?></td>
 </tr>
 <?php endforeach ?>
 </table>
@@ -188,17 +188,17 @@ Y en la vista views/usuario/page.phtml
 
 * * *
 
-## Beta1 a Beta2
+## Beta1 to Beta2
 
 * * *
 
 ## Deprecated
 
-## Métodos y clases que se usaban en versiones anteriores y que aun
+## Methods and classes that were used in previous versions and still work
 
-funcionan. Pero que quedan desaconsejadas y que no funcionarán en el futuro (próxima beta o versión final):
+But they are deprecated and will not work in the future (next beta or final release):
 
-Posiblemente habrá 2 versiones:
+Possibly there will be 2 versions:
 
 0.9 = 100% compatible beta2, con lo deprecated para facilitar migración
 
