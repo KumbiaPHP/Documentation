@@ -48,7 +48,7 @@ Configuration parameters:
 
 page: object obtained from paginator.
 
-show: número de páginas que muestra el paginador, por defecto 10.
+show: number of pages to be shown in the paginator. Default 10.
 
 url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
@@ -62,13 +62,13 @@ View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url
 
 ![](../images/image00.jpg)
 
-Resultado Final
+Final result
 
-Vista de paginación extendida.
+Classic's file pagination view.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
 url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
@@ -80,13 +80,13 @@ View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usu
 
 ### Punbb
 
-Vista de paginación estilo punbb.
+View paging style punbb.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
-show: número de páginas que muestra el paginador, por defecto 10.
+show: number of pages to be shown in the paginator. Default 10.
 
 url: url para la acción que efectúa la paginación, por defecto "module/controller/page/" y se envia por parámetro el número de página.
 
@@ -100,13 +100,13 @@ View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'ur
 
 ![](../images/image11.jpg)
 
-Resultado Final
+Final result
 
-Vista de paginación simple.
+View paging style simple.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
 url: url para la acción que efectua la paginación , por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
@@ -116,11 +116,11 @@ View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuar
 
 * * *
 
-### Ejemplo de uso
+### Sample Usage
 
-Supongamos que queremos paginar una lista de usuarios.
+Suppose we want to paginate a list of users.
 
-Para el modelo Usuario en models/usuario.php:
+For model User in models/user.php:
 
 ```php
 <?php  
