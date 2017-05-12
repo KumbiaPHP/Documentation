@@ -200,29 +200,29 @@ But they are deprecated and will not work in the future (next beta or final rele
 
 Possibly there will be 2 versions:
 
-0.9 = 100% compatible beta2, con lo deprecated para facilitar migración
+Compatible with beta2, supports deprecated to facilitate migration
 
-1.0 = sin lo deprecated más limpia y rápida, para empezar nuevas apps
+1.0 = without the deprecated more clean and fast, to start new apps
 
 | 0.5 | beta1 | beta2 v0.9 | v1.0 |
 | --- | ----- | ---------- | ---- |
 |     |       |            |      |
 
-Flash::success() ahora Flash::valid()
+Flash::success() now is Flash::valid()
 
-Flash::notice() ahora Flash::info()
+Flash::notice() now is Flash::info()
 
-ApplicationController ahora AppController (con sus respectivos cambios de metodos)
+ApplicationController now is AppController (with their respective method changes)
 
-….
+...
 
-Usar $this->response = 'view' o View::response('view') para no mostrar el template.
+Use $this->response = 'view' or View:response('view') to not show the template.
 
-Ahora View::template(NULL) el View::response() solo se usa para elegir formatos de vista alternativos.
+Now, View::template (NULL) or View::response() is used to choose alternative view formats.
 
-### Lista de cambios entre versiones: si no se especifica beta1 es que es
+### List of changes between versions: If don't specify beta1 is that it is compatible in both cases
 
-compatible en ambos casos
+
 
 #### Application
 
