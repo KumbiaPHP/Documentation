@@ -247,9 +247,9 @@ Now, View::template (NULL) or View::response() is used to choose alternative vie
 | public function before_filter() |                                 | protected function before_filter() | protected function before_filter() |
 | public function after_filter()  |                                 | protected function after_filter()  | protected function after_filter()  |
 
-boot.ini se elimina en beta2
+boot.ini is eliminated in beta2
 
-kumbia / mail / libchart 0.5 => se elimina los prefijos beta1
+kumbia / mail / libchart 0.5 => deletes the prefixes beta1
 
 extensions 0.5 => libs beta1
 
@@ -387,14 +387,14 @@ Session::unset_data() ahora Session::delete()
 
 * * *
 
-## Glosario
+## Glossary
 
-CRUD = Create Read Update Delete ( Crear Leer Actualizar Borrar )
+CRUD = Create Read Update Delete
 
 ABM
 
-MVC = Model View Controller ( Modelo Vista Controlador )
+MVC = Model View Controller
 
-HTML = HyperText Markup Language ( Lenguaje de Marcado de HiperTexto )
+HTML = HyperText Markup Language
 
-SQL = Structured Query Language ( Lenguaje de Consulta Estructurado )
+SQL = Structured Query Language
