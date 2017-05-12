@@ -1,10 +1,10 @@
 # Model, View, Controller (MVC)
 
-## ¿Qué es MVC?
+## What MVC is?
 
 In 1979, Trygve Reenskaug developed an architecture for creating interactive applications. In his design there are three components: models, views and controllers. The MVC model allows the separation of the application layers in interface, model and logic control. Programming in layers, is a style of programming where the primary goal is the separation of presentation design from the business logic. A basic example of this is separation of the data layer from the presentation layer (user interfase).
 
-The main advantage of this style is that development can be performed at various levels and in the event of any change only attacking the required level without having to review between mixed code. Además permite distribuir el trabajo de creación de una aplicación por niveles, de este modo, cada grupo de trabajo esta totalmente abstraído del resto de niveles, simplemente es necesario conocer la API (Interfaz de Aplicación) que existe entre niveles. La división en capas reduce la complejidad, facilita la reutilización y acelera el proceso de ensamblar o desensamblar alguna capa, o sustituirla por otra distinta (pero con la misma responsabilidad).
+The main advantage of this style is that development can be performed at various levels and in the event of any change only attacking the required level without having to review between mixed code. In addition, it allows to distribute the development of an application by levels so each work group is totally abstracted from the rest of levels. It is simply necessary to know the API (Application Interface) that exists between levels. La división en capas reduce la complejidad, facilita la reutilización y acelera el proceso de ensamblar o desensamblar alguna capa, o sustituirla por otra distinta (pero con la misma responsabilidad).
 
 En una aplicación Web una petición se realiza usando HTTP y es enviado al controlador. El controlador puede interactuar de muchas formas con el modelo, luego el primero llama a la respectiva vista la cual obtiene el estado del modelo que es enviado desde el controlador y lo muestra al usuario.
 
