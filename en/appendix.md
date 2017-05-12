@@ -24,13 +24,13 @@ Vista de paginado clásica.
 
 ![](../images/image07.jpg)
 
-Resultado Final
+Final result
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
-show: número de páginas que se mostraran en el paginador, por defecto 10.
+show: number of pages to be shown in the paginator. Default 10.
 
 url: url para la accion que efectúa la pacciona, por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
@@ -42,11 +42,11 @@ View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8,
 
 ### Digg
 
-Vista de paginación estilo digg.
+View paging style digg.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
 show: número de páginas que muestra el paginador, por defecto 10.
 
