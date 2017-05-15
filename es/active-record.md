@@ -588,7 +588,7 @@ de la entidad producto donde el atributo estado es 'A'.
 (new Producto)->update_all( "precio = 0, estado='C'", "estado = 'B'");
 ```
 
-Actualiza el atributo precio aumentándolo en un 20% y estado todos registros
+Actualiza los atributos estado y precio, aumentándolo en un 20% en todos registros
 de la entidad producto donde el atributo estado es 'B'.
 
 
