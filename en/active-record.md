@@ -481,13 +481,13 @@ Examples:
 This update the attributes price increasing the 20% for all records in the product entity.
 
 ```php
-(new Producto)->update_all("precio = precio * 1.2", "estado = 'A'", "limit: 100");
+(new Product)->update_all("price = price * 1.2", "state = 'A'", "limit: 100");
 ```
 
-Actualiza el atributo precio aumentándolo en un 20% para 100 registros de la entidad producto donde el atributo estado es 'A'.
+Update the attribute price increasing in a 20% for 100 records of the entity product where the state of attribute is 'A'.
 
 ```php
-(new Producto)->update_all( "precio = 0, estado='C'", "estado = 'B'");
+(new Product)->update_all( "price = 0, state='C'", "state = 'B'");
 ```
 
 Actualiza el atributo precio aumentándolo en un 20% y estado todos registros de la entidad producto donde el atributo estado es 'B'.
