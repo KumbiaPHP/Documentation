@@ -494,15 +494,15 @@ Actualiza el atributo precio aumentándolo en un 20% y estado todos registros de
 
 #### delete()
 
-Elimina uno o más registros a partir de los atributos y condiciones indicadas. Retorna boolean.
+Deletes one or more records from the attributes and conditions. It's return boolean.
 
 ```php
-$producto = (new Producto)->find(123);
-$exito = $producto->delete();
+$product = (new Product)->find(123);
+$success = $product->delete();
 
-(new Producto)->delete(123); //elimina el registro por su ID
+(new Product)->delete(123); //delete the records by ID
 
-$exito = (new Producto)->delete("estado='A'");
+$success = (new Products)->delete("state='A'");
 ```
 
 #### delete\_all()
