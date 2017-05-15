@@ -507,25 +507,25 @@ $success = (new Products)->delete("state='A'");
 
 #### delete\_all()
 
-Elimina uno o más registros a partir de los atributos y condiciones indicadas. Retorna boolean.
+Delete one or more records from of the attributes and conditions givens. It's Return boolean.
 
 ```php
-(new Producto)->delete_all( " precio >= 99.99 " );
+(new Products)->delete_all( " price >= 99.99 " );
 
-(new Producto)->delete_all( " estado = 'C' " );
+(new Products)->delete_all( " state = 'C' " );
 ```
 
-### Validaciones
+### Validations
 
 #### validates\_presence\_of
 
-Cuando este método es llamado desde el constructor de una clase ActiveRecord, obliga a que se valide la presencia de los campos definidos en la lista. Los campos marcados como not\_null en la tabla son automáticamente validados.
+When this method is called from the constructor of ActiveRecord, it requires that you validate the presence of the fields defined in the list. The marked as not\_null fields in the table are automatically validated.
 
 ```php
 <?php
- class Clientes extends ActiveRecord {
+ class Customers extends ActiveRecord {
    protected function initialize{
-    $this->validates_presence_of("cedula");
+    $this->validates_presence_of("name");
    }
  }
 
