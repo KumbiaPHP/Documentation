@@ -533,9 +533,9 @@ When this method is called from the constructor of ActiveRecord, it requires tha
 
 #### validates\_length\_of
 
-Cuando este método es llamado desde el constructor de una clase ActiveRecord, obliga a que se valide la longitud de los campos definidos en la lista.
+When this method is called from the constructor of a ActiveRecord class, its required that you validated the length of the fields defined in the list.
 
-El parámetro minimum indica que se debe validar que el valor a insertar o actualizar no sea menor de ese tamaño. El parámetro maximum indica que el valor a insertar/actualizar no puede ser mayor al indicado. El parámetro too\_short indica el mensaje personalizado que ActiveRecord mostrará en caso de que falle la validación cuando es menor y too\_long cuando es muy largo.
+When this method is called from the constructor of a ActiveRecord class, is required that you validate the length of the fields defined in the list. The maximum parameter indicate that the value to insert/update may not be larger than indicated. The parameter too\_short indicates the custom message that ActiveRecord displayed when validation fails when it is smaller to too\_short and too\_long when it is too long.
 
 ```php
 <?php
