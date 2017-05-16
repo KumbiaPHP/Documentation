@@ -539,14 +539,14 @@ When this method is called from the constructor of a ActiveRecord class, is requ
 
 ```php
 <?php
-class Clientes extends ActiveRecord {
+class Customers extends ActiveRecord {
 
   protected function initialize(){
-   $this->validates_length_of("nombre", "minumum: 15", "too_short: El nombre debe tener al menos 15 caracteres");
-   $this->validates_length_of("nombre", "maximum: 40", "too_long: El nombre debe tener maximo 40 caracteres");
-   $this->validates_length_of("nombre", "in: 15:40", 
-      "too_short: El nombre debe tener al menos 15 caracteres",
-      "too_long: El nombre debe tener maximo 40 caracteres"
+   $this->validates_length_of("name", "minumum: 15", "too_short: The name must have at least 15 characters");
+   $this->validates_length_of("name", "maximum: 40", "too_long: The name it's too large the maximum character is 40 ");
+   $this->validates_length_of("name", "in: 15:40", 
+      "too_short: The name must have at least 15 characters",
+      "too_long: The name must have at maximum 40 characters"
    );
   }
 }
@@ -554,14 +554,14 @@ class Clientes extends ActiveRecord {
 
 #### validates\_numericality\_of
 
-Valida que ciertos atributos tengan un valor numérico antes de insertar ó actualizar.
+Validates some numeric inputs before insert this in the database.
 
 ```php
 <?php
- class Productos extends ActiveRecord {
+ class Products extends ActiveRecord {
 
    protected function initialize{
-    $this->validates_numericality_of("precio");
+    $this->validates_numericality_of("price");
    }
 
  }
@@ -569,29 +569,32 @@ Valida que ciertos atributos tengan un valor numérico antes de insertar ó actu
 
 #### validates\_email\_in
 
-Valida que ciertos atributos tengan un formato de e-mail correcto antes de insertar o actualizar.
+It's validate that the input value has format of e-mail before insert or update in the entity.
 
 ```php
 <?php
- class Clientes extends ActiveRecord {
+ class Customers extends ActiveRecord {
 
    protected function initialize(){
-    $this->validates_email_in("correo");
+    $this->validates_email_in("email");
    }
 
  }
+ 
+Context | Request Context
+
 ```
 
 #### validates\_uniqueness\_of
 
-Valida que ciertos atributos tengan un valor único antes de insertar o actualizar.
+This validate that some parameters has a unique values before insert or update.
 
 ```php
 <?php
- class Clientes extends ActiveRecord {
+ class Customers extends ActiveRecord {
 
    protected function initialize{
-    $this->validates_uniqueness_of("cedula");
+    $this->validates_uniqueness_of("cedule");
    }
 
  }
