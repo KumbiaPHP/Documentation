@@ -602,25 +602,25 @@ This validate that some parameters has a unique values before insert or update.
 
 #### validates\_date\_in
 
-Valida que ciertos atributos tengan un formato de fecha acorde al indicado en config/config.ini antes de insertar o actualizar.
+This validate that some parameters have a format date according to the format in config/config.ini before insert or update.
 
 ```php
 <?php
- class Registro extends ActiveRecord {
+ class Record extends ActiveRecord {
 
    protected function initialize(){
-         $this->validates_date_in("fecha_registro");
+         $this->validates_date_in("date_record");
    }
  }
 ```
 
 #### validates\_format\_of
 
-Valida que el campo tenga determinado formato según una expresión regular antes de insertar o actualizar.
+This validate that some data has a special format using the regex before insert or update.
 
 ```php
 <?php
- class Clientes extends ActiveRecord {
+ class Customers extends ActiveRecord {
 
    protected function initialize(){
     $this->validates_format_of("email", "^(+)@((?:[?a?z0?9]+\.)+[a?z]{2,})$");
@@ -629,7 +629,7 @@ Valida que el campo tenga determinado formato según una expresión regular ante
  }
 ```
 
-### Transacciones
+### Transactions 
 
 #### commit()
 
