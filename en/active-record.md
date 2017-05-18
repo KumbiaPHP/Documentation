@@ -633,9 +633,9 @@ This validate that some data has a special format using the regex before insert 
 
 #### commit()
 
-Este método nos permite confirmar una transacción iniciada por el método begin en el motor de base de datos, si este lo permite. Devuelve true en caso de éxito y false en caso contrario.
+This method allows us to confirm a transaction initiated by the begin method on the database engine, if this permitting. Return true in success or false if not.
 
-Ejemplo
+Example
 
 ```php
 $Usuarios = new Usuarios();
