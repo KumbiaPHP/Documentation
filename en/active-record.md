@@ -638,39 +638,39 @@ This method allows us to confirm a transaction initiated by the begin method on 
 Example
 
 ```php
-$Usuarios = new Usuarios();
-$Usuarios->commit();
+$Users = new Users();
+$Users->commit();
 ```
 
 #### begin()
 
-Este método nos permite crear una transacción en el motor de base de datos, si este lo permite. Devuelve true en caso de éxito y false en caso contrario.
+This method allow us to create a transaction on the database engine, if this permitting. Return true in success or false if not.
 
-Ejemplo
+Example
 
 ```php
-$Usuarios = new Usuarios();
-$Usuarios->begin();
+$Users = new Users();
+$Users->begin();
 ```
 
 #### rollback()
 
-Este método nos permite anular una transacción iniciada por el método begin en el motor de base de datos, sí este lo permite. Devuelve true en caso de éxito y false en caso contrario.
+This method allows us cancel a transaction initiated be the begin method on the database engine, if this permitting. Return true in success or false if not.
 
-Ejemplo
+Example
 
 ```php
-$Usuarios = new Usuarios();
-$Usuarios->rollback();
+$Users = new Users();
+$Users->rollback();
 ```
 
-**Nota:** Las tablas deben tener el motor de almacenamiento \[InnoDB\][1](http://es.wikipedia.org/wiki/InnoDB)
+**Note:** The tables must have the \[InnoDB\] storage engine.[1](http://es.wikipedia.org/wiki/InnoDB) 
 
-### Otros métodos
+### Another methods
 
 #### sql (string $sql)
 
-Esta función nos permite ejecutar sentencias SQL directamente en el motor de base de datos. La idea es que el uso de este método no debería ser común en nuestras aplicaciones ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir al uso de éste.
+This method allows us run SQL statements directly in the database engine. La idea es que el uso de este método no debería ser común en nuestras aplicaciones ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir al uso de éste.
 
 ### Callbacks
 
