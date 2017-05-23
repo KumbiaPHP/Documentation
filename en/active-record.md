@@ -676,33 +676,33 @@ This method allows us run SQL statements directly in the database engine. The ma
 
 #### Introduction
 
-The ActiveRecords take the control of the lifecycle of objects created and read, monitoring when they are modified, stored or erased. Using callbacks (or methods), ActiveRecord allow us take the control in this supervision. We can write the code that can be invoked in any significant event in the life of a object. With the callbacks can performs complex validations, review the values that come and go from the database, and even prevent certain operations to finish. Un ejemplo de estos callbacks puede ser una validación en productos que evita que productos ‘activos’ sean borrados.
+The ActiveRecords take the control of the lifecycle of objects created and read, monitoring when they are modified, stored or erased. Using callbacks (or methods), ActiveRecord allow us take the control in this supervision. We can write the code that can be invoked in any significant event in the life of a object. With the callbacks can performs complex validations, review the values that come and go from the database, and even prevent certain operations to finish. An example of these callbacks can be the validations in products that prevents that active products can be erased.
 
 ```php
 <?php
 class User extends ActiveRecord {
 
-     public $before_delete = “no_borrar_activos”;
+     public $before_delete = “not_erase_actives”;
 
-     public function no_borrar_activos(){
-        if($this->estado==’A’){
-          Flash::error(‘No se puede borrar Productos Activos’);
+     public function not_erase_actives(){
+        if($this->state==’A’){
+          Flash::error(‘It's not possible erase active products’);
           return ‘cancel’;
         }
      }
 
      public function after_delete(){
-          Flash::success("Se borro el usuario $this->nombre");
+          Flash::success("A record has been erased $this->nombre");
      }
 
 }
 ```
 
-A continuación otros callbacks que podemos encontrar en ActiveRecord. El orden en el que son presentados es en el que se llaman si están definidos:
+Then other callbacks that can be found in ActiveRecord. The order in which they are presented is in which are called if they are defined:
 
 #### before\_validation
 
-Es llamado justo antes de realizar el proceso de validación por parte de Kumbia. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+This callbacks are executed just before the process of validation by Kumbia. You can cancel the action taking place if this method returns the word cancel.
 
 #### before\_validation\_on\_create
 
