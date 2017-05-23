@@ -676,7 +676,7 @@ This method allows us run SQL statements directly in the database engine. The ma
 
 #### Introduction
 
-El ActiveRecord controla el ciclo de vida de los objetos creados y leídos, supervisando cuando se modifican, se almacenan o se borran. Usando callbacks (o eventos), el ActiveRecord nos permite intervenir en esta supervisión. Podemos escribir el código que pueda ser invocado en cualquier evento significativo en la vida de un objeto. Con los callbacks podemos realizar validación compleja, revisar los valores que vienen desde y hacia la base de datos, e incluso evitar que ciertas operaciones finalicen. Un ejemplo de estos callbacks puede ser una validación en productos que evita que productos ‘activos’ sean borrados.
+The ActiveRecords take the control of the lifecycle of objects created and read, monitoring when they are modified, stored or erased. Using callbacks (or methods), ActiveRecord allow us take the control in this supervision. We can write the code that can be invoked in any significant event in the life of a object. With the callbacks can performs complex validations, review the values that come and go from the database, and even prevent certain operations to finish. Un ejemplo de estos callbacks puede ser una validación en productos que evita que productos ‘activos’ sean borrados.
 
 ```php
 <?php
