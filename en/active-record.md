@@ -710,7 +710,7 @@ It's called just before the process of validation by Kumbia, only when performin
 
 #### before\_validation\_on\_update
 
-Es llamado justo antes de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de actualización en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It's called just before to process the validation by Kumbia, only when it's a update model process. You can cancel the action if this method return cancel.
 
 #### after\_validation\_on\_create
 
