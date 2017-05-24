@@ -706,7 +706,7 @@ This callbacks are executed just before the process of validation by Kumbia. You
 
 #### before\_validation\_on\_create
 
-Es llamado justo antes de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de inserción en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It's called just before the process of validation by Kumbia, only when performing a process of inclusion in a model. You can cancel the action if this method return cancel.
 
 #### before\_validation\_on\_update
 
