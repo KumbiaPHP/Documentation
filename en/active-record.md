@@ -726,13 +726,13 @@ It's called just after that Kumbia completing the process of validation. You can
 
 #### before\_save
 
-It is called just before the process of storing, using the methods **save()** or **update()** in a model. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It is called just before the process of storing, when using the methods **save()** or **update()** in a model. You can cancel the action if this method return the word 'cancel'.
 
 ```php
 public function before_save() {            
-    $rs = $this->find_first("cedula = $this->cedula");
+    $rs = $this->find_first("idnumber = $this->idnumber");
     if($rs) {
-        Flash::warning("Ya existe un usuario registrado bajo esta cedula");
+        Flash::warning("Exist a user whit that id number");
         return 'cancel';
     }                
 }
