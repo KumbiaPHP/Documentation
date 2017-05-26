@@ -714,19 +714,19 @@ It's called just before to process the validation by Kumbia, only when it's a up
 
 #### after\_validation\_on\_create
 
-Es llamado justo después de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de inserción en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It's called just after of completing the process of validation by Kumbia, only when performing a process of insertion in a model. You can cancel the action if this method return cancel.
 
 #### after\_validation\_on\_update
 
-Es llamado justo después de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de actualización en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It's called just after that Kumbia completing the process of validation, only when performing an update process in a model. You can cancel the action if this method return the word 'cancel'.
 
 #### after\_validation
 
-Es llamado justo después de realizar el proceso de validación por parte de Kumbia. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It's called just after that Kumbia completing the process of validation. You can cancel the action if this method return the word 'cancel'.
 
 #### before\_save
 
-Es llamado justo antes de realizar el proceso de guardar, metodo **save()** y al momento de editar/actualizar, metodo **update()** en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It is called just before the process of storing, using the methods **save()** or **update()** in a model. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
 ```php
 public function before_save() {            
