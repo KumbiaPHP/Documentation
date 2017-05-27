@@ -740,19 +740,19 @@ public function before_save() {
 
 #### before\_update
 
-Es llamado justo antes de realizar el proceso de actualización cuando se llama el método save o update en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'. El mismo codigo del before\_save() para before\_update.
+It's called just before the update process when is used the save or update methods in a model. You can cancel this action if this method return the word 'cancel'. The same code of the before\_save() is used for before\_update.
 
 #### before\_create
 
-Es llamado justo antes de realizar el proceso de inserción cuando se llama el método save o create en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It's called just before the insertion process when is used the save or create method in a model. You can cancel this action if this method return the word 'cancel'.
 
 #### after\_update
 
-Es llamado justo después de realizar el proceso de actualización cuando se llama el método save o update en un modelo.
+It's called just after the update process when is used the save or update method in a model.
 
 #### after\_create
 
-Es llamado justo después de realizar el proceso de actualización cuando se llama el método save o create en un modelo.
+It's called just after the update process when is used the save or create method in a model.
 
 #### after\_save
 
