@@ -756,19 +756,19 @@ It's called just after the update process when is used the save or create method
 
 #### after\_save
 
-Es llamado justo después de realizar el proceso de actualización/inserción cuando se llama el método save, update ó create en un modelo.
+It is called just after the update/insertion process when the is called the save, update or create method in a model.
 
 #### before\_delete
 
-Es llamado justo antes de realizar el proceso de borrado cuando se llama el método delete en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+It is called just before the deletion process when the delete method is called in a model. You can cancel this action if this method return the word 'cancel'.
 
 #### after\_delete
 
-Es llamado justo después de realizar el proceso de borrado cuando se llama el método delete en un modelo.
+It is called just after the deletion process when the delete method is called in a model.
 
-### Asociaciones
+### Associations
 
-#### Introducción
+#### Introduction
 
 Muchas aplicaciones trabajan con múltiples tablas en una base de datos y normalmente hay relaciones entre esas tablas. Por ejemplo, una ciudad puede ser el hogar de muchos clientes pero un cliente solo tiene una ciudad. En un esquema de base de datos, estas relaciones son enlazadas mediante el uso de llaves primarias y foráneas.
 
