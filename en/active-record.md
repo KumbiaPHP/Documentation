@@ -770,9 +770,9 @@ It is called just after the deletion process when the delete method is called in
 
 #### Introduction
 
-Muchas aplicaciones trabajan con múltiples tablas en una base de datos y normalmente hay relaciones entre esas tablas. Por ejemplo, una ciudad puede ser el hogar de muchos clientes pero un cliente solo tiene una ciudad. En un esquema de base de datos, estas relaciones son enlazadas mediante el uso de llaves primarias y foráneas.
+Many applications work with multiples tables in a database and usually there are relationships between these tables. For example, a city can be home to many customer, but a client only has a city. In a database schema, these relationships are linked using primary and foreign keys.
 
-Como ActiveRecord trabaja con la convención: La llave foránea tiene el nombre de la tabla y termina en id, así: ciudad\_id, esto es una relación a la tabla ciudad a su llave primaria id.
+ActiveRecord work with the following convention: the foreign key has the name of the table and ends in "\_id", thus: ciudad\_id, this is a relation to the city to your primary key table id.
 
 Así que, sabiendo esto, quisiéramos que en vez de decir:
 
