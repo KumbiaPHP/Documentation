@@ -772,25 +772,25 @@ It is called just after the deletion process when the delete method is called in
 
 Many applications work with multiples tables in a database and usually there are relationships between these tables. For example, a city can be home to many customer, but a client only has a city. In a database schema, these relationships are linked using primary and foreign keys.
 
-ActiveRecord work with the following convention: the foreign key has the name of the table and ends in "\_id", thus: ciudad\_id, this is a relation to the city to your primary key table id.
+ActiveRecord work with the following convention: the foreign key has the name of the table and ends in "\_id", thus: city\_id, this is a relation to the city to your primary key table id.
 
-Así que, sabiendo esto, quisiéramos que en vez de decir:
-
-```php
-$ciudad_id = $cliente->ciudad_id;
-$ciudad = $Ciudad->find($ciudad_id);
-echo $ciudad->nombre;
-```
-
-Mejor sería:
+So, knowing this, would like that instead of saying:
 
 ```php
-echo $cliente->getCiudad()->nombre;
+$city_id = $customer->city_id;
+$city = $City->find($city_id);
+echo $city->name;
 ```
 
-Gran parte de la magia que tiene ActiveRecord es esto, ya que convierte las llaves foráneas en sentencias de alto nivel, fáciles de comprender y de trabajar.
+It would be better:
 
-#### Pertenece (belongs\_to)
+```php
+echo $customer->getCity()->name;
+```
+
+Much of the magic that has ActiveRecord is this, as it becomes the foreign keys in judgments of high level, easy to understand and work.
+
+#### Belongs (belongs\_to)
 
 Este tipo de relación se efectúa con el método “belongs\_to”, en esta la llave foránea se encuentra en la tabla del modelo de donde se invoca el método. Corresponde a una relación uno a uno en el modelo entidad relación.
 
