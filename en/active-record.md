@@ -792,15 +792,15 @@ Much of the magic that has ActiveRecord is this, as it becomes the foreign keys 
 
 #### Belongs (belongs\_to)
 
-Este tipo de relación se efectúa con el método “belongs\_to”, en esta la llave foránea se encuentra en la tabla del modelo de donde se invoca el método. Corresponde a una relación uno a uno en el modelo entidad relación.
+This type of relationship is done with the method "belongs\_to", this foreign key is located in the table of the model where the method is invoked. Corresponds to a relationship one by one in the model entity relationship.
 
 belongs\_to($relation)
 
-$relation (string): nombre de la relación.
+$relation (string): name of the relationship.
 
-**Parámetros con nombre:**
+**Named parameters:**
 
-model: Nombre del tipo de modelo que debe retornar la consulta de la relación. Por defecto se considera un modelo que corresponda al nombre de la relación. Ejemplo: Si $relation='auto\_volador', entonces model=AutoVolador
+model: name of the type of model that must return the query of the relationship. By default is considered a model that correspond to the name of the relationship. Example: If $relation='car\_flight', then model=CarFlight
 
 fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
 
