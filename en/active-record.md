@@ -802,27 +802,27 @@ $relation (string): name of the relationship.
 
 model: name of the type of model that must return the query of the relationship. By default is considered a model that correspond to the name of the relationship. Example: If $relation='car\_flight', then model=CarFlight
 
-fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
+fk: name of the foreign key that relates. By default is the name of the relationship with the suffix "\_id". Example: If $relation ='car\_flight', then fk = car_flight\_id.
 
-**Ejemplos de uso:**
+**Examples of use:**
 
 ```php
-$this->belongs_to('persona');
-$this->belongs_to('vendedor', 'model: Persona');
-$this->belongs_to('funcionario', 'model: Persona', 'fk: persona_id');
+$this->belongs_to('person');
+$this->belongs_to('seller', 'model: Person');
+$this->belongs_to('functionary', 'model: Person', 'fk: person_id');
 ```
 
-**En el modelo Libro:**
+**In the book model:**
 
 ```php
-class Libro extends ActiveRecord {
+class Book extends ActiveRecord {
     public function initialize() {
-        $this->belongs_to('persona');
+        $this->belongs_to('person');
     }
 }
 ```
 
-#### Tiene un (has\_one)
+#### It has a (has\_one)
 
 Este tipo de relación se efectúa con el método “has\_one”, en esta la llave foránea se encuentra en la tabla del modelo con el que se quiere asociar. Corresponde a una relación uno a uno en el modelo entidad relación.
 
