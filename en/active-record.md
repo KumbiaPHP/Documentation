@@ -824,64 +824,66 @@ class Book extends ActiveRecord {
 
 #### It has a (has\_one)
 
-Este tipo de relación se efectúa con el método “has\_one”, en esta la llave foránea se encuentra en la tabla del modelo con el que se quiere asociar. Corresponde a una relación uno a uno en el modelo entidad relación.
+This type of relationship is done with the method "has\_one", in this foreign key is located in the table of the model that you want to associate. Correspond to a relationship one by one in the model entity relationship.
 
 has\_one($relation)
 
-$relation (string): nombre de la relación.
+$relation (string): name of the relationship.
 
-**Parámetros con nombre:**
+**Named parameters:**
 
-model: Nombre del tipo de modelo que debe retornar la consulta de la relación. Por defecto se considera un modelo que corresponda al nombre de la relación. Ejemplo: Si $relation='auto\_volador', entonces model=AutoVolador
+model: Name of the type of model that must return the query of the relationship. By default is considered a model that correspond to the name of the relationship. Example: If $relation='car\_flight', then model=CarFlight
 
-fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
+fk: name of the foreign key that relates. By default is the name of the relationship with the suffix "\_id". Example: If $relation ='car\_flight', then fk = car_flight\_id.
 
-**Ejemplos de uso:**
+**Examples of use:**
 
 ```php
-$this->has_one('persona');
-$this->has_one('vendedor', 'model: Persona');
-$this->has_one('funcionario', 'model: Persona', 'fk: personal_id');
+$this->has_one('person');
+$this->has_one('seller', 'model: Person');
+$this->has_one('functionary', 'model: Person', 'fk: staff_id');
+
 ```
 
-En el modelo Persona:
+In the person model:
 
 ```php
-class Persona extends ActiveRecord {
+class Person extends ActiveRecord {
     public function initialize() {
-        $this->has_one('datos_personales');
+        $this->has_one('personal_data');
     }
 }
 ```
 
-#### Tiene muchos (has\_many)
+#### It has many (has\_many)
 
-Este tipo de relación se efectúa con el método “has\_many”, en esta la llave foránea se encuentra en la tabla del modelo con el que se quiere asociar. Corresponde a una relación uno a muchos en el modelo entidad relación.
+This type of relationship is done with the method "has\_many", in this foreign key is located in the table of the model that you want to associate. Correspond to a relationship one by many in the model entity relationship.
 
-has\_many($relation)
+has\_many ($relation)
 
-$relation (string): nombre de la relación.
+$relation (string): name of the relationship.
 
-**Parámetros con nombre:**
+**Named parameters:**
 
-model: Nombre del tipo de modelo que debe retornar la consulta de la relación. Por defecto se considera un modelo que corresponda al nombre de la relación. Ejemplo: Si $relation='auto\_volador', entonces model=AutoVolador
+model: Name of the type of model that must return the query of the relationship. By default is considered a model that correspond to the name of the relationship. Example: If $relation='car\_flight', then model=CarFlight
 
-fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
+fk: name of the foreign key that relates. By default is the name of the relationship with the suffix "\_id". Example: If $relation ='car\_flight', then fk = car_flight\_id.
 
-**Ejemplos de uso:**
+**Examples of use:**
 
 ```php
-$this->has_many('persona');
-$this->has_many('vendedor', 'model: Persona');
-$this->has_many('funcionario', 'model: Persona', 'fk: personal_id');
+$this->has_many('person');
+$this->has_many('seller', 'model: Person');
+$this->has_many('functionary', 'model: Person', 'fk: staff_id');
+
 ```
 
-En el modelo Persona:
+In the person model:
 
 ```php
-class Persona extends ActiveRecord {
+class Person extends ActiveRecord {
     public function initialize() {
-        $this->has_many('libro');
+        $this->has_one('personal_data');
     }
 }
 ```
