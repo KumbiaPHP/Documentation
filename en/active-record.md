@@ -888,23 +888,23 @@ class Person extends ActiveRecord {
 }
 ```
 
-#### Tiene y pertenece a muchos (has\_and\_belongs\_to\_many)
+#### It has and belongs to many (has\_and\_belongs\_to\_many)
 
-Este tipo de relación se efectúa con el método “has\_and\_belongs\_to\_many”, esta se efectúa a través de una tabla que se encarga de enlazar los dos modelos. Corresponde a una relación muchos a muchos en el modelo entidad relación. Este tipo de relación tiene la desventaja de que no es soportada en el ámbito de múltiples conexiones de ActiveRecord, para lograr que funcione con multiples conexiones, se puede emular a través de dos relaciones has\_many al modelo de la tabla que relaciona.
+This type of relationship is done with the "has\_and\_belongs\_to\_many" method, this occurs through a table that takes care of linking the two models. Corresponds to a relationship many-to-many model entity relationship. This type of relationship has the disadvantage that is not supported in the field of multiple connections of ActiveRecord, to get it to work with multiple connections, can emulate through two relations has\_many to the table model that relates.
 
 has\_and\_belongs\_to\_many($relation)
 
-$relation (string): nombre de la relación.
+$relation (string): name of the relationship.
 
-**Parámetros con nombre:**
+**Named parameters:**
 
-model: Nombre del tipo de modelo que debe retornar la consulta de la relación. Por defecto se considera un modelo que corresponda al nombre de la relación. Ejemplo: Si $relation='auto\_volador', entonces model=AutoVolador
+model: Name of the type of model that must return the query of the relationship. By default is considered a model that correspond to the name of the relationship. Example: If $relation='car\_flight', then model=CarFlight
 
-fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
+fk: name of the foreign key that relates. By default is the name of the relationship with the suffix "\_id". Example: If $relation ='car\_flight', then fk = car_flight\_id.
 
-key: nombre del campo que contendrá el valor de la llave primaria en la tabla intermedia que contendrá los campos de la relación. Por defecto corresponde al nombre del modelo con que se va a relacionar con el sufijo “\_id”.
+key: name of the field that will contain the value of the primary key in the intermediate table that containing fields of the relationship. By default it is the name of the model that will interact with the suffix "\_id".
 
-through: tabla a través de la cual se establece la relación muchos a muchos. Por defecto se forma por el nombre de la tabla del modelo que tiene el nombre de tabla mas largo y como prefijo un “\_” y el nombre de la tabla del otro modelo.
+through: table through which it establishes the relationship many-to-many. Por defecto se forma por el nombre de la tabla del modelo que tiene el nombre de tabla mas largo y como prefijo un “\_” y el nombre de la tabla del otro modelo.
 
 **Ejemplos de uso:**
 
