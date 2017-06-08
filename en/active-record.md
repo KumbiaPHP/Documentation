@@ -925,33 +925,33 @@ class Person extends ActiveRecord {
 
 ### Pagers
 
-Para la paginación existen dos funciones encargadas de esto:
+There are two function responsible for the pagination:
 
 #### Paginate
 
-Este es capaz de paginar arrays o modelos, recibe los siguientes parámetros:
+It is capable of pagination of arrays or models, it take the following parameters:
 
-Para array:
+For array:
 
-**$s** : array a paginar.
+**$s** : array to page.
 
-**page**: numero de página.
+**page**: page number.
 
-**per\_page**: cantidad de elementos por página.
+**per\_page**: number of items per page.
 
-**Ejemplo:**
+**Example:**
 
 ```php
 $page = paginate($s, 'per_page: 5', 'page: 1');
 ```
 
-Para modelo:
+For model:
 
-**$s**: string con nombre de modelo u objeto ActiveRecord.
+**$s**: string with name of model or ActiveRecord object.
 
-**page**: número de página.
+**page**: page number.
 
-**per\_page**: cantidad de elementos por página.
+**per\_page**: number of items per page.
 
 Asimismo recibe todos los parámetros que pueden utilizarse en el método “find” de ActiveRecord.
 
