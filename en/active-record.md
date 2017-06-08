@@ -904,26 +904,26 @@ fk: name of the foreign key that relates. By default is the name of the relation
 
 key: name of the field that will contain the value of the primary key in the intermediate table that containing fields of the relationship. By default it is the name of the model that will interact with the suffix "\_id".
 
-through: table through which it establishes the relationship many-to-many. Por defecto se forma por el nombre de la tabla del modelo que tiene el nombre de tabla mas largo y como prefijo un “\_” y el nombre de la tabla del otro modelo.
+through: table through which it establishes the relationship many-to-many. By default it is formed by the name of the table from the model that has the table name longer and as a "\_" prefix and the name of the table from the other model.
 
-**Ejemplos de uso:**
+**Examples of use:**
 
 ```php
-$this->has_and_belongs_to_many('persona');
-$this->has_and_belongs_to_many('cargos', 'model: Cargo', 'fk: id_cargo', 'key: id_persona', 'through: cargo_persona');
+$this->has_and_belongs_to_many('person');
+$this->has_and_belongs_to_many('charge', 'model: Charge', 'fk: id_charge', 'key: id_person', 'through: carge_person');
 ```
 
-**En el modelo Persona:**
+**In the person model:**
 
 ```php
-class Persona extends ActiveRecord {
+class Person extends ActiveRecord {
     public function initialize() {
-        $this->has_and_belongs_to_many('cargo');
+        $this->has_and_belongs_to_many('charge');
     }
 }
 ```
 
-### Paginadores
+### Pagers
 
 Para la paginación existen dos funciones encargadas de esto:
 
