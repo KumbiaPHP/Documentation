@@ -29,13 +29,13 @@
   - [KumbiaPHP and URLs](first-app.md#kumbiaphp-y-sus-urls)
   - [Add more content](first-app.md#agregando-mas-contenido)
   - [Repeating history](first-app.md#repitiendo-la-historia)
-- [CRUD](crud.md) - [Introducción](crud.md#introducción) - [Configurando database.ini](crud.md#configurando-database.ini) - [Modelo](crud.md#modelo) - [Controller](crud.md#controller) - [Vistas](crud.md#vistas) - [Probando el CRUD](crud.md#probando-el-crud)
+- [CRUD](crud.md) - [Intro](crud.md#introducción) - [database.ini configuration](crud.md#configurando-database.ini) - [Model](crud.md#modelo) - [Controller](crud.md#controller) - [Views](crud.md#vistas) - [CRUD test](crud.md#probando-el-crud)
 
 ## MCV components
 
 - [Controller](controller.md#el-controlador) 
-  - [Controlador Frontal](controller.md#controlador-frontal) 
-    - [Destripando el Front Controller](controller.md#destripando-el-front-controller)
+  - [Front Controller](controller.md#controlador-frontal) 
+    - [Breaking down Front Controller](controller.md#destripando-el-front-controller)
     - [Front Controller por defecto](controller.md#front-controller-por-defecto)
     - [Constantes de KumbiaPHP](controller.md#constantes-de-kumbiaphp) 
       - [APP_PATH](controller.md#app_path)
