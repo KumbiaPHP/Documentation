@@ -965,29 +965,29 @@ $page = paginate($this->User, 'NOT login=”admin”', 'order: login ASC', 'per_
 
 #### Paginate\_by\_sql
 
-Efectúa paginación a través de una consulta sql. Recibe los siguientes parámetros:
+Performs paging through an sql query. It takes the following parameters:
 
-**$model**: string nombre de modelo o objeto ActiveRecord.
+**$model**: string name of model or ActiveRecord object.
 
-**$sql**: string consulta sql.
+**$sql**: sql query string.
 
-**Ejemplo:**
+**Example:**
 
 ```php
-$page = paginate_by_sql('usuario', 'SELECT * FROM usuario WHERE nombre LIKE “%emilio%” ', 'per_page: 5', 'page: 1');
+$page = paginate_by_sql('user', 'SELECT * FROM user WHERE nombre LIKE “%carl%” ', 'per_page: 5', 'page: 1');
 ```
 
-Ambos tipos de paginadores retornan un objeto “page”, este objeto “page” es creado a partir de stdClass, contiene los siguientes atributos:
+Both type of pagers returning a object "page", this "page" is create from stdClass, that contains the following attributes:
 
-**next**: número de página siguiente, si no hay pagina siguiente vale “false”.
+**Next**: next page number, if there is no page following it is "false".
 
-**prev**: número de página anterior, si no hay pagina anterior vale “false”.
+**Prev**: previous page number, if there is no page above it is "false".
 
-**current**: número de página actual.
+**current**: current page number.
 
-**total**: número de paginas totales.
+**total**: number of pages total.
 
-**items**: array de elementos paginados.
+**items**: array of paginated items.
 
 #### Paginando en ActiveRecord
 
