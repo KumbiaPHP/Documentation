@@ -953,13 +953,14 @@ For model:
 
 **per\_page**: number of items per page.
 
-Asimismo recibe todos los parámetros que pueden utilizarse en el método “find” de ActiveRecord.
+It also receives all the parameters that can be used in the "find" method of ActiveRecord.
 
-**Ejemplos:**
+**Examples:**
 
 ```php
-$page = paginate('usuario', 'NOT login=”admin”', 'order: login ASC', 'per_page: 5', 'page: 1');
-$page = paginate($this->Usuario, 'NOT login=”admin”', 'order: login ASC', 'per_page: 5', 'page: 1');
+$page = paginate('user', 'NOT login=”admin”', 'order: login ASC', 'per_page: 5', 'page: 1');
+$page = paginate($this->User, 'NOT login=”admin”', 'order: login ASC', 'per_page: 5', 'page: 1');
+
 ```
 
 #### Paginate\_by\_sql
