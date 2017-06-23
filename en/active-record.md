@@ -999,11 +999,11 @@ ActiveRecord already brings integrated paginate and paginate\_by\_sql methods, t
 $page = $this->User->paginate('per_page: 5', 'page: 1');
 ```
 
-#### Ejemplo completo de uso del paginador:
+#### Full example of use of the pager:
 
 Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, aprovecharemos la persistencia de datos del controlador para hacer una paginación inmune a inyección sql.
 
-En el controlador *usuario_controller.php*:
+In the *user_controller.php* controller:
 
 ```php
 class UsuarioController extends ApplicationController {
