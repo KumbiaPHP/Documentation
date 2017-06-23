@@ -989,14 +989,14 @@ Both type of pagers returning a object "page", this "page" is create from stdCla
 
 **items**: array of paginated items.
 
-#### Paginando en ActiveRecord
+#### Paging in ActiveRecord
 
-ActiveRecord ya trae integrado los métodos paginate y paginate\_by\_sql, se comportan igual que paginate y paginate\_by\_sql, sin embargo no es necesario pasar el modelo a paginar ya que por defecto toman el modelo que invoca.
+ActiveRecord already brings integrated paginate and paginate\_by\_sql methods, they behave like paginate and paginate\_by\_sql, but is not necessary to pass the model to paging since by default they take the model invoked.
 
-**Ejemplo:**
+**Example:**
 
 ```php
-$page = $this->Usuario->paginate('per_page: 5', 'page: 1');
+$page = $this->User->paginate('per_page: 5', 'page: 1');
 ```
 
 #### Ejemplo completo de uso del paginador:
