@@ -1001,25 +1001,25 @@ $page = $this->User->paginate('per_page: 5', 'page: 1');
 
 #### Full example of use of the pager:
 
-Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, aprovecharemos la persistencia de datos del controlador para hacer una paginación inmune a inyección sql.
+We have a user table with its corresponding User model, then we create a controller which paginate a list of user and also allow search by name, will take advantage of the persistence of controller data to make a paging immune to sql injection.
 
 In the *user_controller.php* controller:
 
 ```php
-class UsuarioController extends ApplicationController {
+class UserController extends ApplicationController {
   private $_per_page = 7;
   /**
-  * Formulario de busqueda
+  * Form of search
   **/
-  public function buscar() {
+  public function search() {
     $this->nullify('page', 'conditions');
   }
   /**
-  * Paginador
+  * Paginator
   **/
-  public function lista($page='') {
+  public function list($page='') {
     /**
-    * Cuando se efectua la busqueda por primera vez
+    * When run the search for first time
     **/
     if(Input::hasPost('usuario')) {
       $usuario = Input::post('usuario');
@@ -1057,7 +1057,7 @@ class UsuarioController extends ApplicationController {
 }
 ```
 
-En la vista *buscar.pthml*
+In the view of *search.pthml*
 
 ```php
 <?= Form::open('usuario/lista') ?>
@@ -1067,7 +1067,7 @@ En la vista *buscar.pthml*
 
 ```
 
-En la vista *lista.phtml*
+In the view of *list.phtml*
 
 ```php
 <table>
