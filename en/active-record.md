@@ -214,7 +214,7 @@ In this example we are looking for the first record whose status is equal to "a"
 Whit the method find_first we can search for a record in particular from his id in this way:
 
 ```php
-$usuario = (new Usuario)->find_first(123);
+$user = (new User)->find_first(123);
 ```
 
 We get the record 123 and also returns an instance of ActiveRecord object on success, or false otherwise. KumbiaPHP generates a warning when the criteria of search for find_first returned more than one record, for this we can force to returned to only one, using the limit parameter, in this way:
@@ -1021,36 +1021,36 @@ class UserController extends ApplicationController {
     /**
     * When run the search for first time
     **/
-    if(Input::hasPost('usuario')) {
-      $usuario = Input::post('usuario');
-      if($usuario['nombre']) {
-        $this->conditions = “ nombre LIKE '%{$usuario['nombre']}%' ”;
+    if(Input::hasPost('user')) {
+      $user = Input::post('user');
+      if($user['name']) {
+        $this->conditions = “ name LIKE '%{$user['name']}%' ”;
       }
       /**
-      * Paginador con condiciones o sin condiciones
+      * Paginator with or without options
       **/
       if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this>_per_page”, 'page: 1');
+        $this->page = $this->User->paginate($this->conditions, “per_page: $this>_per_page”, 'page: 1');
       } else {
-        $this->page = $this->Usuario->paginate(“per_page: $this>_per_page”, 'page: 1');
+        $this->page = $this->User->paginate(“per_page: $this>_per_page”, 'page: 1');
       }
     } elseif($page='next' && isset($this->page) && $this->page->next) {
        /**
-       * Paginador de pagina siguiente
+       * Paginator of next page
        **/
       if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this>_per_page”, “page: {$this->page->next}”);
+        $this->page = $this->User->paginate($this->conditions, “per_page: $this>_per_page”, “page: {$this->page->next}”);
       } else {
-         $this->page = $this->Usuario->paginate(“per_page: $this->_per_page”, “page: {$this->page->next}”);
+         $this->page = $this->User->paginate(“per_page: $this->_per_page”, “page: {$this->page->next}”);
       }
     } elseif($page='prev' && isset($this->page) && $this->page->prev) {
       /**
-      * Paginador de pagina anterior
+      * Paginator of preview page
       **/
       if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this->_per_page”, “page: {$this->page->prev}”);
+        $this->page = $this->User->paginate($this->conditions, “per_page: $this->_per_page”, “page: {$this->page->prev}”);
     } else {
-       $this->page = $this->Usuario->paginate(“per_page: $this->_per_page”, “page: {$this->page->prev}”);
+       $this->page = $this->User->paginate(“per_page: $this->_per_page”, “page: {$this->page->prev}”);
     }
   }
  }
@@ -1060,9 +1060,9 @@ class UserController extends ApplicationController {
 In the view of *search.pthml*
 
 ```php
-<?= Form::open('usuario/lista') ?>
-<?= Form::text('usuario.nombre') ?>
-<?= Form::submit('Consultar') ?>
+<?= Form::open('user/list') ?>
+<?= Form::text('user.name') ?>
+<?= Form::submit('Query') ?>
 <?= Form::close() ?>
 
 ```
@@ -1073,16 +1073,16 @@ In the view of *list.phtml*
 <table>
     <tr>
         <th>id</th>
-        <th>nombre</th>
+        <th>name</th>
     </tr>
     <?php foreach($page->items as $p): ?>
     <tr>
         <td><?= $p->id ?></td>
-        <td><?= h($p->nombre) ?></td>
+        <td><?= h($p->name) ?></td>
     </tr>
     <?php endforeach; ?>
 </table>
 <br>
-<?php if($page->prev) echo Html::linkAction('lista/prev', 'Anterior') ?>
-<?php if($page->next) echo ' | ' . Html::linkAction('lista/next', 'Siguiente') ?>
+<?php if($page->prev) echo Html::linkAction('list/prev', 'Preview') ?>
+<?php if($page->next) echo ' | ' . Html::linkAction('list/next', 'Next') ?>
 ```
