@@ -12,11 +12,11 @@ It's not necessary, but will be helpful if you work with tools like Firebug in M
 
 ## Application in production
 
-TODO
+All
 
-## Partials de paginación
+## Partials of paging
 
-Como complemento para el paginado de ActiveRecord, a través de vistas parciales se implementan los tipos de pacciona mas comunes. Estos se ubican en el directorio "core/views/partials/paginators" listos para ser usados. Son completamente configurables vía CSS. Por supuesto, podéis crear vuestros propios partials para paginar en las vistas.
+As complement to the ActiveRecord, paged through partial views are implemented types of pacciona more common. These are located in the directory "core/views/partials/paginators" ready to be used. They are fully configurable via CSS. Of course, you can create your own partials for pagination in views.
 
 ### Classic
 
@@ -35,7 +35,7 @@ show: number of pages to be shown in the paginator. Default 10.
 url: url para la accion que efectúa la pacciona, por defecto "module/controller/page/" y se envía por parámetro el número de página.
 
 ```php
-View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+View:partial('paginators/classic',_false,_array_(_'page'_=>_$page,_'show'_=>_8,_'url'_=>_'usuario/lista'));
 ```
 
 * * *
@@ -50,10 +50,10 @@ page: object obtained from paginator.
 
 show: number of pages to be shown in the paginator. Default 10.
 
-url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
+URL: url for the action that performs pacciona it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+View:partial (' paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
 ```
 
 * * *
@@ -255,15 +255,15 @@ extensions 0.5 => libs beta1
 
 Input::
 
-$this->has_post 0.5 => Input::hasPost beta2
+$this->has_post 0.5 => Input:hasPost beta2
 
-$this->has_get 0.5 => Input::hasGet beta2
+$this->has_get 0.5 => Input:hasGet beta2
 
-$this->has_request 0.5 => Input::hasRequest beta2
+$this->has_request 0.5 => Input:hasRequest beta2
 
-$this->post 0.5 => 'Input::post beta2
+$this->post 0.5 => ' Input:post beta2
 
-$this->get 0.5 => 'Input::get beta2
+$this->get 0.5 => ' Input:get beta2
 
 $this->request 0.5 => 'Input::request beta2
 
