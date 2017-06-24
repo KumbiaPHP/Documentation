@@ -106,7 +106,7 @@ Flash::error("Ha ocurrido un error");
 
 ### Flash::valid($text)
 
-Permite enviar un mensaje de éxito al usuario. Por defecto es un mensaje de letras color verdes y fondo color verde pastel pero estos pueden ser alterados en la clase css en public/css/style.css llamada valid .
+It allows to send a success message to the user. Default is a lyrics color message green and pastel green color background but these can be altered in the cascading style sheet class in public/css/style.css called valid.
 
 Flash::valid("Se realizo el proceso correctamente");
 
@@ -114,7 +114,7 @@ Flash::valid("Se realizo el proceso correctamente");
 
 ### Flash::info($text)
 
-Permite enviar un mensaje de información al usuario. Por defecto es un mensaje de letras color azules y fondo color azul pastel; pero estos pueden ser alterados en la clase css en public/css/style.css llamada info .
+It allows you to send information to the user. Default is a message of letters color blue and blue pastel-coloured background; but these can be altered in the cascading style sheet class in public/css/style.css called info.
 
 Flash::info("No hay resultados en la busqueda");
 
@@ -122,7 +122,7 @@ Flash::info("No hay resultados en la busqueda");
 
 ### Flash::warning($text)
 
-Permite enviar un mensaje de advertencia al usuario. Por defecto es un mensaje de letras color azules y fondo color azul pastel pero estos pueden ser alterados en la clase css en public/css/style.css llamada warning .
+It allows to send a warning message to the user. Default is a message of letters color blue and pastel blue color background but these can be altered in the cascading style sheet class in public/css/style.css called warning.
 
 Flash::warning("Advertencia: No ha iniciado sesión en el sistema");
 
@@ -174,15 +174,15 @@ Session:: has ( 'id_usuario' ); //retorna false.
 
 * * *
 
-NOTA: $namespace es un espacio individual en el cual se pueden contener las variables de sesión, permitiendo evitar colisiones con nombres de variables.
+Note: $namespace is a single space in which may contain the session variables, avoiding collisions with variable names.
 
 ## Load
 
-La clase load permite la carga de librerías en KumbiaPHP.
+Class load allows the loading of libraries in KumbiaPHP.
 
 ### Load::coreLib($lib)
 
-Permite cargar una librería del núcleo de KumbiaPHP.
+It allows to load a KumbiaPHP core library.
 
 <?php
 
@@ -480,15 +480,15 @@ $auth->setCheckSession(true);
 
 #### setPass()
 
-Asigna el nombre de campo para el campo de clave. Este campo debe corresponder con el campo de la base de datos y del formulario. De manera predeterminada es "password".
+Assigns the name of field for the key field. This field must correspond with the data base and the form field. Default is "password".
 
-$field (string): nombre de campo que recibe por POST.
+$field (string): name of field that receives by POST.
 
 setPass($field)
 
-Ejemplo:
+Example:
 
-$auth->setPass('clave');
+$auth->setPass('key');
 
 * * *
 
