@@ -94,11 +94,11 @@ You can see the second parameter now the file will be named mi_log.txt
 
 ## Flash
 
-Flash es un helper muy útil en Kumbia que permite hacer la salida de mensajes de error, advertencia, informativos y éxito de forma estándar.
+Flash is a very useful helper in Kumbia that makes the messages of error, warning, informational and success output as standard.
 
 ### Flash::error($text)
 
-Permite enviar un mensaje de error al usuario. Por defecto es un mensaje de letras color rojo y fondo color rosa pero estos pueden ser alterados en la clase css en public /css/style.css llamada error.
+— Send an error message to the user. Default is a message of letters red and pink background but these can be altered in the cascading style sheet class in public /css/style.css called error.
 
 Flash::error("Ha ocurrido un error");
 
@@ -494,7 +494,7 @@ $auth->setPass('key');
 
 #### setLogin()
 
-Asigna el nombre de campo para el campo de nombre de usuario. Este campo debe corresponder con el campo de la base de datos y del formulario. De manera predeterminada es "login".
+Assigns the name of the field for the user name field. This field must correspond with the data base and the form field. Default is "login".
 
 $field (string): nombre de campo que recibe por POST.
 
