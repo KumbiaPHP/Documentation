@@ -136,19 +136,19 @@ Flash::warning("Advertencia: No ha iniciado sesión en el sistema");
 
 ## Session
 
-La clase Session es para facilitar el manejo de la sesiones.
+The Session class is to facilitate handling of the session.
 
-### Session::set($index, $value, $namespace='default')
+### Session:set($index,_$value,_$namespace='default')
 
-Crear o especifica el valor para un índice de la sesión actual.
+Create or specify the value for an index of the current session.
 
 <?php  Session:: set ( 'usuario' , 'Administrador' ); ?>
 
 * * *
 
-### Session::get($index, $namespace='default')
+### Session: get ($index, $namespace ='default ')
 
-Obtener el valor para un índice de la sesión actual.
+Get the value for an index of the current session.
 
 <?php  
 Session:: get ( 'usuario' ); //retorna 'Administrador'  
@@ -156,17 +156,17 @@ Session:: get ( 'usuario' ); //retorna 'Administrador'
 
 * * *
 
-### Session::delete($index, $namespace='default')
+### Session:delete($index,_$namespace='default')
 
-Elimina el valor para un índice de la sesión actual.
+Deletes the value for an index of the current session.
 
 <?php  Session:: delete ( 'usuario' ); ?>
 
 * * *
 
-### Session::has($index, $namespace='default')
+### Session:has($index,_$namespace='default')
 
-Verifica que este definido el índice en la sesión actual.
+Verify that this set the rate at the current session.
 
 <?php  
 Session:: has ( 'id_usuario' ); //retorna false.  
@@ -180,7 +180,7 @@ Note: $namespace is a single space in which may contain the session variables, a
 
 Class load allows the loading of libraries in KumbiaPHP.
 
-### Load::coreLib($lib)
+### Load::coreLib ($lib)
 
 It allows to load a KumbiaPHP core library.
 
@@ -332,33 +332,33 @@ El formulario para autenticación debe tener la siguiente estructura básica:
 
 * * *
 
-De manera predeterminada Auth2 toma para el nombre de usuario el campo "login" y para la clave el campo "password".
+Default Auth2 takes the "login" field for the user name and the password 'password' field.
 
-Para poder iniciar una sesión de usuario y realizar la autenticación se debe invocar el método identify , sin embargo dependiendo del tipo de adaptador, es necesario especificar ciertos parámetros de configuración.
+To be able to start a user session and perform the authentication you must invoke the identify method, however depending on the adapter type, it is necessary to specify certain configuration settings.
 
-### Adaptador Model
+### Adapter Model
 
-Este adaptador permite utilizar autenticación en base a un modelo que herede de la clase ActiveRecord , verificando los datos de autenticación en la base de datos.
+This adapter allows you to use authentication based on a model which inherits from the ActiveRecord class, verifying authentication at the database data.
 
 #### setModel()
 
-Establece el modelo ActiveRecord que se utiliza como fuente de datos. De manera predeterminada el modelo que se utiliza como fuente de datos es 'users'.
+Sets the ActiveRecord model that is used as a data source. By default the model that is used as a data source is 'users'.
 
-$model (string): nombre de modelo en smallcase
+$model (string): model name in lowercase
 
-setModel($model)
+setModel ($model)
 
-Ejemplo:
+Example:
 
-$auth->setModel('usuario');
+$auth->setModel ('user');
 
 * * *
 
 #### identify()
 
-Realiza la autenticación. Si ya existe una sesión de usuario activa o los datos de usuario son correctos, entonces la identificación es satisfactoria.
+Performs the authentication. If there is already an active user session or user data are correct, then the identification is satisfactory.
 
-return boolean
+return true or false
 
 identify()
 
@@ -374,7 +374,7 @@ Termina la sesion de usuario.
 
 logout()
 
-Ejemplo:
+Example:
 
 $auth->logout();
 
@@ -382,15 +382,15 @@ $auth->logout();
 
 #### setFields()
 
-Establece los campos del modelo que se cargaran en sesión mediante el método Session::set . De manera predeterminada se carga el campo "id".
+Sets the fields of the model that are loaded into session using the Session:set method. By default load the field 'id'.
 
 $fields (array): arreglo de campos
 
 setFields($fields)
 
-Ejemplo:
+Example:
 
-$auth->setFields(array('id', 'usuario'));
+$auth->setFields (array ('id', 'user'));
 
 * * *
 
@@ -402,21 +402,21 @@ $namespace (string): namespace de sesión
 
 setSessionNamespace($namespace)
 
-Ejemplo:
+Example:
 
-$auth->setSessionNamespace('auth');
+$auth->setSessionNamespace ('auth');
 
 * * *
 
 #### isValid()
 
-Verifica si existe una sesión de usuario autenticado.
+Check if there is an authenticated user session.
 
-return boolean
+return true or false
 
 isValid()
 
-Ejemplo:
+Example:
 
 $valid = $auth->isValid();
 
@@ -424,35 +424,35 @@ $valid = $auth->isValid();
 
 #### getError()
 
-Obtiene el mensaje de error.
+Gets the error message.
 
 return string
 
 getError()
 
-Ejemplo:
+Example:
 
-if(!$auth->identify()) Flash::error($auth->getError());
+if(!$auth->identify()) flash:error ($auth->getError());
 
 * * *
 
 #### setAlgos()
 
-Establece el método de encriptación de la clave de usuario.
+Sets the user password encryption method.
 
-$algos (string): método de encriptación, el nombre coincide con la función hash de php.
+$algos (string): method of encryption, the name matches the php hash function.
 
-setAlgos($algos)
+setAlgos ($algos)
 
-Ejemplo:
+Example:
 
-$auth->setAlgos('md5');
+$auth->setAlgos ('md5');
 
 * * *
 
 #### setKey()
 
-Establece la clave para identificar si existe una sesión autenticada, dicha clave toma un valor booleano "true" cuando la sesión autenticada es valida, asignada mediante el método Session::set .
+Sets the key to identifying whether a session authenticated, this key takes a Boolean value of "true" when the authenticated session is valid, assigned by using the Session:set method.
 
 $key (string): clave de sesión
 
@@ -543,7 +543,7 @@ app/views/acceso/login.phtml
 
 * * *
 
-El controlador:
+Controller:
 
 app/controllers/auth_controller.php
 
@@ -563,11 +563,12 @@ class AuthController extends AppController
 
 * * *
 
-Para validar que el usuario este autenticado, basta con adicionar en cualquier acción del controlador o en el método before_filter el siguiente código:
+To validate this authenticated the user, just add the following code in any controller action or method before_filter:
 
-if(!Load::model('usuario')->logged()) {
+if(!Load::model('user')->logged()) {
 
-    Router::toAction('auth/login');
+    Router:toAction('auth/login');
+    
     
     return false;
     
@@ -576,15 +577,15 @@ if(!Load::model('usuario')->logged()) {
 
 * * *
 
-El modelo:
+Model:
 
 app/models/usuario.php
 
-<?php
+<? php
 
-// Carga de la librería auth2
+The auth2 library loading
 
-Load::lib('auth2');
+Load: lib ('auth2');
 
 class user extends ActiveRecord
 
