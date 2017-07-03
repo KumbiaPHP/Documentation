@@ -88,7 +88,7 @@ You can see the second parameter now the file will be named mi_log.txt
 
 ### Logger::emergence ($msg)
 
-### Logger::custom ($type='CUSTOM', $msg)
+### Logger::custom ($type = 'CUSTOM', $msg)
 
 * * *
 
@@ -96,15 +96,15 @@ You can see the second parameter now the file will be named mi_log.txt
 
 Flash is a very useful helper in Kumbia that makes the messages of error, warning, informational and success output as standard.
 
-### Flash::error($text)
+### Flash::error ($text)
 
 — Send an error message to the user. Default is a message of letters red and pink background but these can be altered in the cascading style sheet class in public /css/style.css called error.
 
-Flash::error("Ha ocurrido un error");
+Flash::error ("an error occurred");
 
 * * *
 
-### Flash::valid($text)
+### Flash::valid ($text)
 
 It allows to send a success message to the user. Default is a lyrics color message green and pastel green color background but these can be altered in the cascading style sheet class in public/css/style.css called valid.
 
@@ -586,69 +586,11 @@ app/models/usuario.php
 
 Load::lib('auth2');
 
-class Usuario extends ActiveRecord
+class user extends ActiveRecord
 
 {
 
-    /**
-    
-     * Iniciar sesión
-    
-     *
-    
-     */
-    
-    public function login()
-    
-    {
-    
-        // Obtiene el adaptador
-    
-        $auth = Auth2::factory('model');
-    
-        // Modelo que utilizara para consultar
-    
-        $auth->setModel('usuario');
-    
-        if($auth->identify()) return true;
-    
-    
-    
-        Flash::error($auth->getError());
-    
-        return false;
-    
-    }
-    
-    /**
-    
-     * Terminar sesión
-    
-     *
-    
-     */
-    
-    public function logout()
-    
-    {
-    
-        Auth2::factory('model')->logout();
-    
-    }
-    
-    /**
-     * Verifica si el usuario esta autenticado
-     *
-     * @return boolean
-     */
-    
-    public function logged()
-    
-    {
-    
-        return Auth2::factory('model')->isValid();
-    
-    }
+    / * * Log * * / public function login() {/ / Gets the adapter $auth = Auth2:factory('model');}      Model to be used for $auth - > setModel ('user');      if($auth->identify()) return true;        Flash:error($auth->getError());      return false;  } / * * End * * / public function logout() {Auth2:factory('model') - > logout();}  } / * * Check if this authenticated user * @return boolean * / public function logged() {return Auth2:factory('model') - > isValid();}  }
     
 
 }
