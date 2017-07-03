@@ -386,7 +386,7 @@ Sets the fields of the model that are loaded into session using the Session:set 
 
 $fields (array): arreglo de campos
 
-setFields($fields)
+setFields ($fields)
 
 Example:
 
@@ -396,9 +396,9 @@ $auth->setFields (array ('id', 'user'));
 
 #### setSessionNamespace()
 
-Establece un namespace para los campos que se cargan en sesión.
+Sets a namespace for fields that are loaded into session.
 
-$namespace (string): namespace de sesión
+$namespace (string): session namespace
 
 setSessionNamespace($namespace)
 
@@ -506,7 +506,7 @@ $auth->setLogin('usuario');
 
 * * *
 
-#### Obtener los campos cargados en sesión
+#### Get the fields loaded on session
 
 Los campos se obtienen por medio del método Session::get .
 
@@ -514,13 +514,13 @@ $id = Session::get('id');
 
 * * *
 
-Si se ha especificado un namespace de sesión, entonces debe indicarlo al invocar el método.
+If you have specified a namespace of session, you must then specify it by invoking the method.
 
 $id = Session::get('id', 'mi_namespace');
 
 * * *
 
-#### Ejemplo
+#### Example
 
 La vista:
 
@@ -530,13 +530,13 @@ app/views/acceso/login.phtml
 
     <input name="mode" type="hidden" value="auth">
     
-    <label for="login">Usuario:</label>
+    <label for="login">User:</label> 
     
-    <?php echo Form::text('login') ?>
+    <? php echo Form:text('login')? >
     
-    <label for="password">Clave:</label>
+    <label for="password">clave:</label>
     
-    <?php echo Form::pass('password') ?>
+    <? php echo Form:pass('password')? >
     
 
 <?php echo Form::close() ?>
