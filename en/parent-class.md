@@ -112,7 +112,7 @@ Flash::valid("Se realizo el proceso correctamente");
 
 * * *
 
-### Flash::info($text)
+### Flash:info ($text)
 
 It allows you to send information to the user. Default is a message of letters color blue and blue pastel-coloured background; but these can be altered in the cascading style sheet class in public/css/style.css called info.
 
@@ -120,11 +120,11 @@ Flash::info("No hay resultados en la busqueda");
 
 * * *
 
-### Flash::warning($text)
+### Flash:warning ($text)
 
 It allows to send a warning message to the user. Default is a message of letters color blue and pastel blue color background but these can be altered in the cascading style sheet class in public/css/style.css called warning.
 
-Flash::warning("Advertencia: No ha iniciado sesión en el sistema");
+Flash:warning("Warning:_you_are_not_login_in_the_system");
 
 * * *
 
@@ -319,7 +319,7 @@ El formulario para autenticación debe tener la siguiente estructura básica:
 
     <input name="mode" type="hidden" value="auth">
     
-    <label for="login">Usuario:</label>
+    <label for="login">User:</label>
     
     <?php echo Form::text('login') ?>
     
@@ -362,7 +362,7 @@ return true or false
 
 identify()
 
-Ejemplo:
+Example:
 
 $valid = $auth->identify();
 
@@ -370,7 +370,7 @@ $valid = $auth->identify();
 
 #### logout()
 
-Termina la sesion de usuario.
+End of the user session.
 
 logout()
 
@@ -384,7 +384,7 @@ $auth->logout();
 
 Sets the fields of the model that are loaded into session using the Session:set method. By default load the field 'id'.
 
-$fields (array): arreglo de campos
+$fields (array): array fields
 
 setFields ($fields)
 
@@ -454,25 +454,25 @@ $auth->setAlgos ('md5');
 
 Sets the key to identifying whether a session authenticated, this key takes a Boolean value of "true" when the authenticated session is valid, assigned by using the Session:set method.
 
-$key (string): clave de sesión
+$key (string): session key
 
-setKey($key)
+setKey ($key)
 
-Ejemplo:
+Example:
 
-$auth->setKey('usuario_logged');
+$auth->setKey('user_logged');
 
 * * *
 
 #### setCheckSession()
 
-Indica que no se inicie sesión desde un navegador distinto con la misma IP.
+It indicates that not start session from a different browser on the same IP.
 
-$check (boolean): indicador
+$check (boolean): indicator
 
-setCheckSession($check)
+setCheckSession ($check)
 
-Ejemplo:
+Example:
 
 $auth->setCheckSession(true);
 
@@ -496,13 +496,13 @@ $auth->setPass('key');
 
 Assigns the name of the field for the user name field. This field must correspond with the data base and the form field. Default is "login".
 
-$field (string): nombre de campo que recibe por POST.
+$field (string): name of field that receives by POST.
 
-setLogin($field)
+setLogin ($field)
 
-Ejemplo:
+Example:
 
-$auth->setLogin('usuario');
+$auth->setLogin ('user');
 
 * * *
 
