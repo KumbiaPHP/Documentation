@@ -32,7 +32,7 @@ page: object obtained from paginator.
 
 show: number of pages to be shown in the paginator. Default 10.
 
-url: URL for the action that performs pacciona it, by default "module/controller/page /" and the page number is sent by parameter.
+url: URL for the action that performs pagination it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
 View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'user/list'));
@@ -50,7 +50,7 @@ page: object obtained from paginator.
 
 show: number of pages to be shown in the paginator. Default 10.
 
-URL: url for the action that performs pacciona it, by default "module/controller/page /" and the page number is sent by parameter.
+URL: url for the action that performs pagination it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
 View:partial (' paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
