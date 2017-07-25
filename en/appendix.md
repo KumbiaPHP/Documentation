@@ -20,7 +20,7 @@ As complement to the ActiveRecord, paged through partial views are implemented t
 
 ### Classic
 
-Vista de paginado clásica.
+Classic pagination view
 
 ![](../images/image07.jpg)
 
@@ -32,10 +32,10 @@ page: object obtained from paginator.
 
 show: number of pages to be shown in the paginator. Default 10.
 
-url: url para la accion que efectúa la pacciona, por defecto "module/controller/page/" y se envía por parámetro el número de página.
+url: URL for the action that performs pacciona it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View:partial('paginators/classic',_false,_array_(_'page'_=>_$page,_'show'_=>_8,_'url'_=>_'usuario/lista'));
+View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'user/list'));
 ```
 
 * * *
