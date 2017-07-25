@@ -70,10 +70,10 @@ Configuration parameters:
 
 page: object obtained from paginator.
 
-url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
+url: url for the action that performs pacciona it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));
+View::partial('paginators/extended', false, array('page' => $page, 'url' => 'user/list'));
 ```
 
 * * *
