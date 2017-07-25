@@ -88,10 +88,10 @@ page: object obtained from paginator.
 
 show: number of pages to be shown in the paginator. Default 10.
 
-url: url para la acción que efectúa la paginación, por defecto "module/controller/page/" y se envia por parámetro el número de página.
+url: URL for the action that performs pagination it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'user/list'));
 ```
 
 * * *
@@ -108,10 +108,10 @@ Configuration parameters:
 
 page: object obtained from paginator.
 
-url: url para la acción que efectua la paginación , por defecto "module/controller/page/" y se envía por parámetro el número de página.
+url: URL for the action that performs pagination it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));
+View::partial('paginators/simple', false, array('page' => $page, 'url' => 'user/list'));
 ```
 
 * * *
@@ -337,7 +337,7 @@ javascript_include_tag 0.5 => 'Tag::js beta2
 
 stylesheet_link_tag 0.5 => 'Tag::css beta2
 
-### Cambio en las rutas entre versiones:
+### Change on routes between versions:
 
 # 0.5 => 1.0 beta1
 
@@ -379,7 +379,7 @@ stylesheet_link_tag 0.5 => 'Tag::css beta2
                 …
     
 
-Cambiados:
+Changed:
 
 Session::isset_data() ahora Session::has()
 
