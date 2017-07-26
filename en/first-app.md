@@ -15,18 +15,18 @@ Now add content to the controller app/controllers/controller/saludo_controller.p
 /** 
  * Controller Saludo
  */
-class SaludoController extends AppController {
-    public function hola() {
+class GreetingController extends AppController {
+    public function hello() {
 
     }
 }
  ```
 
-En el código tenemos la definición de la class *SaludoController*, note que
-también esta el sufijo *Controller* al final de la declaración de la clase, esto
-la identifica como una clase controladora, y esta hereda (extends) de la
-superclase *AppController*, con lo que adquiere las propiedades de una clase
-controladora, además existe el método hola().
+In the code we have the definition of the class GreetingController, note that
+Is also the Controller suffix at the end of the class declaration, this
+Identifies it as a controlling class, and it inherits (extends) the
+Superclass AppController, which acquires the properties of a class
+Controller, there is also the hello() method.
 
 # The view to see the output that sends the controller, it is necessary create the view associated with the action. First, create a directory with the same name of our driver (in this case must be called greeting), and inside it are all views associated with the actions that need to display some information. In our example we call an action called Hello; Therefore, we create a file called * app/views/saludo/hola.phtml*. Once this file is created, add you a little content: "'html < h1 > Hello KumbiaPHP! < / h1 >
 ```
@@ -37,35 +37,35 @@ Then try to access the following URL: http://localhost/kumbiaphp/saludo/hola/ an
 
 ## KumbiaPHP and URLs
 
-Para entender el funcionamiento del framework es importante entender sus URLs, la figura 2.3 muestra una URL típica en KumbiaPHP.
+To understand the functioning of the framework it is important to understand their URLs, Figure 2.3 shows a typical URL in KumbiaPHP.
 
-![](../images/image08.png) Figura 2.3: URL en KumbiaPHP
+![](../images/image08.png) Figure 2.3: URL in KumbiaPHP
 
-En KumbiaPHP no existen las extensiones .php esto porque en primera instancia hay reescritura de URLs y además cuenta con un front-controller encargado de recibir todas las peticiones (mas adelante se explicara en detalle).
+In KumbiaPHP .php extensions there is this because in the first instance there is rewriting of URLs and also has a front-controller responsible for receiving all requests (more I will later explain in detail).
 
 Any other information passed by URL is taken as the parameter of the action, with regard to our application as shown in Figure 2.4.
 
 ![](../images/image05.png) Figure 2.4: URL with parameters
 
-Esto es útil para evitar que tener estar enviando parámetros GET de la forma ?var=valor&var2=valor2 (esto es, de la forma tradicional como se viene utilizando PHP), la cual revela información sobre la arquitectura de software que se dispone en el servidor. Además, hacen que nuestra URL se vea mal y fea para SEO.
+This is useful to avoid having to send form parameters GET? var = value & var2 = value2 (that is, in the traditional way how PHP has been used), which reveals information about the architecture of software that is available on the server. In addition, make that our URL look bad and ugly for SEO.
 
 ## Add more content
 
-Agregaremos algo de contenido dinámico a nuestro proyecto, para que no sea tan aburrido. Mostraremos la hora y la fecha, usando la función date() .
+We will add some dynamic to our project, so it's not so boring. We will show the time and date, using the date() function.
 
-Cambiamos un poco el controlador *app/controllers/saludo_controller.php*
+We changed a bit the driver *app/controllers/greeting_controller.php*
 
 ```php
 <?php
 /**
- * Controller Saludo
+ *  Controller
  */ 
-class SaludoController extends AppController {
+class GreetingController extends AppController {
     /** 
      * metodo para saludar
      */
-    public function hola() { 
-       $this->fecha = date("Y-m-d H:i");
+    public function hello() { 
+       $this->date = date("Y-m-d H:i");
    }
 }
 ```
