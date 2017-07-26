@@ -41,7 +41,7 @@
       - [APP_PATH](controller.md#app_path)
       - [CORE_PATH](controller.md#core_path)
       - [PUBLIC_PATH](controller.md#public_path)
-  - [Actions](controller.md#las-acciones) 
+  - [The actions](controller.md#las-acciones) 
     - [Actions and views](controller.md#las-acciones-y-las-vistas)
     - [Getting values from an action](controller.md#obtener-valores-desde-una-accion)
   - [Controller conventions and creation](controller.md#convenciones-y-creacion-de-un-controlador) 
