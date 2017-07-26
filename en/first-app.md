@@ -146,16 +146,16 @@ class GreetingController extends AppController {
 Add a new view to present the contents of the action goodbye() and if we recall what was explained in the section 2.1.3.3 we should create a view *app/views/saludo/adios.phtml* with the following contents.
 
 ```php
-<h1>Ops! se ha ido :( </h1>
-<?php echo Html::link('saludo/hola/CaChi/', 'Volver a saludar') ?>
+<h1>Ops! has gone :( </h1>
+<?php echo Html::link('greeting/hello/CaChi/', 'To greet again') ?>
 ```
 
-Si ingresa al siguiente enlace *http://localhost/kumbiaphp/saludo/adios/* se vera un nuevo texto, y un vinculo a la acción hola(), como se muestra en la figura 2.7.
+If you enter the following link *http://localhost/kumbiaphp/greeting/goodbye/* you will see a new text, and a link to the hello() action, as shown in Figure 2.7.
 
-![](../images/image04.png) Figura 2.7: Vista de adiós al usuario.
+![](../images/image04.png) Figure 2.7: View goodbye to the user.
 
 Html: link (), is one of the many helper offering KumbiaPHP to facilitate at the time of scheduled hearings. We could write the HTML code directly, by placing *[back to say hello](kumbiaphp/saludo/hola/CaChi/)*, but this can lead to a problem, imagine you would rename his project in kumbiaphp demo, we would have to modify all the links, KumbiaPHP helpers solve these problems.
 
 To write the code of our "Hello KumbiaPHP!" don't need but a controller and a view. We don't need models, since we are not working with information from a database or other type of more complex information processing.
 
-Nos ubicamos en el directorio */path/to/kumbiaphp/app/controllers/*. Here are our drivers (for more details, read the documentation on the app directory). To create a handler, it is important to keep in mind the conventions of name which uses the Framework. We will call our driver *saludo_controller.php*. Note the suffix *_controller.php* this is part of the Naming Convention, and makes that KumbiaPHP identifies this file as a driver.
+We are located in the directory */path/to/kumbiaphp/app/controllers/*. Here are our drivers (for more details, read the documentation on the app directory). To create a handler, it is important to keep in mind the conventions of name which uses the Framework. We will call our driver *saludo_controller.php*. Note the suffix *_controller.php* this is part of the Naming Convention, and makes that KumbiaPHP identifies this file as a driver.
