@@ -39,7 +39,7 @@ $data = Cache::driver()->get('saludo'); if(!$data) { Cache::driver()->save('Hola
 
 <?php if(Cache::driver()->start('+1 day', 'saludo')): ?> 
 
-    Hello <? php echo $usuario? > <? php Cache:driver()-> end()? >
+    Hello <? php echo $user? > <? php Cache:driver()-> end()? >
     
 
 <?php endif; ?>
@@ -108,7 +108,7 @@ Flash::error ("an error occurred");
 
 It allows to send a success message to the user. Default is a lyrics color message green and pastel green color background but these can be altered in the cascading style sheet class in public/css/style.css called valid.
 
-Flash::valid("Se realizo el proceso correctamente");
+Flash: valid("Realized the process correctly");
 
 * * *
 
@@ -116,7 +116,7 @@ Flash::valid("Se realizo el proceso correctamente");
 
 It allows you to send information to the user. Default is a message of letters color blue and blue pastel-coloured background; but these can be altered in the cascading style sheet class in public/css/style.css called info.
 
-Flash::info("No hay resultados en la busqueda");
+Flash::info("There are no results in the search");
 
 * * *
 
@@ -508,7 +508,7 @@ $auth->setLogin ('user');
 
 #### Get the fields loaded on session
 
-Los campos se obtienen por medio del método Session::get .
+The fields are obtained through the Session:get method.
 
 $id = Session::get('id');
 
@@ -516,15 +516,15 @@ $id = Session::get('id');
 
 If you have specified a namespace of session, you must then specify it by invoking the method.
 
-$id = Session::get('id', 'mi_namespace');
+$id = Session::get('id', 'my_namespace');
 
 * * *
 
 #### Example
 
-La vista:
+The view:
 
-app/views/acceso/login.phtml
+app/views/access/login.phtml
 
 <?php echo Form::open() ?>
 
@@ -534,7 +534,7 @@ app/views/acceso/login.phtml
     
     <? php echo Form:text('login')? >
     
-    <label for="password">clave:</label>
+    <label for="password">Password:</label>
     
     <? php echo Form:pass('password')? >
     
