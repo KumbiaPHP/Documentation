@@ -2,7 +2,7 @@
 
 ## What MVC is?
 
-In 1979, Trygve Reenskaug developed an architecture for creating interactive applications. In his design there are three components: models, views and controllers. The MVC model allows the separation of the application layers in interface, model and logic control. Programming in layers, is a style of programming where the primary goal is the separation of presentation design from the business logic. A basic example of this is separation of the data layer from the presentation layer (user interfase).
+In 1979, Trygve Reenskaug developed an architecture for creating interactive applications. In this design there are three components: models, views and controllers. The MVC model allows the separation of the application layers in interface, model and logic control. Programming in layers, is a style of programming where the primary goal is the separation of presentation design from the business logic. A basic example of this is separation of the data layer from the presentation layer (user interfase).
 
 The main advantage of this style is that development can be performed at various levels and in the event of any change only attacking the required level without having to review between mixed code. In addition, it allows to distribute the development of an application by levels so each work group is totally abstracted from the rest of levels. It is simply necessary to know the API (Application Interface) that exists between levels. The division into layers reduces complexity, facilitates the reuse and accelerates the process of assembling or disassembling any layer, or replace it by another (but with the same responsibility).
 
@@ -36,7 +36,7 @@ Finally, the model abstracts the data logic, which makes independent views model
 
 To better understand, here is an example of how an MVC architecture works to add to cart. First, the user interacts with the interface by selecting a product and pressing a button, this probably validates a form and sends a request to the server.
 
-  1. The Front Controller receives notification of a user action, and after running some tasks (routing, security, etc.), understands that it must run the action add on controller.
-  2. Action add access to the model and updates the object of the cart in the user session.
-  3. If the modification is stored correctly, the action prepares the content that will be returned in the response - confirmation of the addition and a complete list of products that are currently in your shopping cart. View joins the response of action in the body of the application to produce the shopping cart page.
-  4. It is finally transferred to the Web server that sends it to the user, who can read it and interact with it again.
+1. The Front Controller receives notification of a user action, and after running some tasks (routing, security, etc.), understands that it must run the action add on controller.
+2. Action add access to the model and updates the object of the cart in the user session.
+3. If the modification is stored correctly, the action prepares the content that will be returned in the response - confirmation of the addition and a complete list of products that are currently in your shopping cart. View joins the response of action in the body of the application to produce the shopping cart page.
+4. It is finally transferred to the Web server that sends it to the user, who can read it and interact with it again.
