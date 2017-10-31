@@ -25,16 +25,16 @@ Because rewriting URL never is made a called of form explicit to the index.php, 
 
 The Front Controller of KumbiaPHP is responsible of dispatching requests, that implies something more than detect the action that is executed. In fact, run the code common to all actions, including:
 
-  1. Defines the constants of the core of the application (APP_PATH, CORE_PATH and PUBLIC_PATH).
-  2. Load and initializes the core class of the framework (bootstrap).
-  3. Load the configuration (Config).
-  4. It decodes the URL of the request to determine the action to execute and the parameters of the request (Router).
-  5. If the action does not exist, redirect to the action of the 404 error (Router).
-  6. Active filters (for example, if the request needs authentication) (Router).
-  7. Execute the filters, first pass (before). (Router)
-  8. Execute the action (Router).
-  9. Execute the filters, second pass (after) (Router).
- 10. Execute the view and shows the response (View).
+1. Defines the constants of the core of the application (APP_PATH, CORE_PATH and PUBLIC_PATH).
+2. Load and initializes the core class of the framework (bootstrap).
+3. Load the configuration (Config).
+4. It decodes the URL of the request to determine the action to execute and the parameters of the request (Router).
+5. If the action does not exist, redirect to the action of the 404 error (Router).
+6. Active filters (for example, if the request needs authentication) (Router).
+7. Execute the filters, first pass (before). (Router)
+8. Execute the action (Router).
+9. Execute the filters, second pass (after) (Router).
+10. Execute the view and shows the response (View).
 
 Great features, this is the process of the front controller, this is all is needs to know about this component which is essential of the KumbiaPHP MVC architecture.
 
