@@ -490,7 +490,7 @@ Update the attribute price increasing in a 20% for 100 records of the entity pro
 (new Product)->update_all( "price = 0, state='C'", "state = 'B'");
 ```
 
-Update the attribute price increasing in a 20% y state in all records of the entity product where the state attribute is 'B'.
+Actualiza el atributo precio a 0 y el estado a 'C' para todos los registros de la entidad producto donde el atributo estado es 'B'.
 
 #### delete()
 
