@@ -54,13 +54,13 @@ Here complete our first steps. Don't need anything more. We will have magically 
 
 ## Advantages
 
-  1. We can go loading our first records in the database
-  2. You try to insert records
-  3. Progressive advancement, since we can go replacing the Scaffold views for my own views.
+1. We can go loading our first records in the database
+2. You try to insert records
+3. Progressive advancement, since we can go replacing the Scaffold views for my own views.
 
 ## Disadvantage
 
-  1. The Scaffold is not for making systems, if not to help the beginning of an application.
+1. The Scaffold is not for making systems, if not to help the beginning of an application.
 
 ## Views for the scaffold
 
