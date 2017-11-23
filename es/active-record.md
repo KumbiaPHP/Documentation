@@ -177,8 +177,7 @@ extra que obtienen el valor de fecha actual en una actualización.
 
 *modified_in* es un campo fecha
 
-**Nota:** Los campos *_at* y *_in* deben ser de tipo fecha (DATE o DATETIME) en el motor de base de datos que se
-este utilizando.
+**Nota:** Los campos *_at* y *_in* deben ser de tipo fecha (DATE o DATETIME) en el motor de base de datos que se esté utilizando.
 
 ##  ActiveRecord API
 
@@ -190,62 +189,149 @@ alfabéticamente:
 
 Métodos para hacer consulta de registros:
 
-####  distinct ()
-
-Este método ejecuta una consulta de distinción única en la entidad, funciona
-igual que un "select unique campo" viéndolo desde la perspectiva del SQL. El
-objetivo es devolver un array con los valores únicos del campo especificado
-como parámetro.
+####  find()
 
 Sintaxis
 ```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
+find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
 ```
 
+El método "find" es el principal método de búsqueda de ActiveRecord, devuelve
+todos los registros de una entidad o el conjunto de ocurrencias de acuerdo a
+unos criterios de búsqueda. Los parámetros son todos opcionales y su orden no
+es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando
+se invoca sin parámetros devuelve todos los registros en la entidad.
+
+Si se usan parámetros __no hay que olvidarse__ de incluir un espacio después de los dos puntos (:) luego de cada parámetro.
+
 Ejemplo
+
 ```php
-$unicos = (new Usuario)->distinct("estado");
-# array('A', 'I', 'N')  
+$usuarios = (new Usuario)->find( "conditions: estado='A'", "order: fecha desc");
+```
+
+En este ejemplo buscamos todos los registros cuyo estado sea igual a "A" y
+devuelva estos ordenados descendentemente, el resultado de este es un array de
+objetos de la misma clase con los valores de los registros cargados en ellos.
+En caso de no hayan registros devuelve un array vacío.
+
+Con el método find podemos buscar un registro en particular a partir de su id
+de esta forma:
+
+```php
+$usuario = (new Usuario)->find(123);
 ``` 
 
-Los parámetros conditions, order y limit funcionan idénticamente que en el
-método find y permiten modificar la forma o los mismos valores de retorno
-devueltos por esta.
+Obtenemos el registro 123 e igualmente devuelve una instancia del mismo
+objeto ActiveRecord en caso de éxito, o false en caso contrario. Como es un
+solo registro no devuelve un array, sino que los valores de este se cargan en
+la misma variable si existe el registro.
 
-####  find\_all\_by\_sql (string $sql)
+Para limitar el número de registros devueltos, podemos usar el parámetro limit:
 
-Este método nos permite hacer una consulta por medio de un SQL y el resultado
-devuelto es un array de objetos de la misma clase con los valores de los
-registros en estos. La idea es que el uso de este método no sea tan común
-en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del
-SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más
-específicos y tengamos que recurrir a su uso.
-
-Ejemplo
 ```php
-$usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
+$usuarios = (new Usuario)->find("conditions: estado='A'", 'limit: 5', 'offset: 1');
 ``` 
 
-En este ejemplo consultamos todos los usuarios con una sentencia where
-especial. La idea es que los usuarios consultados no pueden estar en la
-entidad ingreso.
+Cuando queremos consultar sólo algunos de los atributos de la entidad podemos
+utilizar el parámetro columns :
 
-####  find\_by\_sql (string $sql)
-
-Este método nos permite hacer una consulta por medio de un SQL y el resultado
-devuelto es un objeto que representa el resultado encontrado. La idea es que
-el uso de este método no sea tan común en nuestras aplicaciones, ya que
-ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero
-hay momentos en que es necesario que seamos mas específicos y tengamos que
-recurrir al uso de este.
-
-Ejemplo
 ```php
-$usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso) limit 1" );  
-```  
+$usuarios = (new Usuario)->find("columns: nombre, estado");
+``` 
 
-Este ejemplo consulta el primer usuario con una sentencia where especial.
-La idea es que el usuario consultado no se encuentre en la entidad ingreso.
+Cuando especificamos el primer parámetro de tipo string, ActiveRecord asume
+que son las condiciones de búsqueda para find:
+
+```php
+$usuarios = (new Usuario)->find( "estado='A'");
+```
+
+Se puede utilizar la propiedad count para saber cuántos registros fueron
+devueltos en la búsqueda.
+
+Nota: No es necesario usar find('id: $id'), se puede usar directamente
+find($id)
+
+##### Parámetros de find
+###### conditions
+Lo usamos para hacer filtros en nuestras consultas, de igual forma como haríamos usando la instrucción WHERE. 
+```php
+$usuarios = (new Usuario)->find("conditions: estado='A' AND email LIKE '%@gmail'");
+
+```
+Podemos ver otro ejemplo de conditions usando dos tablas (con apoyo de join y columns)
+```php
+$usuarios = (new Usuario)->find("conditions: usuario.estado='A' AND perfil.nombre = 'Admin'", "join: INNER JOIN perfil ON usuario.perfil_id = perfil.id", "columns: usuario.*");
+```
+
+###### order
+Nos permite indicar sobre qué atributos se realizará el ordenamiento de la consulta que estamos haciendo. Si no se indica este parámetro, el ordenamiento será según la clave primaria (id).
+
+```php
+$categorias = (new Categoria)->find("order: creado_at DESC");
+```
+En la consulta anterior hemos solicitado todos los atributos (columnas, campos) y todos los registros (tuplas, filas) de la tabla categoria, ordenando por la fecha de creación de forma descendente, es decir, del más reciente al más antiguo.
+
+###### limit
+Restringe el número de filas recibidas en la consulta, por ejemplo los 5 últimos usuarios registrados.
+```php
+$usuarios = (new Usuario)->find("order: creado_at DESC", "limit: 5");
+```
+
+###### offset
+Podemos usar el desplazamiento como estrategia de paginación, o simplemente para saltarnos los primeros X registros que le indiquemos. Si tenemos una tabla con los usuarios,  en ella los primeros diez usuarios son restringidos, para no mostrarlos en una vista podríamos tener el siguiente ejemplo:
+```php
+$usuarios_validos = (new Usuario)->find("offset: 10");
+```
+
+###### join
+Cuando necesitamos combinar los datos de nuestro modelo con datos de otras tablas podemos apoyarnos en este parámetro para cargar lo que necesitemos extra.
+```php
+$empleados = (new Empleado)->find("columns: empleado.*, departamento.nombre as departamento", "join: inner join departamento on empleado.departamento_id = departamento.id");
+```
+El ejemplo extrae los datos desde la tabla empleado y le adiciona el nombre del departamento en el cual el empleado trabaja (usando inner join).
+
+Los tipos de join que pueden usarse normalmente son:
+- __inner join__, sólo mostrará los datos de las tablas que concuerdan 100% con la condición ON.
+- __left outer join__ mostrarà todos los datos de la izquierda, y si algún dato de la derecha no concuerda con la condición ON, será reemplazado por NULL.
+- __right outer join__ mostrará todos los datos de la derecha, y si alguno de los datos de la tabla a la izquierda no concuerda, será reemplazado con NULL.
+
+
+###### columns
+Si necesitamos especificar más o menos columnas dentro de lo nuestra consulta, podemos hacerlo usando este parámetro.
+
+```php
+$empleados = (new Empleado)->find("columns: id, nombre");
+```
+En el ejemplo, sólo necesitamos el identificador clave y el nombre del elmpleado.
+
+###### group
+Cuando necesitamos usar campos calculados (como sumas, máximos, mínimos, cuentas, promedios) necesitamos indicarle a ActiveRecord sobre qué conjunto de atributos deberán realizarse dichos cálculos.
+```php
+$edades_por_departamento = (new Empleado)->find("columns: departamento.nombre as dep_nombre, avg(empleado.edad) as prom_edad", "join: inner join departamento on empleado.departamento_id = departamento.id", "group: departamento.nombre");
+```
+
+###### having
+Hay ocaciones en que necesitamos restrigir el número de filas condicionando alguno de los campos calculados (sum, count, min, max, avg). Supongamos que nos piden mostrar las ventas de un conjunto de tiendas, pero sólo aquellas que hayan vendido más de X monto.
+
+```php
+$ventas = (new Tienda)->find("columns: tienda.nombre as tien_nombre, sum(venta.monto) as ven_monto", "join: inner join venta on tienda.id = venta.tienda_id", "having: sum(venta.monto) > 2000");
+```
+En el siguiente ejemplo veremos cómo restringir la lista de facturas por tienda_origen a tienda_destino donde el conteo de dichas facturas sea mayor a 5.
+
+```php
+$resumen = (new Factura)->find("columns: tienda_origen, tienda_destino, count(*) as num_facturas", "group: tienda_origen, tienda_destino", "having: count(*) > 5");
+```
+
+###### distinct
+Si necesitamos la lista de los elementos de una tabla, pero que dichos elementos sólo aparezcan en una ocasión en la lista, __distinct__ nos permitirá llevar a cabo dicha labor.
+
+```php
+$vendedoresPorTienda = (new Venta)->find("distinct: empleado.nombre as vendedor, tienda.nombre as tie_nombre", "join: inner join tienda on venta.tienda_id = tienda.id inner join empleado on venta.empleado_id = empleado.id");
+```
+
+Con esto hemos cubierto la lista de parámetros que pueden usarse en __find__. Estos parámetros también son aplicables a otros métodos dentro de _ActiveRecord_.
 
 ####  find\_first (string $sql)
 
@@ -313,75 +399,64 @@ $usuario = (new Usuario)->find_first( "id='123'" );
 $usuario = (new Usuario)->find_first(123);
 ```  
 
-####  find()
+
+
+####  distinct ()
+
+Este método ejecuta una consulta de distinción única en la entidad, funciona
+igual que un "select unique campo" viéndolo desde la perspectiva del SQL. El
+objetivo es devolver un array con los valores únicos del campo especificado
+como parámetro.
 
 Sintaxis
 ```php
-find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
+distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
 ```
-
-El método "find" es el principal método de búsqueda de ActiveRecord, devuelve
-todas los registros de una entidad o el conjunto de ocurrencias de acuerdo a
-unos criterios de búsqueda. Los parámetros son todos opcionales y su orden no
-es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando
-se invoca sin parámetros devuelve todos los registros en la entidad.
-
-No hay que olvidarse de incluir un espacio después de los dos puntos (:) en
-cada parámetro.
 
 Ejemplo
-
 ```php
-$usuarios = (new Usuario)->find( "conditions: estado='A'", "order: fecha desc");
-```
-
-En este ejemplo buscamos todos los registros cuyo estado sea igual a "A" y
-devuelva estos ordenados descendentemente, el resultado de este es un array de
-objetos de la misma clase con los valores de los registros cargados en ellos.
-En caso de no hayan registros devuelve un array vacío.
-
-Con el método find podemos buscar un registro en particular a partir de su id
-de esta forma:
-
-```php
-$usuario = (new Usuario)->find(123);
+$unicos = (new Usuario)->distinct("estado");
+# array('A', 'I', 'N')  
 ``` 
 
-Obtenemos el registro 123 e igualmente devuelve una instancia del mismo
-objeto ActiveRecord en caso de éxito, o false en caso contrario. Como es un
-solo registro no devuelve un array, sino que los valores de este se cargan en
-la misma variable si existe el registro.
+Los parámetros conditions, order y limit funcionan idénticamente que en el
+método find y permiten modificar la forma o los mismos valores de retorno
+devueltos por esta.
 
-Para limitar el número de registros devueltos, podemos usar el parámetro limit:
+####  find\_all\_by\_sql (string $sql)
 
+Este método nos permite hacer una consulta por medio de un SQL y el resultado
+devuelto es un array de objetos de la misma clase con los valores de los
+registros en estos. La idea es que el uso de este método no sea tan común
+en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del
+SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más
+específicos y tengamos que recurrir a su uso.
+
+Ejemplo
 ```php
-$usuarios = (new Usuario)->find("conditions: estado='A'", 'limit: 5', 'offset: 1');
+$usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
 ``` 
 
-Cuando queremos consultar sólo algunos de los atributos de la entidad podemos
-utilizar el parámetro columns :
+En este ejemplo consultamos todos los usuarios con una sentencia where
+especial. La idea es que los usuarios consultados no pueden estar en la
+entidad ingreso.
 
+####  find\_by\_sql (string $sql)
+
+Este método nos permite hacer una consulta por medio de un SQL y el resultado
+devuelto es un objeto que representa el resultado encontrado. La idea es que
+el uso de este método no sea tan común en nuestras aplicaciones, ya que
+ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero
+hay momentos en que es necesario que seamos mas específicos y tengamos que
+recurrir al uso de este.
+
+Ejemplo
 ```php
-$usuarios = (new Usuario)->find("columns: nombre, estado");
-``` 
+$usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso) limit 1" );  
+```  
 
-Cuando especificamos el primer parámetro de tipo string, ActiveRecord asume
-que son las condiciones de búsqueda para find:
-
-```php
-$usuarios = (new Usuario)->find( "estado='A'");
-```
-
-Se puede utilizar la propiedad count para saber cuántos registros fueron
-devueltos en la búsqueda.
-
-Nota: No es necesario usar find('id: $id'), se puede usar directamente
-find($id)
-
-Podemos ver un ejemplo para __find__ usando funciones de resumen y agrupación (aplicables también a __find_first__)
-```php
-$resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(*) as num_facturas", "group: agencia_origen, agencia_destino", "having: count(*) > 5");
-```
+Este ejemplo consulta el primer usuario con una sentencia where especial.
+La idea es que el usuario consultado no se encuentre en la entidad ingreso.
 
 
 #### select\_one (string $select_query)
