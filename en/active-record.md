@@ -1,264 +1,207 @@
 # ActiveRecord
 
-Es la principal clase para la administración y funcionamiento de modelos.
-ActiveRecord es una implementación de este patrón de programación y esta muy
-influenciada por la funcionalidad de su análoga en Ruby disponible en Rails.
-ActiveRecord proporciona la capa objeto-relacional que sigue rigurosamente el
-estándar ORM: Tablas en Clases, Registros en Objetos, y Campos en Atributos.
-Facilita el entendimiento del código asociado a base de datos y encapsula la
-lógica especifica haciendo más fácil de usar para el programador.
+It is the main class for the Administration and operation of models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by the functionality of its analog avaiable in Ruby on Rails. ActiveRecord provides object-relational layer that strictly follows the standard ORM: tables in classes, objects records, and fields in attributes. Facilitates the understanding of the code associated with the database and encapsulates the logic specified making it easier to use for the programmer.
 
-KumbiaPHP usa POO (Programación orientada a objetos), así que ActiveRecord es
-una clase que ya lleva métodos listos para usar. Estos métodos facilitan al
-usuario el manejo de las tablas de las bases de datos; entre ellos están los
-siguientes: find(), find_first(), save(), update(), etc.
+KumbiaPHP uses OOP (Object-oriented programming), so ActiveRecord is a class with ready-to-use methods. These methods make it easier for the user to manage tables in databases; Among them are the next:
 
-Ejemplo con KumbiaPHP 0.9
+Example with KumbiaPHP 0.9
 
 ```php
 <?php
 //KumbiaPHP 0.9
-$cliente = Load::model('cliente');
-$cliente->nit = "808111827-2";
-$cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
-$cliente->save();
+$customer = Load::model('customer'); 
+$customer->nit = "808111827-2"; 
+$customer->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
+$customer->save(); 
 ```
 
-Ejemplo con KumbiaPHP 1.0
-```php
-<?php
-//KumbiaPHP 1.0
-$cliente = new Cliente();
-$cliente->nit = "808111827-2";
-$cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
-$cliente->save();
-```
-
-### Ventajas del ActiveRecord
-
- * Se trabajan las entidades del Modelo mas Naturalmente como objetos.
- * Las acciones como Insertar, Consultar, Actualizar, Borrar, etc. de una entidad del Modelo están encapsuladas así que se reduce el código y se hace mas fácil de mantener.
- * Código más fácil de Entender y Mantener
- * Reducción del uso del SQL en un 80%, con lo que se logra un alto porcentaje de independencia del motor de base de datos.
- * Menos "detalles", más práctico y util
- * ActiveRecord protege en un gran porcentaje de ataques de SQL inyection que puedan llegar a sufrir tus aplicaciones escapando caracteres que puedan facilitar estos ataques.
-
-### Crear un Modelo ActiveRecord en KumbiaPHP Framework
-
-Lo primero es crear un archivo en el directorio models con el mismo nombre de
-la tabla en la base de datos. Por ejemplo: models/clientes.php Luego
-creamos una clase con el nombre de la tabla extendiendo alguna de las clases
-para modelos.
-
-Ejemplo:
-
-```php
-<?php
-class Cliente extends ActiveRecord {
-}
-```
-
-Si lo que se desea es crear un modelo de una clase que tiene nombre compuesto
-por ejemplo la clase Tipo de Cliente, por convención en nuestra base de datos
-esta tabla debe llamarse: tipo_de_cliente y el archivo:
-models/tipo_de_cliente.php y el código de este modelo es el siguiente:
-
-```php
-<?php
-class TipoDeCliente extends ActiveRecord {
-}
- ```
-
-### Columnas y Atributos
-
-Objetos ActiveRecord corresponden a registros en una tabla de una base de
-datos. Los objetos poseen atributos que corresponden a los campos en estas
-tablas. La clase ActiveRecord automáticamente obtiene la definición de los
-campos de las tablas y los convierte en atributos de la clase asociada. A esto
-es lo que nos referíamos con mapeo objeto relacional.
-
-Miremos la tabla Álbum:
-
-```sql
-CREATE TABLE album (
-    id INTEGER NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    fecha DATE NOT NULL,
-    valor DECIMAL(12,2) NOT NULL,
-    artista_id INTEGER NOT NULL,
-    estado CHAR(1),
-    PRIMARY KEY(id)
-)
-```
-
-Podemos crear un modelo ActiveRecord que mapee esta tabla:
-
-```php
-<?php
-class Album extends ActiveRecord {
-}
-```
-
-Una instancia de esta clase sera un objeto con los atributos de la tabla
-album:
-
-Ejemplo con KumbiaPHP 0.9
+Example with KumbiaPHP 1.0
 
 ```php
 <?php
 //KumbiaPHP 0.9
-$album = Load::model('album');
-$album->id = 2;
-$album->nombre = "Going Under";
-$album->save();
- ```
+$customer = new Customer(); 
+$customer->nit = "808111827-2"; 
+$customer->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
+$customer->save(); 
+```
 
-Ejemplo con KumbiaPHP 1.0
+### Advantages of ActiveRecord
+
+- The entities of the Model are most naturally worked as objects.
+- Actions such as inserting, consult, update, delete, etc. of an entity of the model are encapsulated so the code is reduced and becomes more easy to maintain.
+- The code it's much more easy to learn and keep
+- The use of SQL has a 80% reduction, which achieves a high percentage of independence of the database engine.
+- without details unnecessary, the code is more practical and useful
+- "ActiveRecord" protec in a huge percent of SQL injections attacks that your apps can suffer, limited the letters that make it's.
+
+### How to Create an ActiveRecord in KumbiaPHP Framework?
+
+The first thing is create a file in the directory "models" with the same name of the table in the database. For example: models/customers.php then create a class extended of some class for models.
+
+Example:
+
+```php
+<?php 
+class Customers extends ActiveRecord { 
+} 
+```
+
+If you wanna make a model of a class has a compound name, for example the class Type Of Customer, for convention in our datebase it's must have a table called: type_of_customer and in the file: models/type_of_customer.php has the following code in the model:
+
+```php
+<?php 
+class TypeOfCustomers extends ActiveRecord { 
+} 
+
+
+### Columns and Attributes
+
+Objects ActiveRecord correspond to a register in a table of a 
+database. The objects have attributes that correspond to a 
+fields in it's tables. The class ActiveRecord obtain automatically 
+the definition of the fields of the tables and make convert it 
+in attributes of the class associated. This is we referred with the concept of object relational mapping.
+
+Take a look into Album table: 
+```sql 
+CREATE TABLE album (     
+id INTEGER NOT NULL AUTO_INCREMENT,     
+name VARCHAR(100) NOT NULL,     
+published_date DATE NOT NULL,     
+price DECIMAL(12,2) NOT NULL,     
+artist_id INTEGER NOT NULL,     
+status CHAR(1),     
+PRIMARY KEY(id)
+ )
+```
+
+We can create an ActiveRecord model that maps this table:
+
+```php
+<?php 
+class Album extends ActiveRecord { 
+} 
+```
+
+An instance of this class will be an object with the attributes of the table album:
+
+Example with KumbiaPHP 0.9
+
+```php
 ```php
 <?php
+//KumbiaPHP 0.9
+$album = Load::model('album'); 
+$album->id = 2; 
+$album->name = "Going Under"; 
+$album->save(); 
+ ```
+
+Example with KumbiaPHP 1.0
+```php
+<?php 
  //KumbiaPHP 1.0
-$album = new Album();
-$album->id = 2;
-$album->nombre = "Going Under";
-$album->save();
+$album = new Album(); 
+$album->id = 2; 
+$album->name = "Going Under"; 
+$album->save(); 
 ```
 
-### Llaves Primarias y el uso de IDs
+### Primary keys and the use of IDs
 
-En los ejemplos mostrados de KumbiaPHP siempre se trabaja una columna llamada
-id como llave primaria de nuestras tablas. Tal vez, esto no siempre es
-practico a su parecer, de pronto al crear la tabla clientes la columna de
-numero de identificación seria una excelente elección, pero en caso de cambiar
-este valor por otro tendría problemas con el dato que este replicado en otras
-relaciones (ejemplo facturas), además de esto tendría que validar otras cosas
-relacionadas con su naturaleza. KumbiaPHP propone el uso de ids como llaves
-primarias con esto se automatiza muchas tareas de consulta y proporciona una
-forma de referirse unívocamente a un registro en especial sin depender de la
-naturaleza de un atributo especifico. Usuarios de Rails se sentirán
-familiarizados con esta característica.
+The examples shown in KumbiaPHP always works a column called id as primary key of our tables. Maybe, this is not practical every time for your seem, maybe at moment to create the customers table, the column of id would an excellent choice, but in case of change this value for another value you can found problems with the replicated data in another relations (taxes is a good example), and much more problems related the nature of the data struct. KumbiaPHP propose the use of ids has primary key with it is possible to automate many queries and provide one way to refer unequivocally to an special register without depend of the nature their attribute. Users of Rails can feel good with this features.
 
-Esta particularidad también permite a KumbiaPHP entender el modelo entidad
-relación leyendo los nombres de los atributos de las tablas. Por ejemplo en la
-tabla album del ejemplo anterior la convención nos dice que id es la llave
-primaria de esta tabla pero además nos dice que hay una llave foránea a la
-tabla artista en su campo id.
+This feature can also to KumbiaPHP understand the entity–relationship model reading the name of the attributes of the tables. For example in the table of the previous example the convention affirms that id column is the primary key in this table but also tells that there is a foreign key to the artist table in it's field id.
 
-### Convenciones en ActiveRecord
+### Conventions in ActiveRecord
 
-ActiveRecord posee una serie de convenciones que le sirven para asumir
-distintas cualidades y relacionar un modelo de datos. Las convenciones son las
-siguientes:
+ActiveRecord has a series of conventions that serve to bring the possibilities to assume different qualities and relate the data model. Conventions are the following:
 
 **id**
 
-Si ActiveRecord encuentra un campo llamado id, ActiveRecord asumira que se
-trata de la llave primaria de la entidad y que es auto-numérica.
+If ActiveRecord finds a field called id, ActiveRecord will take that's the primary key of entity, that it's auto incremental and numerical.
 
-**tabla_id**
+**table_id**
 
-Los campos terminados en *_id* indican relaciones foráneas a otras tablas, de
-esta forma se puede definir fácilmente las relaciones entre las entidades del
-modelo:
+The finished fields in *_id* indicate foreign relationships to other tables, thus can be easily defined relations between the entities in the model:
 
-Un campo llamado *clientes_id* en una tabla indica que existe otra tabla
-llamada clientes y esta contiene un campo id que es foránea a este.
+A field called *customers_id* in a table indicates that exist another table called customers and this have a field called id that is related to it.
 
-**campo_at**
+**field_at**
 
-Los campos terminados en *_at* indican que son fechas y posee la funcionalidad
-extra que obtienen el valor de fecha actual en una inserción.
+The finished fields in *_at* indicate that are date and has the extra functionality that can obtain the value of current date insertion.
 
-*created_at* es un campo fecha
+*field_at* is a date field.
 
-**campo_in**
+**field_in**
 
-Los campos terminados en *_in* indican que son fechas y posee la funcionalidad
-extra que obtienen el valor de fecha actual en una actualización.
+The finished fields in *_in* indicate that are date and has the extra functionality that can obtain the value of current date update.
 
-*modified_in* es un campo fecha
+*field_in* is a date field.
 
-**Nota:** Los campos *_at* y *_in* deben ser de tipo fecha (DATE o DATETIME) en el motor de base de datos que se
-este utilizando.
+**Note:** The fields *_at* and *_in* must be of date type (DATE o DATETIME) in the database engine is using.
 
-##  ActiveRecord API
+## ActiveRecord API
 
-A continuación veremos una referencia de los métodos que posee la clase
-ActiveRecord y su funcionalidad respectiva. Éstos se encuentran organizados
-alfabéticamente:
+Then will see a method reference of the ActiveRecord class and its respective functionality. These are organized alphabetically.
 
-###  Consultas
+### Querys
 
-Métodos para hacer consulta de registros:
+Methods to query registries:
 
-####  distinct ()
+#### distinct ()
 
-Este método ejecuta una consulta de distinción única en la entidad, funciona
-igual que un "select unique campo" viéndolo desde la perspectiva del SQL. El
-objetivo es devolver un array con los valores únicos del campo especificado
-como parámetro.
+This method execute a distinction query in the entity, working the same as a "unique select field", in SQL. The goal is return an array with the unique values of the specified field as parameter.
 
-Sintaxis
+Syntax
+
 ```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
+distinct([string $attribute_entity], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ])
 ```
 
-Ejemplo
+Example
+
 ```php
-$unicos = (new Usuario)->distinct("estado");
-# array('A', 'I', 'N')  
+$uniques = (new Users)->distinct("state");
+# array('A','I','N')  
 ```
 
-Los parámetros conditions, order y limit funcionan idénticamente que en el
-método find y permiten modificar la forma o los mismos valores de retorno
-devueltos por esta.
+The conditions parameters, order and limit work identically to in the find method and enable you modify the shape or the same return values returned by this.
 
-####  find\_all\_by\_sql (string $sql)
+#### find\_all\_by\_sql (string $sql)
 
-Este método nos permite hacer una consulta por medio de un SQL y el resultado
-devuelto es un array de objetos de la misma clase con los valores de los
-registros en estos. La idea es que el uso de este método no sea tan común
-en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del
-SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más
-específicos y tengamos que recurrir a su uso.
+This method allows us to do a query using SQL and the returned result is an array of objects of the same class with the values of this register. La idea es que el uso de este método sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir a su uso.
 
-Ejemplo
+Example
+
 ```php
 $usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
 ```
 
-En este ejemplo consultamos todos los usuarios con una sentencia where
-especial. La idea es que los usuarios consultados no pueden estar en la
-entidad ingreso.
+En este ejemplo consultamos todos los usuarios con una sentencia where especial. La idea es que los usuarios consultados no pueden estar en la entidad ingreso.
 
-####  find\_by\_sql (string $sql)
+#### find\_by\_sql (string $sql)
 
-Este método nos permite hacer una consulta por medio de un SQL y el resultado
-devuelto es un objeto que representa el resultado encontrado. La idea es que
-el uso de este método no sea tan común en nuestras aplicaciones, ya que
-ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero
-hay momentos en que es necesario que seamos mas específicos y tengamos que
-recurrir al uso de este.
+Este método nos permite hacer una consulta por medio de un SQL y el resultado devuelto es un objeto que representa el resultado encontrado. La idea es que el uso de este método no sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos mas específicos y tengamos que recurrir al uso de este.
 
 Ejemplo
+
 ```php
 $usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso) limit 1" );  
-```  
+```
 
-Este ejemplo consulta el primer usuario con una sentencia where especial.
-La idea es que el usuario consultado no se encuentre en la entidad ingreso.
+Este ejemplo consulta el primer usuario con una sentencia where especial. La idea es que el usuario consultado no se encuentre en la entidad ingreso.
 
-####  find\_first (string $sql)
+#### find\_first (string $sql)
 
 Sintaxis
-```php
-find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ] )  
-```  
 
-El método "find\_first" devuelve el primer registro de una entidad o la primera
-ocurrencia de acuerdo a unos criterios de búsqueda u ordenamiento. Los
-parámetros son todos opcionales y su orden no es relevante, cuando se invoca
-sin parámetros devuelve el primer registro insertado en la entidad. Este
-método es muy flexible y puede ser usado de muchas formas:
+```php
+find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ])  
+```
+
+El método "find\_first" devuelve el primer registro de una entidad o la primera ocurrencia de acuerdo a unos criterios de búsqueda u ordenamiento. Los parámetros son todos opcionales y su orden no es relevante, cuando se invoca sin parámetros devuelve el primer registro insertado en la entidad. Este método es muy flexible y puede ser usado de muchas formas:
 
 Ejemplo
 
@@ -266,44 +209,33 @@ Ejemplo
 $usuario = (new Usuario)->find_first( "conditions: estado='A'", "order: fecha desc");
 ```
 
-En este ejemplo buscamos el primer registro cuyo estado sea igual a "A" y
-ordenado descendentemente, el resultado de este, se carga a la variable
-$usuarios. Devuelve una instancia del mismo objeto ActiveRecord en
-caso de éxito o false en caso contrario.
+En este ejemplo buscamos el primer registro cuyo estado sea igual a "A" y ordenado descendentemente, el resultado de este, se carga a la variable $usuarios. Devuelve una instancia del mismo objeto ActiveRecord en caso de éxito o false en caso contrario.
 
-Con el método find_first podemos buscar un registro en particular a partir de
-su id de esta forma:
+Con el método find_first podemos buscar un registro en particular a partir de su id de esta forma:
 
 ```php
 $usuario = (new Usuario)->find_first(123);
 ```
 
-Obtenemos el registro 123 e igualmente devuelve una instancia del mismo
-objeto ActiveRecord en caso de éxito, o false en caso contrario. KumbiaPHP genera
-una advertencia cuando los criterios de búsqueda para find\_first devuelven más
-de un registro, para esto podemos forzar que se devuelva solamente uno,
-mediante el parámetro limit, de esta forma:
+Obtenemos el registro 123 e igualmente devuelve una instancia del mismo objeto ActiveRecord en caso de éxito, o false en caso contrario. KumbiaPHP genera una advertencia cuando los criterios de búsqueda para find\_first devuelven más de un registro, para esto podemos forzar que se devuelva solamente uno, mediante el parámetro limit, de esta forma:
 
 ```php
 $usuario = (new Usuario)->find_first( "conditions: estado='A'", "limit: 1" );
 ```
 
-Cuando queremos consultar, sólo algunos de los atributos de la entidad, podemos
-utilizar el parámetro columns:
+Cuando queremos consultar, sólo algunos de los atributos de la entidad, podemos utilizar el parámetro columns:
 
 ```php
 $usuario = (new Usuario)->find_first( "columns: nombre, estado");
 ```
 
-Cuando especificamos el primer parámetro de tipo string, ActiveRecord asumirá
-que son las condiciones de búsqueda para find_first:
+Cuando especificamos el primer parámetro de tipo string, ActiveRecord asumirá que son las condiciones de búsqueda para find_first:
 
 ```php
 $usuario = (new Usuario)->find_first( "estado='A'" );
-```  
+```
 
-De esta forma podemos también deducir que estas 2 sentencias arrojarían el
-mismo resultado:
+De esta forma podemos también deducir que estas 2 sentencias arrojarían el mismo resultado:
 
 ```php
 $usuario = (new Usuario)->find_first( "id='123'" );
@@ -311,23 +243,19 @@ $usuario = (new Usuario)->find_first( "id='123'" );
 
 ```php
 $usuario = (new Usuario)->find_first(123);
-```  
-
-####  find()
-
-Sintaxis
-```php
-find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
 ```
 
-El método "find" es el principal método de búsqueda de ActiveRecord, devuelve
-todas los registros de una entidad o el conjunto de ocurrencias de acuerdo a
-unos criterios de búsqueda. Los parámetros son todos opcionales y su orden no
-es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando
-se invoca sin parámetros devuelve todos los registros en la entidad.
+#### find()
 
-No hay que olvidarse de incluir un espacio después de los dos puntos (:) en
-cada parámetro.
+Sintaxis
+
+```php
+find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …], ["columns: … "])
+```
+
+El método "find" es el principal método de búsqueda de ActiveRecord, devuelve todas los registros de una entidad o el conjunto de ocurrencias de acuerdo a unos criterios de búsqueda. Los parámetros son todos opcionales y su orden no es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando se invoca sin parámetros devuelve todos los registros en la entidad.
+
+No hay que olvidarse de incluir un espacio después de los dos puntos (:) en cada parámetro.
 
 Ejemplo
 
@@ -335,22 +263,15 @@ Ejemplo
 $usuarios = (new Usuario)->find( "conditions: estado='A'", "order: fecha desc");
 ```
 
-En este ejemplo buscamos todos los registros cuyo estado sea igual a "A" y
-devuelva estos ordenados descendentemente, el resultado de este es un array de
-objetos de la misma clase con los valores de los registros cargados en ellos.
-En caso de no hayan registros devuelve un array vacío.
+En este ejemplo buscamos todos los registros cuyo estado sea igual a "A" y devuelva estos ordenados descendentemente, el resultado de este es un array de objetos de la misma clase con los valores de los registros cargados en ellos. En caso de no hayan registros devuelve un array vacío.
 
-Con el método find podemos buscar un registro en particular a partir de su id
-de esta forma:
+Con el método find podemos buscar un registro en particular a partir de su id de esta forma:
 
 ```php
 $usuario = (new Usuario)->find(123);
 ```
 
-Obtenemos el registro 123 e igualmente devuelve una instancia del mismo
-objeto ActiveRecord en caso de éxito, o false en caso contrario. Como es un
-solo registro no devuelve un array, sino que los valores de este se cargan en
-la misma variable si existe el registro.
+Obtenemos el registro 123 e igualmente devuelve una instancia del mismo objeto ActiveRecord en caso de éxito, o false en caso contrario. Como es un solo registro no devuelve un array, sino que los valores de este se cargan en la misma variable si existe el registro.
 
 Para limitar el número de registros devueltos, podemos usar el parámetro limit:
 
@@ -358,62 +279,45 @@ Para limitar el número de registros devueltos, podemos usar el parámetro limit
 $usuarios = (new Usuario)->find("conditions: estado='A'", 'limit: 5', 'offset: 1');
 ```
 
-Cuando queremos consultar sólo algunos de los atributos de la entidad podemos
-utilizar el parámetro columns :
+Cuando queremos consultar sólo algunos de los atributos de la entidad podemos utilizar el parámetro columns :
 
 ```php
 $usuarios = (new Usuario)->find("columns: nombre, estado");
 ```
 
-Cuando especificamos el primer parámetro de tipo string, ActiveRecord asume
-que son las condiciones de búsqueda para find:
+Cuando especificamos el primer parámetro de tipo string, ActiveRecord asume que son las condiciones de búsqueda para find:
 
 ```php
 $usuarios = (new Usuario)->find( "estado='A'");
 ```
 
-Se puede utilizar la propiedad count para saber cuántos registros fueron
-devueltos en la búsqueda.
+Se puede utilizar la propiedad count para saber cuántos registros fueron devueltos en la búsqueda.
 
-Nota: No es necesario usar find('id: $id'), se puede usar directamente
-find($id)
-
-Podemos ver un ejemplo para __find__ usando funciones de resumen y agrupación (aplicables también a __find_first__)
-```php
-$resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(*) as num_facturas", "group: agencia_origen, agencia_destino", "having: count(*) > 5");
-```
-
+Nota: No es necesario usar find('id: $id'), se puede usar directamente find($id)
 
 #### select\_one (string $select_query)
 
-Este método nos permite hacer ciertas consultas como ejecutar funciones en el
-motor de base de datos sabiendo que éstas devuelven un único registro.
+Este método nos permite hacer ciertas consultas como ejecutar funciones en el motor de base de datos sabiendo que éstas devuelven un único registro.
 
 ```php
 $current_time = (new Usuario)->select_one( "current_time");
-```  
+```
 
-En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL,
-podemos usar este método para esto.
+En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL, podemos usar este método para esto.
 
-####  select\_one(string $select_query) (static)
+#### select\_one(string $select_query) (static)
 
-Este método nos permite hacer ciertas consultas como ejecutar funciones en el
-motor de base de datos, sabiendo que estas devuelven un solo registro. Este
-método se puede llamar de forma estática, esto significa que no es necesario
-que haya una instancia de ActiveRecord para hacer el llamado.
+Este método nos permite hacer ciertas consultas como ejecutar funciones en el motor de base de datos, sabiendo que estas devuelven un solo registro. Este método se puede llamar de forma estática, esto significa que no es necesario que haya una instancia de ActiveRecord para hacer el llamado.
 
 ```php
 $current_time = ActiveRecord::select_one( "current_time");
 ```
 
-En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL,
-podemos usar este método para esto.
+En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL, podemos usar este método para esto.
 
-####  exists()
+#### exists()
 
-Este método nos permite verificar si el registro existe o no en la base de
-datos mediante su id o una condición.
+Este método nos permite verificar si el registro existe o no en la base de datos mediante su id o una condición.
 
 ```php
 $usuario = new Usuario();
@@ -428,7 +332,7 @@ if ($usuario->exists()){
 (new Usuario)->exists(2); // Un Usuario con id->2?
 ```
 
-####  find\_all\_by()
+#### find\_all\_by()
 
 Este método nos permite realizar una búsqueda por algún campo
 
@@ -436,48 +340,43 @@ Este método nos permite realizar una búsqueda por algún campo
 $resultado = (new Producto)->find_all_by( 'categoria', 'Insumos');
 ```
 
-####  find\_by\__campo_()
+#### find\_by\__campo_()
 
-Este método nos permite realizar una búsqueda usando el nombre del atributo
-como nombre de método. Devuelve un único registro.
+Este método nos permite realizar una búsqueda usando el nombre del atributo como nombre de método. Devuelve un único registro.
 
 ```php
 $resultado = (new Producto)->find_by_categoria('Insumos');
 ```
 
-####  find\_all\_by\__campo_()
+#### find\_all\_by\__campo_()
 
-Este método nos permite realizar una búsqueda el nombre del atributo como
-nombre de método. Devuelve todos los registros que coincidan con
-la búsqueda.
+Este método nos permite realizar una búsqueda el nombre del atributo como nombre de método. Devuelve todos los registros que coincidan con la búsqueda.
 
 ```php
 $resultado = (new Producto)->find_all_by_categoria("Insumos");
-```  
+```
 
-###  Conteos y sumatorias
+### Conteos y sumatorias
 
-####  count()
+#### count()
 
-Realiza un conteo sobre los registros de la entidad con o sin alguna condición
-adicional. Emula la función de agrupamiento count. Se puede usar los mismos parámetros que find.
+Realiza un conteo sobre los registros de la entidad con o sin alguna condición adicional. Emula la función de agrupamiento count.
 
 ```php
 $numero_registros = (new Cliente)->count();
 $numero_registros = (new Cliente)->count("ciudad = 'BOGOTA'");
-```  
+```
 
 #### sum()
 
-Realiza una sumatoria sobre los valores numéricos del atributo de alguna
-entidad, emula la función de agrupamiento sum en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Realiza una sumatoria sobre los valores numéricos del atributo de alguna entidad, emula la función de agrupamiento sum en el lenguaje SQL.
 
 ```php
 $suma = (new Producto)->sum("precio");
 $suma = (new Producto)->sum("precio", "conditions: estado = 'A'");
-```  
+```
 
-####  count\_by\_sql()
+#### count\_by\_sql()
 
 Realiza una sumatoria utilizando lenguaje SQL.
 
@@ -490,8 +389,7 @@ $numero = (new Producto)->count_by_sql("select count(precio) from producto, fact
 
 #### average()
 
-Realiza el cálculo del promedio sobre los valores numéricos del atributo de
-alguna entidad, emula la función de agrupamiento avg en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Realiza el cálculo del promedio sobre los valores numéricos del atributo de alguna entidad, emula la función de agrupamiento avg en el lenguaje SQL.
 
 ```php
 $promedio = (new Producto)->average("precio");
@@ -500,8 +398,7 @@ $promedio = (new Producto)->average("precio", "conditions: estado = 'A'");
 
 #### maximum()
 
-Realiza el cálculo del valor máximo sobre los valores del atributo de alguna
-entidad, emula la función de agrupamiento max en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Realiza el cálculo del valor máximo sobre los valores del atributo de alguna entidad, emula la función de agrupamiento max en el lenguaje SQL.
 
 ```php
 $max = (new Producto)->maximum("precio");
@@ -510,19 +407,17 @@ $max = (new Producto)->maximum("fecha_compra", "conditions: estado = 'A'");
 
 #### minimum()
 
-Realiza el cálculo del valor mínimo sobre los valores del atributo de alguna
-entidad, emula la función de agrupamiento min en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Realiza el cálculo del valor mínimo sobre los valores del atributo de alguna entidad, emula la función de agrupamiento min en el lenguaje SQL.
 
 ```php
 $min = (new Producto)->minimum("precio");
 $min = (new Producto)->minimum("fecha_compra", "conditions: estado = 'A'");
 ```
 
-
-
 ### Creación, actualización y borrado de registros
 
 #### create()
+
 Crea un registro a partir de los datos indicados en el modelo. Retorna boolean.
 
 ```php
@@ -537,9 +432,8 @@ $exito = $producto->create();
 ```
 
 #### save()
-Actualiza o crea un registro a partir de los datos indicados en el modelo.
-Crea el registro cuando el elemento a guardar no existe o cuando no se indica
-el atributo de clave primaria. Actualiza cuando el registro existe. Retorna boolean.
+
+Actualiza o crea un registro a partir de los datos indicados en el modelo. Crea el registro cuando el elemento a guardar no existe o cuando no se indica el atributo de clave primaria. Actualiza cuando el registro existe. Retorna boolean.
 
 ```php
 $data = array ("nombre" => "Cereal", "precio" => 9.99, "estado" => "A" );
@@ -552,8 +446,8 @@ $exito = $producto->save();
 ```
 
 #### update()
-Actualiza un registro a partir de los datos indicados en el modelo. Retorna
-boolean.
+
+Actualiza un registro a partir de los datos indicados en el modelo. Retorna boolean.
 
 ```php
 $data = array ("nombre" => "Cereal Integral", "precio" => 8.99, "estado" => "A", "id" => 123);
@@ -565,35 +459,32 @@ $producto->update();
 ```
 
 #### update\_all()
-Actualiza uno o más valores dentro de uno o más registros a partir de los
-atributos y condiciones indicadas.
+
+Actualiza uno o más valores dentro de uno o más registros a partir de los atributos y condiciones indicadas.
 
 Ejemplos:
 
 ```php
 (new Producto)->update_all("precio = precio * 1.2");
 ```
-Actualiza el atributo precio aumentándolo en un 20% para todos los registros
-de la entidad producto.
 
+Actualiza el atributo precio aumentándolo en un 20% para todos los registros de la entidad producto.
 
 ```php
 (new Producto)->update_all("precio = precio * 1.2", "estado = 'A'", "limit: 100");
 ```
 
-Actualiza el atributo precio aumentándolo en un 20% para 100 registros
-de la entidad producto donde el atributo estado es 'A'.
+Actualiza el atributo precio aumentándolo en un 20% para 100 registros de la entidad producto donde el atributo estado es 'A'.
 
 ```php
 (new Producto)->update_all( "precio = 0, estado='C'", "estado = 'B'");
 ```
 
-Actualiza el atributo precio a 0 y el estado a 'C' para todos los registros de la entidad producto donde el atributo estado es 'B'.
-
+Actualiza el atributo precio aumentándolo en un 20% y estado todos registros de la entidad producto donde el atributo estado es 'B'.
 
 #### delete()
-Elimina uno o más registros a partir de los atributos y condiciones indicadas.
-Retorna boolean.
+
+Elimina uno o más registros a partir de los atributos y condiciones indicadas. Retorna boolean.
 
 ```php
 $producto = (new Producto)->find(123);
@@ -605,8 +496,8 @@ $exito = (new Producto)->delete("estado='A'");
 ```
 
 #### delete\_all()
-Elimina uno o más registros a partir de los atributos y condiciones indicadas.
-Retorna boolean.
+
+Elimina uno o más registros a partir de los atributos y condiciones indicadas. Retorna boolean.
 
 ```php
 (new Producto)->delete_all( " precio >= 99.99 " );
@@ -643,7 +534,7 @@ class Clientes extends ActiveRecord {
   protected function initialize(){
    $this->validates_length_of("nombre", "minumum: 15", "too_short: El nombre debe tener al menos 15 caracteres");
    $this->validates_length_of("nombre", "maximum: 40", "too_long: El nombre debe tener maximo 40 caracteres");
-   $this->validates_length_of("nombre", "in: 15:40",
+   $this->validates_length_of("nombre", "in: 15:40", 
       "too_short: El nombre debe tener al menos 15 caracteres",
       "too_long: El nombre debe tener maximo 40 caracteres"
    );
@@ -762,13 +653,13 @@ $Usuarios->rollback();
 
 **Nota:** Las tablas deben tener el motor de almacenamiento \[InnoDB\][1](http://es.wikipedia.org/wiki/InnoDB)
 
-###Otros métodos
+### Otros métodos
 
 #### sql (string $sql)
 
 Esta función nos permite ejecutar sentencias SQL directamente en el motor de base de datos. La idea es que el uso de este método no debería ser común en nuestras aplicaciones ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir al uso de éste.
 
-###Callbacks
+### Callbacks
 
 #### Introducción
 
@@ -833,6 +724,7 @@ public function before_save() {
     }                
 }
 ```
+
 #### before\_update
 
 Es llamado justo antes de realizar el proceso de actualización cuando se llama el método save o update en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'. El mismo codigo del before\_save() para before\_update.
@@ -1095,89 +987,71 @@ $page = $this->Usuario->paginate('per_page: 5', 'page: 1');
 
 Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, aprovecharemos la persistencia de datos del controlador para hacer una paginación inmune a inyección sql.
 
-El modelo *usuario.php*:
-
-```php
-<?php
-class Usuario extends ActiveRecord {
-
-}
-```
-
-
 En el controlador *usuario_controller.php*:
 
 ```php
-<?php
-
-class UsuarioController extends AppController{
-
-    public $page_title = 'Daily Backend Manager';
-
-    private $_per_page = 10;
-
+class UsuarioController extends ApplicationController {
+  private $_per_page = 7;
+  /**
+  * Formulario de busqueda
+  **/
+  public function buscar() {
+    $this->nullify('page', 'conditions');
+  }
+  /**
+  * Paginador
+  **/
+  public function lista($page='') {
     /**
-     * Formulario de busqueda
-     * */
-    public function index() {
-        Input::delete();
+    * Cuando se efectua la busqueda por primera vez
+    **/
+    if(Input::hasPost('usuario')) {
+      $usuario = Input::post('usuario');
+      if($usuario['nombre']) {
+        $this->conditions = “ nombre LIKE '%{$usuario['nombre']}%' ”;
+      }
+      /**
+      * Paginador con condiciones o sin condiciones
+      **/
+      if(isset($this->conditions) && $this->conditions) {
+        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this>_per_page”, 'page: 1');
+      } else {
+        $this->page = $this->Usuario->paginate(“per_page: $this>_per_page”, 'page: 1');
+      }
+    } elseif($page='next' && isset($this->page) && $this->page->next) {
+       /**
+       * Paginador de pagina siguiente
+       **/
+      if(isset($this->conditions) && $this->conditions) {
+        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this>_per_page”, “page: {$this->page->next}”);
+      } else {
+         $this->page = $this->Usuario->paginate(“per_page: $this->_per_page”, “page: {$this->page->next}”);
+      }
+    } elseif($page='prev' && isset($this->page) && $this->page->prev) {
+      /**
+      * Paginador de pagina anterior
+      **/
+      if(isset($this->conditions) && $this->conditions) {
+        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this->_per_page”, “page: {$this->page->prev}”);
+    } else {
+       $this->page = $this->Usuario->paginate(“per_page: $this->_per_page”, “page: {$this->page->prev}”);
     }
-
-    /**
-     * Paginador
-     * */
-    public function listar($page = '') {
-
-        $usuario = new Usuario();
-        /**
-         * Cuando se efectua la búsqueda por primera vez
-         * */
-        if (Input::hasPost('usuario')) {
-            $data = Input::post('usuario');
-            if ($data['nombre']) {
-                $this->conditions = " nombre LIKE '%{$data['nombre']}%' ";
-            }
-            /**
-             * Paginador con condiciones o sin condiciones
-             * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", 'page: 1');
-            } else {
-                $this->page = $usuario->paginate("per_page: $this>_per_page", 'page: 1');
-            }
-        } elseif ($page = 'next' && isset($this->page) && $this->page->next) {
-            /**
-             * Paginador de pagina siguiente
-             * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this>_per_page", "page: {$this->page->next}");
-            } else {
-                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->next}");
-            }
-        } elseif ($page = 'prev' && isset($this->page) && $this->page->prev) {
-            /**
-             * Paginador de pagina anterior
-             * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", "page: {$this->page->prev}");
-            } else {
-                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->prev}");
-            }
-        }
-    }
+  }
+ }
 }
 ```
 
-En la vista *index.pthml*
+En la vista *buscar.pthml*
 
 ```php
-<?= Form::open('usuario/listar') ?>
+<?= Form::open('usuario/lista') ?>
 <?= Form::text('usuario.nombre') ?>
 <?= Form::submit('Consultar') ?>
 <?= Form::close() ?>
+
 ```
 
-En la vista *listar.phtml*
+En la vista *lista.phtml*
 
 ```php
 <table>
@@ -1185,14 +1059,14 @@ En la vista *listar.phtml*
         <th>id</th>
         <th>nombre</th>
     </tr>
-    <?php foreach ($page->items as $p): ?>
-        <tr>
-            <td><?= $p->id ?></td>
-            <td><?=h($p->nombre) ?></td>
-        </tr>
+    <?php foreach($page->items as $p): ?>
+    <tr>
+        <td><?= $p->id ?></td>
+        <td><?= h($p->nombre) ?></td>
+    </tr>
     <?php endforeach; ?>
 </table>
 <br>
-<?php if ($page->prev) echo Html::linkAction('listar/prev', 'Anterior') ?>
-<?php if ($page->next) echo ' | ' . Html::linkAction('listar/next', 'Siguiente') ?>
+<?php if($page->prev) echo Html::linkAction('lista/prev', 'Anterior') ?>
+<?php if($page->next) echo ' | ' . Html::linkAction('lista/next', 'Siguiente') ?>
 ```

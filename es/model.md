@@ -32,6 +32,5 @@ otro controlador.
 Partiendo de este principio, los controladores NO  deberían contener ningún
 tipo de lógica, sólo se encargan de atender las peticiones del usuarios y
 solicitar dicha información a los modelos. Con esto garantizamos un buen uso
-del [MVC](http://www.google.com/url?q=http%3A%2F%2Fes.wikipedia.org%2Fwiki%2FM
-odelo_Vista_Controlador&sa=D&sntz=1&usg=AFQjCNFo6Rn8nbUjHG5f8Qqa__2nYwMDjg) .
+del [MVC](https://es.wikipedia.org/wiki/Modelo-vista-controlador).
 

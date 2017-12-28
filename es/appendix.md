@@ -16,225 +16,7 @@ mejor control de la ejecución.
 No es necesario pero si recomendable usar Firebug  si se trabaja en Mozilla
 Firefox o algún navegador que use la consola de WebKit como Google Chrome.
 
-## CRUD
 
-### Introducción
-
-Este ejemplo, permite de manera sencilla conocer y entender la
-implementación de un CRUD (Create, Read, Update y Delete en ingles) sin la
-necesidad de un Scaffold y un manejo correcto del MVC en KumbiaPHP.
-
-El CRUD de la beta1 sigue funcionando igual en la beta2, pero queda
-desaconsejado. En la versión 1.0 se puede usar de las 2 maneras. Y la 1.2 que
-saldrá junto a la 1.0 sólo usa el nuevo y se elimina lo desaconsejado.
-
-### Configurando database.ini
-
-Configurar el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) ,
-con los datos y motor de Base de Datos a utilizar.
-
-### Modelo
-
-Crear el Modelo el cual esta viene dado por la definición de una tabla en la
-BD, para efecto del ejemplo creamos la siguiente tabla.
-
-```sql
-CREATE TABLE menus
-(
-id           int            unique not null auto_increment,
-nombre       varchar(100),
-titulo       varchar(100)   not null,
-primary key(id)
-)  
-```  
-  
-Vamos ahora a definir el modelo el cual nos permite interactuar con la BD.
-
-[app]/models/menus.php:
-
-```php
-<?php  
-class Menus extends ActiveRecord  
-{  
-  /**  
-     * Retorna los menu para ser paginados   
-     *   
-     */   
-  public function getMenus($page, $ppage=20)  
-  {  
-      return $this->paginate("page: $page", "per_page: $ppage", 'order: id desc');   
-  }  
-}  
-```  
-  
-### Controller
-
-El controlador es encargado de atender las peticiones del cliente (ej.
-browser) y a su vez de darle una respuesta. En este controller vamos a definir
-todas las operaciones CRUD que necesitamos.
-
-[app]/controllers/menus_controller.php:
-
-```php
-<?php  
-/**  
-* Carga del modelo Menus...   
-*/   
-// Load::models( 'menus' );// Necesario en versiones < 0.9 
-  
-class MenusController extends AppController
-{
-  /**  
-    * Obtiene una lista para paginar los menus   
-    */   
-  public function index($page=1)
-  {
-      $menu = new Menus();
-      $this->listMenus = $menu->getMenus($page);
-  }
-  
-  /**  
-    * Crea un Registro   
-    */   
-  public function  create ()
-  {
-      /**   
-        * Se verifica si el usuario envio el form (submit) y si ademas   
-        * dentro del array POST existe uno llamado "menus"   
-        * el cual aplica la autocarga de objeto para guardar los   
-        * datos enviado por POST utilizando autocarga de objeto   
-        */   
-      if (Input::hasPost('menus')) {
-          /**   
-            * se le pasa al modelo por constructor los datos del form y ActiveRecord recoge esos datos   
-            * y los asocia al campo correspondiente siempre y cuando se utilice la convencion   
-            * model.campo   
-            */   
-          $menu = new Menus(Input::post('menus'));
-          //En caso que falle la operacion de guardar   
-          if (!$menu->save()) {
-              Flash::error('No se puede crear');
-          } else {
-              Flash::valid('Añadido correctamente');
-              //Eliminamos el POST, si no queremos que se vean en el form   
-              Input::delete();
-          }
-      }
-  }
-  
-  /**  
-    * Edita un Registro   
-    *   
-    * @param int $id (requerido)   
-    */   
-  public function edit($id)
-  {
-      $menu = new Menus();
-  
-      //se verifica si se ha enviado el formulario (submit)   
-      if (Input::hasPost('menus')) {
-  
-          if (!$menu->update(Input::post('menus'))) {
-              Flash::error('Fallo al editar');
-          } else {
-              Flash::valid('Cambio correcto');
-              //enrutando por defecto al index del controller   
-              return Router::redirect();
-          }   
-      } else {
-          //Aplicando la autocarga de objeto, para comenzar la edicion   
-          $this->menus = $menu->find((int) $id);
-      }
-  }
-  
-  /**  
-    * Eliminar un menu   
-    *   
-    * @param int $id (requerido)   
-    */   
-  public function del($id)
-  {  
-      $menu = new Menus();
-      if  (!$menu->delete((int) $id)) {
-              Flash::error('Fallo al borrar');
-      } else {
-              Flash::valid('Borrado correctamente');
-      }
-  
-      //enrutando por defecto al index del controller   
-      return Router::redirect();
-  }
-}
-``` 
-  
-### Vistas
-
-Agregamos las vistas...
-
-[app]/views/menus/index.phtml
-```php
-<div class="content">
-  <?php View::content() ?>
-  <h3>Menús</h3>
-  <ul>
-  <?php foreach($listMenus->items as $item) : ?>
-  <li>
-      <?= Html::linkAction("edit/$item->id/", 'Editar') ?>
-      <?= Html::linkAction("del/$item->id/", 'Borrar') ?>
-      <strong><?= $item->nombre ?> - <?= $item->titulo ?></strong>
-  </li>
-  <?php endforeach ?>
-  </ul>
-  
-   // ejemplo manual de paginado, existen partials listos en formato digg,
-clasic,...
-  <?php if($listMenus->prev) echo Html::linkAction("index/$listMenus->prev/", '<< Anterior |') ?>
-  <?php if($listMenus->next) echo Html::linkAction("index/$listMenus->next/", 'Proximo >>') ?>
-</div>
-```  
-  
-[app]/views/menus/create.phtml
-
-```php
-<?php View::content() ?>
-<h3>Crear menú<h3>
-
-<?= Form::open(); // por defecto llama a la misma url ?>  
-
-      <label>Nombre
-      <?= Form::text('menus.nombre') ?></label>
-
-      <label>Titulo
-      <?= Form::text('menus.titulo') ?></label>
-
-      <?= Form::submit('Agregar') ?>
-
-<?= Form::close() ?>
-```
-[app]/views/menus/edit.phtml
-```php 
-<?php View::content() ?>
-<h3>Editar menú<h3>
-<?= Form::open(); // por defecto llama a la misma url ?>
-  <label>Nombre <?= Form::text('menus.nombre') ?></label>
-  <label>Titulo <?= Form::text('menus.titulo') ?></label>
-  <?= Form::hidden('menus.id') ?>
-  <?= Form::submit('Actualizar') ?>
-<?= Form::close() ?>
-```  
-  
-  
-###  Probando el CRUD
-
-Ahora sólo resta probar todo el código que hemos generado, en este punto es
-importante conocer el comportamiento de las [URL's en KumbiaPHP](http://wiki.kumbiaphp.com/Hola_Mundo_KumbiaPHP_Framework#KumbiaPHP_URLS) .
-
-  * index es la acción para listar http://localhost/menus/index/
-NOTA: index/ se puede pasar de forma implícita o no.  KumbiaPHP en caso que no
-se le pase una accion, buscara por defecto un index, es decir si colocamos:
-http://localhost/menus/
-  * create crea un menú en la Base de Datos http://localhost/menus/create/
-  * Las acciones del y edit a ambas se debe entrar desde el index, ya que reciben el parámetros a editar o borrar según el caso.
 
 ##  Aplicación en producción
 
@@ -265,7 +47,9 @@ show:  número de páginas que se mostraran en el paginador, por defecto 10.
 url:  url para la accion que efectúa la pacciona, por defecto
 "module/controller/page/" y se envía por parámetro el número de página.
 
-`View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));` 
+```php
+View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+```
   
 ---  
   
@@ -282,7 +66,9 @@ show: número de páginas  que muestra el paginador, por defecto 10.
 url: url para la accion  que efectúa  la pacciona , por defecto
 "module/controller/page/" y se envía  por parámetro el número de página.
 
-`View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));`  
+```php 
+View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+```
   
 ---  
   
@@ -301,7 +87,9 @@ page:  objeto obtenido al invocar al paginador.
 url:  url para la accion  que efectúa  la pacciona , por defecto
 "module/controller/page/" y se envía  por parámetro el número de página.
 
-`View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));`
+```php
+View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));
+```
   
 ---  
   
@@ -318,7 +106,9 @@ show:  número de páginas  que muestra el paginador, por defecto 10.
 url:  url para la acción que efectúa la paginación, por defecto
 "module/controller/page/" y se envia  por parámetro  el número de página.
 
-`View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));`  
+```php 
+View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+```
   
 ---  
   
@@ -337,7 +127,9 @@ page:  objeto obtenido al invocar al paginador.
 url:  url para la acción  que efectua  la paginación , por defecto
 "module/controller/page/" y se envía  por parámetro el número de página.
 
-`View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));`  
+```php
+View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));
+```
   
 ---  
   

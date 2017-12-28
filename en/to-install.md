@@ -6,8 +6,8 @@ This section explains the steps to follow, to run the framework in our developme
 
 As mentioned above KumbiaPHP is very easy, and in this sense the requirements to operate the framework are minimal, are listed below:
 
-- Interprete PHP versión 5.4 o superior.
-- Servidor Web con soporte de reescritura de URL (Apache, Nginx, Cherokee, Lighttpd, Internet Information Server (IIS)).
+- PHP version 5.4 or higher.
+- Web server with support for URL rewriting (Apache, Cherokee, Nginx, Lighttpd, Internet Information Server (IIS)).
 - Database supported by KumbiaPHP.
 
 To install KumbiaPHP Framework, you should download the archive from the download section http://www.kumbiaphp.com/blog/manuales-y-descargas/ for the framework most recent version. Once the file is downloaded, it is essential to make sure that it has the extension .tgz for users Linux and .zip for Windows users.
@@ -24,7 +24,7 @@ Then unzip its contents in the directory root of the webserver (DocumentRoot). T
             `-- index.php  
     
 
-## Configurar Apache
+## Configure Apache
 
 KumbiaPHP Framework uses a module to rewrite URLs, making them more understandable and easy to remember in our applications. This module must be configured and installed, in this sense must check that the module is enabled, the following sections explain how to do it.
 
@@ -67,7 +67,7 @@ Next, test all settings made by the following URL.
 
 http://localhost/kumbiaphp/
 
-Si todo ha ido bien, debería ver una página de bienvenida, con lo que la instalación rápida se puede dar por concluida.
+If all has gone well, you should see a welcome page, so the quick installation can be finished.
 
 ![](../images/image12.png)
 
@@ -75,70 +75,74 @@ Figure 2.1: Successful installation of KumbiaPHP
 
 This is an environment test which is intended to practice with KumbiaPHP on a local server, not to develop complex applications that end up being published on the web.
 
-## Configurar Nginx
+## Configure Nginx
 
-Using `$_SERVER['PATH_INFO']` as source of URIs:
+Using `$_SERVER['PATH_INFO']`:
 
-    server {
-        listen      80;
-        server_name localhost.dev;
-        root        /var/www/kumbiaphp;
-        index       index.php index.html index.htm;
-    
-        location / {
-            try_files $uri $uri/ /index.php;
-        }
-    
-        location ~ \.php {
-            fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
-            fastcgi_index /index.php;
-    
-            include fastcgi_params;
-            fastcgi_split_path_info       ^(.+\.php)(/.+)$;
-            fastcgi_param PATH_INFO       $fastcgi_path_info;
-            fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        }
-    
-        location ~ /\. {
-            deny all;
-        }
+```nginx
+server {
+    listen      80;
+    server_name localhost.dev;
+    root        /var/www/kumbiaphp;
+    index       index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php;
     }
-    
 
-Using `$_GET['_url']` as source of URIs:
+    location ~ \.php {
+        #fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index /index.php;
 
-    server {
-        listen      80;
-        server_name localhost.dev;
-        root        /var/www/kumbiaphp;
-        index       index.php index.html index.htm;
-    
-        location / {
-            try_files $uri $uri/ /index.php?_url=$uri&$args;
-        }
-    
-        location ~ \.php {
-            fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
-            fastcgi_index /index.php;
-    
-            include fastcgi_params;
-            fastcgi_split_path_info       ^(.+\.php)(/.+)$;
-            fastcgi_param PATH_INFO       $fastcgi_path_info;
-            fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        }
-    
-        location ~ /\. {
-            deny all;
-        }
+        include fastcgi_params;
+        fastcgi_split_path_info       ^(.+\.php)(/.+)$;
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
-    
+
+    location ~ /\. {
+        deny all;
+    }
+}
+```
+
+Using `$_GET['_url']`:
+
+```nginx
+server {
+    listen      80;
+    server_name localhost.dev;
+    root        /var/www/kumbiaphp;
+    index       index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?_url=$uri&$args;
+    }
+
+    location ~ \.php {
+        #fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
+        fastcgi_pass  127.0.0.1:9000;
+        fastcgi_index /index.php;
+
+        include fastcgi_params;
+        fastcgi_split_path_info       ^(.+\.php)(/.+)$;
+        fastcgi_param PATH_INFO       $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~ /\. {
+        deny all;
+    }
+}
+```
 
 ### Why is important Mod-Rewrite?
 
-ReWrite es un módulo de apache que permite reescribir las urls que han utilizado nuestros usuarios. KumbiaPHP Framework encapsula esta complejidad permitiendo usar URLs bonitas o limpias como las que vemos en blogs o en muchos sitios donde no aparecen los ?, los & ni las extensiones del servidor (.php, .asp, .aspx, etc).
+ReWrite is an apache module that allows you to rewrite urls that our users have used. KumbiaPHP Framework encapsulates this complexity by allowing to use beautiful URLs or clean like that you see in blogs or in places where they do not appear the?, the & or server extensions (.php, .asp, .aspx, etc).
 
-Además de esto, con mod-rewrite KumbiaPHP puede proteger nuestras aplicaciones ante la posibilidad de que los usuarios puedan ver los directorios del proyecto y puedan acceder a archivos de clases, modelos, lógica, etc., sin que sean autorizados.
+In addition, with mod-rewrite KumbiaPHP can protect our applications to the possibility that users can see the project directories and can access class files, models, logic, etc., unless they are authorized.
 
-Con mod-rewrite el único directorio que pueden ver los usuarios es el contenido del directorio público (public) del servidor web, el resto permanece oculto y solo puede ser visualizado cuando ha realizado una petición en forma correcta y también es correcto según nuestra lógica de aplicación. Cuando escribes direcciones utilizando este tipo de URLs, estas ayudando también a los motores de búsqueda a indexar mejor tu información.
+With mod-rewrite the only directory that users can see is public directory (public) of the web server content, the rest remains hidden and only can be viewed when you have made a request to properly and is also correct according to our application logic. When you write addresses using this type of URLs, are also helping the search engines to better index your information.

@@ -15,14 +15,16 @@
 - [Controller](controller.md#el-controlador)
 - [Models](model.md#5-modelos)
 - [View](view.md#la-vista)
+- [CRUD](crud.md)
 
 ## Other Components
 
-- [Parent classes](parent-class.md#7-clases-padre)
+- [ActiveRecord](active-record.md)
+- [Parent classes](parent-class.md#clases-padre)
 - [Console](console.md#la-consola)
 
 ## Appendices
 
 - [Appendices](appendix.md#apendices)
 
-[Topics List](index.md)
+[Full topic list](index.md)
