@@ -58,10 +58,9 @@ class TypeOfCustomers extends ActiveRecord {
 ### Columns and Attributes
 
 Objects ActiveRecord correspond to a register in a table of a 
-database. The objects have attributes that correspond to a 
-fields in it's tables. The class ActiveRecord obtain automatically 
+database. The objects have attributes that correspond to a fields in its tables. The class ActiveRecord obtain automatically 
 the definition of the fields of the tables and make convert it 
-in attributes of the class associated. This is we referred with the concept of object relational mapping.
+in attributes of the class associated. This is what we referred to the concept of object-relational mapping.
 
 Take a look into Album table: 
 ```sql 
@@ -110,7 +109,7 @@ $album->save();
 
 ### Primary keys and the use of IDs
 
-The examples shown in KumbiaPHP always works a column called id as primary key of our tables. Maybe, this is not practical every time for your seem, maybe at moment to create the customers table, the column of id would an excellent choice, but in case of change this value for another value you can found problems with the replicated data in another relations (taxes is a good example), and much more problems related the nature of the data struct. KumbiaPHP propose the use of ids has primary key with it is possible to automate many queries and provide one way to refer unequivocally to an special register without depend of the nature their attribute. Users of Rails can feel good with this features.
+The examples are shown in KumbiaPHP always works a column called id as the primary key of our tables. Maybe, this is not practical every time for your seem, maybe at moment to create the customers table, the column of id would an excellent choice, but in case of change this value for another value you can found problems with the replicated data in another relations (taxes is a good example), and much more problems related the nature of the data struct. KumbiaPHP propose the use of ids has primary key with it is possible to automate many queries and provide one way to refer unequivocally to an special register without depend of the nature their attribute. Users of Rails can feel good with this features.
 
 This feature can also to KumbiaPHP understand the entity–relationship model reading the name of the attributes of the tables. For example in the table of the previous example the convention affirms that id column is the primary key in this table but also tells that there is a foreign key to the artist table in it's field id.
 
