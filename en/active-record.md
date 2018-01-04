@@ -1,6 +1,6 @@
 # ActiveRecord
 
-It is the main class for the Administration and operation of models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by the functionality of its analogue in Ruby available on Rails. ActiveRecord provides an object-relational layer that strictly follows the standard ORM: tables in classes, objects records, and fields in attributes. Facilitates the understanding of the code associated with the database and encapsulates the logic specified making it easier to use for the programmer.
+It is the main class for the Administration and operation of models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by the functionality of its analog available in Ruby on Rails. ActiveRecord provides an object-relational layer that strictly follows the standard ORM: tables in classes, objects records, and fields in attributes. Facilitates the understanding of the code associated with the database and encapsulates the logic specified making it easier to use for the programmer.
 
 KumbiaPHP uses OOP (Object-oriented programming), so ActiveRecord is a class with ready-to-use methods. These methods make it easier for the user to manage tables in databases; Among them are the next:
 
@@ -37,7 +37,7 @@ $customer->save();
 
 ### How to Create an ActiveRecord in KumbiaPHP Framework?
 
-The first thing is create a file in the directory "models" with the same name of the table in the database. For example: models/customers.php then create a class extended of some class for models.
+The first thing is to create a file in the directory "models" with the same name of the table in the database. For example models/customers.php then create a class extended of some class for models.
 
 Example:
 
@@ -47,7 +47,7 @@ class Customers extends ActiveRecord {
 } 
 ```
 
-If you wanna make a model of a class has a compound name, for example the class Type Of Customer, for convention in our datebase it's must have a table called: type_of_customer and in the file: models/type_of_customer.php has the following code in the model:
+If you wanna make a model of a class has a compound name, for example, the class Type Of Customer, for the convention in our database it's must have a table called: type_of_customer and in the file: models/type_of_customer.php has the following code in the model:
 
 ```php
 <?php 
