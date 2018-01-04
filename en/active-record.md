@@ -30,8 +30,8 @@ $customer->save();
 
 - The entities of the Model are most naturally worked as objects.
 - Actions such as inserting, consult, update, delete, etc. of an entity of the model are encapsulated so the code is reduced and becomes more easy to maintain.
-- The code it's much more easy to learn and keep
-- The use of SQL has a 80% reduction, which achieves a high percentage of independence of the database engine.
+- Easiest Code to Understand and Maintain
+- Reduction in the use of instructions of SQL by 80%, which achieves a high percentage of independence from the database engine.
 - without details unnecessary, the code is more practical and useful
 - "ActiveRecord" protec in a huge percent of SQL injections attacks that your apps can suffer, limited the letters that make it's.
 
