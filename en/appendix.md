@@ -6,54 +6,54 @@ KumbiaPHP provides integration with the JavaScript Framework jQuery
 
 ### KDebug
 
-KDebug es un nuevo objeto incorporado al plugins de integración KumbiaPHP/jQuery que permite una depuración del código en tiempo de desarrollo. Con solo un parámetro se puede aplicar un log que permite ver en consola (mientras esta este disponible, sino usara alert) que permite un mejor control de la ejecución.
+KDebug is a new object incorporated to the integration plugins at KumbiaPHP/JQuery that allows a debugging of the code in development time. With just one parameter you can use a log that allow see in console (while available, if not it using alert) allowing a better control of the execution.
 
-No es necesario pero si recomendable usar Firebug si se trabaja en Mozilla Firefox o algún navegador que use la consola de WebKit como Google Chrome.
+It's not necessary, but will be helpful if you work with tools like Firebug in Mozilla Firefox o some browser that use the WebKit console, like Google Chrome.
 
-## Aplicación en producción
+## Application in production
 
-TODO
+All
 
-## Partials de paginación
+## Partials of paging
 
-Como complemento para el paginado de ActiveRecord, a través de vistas parciales se implementan los tipos de pacciona mas comunes. Estos se ubican en el directorio "core/views/partials/paginators" listos para ser usados. Son completamente configurables vía CSS. Por supuesto, podéis crear vuestros propios partials para paginar en las vistas.
+As complement to the ActiveRecord, paged through partial views are implemented types of pacciona more common. These are located in the directory "core/views/partials/paginators" ready to be used. They are fully configurable via CSS. Of course, you can create your own partials for pagination in views.
 
 ### Classic
 
-Vista de paginado clásica.
+Classic pagination view
 
 ![](../images/image07.jpg)
 
-Resultado Final
+Final result
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
-show: número de páginas que se mostraran en el paginador, por defecto 10.
+show: number of pages to be shown in the paginator. Default 10.
 
-url: url para la accion que efectúa la pacciona, por defecto "module/controller/page/" y se envía por parámetro el número de página.
+url: URL for the action that performs pagination it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+View::partial('paginators/classic', false, array ( 'page' => $page, 'show' => 8, 'url' => 'user/list'));
 ```
 
 * * *
 
 ### Digg
 
-Vista de paginación estilo digg.
+View paging style digg.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
-show: número de páginas que muestra el paginador, por defecto 10.
+show: number of pages to be shown in the paginator. Default 10.
 
-url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
+URL: url for the action that performs pagination it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+View:partial (' paginators/digg', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
 ```
 
 * * *
@@ -62,36 +62,36 @@ View::partial('paginators/digg', false, array('page' => $page, 'show' => 8, 'url
 
 ![](../images/image00.jpg)
 
-Resultado Final
+Final result
 
-Vista de paginación extendida.
+Classic's file pagination view.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
-url: url para la accion que efectúa la pacciona , por defecto "module/controller/page/" y se envía por parámetro el número de página.
+url: url for the action that performs pacciona it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/extended', false, array('page' => $page, 'url' => 'usuario/lista'));
+View::partial('paginators/extended', false, array('page' => $page, 'url' => 'user/list'));
 ```
 
 * * *
 
 ### Punbb
 
-Vista de paginación estilo punbb.
+View paging style punbb.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
-show: número de páginas que muestra el paginador, por defecto 10.
+show: number of pages to be shown in the paginator. Default 10.
 
-url: url para la acción que efectúa la paginación, por defecto "module/controller/page/" y se envia por parámetro el número de página.
+url: URL for the action that performs pagination it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'usuario/lista'));
+View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'url' => 'user/list'));
 ```
 
 * * *
@@ -100,39 +100,39 @@ View::partial('paginators/punbb', false, array('page' => $page, 'show' => 8, 'ur
 
 ![](../images/image11.jpg)
 
-Resultado Final
+Final result
 
-Vista de paginación simple.
+View paging style simple.
 
-Parámetros de configuración:
+Configuration parameters:
 
-page: objeto obtenido al invocar al paginador.
+page: object obtained from paginator.
 
-url: url para la acción que efectua la paginación , por defecto "module/controller/page/" y se envía por parámetro el número de página.
+url: URL for the action that performs pagination it, by default "module/controller/page /" and the page number is sent by parameter.
 
 ```php
-View::partial('paginators/simple', false, array('page' => $page, 'url' => 'usuario/lista'));
+View::partial('paginators/simple', false, array('page' => $page, 'url' => 'user/list'));
 ```
 
 * * *
 
-### Ejemplo de uso
+### Sample Usage
 
-Supongamos que queremos paginar una lista de usuarios.
+Suppose we want to paginate a list of users.
 
-Para el modelo Usuario en models/usuario.php:
+For model User in "models/user.php":
 
 ```php
 <?php  
-class Usuario extends ActiveRecord
+class User extends ActiveRecord
 {  
   /**  
-    * Muestra los usuarios de cinco en cinco utilizando paginador
+    * Displays users five by five using "paginador"
     *
     * @param int $page
     * @return object
     **/
-  public function ver($page=1)
+  public function displayUsers($page=1)
   {
       return $this->paginate("page: $page", 'per_page: 5');
   }
@@ -140,39 +140,39 @@ class Usuario extends ActiveRecord
 
 ```
 
-Para el controlador UsuarioController en controllers/usuario_controller.php:
+For the UserController controller in "controllers/usuario_controller. php":
 
 ```php
 <?php  
-//Load::models('usuario'); //Necesario en versiones < 1.0
+//Load::models('user'); //Required in versions < 1.0
 
-class UsuarioController extends AppController
+class UserController extends AppController
 {
   /**
-    * Acción de paginado
+    * Paged action
     *
     * @param int $page
     **/
   public function page($page=1)
   {
-      $this->page = (new Usuario)->ver($page);
+      $this->page = (new Usuario)->displayUsers($page);
   }
 }
 
 ```
 
-Y en la vista views/usuario/page.phtml
+And in the view "views/user/page.phtml"
 
 ```php
 <table>
 <tr>
 <th>Id</th>
-<th>Nombre</th>
+<th>Name</th>
 </tr>
 <?php foreach($page->items as $p) : ?>
 <tr>
 <td><?= $p->id ?></td>
-<td><?= $p->nombre ?></td>
+<td><?= $p->name ?></td>
 </tr>
 <?php endforeach ?>
 </table>
@@ -188,41 +188,41 @@ Y en la vista views/usuario/page.phtml
 
 * * *
 
-## Beta1 a Beta2
+## Beta1 to Beta2
 
 * * *
 
 ## Deprecated
 
-## Métodos y clases que se usaban en versiones anteriores y que aun
+## Methods and classes that were used in previous versions and still work
 
-funcionan. Pero que quedan desaconsejadas y que no funcionarán en el futuro (próxima beta o versión final):
+But they are deprecated and will not work in the future (next beta or final release):
 
-Posiblemente habrá 2 versiones:
+Possibly there will be 2 versions:
 
-0.9 = 100% compatible beta2, con lo deprecated para facilitar migración
+Compatible with beta2, supports deprecated to facilitate migration
 
-1.0 = sin lo deprecated más limpia y rápida, para empezar nuevas apps
+1.0 = without the deprecated more clean and fast, to start new apps
 
 | 0.5 | beta1 | beta2 v0.9 | v1.0 |
 | --- | ----- | ---------- | ---- |
 |     |       |            |      |
 
-Flash::success() ahora Flash::valid()
+Flash::success() now is Flash::valid()
 
-Flash::notice() ahora Flash::info()
+Flash::notice() now is Flash::info()
 
-ApplicationController ahora AppController (con sus respectivos cambios de metodos)
+ApplicationController now is AppController (with their respective method changes)
 
-….
+...
 
-Usar $this->response = 'view' o View::response('view') para no mostrar el template.
+Use $this->response = 'view' or View:response('view') to not show the template.
 
-Ahora View::template(NULL) el View::response() solo se usa para elegir formatos de vista alternativos.
+Now, View::template (NULL) or View::response() is used to choose alternative view formats.
 
-### Lista de cambios entre versiones: si no se especifica beta1 es que es
+### List of changes between versions: If don't specify beta1 is that it is compatible in both cases
 
-compatible en ambos casos
+
 
 #### Application
 
@@ -247,23 +247,23 @@ compatible en ambos casos
 | public function before_filter() |                                 | protected function before_filter() | protected function before_filter() |
 | public function after_filter()  |                                 | protected function after_filter()  | protected function after_filter()  |
 
-boot.ini se elimina en beta2
+boot.ini is eliminated in beta2
 
-kumbia / mail / libchart 0.5 => se elimina los prefijos beta1
+kumbia / mail / libchart 0.5 => deletes the prefixes beta1
 
 extensions 0.5 => libs beta1
 
 Input::
 
-$this->has_post 0.5 => Input::hasPost beta2
+$this->has_post 0.5 => Input:hasPost beta2
 
-$this->has_get 0.5 => Input::hasGet beta2
+$this->has_get 0.5 => Input:hasGet beta2
 
-$this->has_request 0.5 => Input::hasRequest beta2
+$this->has_request 0.5 => Input:hasRequest beta2
 
-$this->post 0.5 => 'Input::post beta2
+$this->post 0.5 => ' Input:post beta2
 
-$this->get 0.5 => 'Input::get beta2
+$this->get 0.5 => ' Input:get beta2
 
 $this->request 0.5 => 'Input::request beta2
 
@@ -337,7 +337,7 @@ javascript_include_tag 0.5 => 'Tag::js beta2
 
 stylesheet_link_tag 0.5 => 'Tag::css beta2
 
-### Cambio en las rutas entre versiones:
+### Change on routes between versions:
 
 # 0.5 => 1.0 beta1
 
@@ -379,7 +379,7 @@ stylesheet_link_tag 0.5 => 'Tag::css beta2
                 …
     
 
-Cambiados:
+Changed:
 
 Session::isset_data() ahora Session::has()
 
@@ -387,14 +387,14 @@ Session::unset_data() ahora Session::delete()
 
 * * *
 
-## Glosario
+## Glossary
 
-CRUD = Create Read Update Delete ( Crear Leer Actualizar Borrar )
+CRUD = Create Read Update Delete
 
 ABM
 
-MVC = Model View Controller ( Modelo Vista Controlador )
+MVC = Model View Controller
 
-HTML = HyperText Markup Language ( Lenguaje de Marcado de HiperTexto )
+HTML = HyperText Markup Language
 
-SQL = Structured Query Language ( Lenguaje de Consulta Estructurado )
+SQL = Structured Query Language

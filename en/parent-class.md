@@ -12,22 +12,22 @@ Kumbiaphp have ready-to-use classes, but remember that you can create your own c
 
 ## Cache
 
-Un cache es un conjunto de datos duplicados de otros originales, con la propiedad de que los datos originales son costosos de acceder, normalmente en tiempo, respecto a la copia en la cache.
+A cache is a set of duplicate data of other originals, with the property that the original data are costly to access, usually in time, with respect to the copy in the cache.
 
-El cache de datos esta implementado en KumbiaPHP utilizando los patrones de diseño factory y singleton. Para hacer uso de la cache es necesario tener permisos de escritura en el directorio "cache" (solamente en el caso de los manejadores "sqlite" y "file").
+The cache data is implemented in KumbiaPHP using factory and singleton design patterns. To make use of the cache, it is necessary to have write permissions in the "cache" directory (only in the case of the handlers "sqlite" and "file").
 
-Cada cache es controlada por un manejador de cache. El sistema de cache de KumbiaPHP actualmente posee los siguientes manejadores:
+Each cache is controlled by a cache handler. The system cache KumbiaPHP has currently the following handlers:
 
-* APC : utiliza Alternative PHP Cache.
-* file : cache en archivos, estos se almacenan en el directorio cache y compatible con todos los sistemas operativos.
-* nixfile : cache en archivos, estos se almacenan en el directorio cache y compatible solo con sistemas operativos \*nix (linux, freebsd, entre otros). Esta cache es mas rapida que la cache «file».
-* sqlite : cache utilizando base de datos SqLite y esta se ubica en el directorio cache.
+* APC: use Alternative PHP Cache.
+* file: cache files, these are stored in the directory cache and compatible with all operating systems.
+* nixfile: cache files, these are stored in the directory cache and compatible only with operating systems \*nix (linux, freebsd, and others). This cache is more fast cache «file».
+* sqlite: cache using SqLite database and this is located in the cache directory.
 
-Para obtener un manejador de cache se debe utilizar el método «driver» que proporciona la clase Cache.
+To obtain a cache handler you must use the method «driver» which provides the Cache class.
 
 ### driver($driver=null)
 
-Este método permite obtener un manejador de cache especifico (APC, file, nixfile, sqlite, memsqlite). Si no se indica, se obtiene el manejador de cache por defecto indicado en el config.ini.
+This method allows to obtain a cache handler specific (APC, file, nixfile, sqlite, memsqlite). If not indicated, gets cache handler by default indicated in the config.ini.
 
 <?php  
 // cache por defecto  
@@ -39,94 +39,92 @@ $data = Cache::driver()->get('saludo'); if(!$data) { Cache::driver()->save('Hola
 
 <?php if(Cache::driver()->start('+1 day', 'saludo')): ?> 
 
-    Hola <?php echo $usuario ?>
-    
-    <?php Cache::driver()->end() ?>
+    Hello <? php echo $user? > <? php Cache:driver()-> end()? >
     
 
 <?php endif; ?>
 
 * * *
 
-### end ($save=true)
+### end ($save = true)
 
-Termina cacheo de buffer de salida indicando si se debe guardar o no en la cache.
+End caching output buffer indicating if it should be kept or not in the cache.
 
 * * *
 
 ## Logger
 
-La clase Logger para el manejo de \[Log\](http://www.google.com/url?q=http%3A%2F %2Fes.wikipedia.org%2Fwiki%2FLog_\(registro\)&sa=D&sntz=1&usg=AFQjCNGft16YEbrl ayLoKbZFpNDBDXgXAA) fue reescrita de forma estática, esto quiere decir ya no es necesario crear una instancia de la clase Logger. Esta clase dispone de una variedad de métodos para manejar distintos tipos de Log.
+The Logger class for handling \[Log\] (http://www.google.com/url?q=http%3A%2F %2Fes.wikipedia.org%2Fwiki%2FLog_\(registro\) & sa = D & sntz = 1 & usg = AFQjCNGft16YEbrl ayLoKbZFpNDBDXgXAA) was rewritten statically, this means no longer necessary to create an instance of the Logger class. This class offers a variety of methods to handle different types of Log.
 
 <?php  Logger:: error ( 'Mensaje de Error' ) ?>
 
 * * *
 
-La salida de la instrucción anterior sera lo siguiente:
+The previous statement will output the following:
 
-\[Thu, 05 Feb 09 15:19:39 -0500\]\[ERROR\] Mensaje de Error
+\[Thu, 05 Feb 09 15:19:39-0500\]\[ERROR\] Error message
 
-Por defecto los archivos log tienen el siguiente nombre logDDMMYYY.txt este nombre puede ser cambiado si así lo deseamos a través de un parámetro adicional al método.
+By default the log files have the name logDDMMYYY.txt this name can be changed if we so wish it through an additional parameter to the method.
 
 <?php  Logger:: error ( 'Mensaje de Error' , 'mi_log' ) ?>
 
 * * *
 
-Se puede apreciar el segundo parámetro ahora el archivo tendrá como nombre mi_log.txt
+You can see the second parameter now the file will be named mi_log.txt
 
-### Logger::warning ($msg);
+### Logger:warning ($msg);
 
-### Logger::error ($msg)
+### Logger:error ($msg)
 
-### Logger::debug ($msg)
+### Logger:debug ($msg)
 
-### Logger::alert ($msg)
+### Logger:alert ($msg)
 
-### Logger::critical ($msg)
+### Logger: critical ($msg)
 
-### Logger::notice ($msg)
+### Logger:notice ($msg)
 
-### Logger::info ($msg)
+### Logger:info ($msg)
 
 ### Logger::emergence ($msg)
 
-### Logger::custom ($type='CUSTOM', $msg)
+### Logger::custom ($type = 'CUSTOM', $msg)
 
 * * *
 
 ## Flash
 
-Flash es un helper muy útil en Kumbia que permite hacer la salida de mensajes de error, advertencia, informativos y éxito de forma estándar.
+Flash is a very useful helper in Kumbia that makes the messages of error, warning, informational and success output as standard.
 
-### Flash::error($text)
+### Flash::error ($text)
 
-Permite enviar un mensaje de error al usuario. Por defecto es un mensaje de letras color rojo y fondo color rosa pero estos pueden ser alterados en la clase css en public /css/style.css llamada error.
+— Send an error message to the user. Default is a message of letters red and pink background but these can be altered in the cascading style sheet class in public /css/style.css called error.
 
-Flash::error("Ha ocurrido un error");
-
-* * *
-
-### Flash::valid($text)
-
-Permite enviar un mensaje de éxito al usuario. Por defecto es un mensaje de letras color verdes y fondo color verde pastel pero estos pueden ser alterados en la clase css en public/css/style.css llamada valid .
-
-Flash::valid("Se realizo el proceso correctamente");
+Flash::error ("an error occurred");
 
 * * *
 
-### Flash::info($text)
+### Flash::valid ($text)
 
-Permite enviar un mensaje de información al usuario. Por defecto es un mensaje de letras color azules y fondo color azul pastel; pero estos pueden ser alterados en la clase css en public/css/style.css llamada info .
+It allows to send a success message to the user. Default is a lyrics color message green and pastel green color background but these can be altered in the cascading style sheet class in public/css/style.css called valid.
 
-Flash::info("No hay resultados en la busqueda");
+Flash: valid("Realized the process correctly");
 
 * * *
 
-### Flash::warning($text)
+### Flash:info ($text)
 
-Permite enviar un mensaje de advertencia al usuario. Por defecto es un mensaje de letras color azules y fondo color azul pastel pero estos pueden ser alterados en la clase css en public/css/style.css llamada warning .
+It allows you to send information to the user. Default is a message of letters color blue and blue pastel-coloured background; but these can be altered in the cascading style sheet class in public/css/style.css called info.
 
-Flash::warning("Advertencia: No ha iniciado sesión en el sistema");
+Flash::info("There are no results in the search");
+
+* * *
+
+### Flash:warning ($text)
+
+It allows to send a warning message to the user. Default is a message of letters color blue and pastel blue color background but these can be altered in the cascading style sheet class in public/css/style.css called warning.
+
+Flash:warning("Warning:_you_are_not_login_in_the_system");
 
 * * *
 
@@ -138,19 +136,19 @@ Flash::warning("Advertencia: No ha iniciado sesión en el sistema");
 
 ## Session
 
-La clase Session es para facilitar el manejo de la sesiones.
+The Session class is to facilitate handling of the session.
 
-### Session::set($index, $value, $namespace='default')
+### Session:set($index,_$value,_$namespace='default')
 
-Crear o especifica el valor para un índice de la sesión actual.
+Create or specify the value for an index of the current session.
 
 <?php  Session:: set ( 'usuario' , 'Administrador' ); ?>
 
 * * *
 
-### Session::get($index, $namespace='default')
+### Session: get ($index, $namespace ='default ')
 
-Obtener el valor para un índice de la sesión actual.
+Get the value for an index of the current session.
 
 <?php  
 Session:: get ( 'usuario' ); //retorna 'Administrador'  
@@ -158,17 +156,17 @@ Session:: get ( 'usuario' ); //retorna 'Administrador'
 
 * * *
 
-### Session::delete($index, $namespace='default')
+### Session:delete($index,_$namespace='default')
 
-Elimina el valor para un índice de la sesión actual.
+Deletes the value for an index of the current session.
 
 <?php  Session:: delete ( 'usuario' ); ?>
 
 * * *
 
-### Session::has($index, $namespace='default')
+### Session:has($index,_$namespace='default')
 
-Verifica que este definido el índice en la sesión actual.
+Verify that this set the rate at the current session.
 
 <?php  
 Session:: has ( 'id_usuario' ); //retorna false.  
@@ -176,15 +174,15 @@ Session:: has ( 'id_usuario' ); //retorna false.
 
 * * *
 
-NOTA: $namespace es un espacio individual en el cual se pueden contener las variables de sesión, permitiendo evitar colisiones con nombres de variables.
+Note: $namespace is a single space in which may contain the session variables, avoiding collisions with variable names.
 
 ## Load
 
-La clase load permite la carga de librerías en KumbiaPHP.
+Class load allows the loading of libraries in KumbiaPHP.
 
-### Load::coreLib($lib)
+### Load::coreLib ($lib)
 
-Permite cargar una librería del núcleo de KumbiaPHP.
+It allows to load a KumbiaPHP core library.
 
 <?php
 
@@ -321,7 +319,7 @@ El formulario para autenticación debe tener la siguiente estructura básica:
 
     <input name="mode" type="hidden" value="auth">
     
-    <label for="login">Usuario:</label>
+    <label for="login">User:</label>
     
     <?php echo Form::text('login') ?>
     
@@ -334,37 +332,37 @@ El formulario para autenticación debe tener la siguiente estructura básica:
 
 * * *
 
-De manera predeterminada Auth2 toma para el nombre de usuario el campo "login" y para la clave el campo "password".
+Default Auth2 takes the "login" field for the user name and the password 'password' field.
 
-Para poder iniciar una sesión de usuario y realizar la autenticación se debe invocar el método identify , sin embargo dependiendo del tipo de adaptador, es necesario especificar ciertos parámetros de configuración.
+To be able to start a user session and perform the authentication you must invoke the identify method, however depending on the adapter type, it is necessary to specify certain configuration settings.
 
-### Adaptador Model
+### Adapter Model
 
-Este adaptador permite utilizar autenticación en base a un modelo que herede de la clase ActiveRecord , verificando los datos de autenticación en la base de datos.
+This adapter allows you to use authentication based on a model which inherits from the ActiveRecord class, verifying authentication at the database data.
 
 #### setModel()
 
-Establece el modelo ActiveRecord que se utiliza como fuente de datos. De manera predeterminada el modelo que se utiliza como fuente de datos es 'users'.
+Sets the ActiveRecord model that is used as a data source. By default the model that is used as a data source is 'users'.
 
-$model (string): nombre de modelo en smallcase
+$model (string): model name in lowercase
 
-setModel($model)
+setModel ($model)
 
-Ejemplo:
+Example:
 
-$auth->setModel('usuario');
+$auth->setModel ('user');
 
 * * *
 
 #### identify()
 
-Realiza la autenticación. Si ya existe una sesión de usuario activa o los datos de usuario son correctos, entonces la identificación es satisfactoria.
+Performs the authentication. If there is already an active user session or user data are correct, then the identification is satisfactory.
 
-return boolean
+return true or false
 
 identify()
 
-Ejemplo:
+Example:
 
 $valid = $auth->identify();
 
@@ -372,11 +370,11 @@ $valid = $auth->identify();
 
 #### logout()
 
-Termina la sesion de usuario.
+End of the user session.
 
 logout()
 
-Ejemplo:
+Example:
 
 $auth->logout();
 
@@ -384,41 +382,41 @@ $auth->logout();
 
 #### setFields()
 
-Establece los campos del modelo que se cargaran en sesión mediante el método Session::set . De manera predeterminada se carga el campo "id".
+Sets the fields of the model that are loaded into session using the Session:set method. By default load the field 'id'.
 
-$fields (array): arreglo de campos
+$fields (array): array fields
 
-setFields($fields)
+setFields ($fields)
 
-Ejemplo:
+Example:
 
-$auth->setFields(array('id', 'usuario'));
+$auth->setFields (array ('id', 'user'));
 
 * * *
 
 #### setSessionNamespace()
 
-Establece un namespace para los campos que se cargan en sesión.
+Sets a namespace for fields that are loaded into session.
 
-$namespace (string): namespace de sesión
+$namespace (string): session namespace
 
 setSessionNamespace($namespace)
 
-Ejemplo:
+Example:
 
-$auth->setSessionNamespace('auth');
+$auth->setSessionNamespace ('auth');
 
 * * *
 
 #### isValid()
 
-Verifica si existe una sesión de usuario autenticado.
+Check if there is an authenticated user session.
 
-return boolean
+return true or false
 
 isValid()
 
-Ejemplo:
+Example:
 
 $valid = $auth->isValid();
 
@@ -426,55 +424,55 @@ $valid = $auth->isValid();
 
 #### getError()
 
-Obtiene el mensaje de error.
+Gets the error message.
 
 return string
 
 getError()
 
-Ejemplo:
+Example:
 
-if(!$auth->identify()) Flash::error($auth->getError());
+if(!$auth->identify()) flash:error ($auth->getError());
 
 * * *
 
 #### setAlgos()
 
-Establece el método de encriptación de la clave de usuario.
+Sets the user password encryption method.
 
-$algos (string): método de encriptación, el nombre coincide con la función hash de php.
+$algos (string): method of encryption, the name matches the php hash function.
 
-setAlgos($algos)
+setAlgos ($algos)
 
-Ejemplo:
+Example:
 
-$auth->setAlgos('md5');
+$auth->setAlgos ('md5');
 
 * * *
 
 #### setKey()
 
-Establece la clave para identificar si existe una sesión autenticada, dicha clave toma un valor booleano "true" cuando la sesión autenticada es valida, asignada mediante el método Session::set .
+Sets the key to identifying whether a session authenticated, this key takes a Boolean value of "true" when the authenticated session is valid, assigned by using the Session:set method.
 
-$key (string): clave de sesión
+$key (string): session key
 
-setKey($key)
+setKey ($key)
 
-Ejemplo:
+Example:
 
-$auth->setKey('usuario_logged');
+$auth->setKey('user_logged');
 
 * * *
 
 #### setCheckSession()
 
-Indica que no se inicie sesión desde un navegador distinto con la misma IP.
+It indicates that not start session from a different browser on the same IP.
 
-$check (boolean): indicador
+$check (boolean): indicator
 
-setCheckSession($check)
+setCheckSession ($check)
 
-Ejemplo:
+Example:
 
 $auth->setCheckSession(true);
 
@@ -482,70 +480,70 @@ $auth->setCheckSession(true);
 
 #### setPass()
 
-Asigna el nombre de campo para el campo de clave. Este campo debe corresponder con el campo de la base de datos y del formulario. De manera predeterminada es "password".
+Assigns the name of field for the key field. This field must correspond with the data base and the form field. Default is "password".
 
-$field (string): nombre de campo que recibe por POST.
+$field (string): name of field that receives by POST.
 
 setPass($field)
 
-Ejemplo:
+Example:
 
-$auth->setPass('clave');
+$auth->setPass('key');
 
 * * *
 
 #### setLogin()
 
-Asigna el nombre de campo para el campo de nombre de usuario. Este campo debe corresponder con el campo de la base de datos y del formulario. De manera predeterminada es "login".
+Assigns the name of the field for the user name field. This field must correspond with the data base and the form field. Default is "login".
 
-$field (string): nombre de campo que recibe por POST.
+$field (string): name of field that receives by POST.
 
-setLogin($field)
+setLogin ($field)
 
-Ejemplo:
+Example:
 
-$auth->setLogin('usuario');
+$auth->setLogin ('user');
 
 * * *
 
-#### Obtener los campos cargados en sesión
+#### Get the fields loaded on session
 
-Los campos se obtienen por medio del método Session::get .
+The fields are obtained through the Session:get method.
 
 $id = Session::get('id');
 
 * * *
 
-Si se ha especificado un namespace de sesión, entonces debe indicarlo al invocar el método.
+If you have specified a namespace of session, you must then specify it by invoking the method.
 
-$id = Session::get('id', 'mi_namespace');
+$id = Session::get('id', 'my_namespace');
 
 * * *
 
-#### Ejemplo
+#### Example
 
-La vista:
+The view:
 
-app/views/acceso/login.phtml
+app/views/access/login.phtml
 
 <?php echo Form::open() ?>
 
     <input name="mode" type="hidden" value="auth">
     
-    <label for="login">Usuario:</label>
+    <label for="login">User:</label> 
     
-    <?php echo Form::text('login') ?>
+    <? php echo Form:text('login')? >
     
-    <label for="password">Clave:</label>
+    <label for="password">Password:</label>
     
-    <?php echo Form::pass('password') ?>
+    <? php echo Form:pass('password')? >
     
 
 <?php echo Form::close() ?>
 
 * * *
 
-El controlador:
+Controller:
 
 app/controllers/auth_controller.php
 
@@ -565,11 +563,12 @@ class AuthController extends AppController
 
 * * *
 
-Para validar que el usuario este autenticado, basta con adicionar en cualquier acción del controlador o en el método before_filter el siguiente código:
+To validate this authenticated the user, just add the following code in any controller action or method before_filter:
 
-if(!Load::model('usuario')->logged()) {
+if(!Load::model('user')->logged()) {
 
-    Router::toAction('auth/login');
+    Router:toAction('auth/login');
+    
     
     return false;
     
@@ -578,79 +577,21 @@ if(!Load::model('usuario')->logged()) {
 
 * * *
 
-El modelo:
+Model:
 
 app/models/usuario.php
 
-<?php
+<? php
 
-// Carga de la librería auth2
+The auth2 library loading
 
-Load::lib('auth2');
+Load: lib ('auth2');
 
-class Usuario extends ActiveRecord
+class user extends ActiveRecord
 
 {
 
-    /**
-    
-     * Iniciar sesión
-    
-     *
-    
-     */
-    
-    public function login()
-    
-    {
-    
-        // Obtiene el adaptador
-    
-        $auth = Auth2::factory('model');
-    
-        // Modelo que utilizara para consultar
-    
-        $auth->setModel('usuario');
-    
-        if($auth->identify()) return true;
-    
-    
-    
-        Flash::error($auth->getError());
-    
-        return false;
-    
-    }
-    
-    /**
-    
-     * Terminar sesión
-    
-     *
-    
-     */
-    
-    public function logout()
-    
-    {
-    
-        Auth2::factory('model')->logout();
-    
-    }
-    
-    /**
-     * Verifica si el usuario esta autenticado
-     *
-     * @return boolean
-     */
-    
-    public function logged()
-    
-    {
-    
-        return Auth2::factory('model')->isValid();
-    
-    }
+    / * * Log * * / public function login() {/ / Gets the adapter $auth = Auth2:factory('model');}      Model to be used for $auth - > setModel ('user');      if($auth->identify()) return true;        Flash:error($auth->getError());      return false;  } / * * End * * / public function logout() {Auth2:factory('model') - > logout();}  } / * * Check if this authenticated user * @return boolean * / public function logged() {return Auth2:factory('model') - > isValid();}  }
     
 
 }

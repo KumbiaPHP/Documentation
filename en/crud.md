@@ -32,10 +32,10 @@ We will now define the model which allows us to interact with the database.
 class Menus extends ActiveRecord
 {
     /**
-      * Retorna los menús para ser paginados
+      * Return the menus for pagination
       *
-      * @param int $page  [requerido] página a visualizar
-      * @param int $ppage [opcional] por defecto 20 por página
+      * @param int $page  [required] page to see
+      * @param int $ppage [optional] for default 20 for page
       */
     public function getMenus($page, $ppage=20)
     {
@@ -54,14 +54,14 @@ The controller handles client requests and replies (ie, a browser). In this cont
 ```php
 <?php  
 /**  
-* Carga del modelo Menus...   
+* Load of model Menus...   
 */   
-// Load::models( 'menus' );// Necesario en versiones < 0.9 
+// Load::models( 'menus' );// Necessary for versions < 0.9 
 
 class MenusController extends AppController
 {
     /**
-     * Obtiene una lista para paginar los menús
+     * Obtain a list for pagination of menus
      *
      * @param int $page [opcional]
      */
@@ -71,75 +71,75 @@ class MenusController extends AppController
     }
 
     /**
-     * Crea un Registro
+     * Make a record
      */
     public function create()
     {
         /**
-         * Se verifica si el usuario envío el form (submit) y si además
-         * dentro del array POST existe uno llamado "menus"
-         * el cual aplica la autocarga de objeto para guardar los
-         * datos enviado por POST utilizando autocarga de objeto
+         * Verify if the user send the form(submit) and if also
+         * inner of array POST exist a variable called "menus"
+         * that which applies for the auto load  of object for save the
+         * date send for POST using auto load of object
          */
         if (Input::hasPost('menus')) {
             /**
-             * se le pasa al modelo por constructor los datos del form y ActiveRecord recoge esos datos
-             * y los asocia al campo correspondiente siempre y cuando se utilice la convención
-             * model.campo
+             * the data of form is sent to model for construct and ActiveRecord collect 
+             * this data and associate to the corresponding field when it's use the convention
+             * model.field
              */
             $menu = new Menus(Input::post('menus'));
-            //En caso que falle la operación de guardar
+            //In case that the operation fail
             if ($menu->create()) {
-                Flash::valid('Operación exitosa');
-                //Eliminamos el POST, si no queremos que se vean en el form
+                Flash::valid('Success');
+                //Delete the POST, if don't wanna that it can be seen in the form
                 Input::delete();
                 return;
             }
 
-            Flash::error('Falló Operación');
+            Flash::error('Operation Fail');
         }
     }
 
     /**
-     * Edita un Registro
+     * Edit a record
      *
-     * @param int $id (requerido)
+     * @param int $id (required)
      */
     public function edit($id)
     {
         $menu = new Menus();
 
-        //se verifica si se ha enviado el formulario (submit)
+        //verify if the post as send data (submit)
         if (Input::hasPost('menus')) {
 
             if ($menu->update(Input::post('menus'))) {
-                 Flash::valid('Operación exitosa');
-                //enrutando por defecto al index del controller
+                 Flash::valid(Success');
+                //redirect por default to the index of controller
                 return Redirect::to();
             }
-            Flash::error('Falló Operación');
+            Flash::error('Operation Fail');
             return;
         }
 
-        //Aplicando la autocarga de objeto, para comenzar la edición
+        //Applied the auto load of object, for start the edition
         $this->menus = $menu->find_by_id((int) $id);
 
     }
 
     /**
-     * Eliminar un menú
+     * Delete a menu
      *
-     * @param int $id (requerido)
+     * @param int $id (require)
      */
     public function del($id)
     {
         if ((new Menus)->delete((int) $id)) {
-                Flash::valid('Operación exitosa');
+                Flash::valid('Success');
         } else {
-                Flash::error('Falló Operación');
+                Flash::error('Operation fail');
         }
 
-        //enrutando por defecto al index del controller
+        //redirect to the index of controller
         return Redirect::to();
     }
 }
