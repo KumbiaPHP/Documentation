@@ -13,27 +13,16 @@ una clase que ya lleva métodos listos para usar. Estos métodos facilitan al
 usuario el manejo de las tablas de las bases de datos; entre ellos están los
 siguientes: find(), find_first(), save(), update(), etc.
 
-Ejemplo con KumbiaPHP 0.9
-
-```php
-<?php
-//KumbiaPHP 0.9
-$cliente = Load::model('cliente'); 
-$cliente->nit = "808111827-2"; 
-$cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
-$cliente->save(); 
-```
-
-Ejemplo con KumbiaPHP 1.0
+Ejemplo:
 ```php
 <?php
 //KumbiaPHP 1.0
-$cliente = new Cliente(); 
-$cliente->nit = "808111827-2"; 
+$cliente = new Cliente();
+$cliente->nit = "808111827-2";
 $cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
-$cliente->save(); 
-``` 
- 
+$cliente->save();
+```
+
 ### Ventajas del ActiveRecord
 
  * Se trabajan las entidades del Modelo mas Naturalmente como objetos.
@@ -51,24 +40,23 @@ creamos una clase con el nombre de la tabla extendiendo alguna de las clases
 para modelos.
 
 Ejemplo:
-
 ```php
-<?php 
-class Cliente extends ActiveRecord { 
-} 
-``` 
- 
+<?php
+class Cliente extends ActiveRecord {
+}
+```
+
 Si lo que se desea es crear un modelo de una clase que tiene nombre compuesto
 por ejemplo la clase Tipo de Cliente, por convención en nuestra base de datos
 esta tabla debe llamarse: tipo_de_cliente y el archivo:
 models/tipo_de_cliente.php y el código de este modelo es el siguiente:
 
 ```php
-<?php 
-class TipoDeCliente extends ActiveRecord { 
-} 
+<?php
+class TipoDeCliente extends ActiveRecord {
+}
  ```
- 
+
 ### Columnas y Atributos
 
 Objetos ActiveRecord corresponden a registros en una tabla de una base de
@@ -81,48 +69,37 @@ Miremos la tabla Álbum:
 
 ```sql
 CREATE TABLE album (
-    id INTEGER NOT NULL AUTO_INCREMENT, 
-    nombre VARCHAR(100) NOT NULL, 
-    fecha DATE NOT NULL, 
-    valor DECIMAL(12,2) NOT NULL, 
-    artista_id INTEGER NOT NULL, 
-    estado CHAR(1), 
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    fecha DATE NOT NULL,
+    valor DECIMAL(12,2) NOT NULL,
+    artista_id INTEGER NOT NULL,
+    estado CHAR(1),
     PRIMARY KEY(id)
 )
 ```
- 
+
 Podemos crear un modelo ActiveRecord que mapee esta tabla:
 
 ```php
-<?php 
-class Album extends ActiveRecord { 
-} 
+<?php
+class Album extends ActiveRecord {
+}
 ```
- 
+
 Una instancia de esta clase sera un objeto con los atributos de la tabla
 album:
 
-Ejemplo con KumbiaPHP 0.9
-
+Ejemplo:
 ```php
 <?php
-//KumbiaPHP 0.9
-$album = Load::model('album'); 
-$album->id = 2; 
-$album->nombre = "Going Under"; 
-$album->save(); 
- ```
-
-Ejemplo con KumbiaPHP 1.0
-```php
-<?php 
  //KumbiaPHP 1.0
-$album = new Album(); 
-$album->id = 2; 
-$album->nombre = "Going Under"; 
-$album->save(); 
+$album = new Album();
+$album->id = 2;
+$album->nombre = "Going Under";
+$album->save();
 ```
- 
+
 ### Llaves Primarias y el uso de IDs
 
 En los ejemplos mostrados de KumbiaPHP siempre se trabaja una columna llamada
@@ -202,11 +179,11 @@ Sintaxis
 distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
 ```
 
-Ejemplo
+Ejemplo:
 ```php
 $unicos = (new Usuario)->distinct("estado");
 # array('A', 'I', 'N')  
-``` 
+```
 
 Los parámetros conditions, order y limit funcionan idénticamente que en el
 método find y permiten modificar la forma o los mismos valores de retorno
@@ -221,10 +198,10 @@ en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del
 SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más
 específicos y tengamos que recurrir a su uso.
 
-Ejemplo
+Ejemplo:
 ```php
 $usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
-``` 
+```
 
 En este ejemplo consultamos todos los usuarios con una sentencia where
 especial. La idea es que los usuarios consultados no pueden estar en la
@@ -239,7 +216,7 @@ ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero
 hay momentos en que es necesario que seamos mas específicos y tengamos que
 recurrir al uso de este.
 
-Ejemplo
+Ejemplo:
 ```php
 $usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso) limit 1" );  
 ```  
@@ -260,11 +237,10 @@ parámetros son todos opcionales y su orden no es relevante, cuando se invoca
 sin parámetros devuelve el primer registro insertado en la entidad. Este
 método es muy flexible y puede ser usado de muchas formas:
 
-Ejemplo
-
+Ejemplo:
 ```php
 $usuario = (new Usuario)->find_first( "conditions: estado='A'", "order: fecha desc");
-``` 
+```
 
 En este ejemplo buscamos el primer registro cuyo estado sea igual a "A" y
 ordenado descendentemente, el resultado de este, se carga a la variable
@@ -276,7 +252,7 @@ su id de esta forma:
 
 ```php
 $usuario = (new Usuario)->find_first(123);
-``` 
+```
 
 Obtenemos el registro 123 e igualmente devuelve una instancia del mismo
 objeto ActiveRecord en caso de éxito, o false en caso contrario. KumbiaPHP genera
@@ -286,14 +262,14 @@ mediante el parámetro limit, de esta forma:
 
 ```php
 $usuario = (new Usuario)->find_first( "conditions: estado='A'", "limit: 1" );
-``` 
+```
 
 Cuando queremos consultar, sólo algunos de los atributos de la entidad, podemos
 utilizar el parámetro columns:
 
 ```php
 $usuario = (new Usuario)->find_first( "columns: nombre, estado");
-``` 
+```
 
 Cuando especificamos el primer parámetro de tipo string, ActiveRecord asumirá
 que son las condiciones de búsqueda para find_first:
@@ -329,8 +305,7 @@ se invoca sin parámetros devuelve todos los registros en la entidad.
 No hay que olvidarse de incluir un espacio después de los dos puntos (:) en
 cada parámetro.
 
-Ejemplo
-
+Ejemplo:
 ```php
 $usuarios = (new Usuario)->find( "conditions: estado='A'", "order: fecha desc");
 ```
@@ -345,7 +320,7 @@ de esta forma:
 
 ```php
 $usuario = (new Usuario)->find(123);
-``` 
+```
 
 Obtenemos el registro 123 e igualmente devuelve una instancia del mismo
 objeto ActiveRecord en caso de éxito, o false en caso contrario. Como es un
@@ -356,14 +331,14 @@ Para limitar el número de registros devueltos, podemos usar el parámetro limit
 
 ```php
 $usuarios = (new Usuario)->find("conditions: estado='A'", 'limit: 5', 'offset: 1');
-``` 
+```
 
 Cuando queremos consultar sólo algunos de los atributos de la entidad podemos
 utilizar el parámetro columns :
 
 ```php
 $usuarios = (new Usuario)->find("columns: nombre, estado");
-``` 
+```
 
 Cuando especificamos el primer parámetro de tipo string, ActiveRecord asume
 que son las condiciones de búsqueda para find:
@@ -405,7 +380,7 @@ que haya una instancia de ActiveRecord para hacer el llamado.
 
 ```php
 $current_time = ActiveRecord::select_one( "current_time");
-``` 
+```
 
 En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL,
 podemos usar este método para esto.
@@ -426,7 +401,7 @@ if ($usuario->exists()){
 
 (new Usuario)->exists( "nombre='Juan Perez'")
 (new Usuario)->exists(2); // Un Usuario con id->2?
-``` 
+```
 
 ####  find\_all\_by()
 
@@ -434,7 +409,7 @@ Este método nos permite realizar una búsqueda por algún campo
 
 ```php
 $resultado = (new Producto)->find_all_by( 'categoria', 'Insumos');
-``` 
+```
 
 ####  find\_by\__campo_()
 
@@ -443,7 +418,7 @@ como nombre de método. Devuelve un único registro.
 
 ```php
 $resultado = (new Producto)->find_by_categoria('Insumos');
-``` 
+```
 
 ####  find\_all\_by\__campo_()
 
@@ -569,7 +544,6 @@ Actualiza uno o más valores dentro de uno o más registros a partir de los
 atributos y condiciones indicadas.
 
 Ejemplos:
-
 ```php
 (new Producto)->update_all("precio = precio * 1.2");
 ```
@@ -639,11 +613,11 @@ El parámetro minimum indica que se debe validar que el valor a insertar o actua
 ```php
 <?php
 class Clientes extends ActiveRecord {
- 
+
   protected function initialize(){
    $this->validates_length_of("nombre", "minumum: 15", "too_short: El nombre debe tener al menos 15 caracteres");
    $this->validates_length_of("nombre", "maximum: 40", "too_long: El nombre debe tener maximo 40 caracteres");
-   $this->validates_length_of("nombre", "in: 15:40", 
+   $this->validates_length_of("nombre", "in: 15:40",
       "too_short: El nombre debe tener al menos 15 caracteres",
       "too_long: El nombre debe tener maximo 40 caracteres"
    );
@@ -658,11 +632,11 @@ Valida que ciertos atributos tengan un valor numérico antes de insertar ó actu
 ```php
 <?php
  class Productos extends ActiveRecord {
- 
+
    protected function initialize{
     $this->validates_numericality_of("precio");
    }
- 
+
  }
 ```
 
@@ -673,11 +647,11 @@ Valida que ciertos atributos tengan un formato de e-mail correcto antes de inser
 ```php
 <?php
  class Clientes extends ActiveRecord {
- 
+
    protected function initialize(){
     $this->validates_email_in("correo");
    }
- 
+
  }
 ```
 
@@ -688,11 +662,11 @@ Valida que ciertos atributos tengan un valor único antes de insertar o actualiz
 ```php
 <?php
  class Clientes extends ActiveRecord {
- 
+
    protected function initialize{
     $this->validates_uniqueness_of("cedula");
    }
- 
+
  }
 ```
 
@@ -703,7 +677,7 @@ Valida que ciertos atributos tengan un formato de fecha acorde al indicado en co
 ```php
 <?php
  class Registro extends ActiveRecord {
- 
+
    protected function initialize(){
          $this->validates_date_in("fecha_registro");
    }
@@ -717,11 +691,11 @@ Valida que el campo tenga determinado formato según una expresión regular ante
 ```php
 <?php
  class Clientes extends ActiveRecord {
- 
+
    protected function initialize(){
     $this->validates_format_of("email", "^(+)@((?:[?a?z0?9]+\.)+[a?z]{2,})$");
    }
- 
+
  }
 ```
 
@@ -731,8 +705,7 @@ Valida que el campo tenga determinado formato según una expresión regular ante
 
 Este método nos permite confirmar una transacción iniciada por el método begin en el motor de base de datos, si este lo permite. Devuelve true en caso de éxito y false en caso contrario.
 
-Ejemplo
-
+Ejemplo:
 ```php
 $Usuarios = new Usuarios();
 $Usuarios->commit();
@@ -742,8 +715,7 @@ $Usuarios->commit();
 
 Este método nos permite crear una transacción en el motor de base de datos, si este lo permite. Devuelve true en caso de éxito y false en caso contrario.
 
-Ejemplo
-
+Ejemplo:
 ```php
 $Usuarios = new Usuarios();
 $Usuarios->begin();
@@ -753,8 +725,7 @@ $Usuarios->begin();
 
 Este método nos permite anular una transacción iniciada por el método begin en el motor de base de datos, sí este lo permite. Devuelve true en caso de éxito y false en caso contrario.
 
-Ejemplo
-
+Ejemplo:
 ```php
 $Usuarios = new Usuarios();
 $Usuarios->rollback();
@@ -762,13 +733,13 @@ $Usuarios->rollback();
 
 **Nota:** Las tablas deben tener el motor de almacenamiento \[InnoDB\][1](http://es.wikipedia.org/wiki/InnoDB)
 
-###Otros métodos
+### Otros métodos
 
-#### sql (string $sql)
+#### sql(string $sql)
 
 Esta función nos permite ejecutar sentencias SQL directamente en el motor de base de datos. La idea es que el uso de este método no debería ser común en nuestras aplicaciones ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir al uso de éste.
 
-###Callbacks
+### Callbacks
 
 #### Introducción
 
@@ -777,16 +748,16 @@ El ActiveRecord controla el ciclo de vida de los objetos creados y leídos, supe
 ```php
 <?php
 class User extends ActiveRecord {
- 
+
      public $before_delete = “no_borrar_activos”;
- 
+
      public function no_borrar_activos(){
         if($this->estado==’A’){
           Flash::error(‘No se puede borrar Productos Activos’);
           return ‘cancel’;
         }
      }
-    
+
      public function after_delete(){
           Flash::success("Se borro el usuario $this->nombre");
      }
@@ -1095,71 +1066,89 @@ $page = $this->Usuario->paginate('per_page: 5', 'page: 1');
 
 Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, aprovecharemos la persistencia de datos del controlador para hacer una paginación inmune a inyección sql.
 
-En el controlador *usuario_controller.php*:
+El modelo *usuario.php*:
 
 ```php
-class UsuarioController extends ApplicationController {
-  private $_per_page = 7;
-  /**
-  * Formulario de busqueda
-  **/
-  public function buscar() {
-    $this->nullify('page', 'conditions');
-  }
-  /**
-  * Paginador
-  **/
-  public function lista($page='') {
-    /**
-    * Cuando se efectua la busqueda por primera vez
-    **/
-    if(Input::hasPost('usuario')) {
-      $usuario = Input::post('usuario');
-      if($usuario['nombre']) {
-        $this->conditions = “ nombre LIKE '%{$usuario['nombre']}%' ”;
-      }
-      /**
-      * Paginador con condiciones o sin condiciones
-      **/
-      if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this>_per_page”, 'page: 1');
-      } else {
-        $this->page = $this->Usuario->paginate(“per_page: $this>_per_page”, 'page: 1');
-      }
-    } elseif($page='next' && isset($this->page) && $this->page->next) {
-       /**
-       * Paginador de pagina siguiente
-       **/
-      if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this>_per_page”, “page: {$this->page->next}”);
-      } else {
-         $this->page = $this->Usuario->paginate(“per_page: $this->_per_page”, “page: {$this->page->next}”);
-      }
-    } elseif($page='prev' && isset($this->page) && $this->page->prev) {
-      /**
-      * Paginador de pagina anterior
-      **/
-      if(isset($this->conditions) && $this->conditions) {
-        $this->page = $this->Usuario->paginate($this->conditions, “per_page: $this->_per_page”, “page: {$this->page->prev}”);
-    } else {
-       $this->page = $this->Usuario->paginate(“per_page: $this->_per_page”, “page: {$this->page->prev}”);
-    }
-  }
- }
+<?php
+class Usuario extends ActiveRecord {
+
 }
 ```
 
-En la vista *buscar.pthml*
+
+En el controlador *usuario_controller.php*:
 
 ```php
-<?= Form::open('usuario/lista') ?>
+<?php
+
+class UsuarioController extends AppController{
+
+    public $page_title = 'Daily Backend Manager';
+
+    private $_per_page = 10;
+
+    /**
+     * Formulario de busqueda
+     * */
+    public function index() {
+        Input::delete();
+    }
+
+    /**
+     * Paginador
+     * */
+    public function listar($page = '') {
+
+        $usuario = new Usuario();
+        /**
+         * Cuando se efectua la búsqueda por primera vez
+         * */
+        if (Input::hasPost('usuario')) {
+            $data = Input::post('usuario');
+            if ($data['nombre']) {
+                $this->conditions = " nombre LIKE '%{$data['nombre']}%' ";
+            }
+            /**
+             * Paginador con condiciones o sin condiciones
+             * */
+            if (isset($this->conditions) && $this->conditions) {
+                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", 'page: 1');
+            } else {
+                $this->page = $usuario->paginate("per_page: $this>_per_page", 'page: 1');
+            }
+        } elseif ($page = 'next' && isset($this->page) && $this->page->next) {
+            /**
+             * Paginador de pagina siguiente
+             * */
+            if (isset($this->conditions) && $this->conditions) {
+                $this->page = $usuario->paginate($this->conditions, "per_page: $this>_per_page", "page: {$this->page->next}");
+            } else {
+                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->next}");
+            }
+        } elseif ($page = 'prev' && isset($this->page) && $this->page->prev) {
+            /**
+             * Paginador de pagina anterior
+             * */
+            if (isset($this->conditions) && $this->conditions) {
+                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", "page: {$this->page->prev}");
+            } else {
+                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->prev}");
+            }
+        }
+    }
+}
+```
+
+En la vista *index.pthml*
+
+```php
+<?= Form::open('usuario/listar') ?>
 <?= Form::text('usuario.nombre') ?>
 <?= Form::submit('Consultar') ?>
 <?= Form::close() ?>
-
 ```
 
-En la vista *lista.phtml*
+En la vista *listar.phtml*
 
 ```php
 <table>
@@ -1167,14 +1156,14 @@ En la vista *lista.phtml*
         <th>id</th>
         <th>nombre</th>
     </tr>
-    <?php foreach($page->items as $p): ?>
-    <tr>
-        <td><?= $p->id ?></td>
-        <td><?= h($p->nombre) ?></td>
-    </tr>
+    <?php foreach ($page->items as $p): ?>
+        <tr>
+            <td><?= $p->id ?></td>
+            <td><?=h($p->nombre) ?></td>
+        </tr>
     <?php endforeach; ?>
 </table>
 <br>
-<?php if($page->prev) echo Html::linkAction('lista/prev', 'Anterior') ?>
-<?php if($page->next) echo ' | ' . Html::linkAction('lista/next', 'Siguiente') ?>
+<?php if ($page->prev) echo Html::linkAction('listar/prev', 'Anterior') ?>
+<?php if ($page->next) echo ' | ' . Html::linkAction('listar/next', 'Siguiente') ?>
 ```
