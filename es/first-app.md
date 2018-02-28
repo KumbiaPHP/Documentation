@@ -1,4 +1,4 @@
-#Mi Primera Aplicación con KumbiaPHP
+# Mi Primera Aplicación con KumbiaPHP
 
 Luego que explicamos los pasos para configurar KumbiaPHP y ver su pantalla de
 bienvenida, se viene hacer el primer ejemplo el cual tiene como objetivo
