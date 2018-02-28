@@ -1,4 +1,4 @@
-#Modelo, Vista, Controlador (MVC)
+# Modelo, Vista, Controlador (MVC)
 
 ## ¿Qué es MVC?
 
@@ -42,7 +42,7 @@ cambio centraliza el efecto sobre las demás, así que podemos estar seguros que
 una modificación en un componente no afecta las tareas en cualquier parte
 de la aplicación.
 
-##Más información
+## Más información
 
 La base de KumbiaPHP es el MVC y POO, un tradicional patrón de diseño que
 funciona en tres capas:
