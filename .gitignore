@@ -1,3 +1,17 @@
 /composer.lock
 /vendor/*
 crowdin.yaml
+
+# Mac filesystem dust
+.DS_Store
+
+#### Editors:
+
+# Netbeans
+/nbproject
+
+# Visual Studio Code
+.vscode
+
+# Intellij
+.idea
