@@ -32,6 +32,60 @@ $cliente->save();
  * Menos "detalles", más práctico y util
  * ActiveRecord protege en un gran porcentaje de ataques de SQL inyection que puedan llegar a sufrir tus aplicaciones escapando caracteres que puedan facilitar estos ataques.
 
+### Configurando conexión a la base de datos
+
+Para establecer la configuración de conexión a la base de datos, se usa el archivo
+[default/app/config/databases.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/databases.php).
+Aun sigue funcionando la configuración en el archivo
+[databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini)
+pero está desaconsejado ya que al estar ahora en un archivo PHP funciona mucho más rápido
+y se puede aprovechar la cache.
+
+Este archivo almacena la configuración en un array y lo retorna para ser usado
+por el ActiveRecord, se pueden crear tantas conexiones como se necesite, puedes
+tener la de desarrollo, producción, pruebas, etc. Esta se define con la primera llave
+del arreglo $databases por ejemplo:
+
+```php
+//Parámetros de conexión para desarrollo
+$databases['development'] = [];
+//Parámetros de conexión para producción
+$databases['production'] = [];
+```
+
+Veamos un ejemplo de conexión a desarrollo, donde el servidor de base de datos
+se enuentra en la misma máquina que el servidor web, por defecto se conecta
+con el usuario root y con la contraseña root **Nunca usen el usuario root en
+producción**:
+
+```php
+$databases['development'] = [   
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => 'root',
+    'name' => 'test',
+    'type' => 'mysql',
+    'charset' => 'utf8',
+    //'dsn' => '',
+    //'pdo' => 'On',
+];
+```
+
+Explicación de cada parámetro:
+
+* Host: Ip o nombre del host de la base de datos
+* Username: Nombre de usuario con permisos en la base de datos, no es recomendable usar el usuario root
+* Password: Clave del usuario de la base de datos
+* Name: Nombre de la base de datos
+* Type: Tipo de motor de base de datos (mysql, pgsql, oracle o sqlite)
+* Charset: Conjunto de caracteres de conexión, por ejemplo 'utf8'
+* Dsn: Cadena de conexión a la base de datos (Opcional)
+* Pdo: Para activar conexiones PDO (On/Off)
+
+Por defecto KumbiaPHP usa la conexión **development** esto se puede cambiar en el
+archivo [default/app/config/config.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/config.php)
+modificando el parámetro **database**.
+
 ### Crear un Modelo ActiveRecord en KumbiaPHP Framework
 
 Lo primero es crear un archivo en el directorio models con el mismo nombre de
@@ -59,7 +113,7 @@ class TipoDeCliente extends ActiveRecord {
 
 ### Columnas y Atributos
 
-Objetos ActiveRecord corresponden a registros en una tabla de una base de
+Los objetos ActiveRecord corresponden a registros en una tabla de una base de
 datos. Los objetos poseen atributos que corresponden a los campos en estas
 tablas. La clase ActiveRecord automáticamente obtiene la definición de los
 campos de las tablas y los convierte en atributos de la clase asociada. A esto
