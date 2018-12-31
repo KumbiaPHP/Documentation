@@ -73,18 +73,16 @@ $databases['development'] = [
 
 Explicación de cada parámetro:
 
-* Host: Ip o nombre del host de la base de datos
-* Username: Nombre de usuario con permisos en la base de datos, no es recomendable usar el usuario root
-* Password: Clave del usuario de la base de datos
-* Name: Nombre de la base de datos
-* Type: Tipo de motor de base de datos (mysql, pgsql, oracle o sqlite)
-* Charset: Conjunto de caracteres de conexión, por ejemplo 'utf8'
-* Dsn: Cadena de conexión a la base de datos (Opcional)
-* Pdo: Para activar conexiones PDO (On/Off)
+* **Host:** Ip o nombre del host de la base de datos
+* **Username:** Nombre de usuario con permisos en la base de datos, no es recomendable usar el usuario root
+* **Password:** Clave del usuario de la base de datos
+* **Name:** Nombre de la base de datos
+* **Type:** Tipo de motor de base de datos (mysql, pgsql, oracle o sqlite)
+* **Charset:** Conjunto de caracteres de conexión, por ejemplo 'utf8'
+* **Dsn:** Cadena de conexión a la base de datos (Opcional)
+* **Pdo:** Para activar conexiones PDO (On/Off)
 
-Por defecto KumbiaPHP usa la conexión **development** esto se puede cambiar en el
-archivo [default/app/config/config.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/config.php)
-modificando el parámetro **database**.
+Hay que recordar que al final siempre debe ir el return del array $databases.
 
 ### Crear un Modelo ActiveRecord en KumbiaPHP Framework
 
@@ -110,6 +108,40 @@ models/tipo_de_cliente.php y el código de este modelo es el siguiente:
 class TipoDeCliente extends ActiveRecord {
 }
  ```
+
+### Cambiar la conexión por defecto
+
+Por defecto KumbiaPHP usa la conexión configurada en **development** esto se puede cambiar en el
+archivo [default/app/config/config.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/config.php)
+modificando el parámetro **database** y tendría efecto en toda la aplicación.
+
+Este cambio también se puede realizar en cada **modelo** que herede de ActiveRecord,
+y se realiza modificando el valor del atributo protegido **$database**, veamos un
+ejemplo con la siguiente conexión:
+
+```php
+$databases['new'] = [   
+    'host' => 'superserver',
+    'username' => 'myusername',
+    'password' => 'Y)vahu}UvM(jG]#UTa3zAU7',
+    'name' => 'newdatabase',
+    'type' => 'mysql',
+    'charset' => 'utf8',
+    //'dsn' => '',
+    //'pdo' => 'On',
+];
+```
+Y ahora necesitamos que solo los clientes sean consultados y almacenados 
+en el nuevo servidor, entonces el código sería el siguiente:
+
+```php
+<?php
+class Cliente extends ActiveRecord {
+    protected $database = 'new';
+}
+```
+
+Donde **new** es el nombre de la configuración al super servidor.
 
 ### Columnas y Atributos
 
