@@ -87,7 +87,7 @@ Hay que recordar que al final siempre debe ir el return del array $databases.
 ### Crear un Modelo ActiveRecord en KumbiaPHP Framework
 
 Lo primero es crear un archivo en el directorio models con el mismo nombre de
-la tabla en la base de datos. Por ejemplo: models/clientes.php Luego
+la tabla en la base de datos. Por ejemplo: models/cliente.php Luego
 creamos una clase con el nombre de la tabla extendiendo alguna de las clases
 para modelos.
 
@@ -143,6 +143,26 @@ class Cliente extends ActiveRecord {
 
 Donde **new** es el nombre de la configuración al super servidor.
 
+### Cambiar la tabla que está siendo mapeada
+
+Como sabran por convención el ActiveRecord mapea con el nombre de la clase
+una tabla de la base de datos para armar el objeto, por lo tanto si tenemos la
+clase __Cliente__, el ActiveRecord espera encontrar una tabla llamada __cliente__,
+como en el ejemplo anterior. Pero ¿qué se puede hacer si la tabla por motivo de
+fuerza mayor tiene otro nombre? Supongamos que se llama __customers__ y no quieres
+cambiar el nombre de tu clase. Lo que se debe hacer es modificar el atributo 
+protegido **$source**, como en el siguiente ejemplo:
+
+```php
+<?php
+class Cliente extends ActiveRecord {
+    protected $source = 'customers';
+}
+```
+
+Con lo anterior el ActiveRecord mapearía la tabla __customers__ en lugar de
+la tabla __cliente__.
+
 ### Columnas y Atributos
 
 Los objetos ActiveRecord corresponden a registros en una tabla de una base de
@@ -182,7 +202,11 @@ Ejemplo:
  //KumbiaPHP 1.0
 $album = new Album();
 $album->id = 2;
-$album->nombre = "Going Under";
+$album->nombre = 'Going Under';
+$album->fecha = '2017-01-01';
+$album->valor = 25;
+$album->artista_id = 123;
+$album->estado = 'A';
 $album->save();
 ```
 
