@@ -39,7 +39,11 @@ Para establecer la configuración de conexión a la base de datos, se usa el arc
 Aun sigue funcionando la configuración en el archivo
 [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini)
 pero está desaconsejado ya que al estar ahora en un archivo PHP funciona mucho más rápido
-y se puede aprovechar la cache.
+y se puede aprovechar la cache. 
+
+**Nota:** KumabiaPHP buscará primero el archivo databases.php para cargar la información
+si este archivo no existe intentará obtenerla del archivo databases.ini. Lo mismo
+sucede con los demás archivos de configuración como el config.php y el routes.php.
 
 Este archivo almacena la configuración en un array y lo retorna para ser usado
 por el ActiveRecord, se pueden crear tantas conexiones como se necesite, puedes
@@ -69,6 +73,8 @@ $databases['development'] = [
     //'dsn' => '',
     //'pdo' => 'On',
 ];
+//Siempre al final
+return $databases;
 ```
 
 Explicación de cada parámetro:
@@ -130,6 +136,8 @@ $databases['new'] = [
     //'dsn' => '',
     //'pdo' => 'On',
 ];
+//Siempre al final
+return $databases;
 ```
 Y ahora necesitamos que solo los clientes sean consultados y almacenados 
 en el nuevo servidor, entonces el código sería el siguiente:
