@@ -13,18 +13,7 @@ una clase que ya lleva métodos listos para usar. Estos métodos facilitan al
 usuario el manejo de las tablas de las bases de datos; entre ellos están los
 siguientes: find(), find_first(), save(), update(), etc.
 
-Ejemplo con KumbiaPHP 0.9
-
-```php
-<?php
-//KumbiaPHP 0.9
-$cliente = Load::model('cliente');
-$cliente->nit = "808111827-2";
-$cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
-$cliente->save();
-```
-
-Ejemplo con KumbiaPHP 1.0
+Ejemplo:
 ```php
 <?php
 //KumbiaPHP 1.0
@@ -51,7 +40,6 @@ creamos una clase con el nombre de la tabla extendiendo alguna de las clases
 para modelos.
 
 Ejemplo:
-
 ```php
 <?php
 class Cliente extends ActiveRecord {
@@ -102,18 +90,7 @@ class Album extends ActiveRecord {
 Una instancia de esta clase sera un objeto con los atributos de la tabla
 album:
 
-Ejemplo con KumbiaPHP 0.9
-
-```php
-<?php
-//KumbiaPHP 0.9
-$album = Load::model('album');
-$album->id = 2;
-$album->nombre = "Going Under";
-$album->save();
- ```
-
-Ejemplo con KumbiaPHP 1.0
+Ejemplo:
 ```php
 <?php
  //KumbiaPHP 1.0
@@ -202,7 +179,7 @@ Sintaxis
 distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
 ```
 
-Ejemplo
+Ejemplo:
 ```php
 $unicos = (new Usuario)->distinct("estado");
 # array('A', 'I', 'N')  
@@ -221,7 +198,7 @@ en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del
 SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más
 específicos y tengamos que recurrir a su uso.
 
-Ejemplo
+Ejemplo:
 ```php
 $usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
 ```
@@ -239,7 +216,7 @@ ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero
 hay momentos en que es necesario que seamos mas específicos y tengamos que
 recurrir al uso de este.
 
-Ejemplo
+Ejemplo:
 ```php
 $usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso) limit 1" );  
 ```  
@@ -260,8 +237,7 @@ parámetros son todos opcionales y su orden no es relevante, cuando se invoca
 sin parámetros devuelve el primer registro insertado en la entidad. Este
 método es muy flexible y puede ser usado de muchas formas:
 
-Ejemplo
-
+Ejemplo:
 ```php
 $usuario = (new Usuario)->find_first( "conditions: estado='A'", "order: fecha desc");
 ```
@@ -329,8 +305,7 @@ se invoca sin parámetros devuelve todos los registros en la entidad.
 No hay que olvidarse de incluir un espacio después de los dos puntos (:) en
 cada parámetro.
 
-Ejemplo
-
+Ejemplo:
 ```php
 $usuarios = (new Usuario)->find( "conditions: estado='A'", "order: fecha desc");
 ```
@@ -569,7 +544,6 @@ Actualiza uno o más valores dentro de uno o más registros a partir de los
 atributos y condiciones indicadas.
 
 Ejemplos:
-
 ```php
 (new Producto)->update_all("precio = precio * 1.2");
 ```
@@ -731,8 +705,7 @@ Valida que el campo tenga determinado formato según una expresión regular ante
 
 Este método nos permite confirmar una transacción iniciada por el método begin en el motor de base de datos, si este lo permite. Devuelve true en caso de éxito y false en caso contrario.
 
-Ejemplo
-
+Ejemplo:
 ```php
 $Usuarios = new Usuarios();
 $Usuarios->commit();
@@ -742,8 +715,7 @@ $Usuarios->commit();
 
 Este método nos permite crear una transacción en el motor de base de datos, si este lo permite. Devuelve true en caso de éxito y false en caso contrario.
 
-Ejemplo
-
+Ejemplo:
 ```php
 $Usuarios = new Usuarios();
 $Usuarios->begin();
@@ -753,8 +725,7 @@ $Usuarios->begin();
 
 Este método nos permite anular una transacción iniciada por el método begin en el motor de base de datos, sí este lo permite. Devuelve true en caso de éxito y false en caso contrario.
 
-Ejemplo
-
+Ejemplo:
 ```php
 $Usuarios = new Usuarios();
 $Usuarios->rollback();
@@ -762,13 +733,13 @@ $Usuarios->rollback();
 
 **Nota:** Las tablas deben tener el motor de almacenamiento \[InnoDB\][1](http://es.wikipedia.org/wiki/InnoDB)
 
-###Otros métodos
+### Otros métodos
 
-#### sql (string $sql)
+#### sql(string $sql)
 
 Esta función nos permite ejecutar sentencias SQL directamente en el motor de base de datos. La idea es que el uso de este método no debería ser común en nuestras aplicaciones ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir al uso de éste.
 
-###Callbacks
+### Callbacks
 
 #### Introducción
 

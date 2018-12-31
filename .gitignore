@@ -1,6 +1,6 @@
-/composer.lock
 /vendor/*
 crowdin.yaml
+/composer.lock
 
 # Mac filesystem dust
 .DS_Store

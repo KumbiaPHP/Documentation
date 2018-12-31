@@ -119,7 +119,7 @@ Example:
    <title>Example Template</title>  
 </head>  
 <body>  
-   <h1>;Example Template</h1>  
+   <h1>Example Template</h1>  
 
     <?php View::content() ?>   
 </body>  
