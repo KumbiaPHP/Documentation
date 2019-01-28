@@ -32,10 +32,68 @@ $cliente->save();
  * Menos "detalles", más práctico y util
  * ActiveRecord protege en un gran porcentaje de ataques de SQL inyection que puedan llegar a sufrir tus aplicaciones escapando caracteres que puedan facilitar estos ataques.
 
+### Configurando conexión a la base de datos
+
+Para establecer la configuración de conexión a la base de datos, se usa el archivo
+[default/app/config/databases.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/databases.php).
+Aun sigue funcionando la configuración en el archivo
+[databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini)
+pero está desaconsejado ya que al estar ahora en un archivo PHP funciona mucho más rápido
+y se puede aprovechar la cache. 
+
+**Nota:** KumabiaPHP buscará primero el archivo databases.php para cargar la información
+si este archivo no existe intentará obtenerla del archivo databases.ini. Lo mismo
+sucede con los demás archivos de configuración como el config.php y el routes.php.
+
+Este archivo almacena la configuración en un array y lo retorna para ser usado
+por el ActiveRecord, se pueden crear tantas conexiones como se necesite, puedes
+tener la de desarrollo, producción, pruebas, etc. Esta se define con la primera llave
+del arreglo $databases por ejemplo:
+
+```php
+//Parámetros de conexión para desarrollo
+$databases['development'] = [];
+//Parámetros de conexión para producción
+$databases['production'] = [];
+```
+
+Veamos un ejemplo de conexión a desarrollo, donde el servidor de base de datos
+se enuentra en la misma máquina que el servidor web, por defecto se conecta
+con el usuario root y con la contraseña root **Nunca usen el usuario root en
+producción**:
+
+```php
+$databases['development'] = [   
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => 'root',
+    'name' => 'test',
+    'type' => 'mysql',
+    'charset' => 'utf8',
+    //'dsn' => '',
+    //'pdo' => 'On',
+];
+//Siempre al final
+return $databases;
+```
+
+Explicación de cada parámetro:
+
+* **Host:** Ip o nombre del host de la base de datos
+* **Username:** Nombre de usuario con permisos en la base de datos, no es recomendable usar el usuario root
+* **Password:** Clave del usuario de la base de datos
+* **Name:** Nombre de la base de datos
+* **Type:** Tipo de motor de base de datos (mysql, pgsql, oracle o sqlite)
+* **Charset:** Conjunto de caracteres de conexión, por ejemplo 'utf8'
+* **Dsn:** Cadena de conexión a la base de datos (Opcional)
+* **Pdo:** Para activar conexiones PDO (On/Off)
+
+Hay que recordar que al final siempre debe ir el return del array $databases.
+
 ### Crear un Modelo ActiveRecord en KumbiaPHP Framework
 
 Lo primero es crear un archivo en el directorio models con el mismo nombre de
-la tabla en la base de datos. Por ejemplo: models/clientes.php Luego
+la tabla en la base de datos. Por ejemplo: models/cliente.php Luego
 creamos una clase con el nombre de la tabla extendiendo alguna de las clases
 para modelos.
 
@@ -57,9 +115,65 @@ class TipoDeCliente extends ActiveRecord {
 }
  ```
 
+### Cambiar la conexión por defecto
+
+Por defecto KumbiaPHP usa la conexión configurada en **development** esto se puede cambiar en el
+archivo [default/app/config/config.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/config.php)
+modificando el parámetro **database** y tendría efecto en toda la aplicación.
+
+Este cambio también se puede realizar en cada **modelo** que herede de ActiveRecord,
+y se realiza modificando el valor del atributo protegido **$database**, veamos un
+ejemplo con la siguiente conexión:
+
+```php
+$databases['new'] = [   
+    'host' => 'superserver',
+    'username' => 'myusername',
+    'password' => 'Y)vahu}UvM(jG]#UTa3zAU7',
+    'name' => 'newdatabase',
+    'type' => 'mysql',
+    'charset' => 'utf8',
+    //'dsn' => '',
+    //'pdo' => 'On',
+];
+//Siempre al final
+return $databases;
+```
+Y ahora necesitamos que solo los clientes sean consultados y almacenados 
+en el nuevo servidor, entonces el código sería el siguiente:
+
+```php
+<?php
+class Cliente extends ActiveRecord {
+    protected $database = 'new';
+}
+```
+
+Donde **new** es el nombre de la configuración al super servidor.
+
+### Cambiar la tabla que está siendo mapeada
+
+Como sabran por convención el ActiveRecord mapea con el nombre de la clase
+una tabla de la base de datos para armar el objeto, por lo tanto si tenemos la
+clase __Cliente__, el ActiveRecord espera encontrar una tabla llamada __cliente__,
+como en el ejemplo anterior. Pero ¿qué se puede hacer si la tabla por motivo de
+fuerza mayor tiene otro nombre? Supongamos que se llama __customers__ y no quieres
+cambiar el nombre de tu clase. Lo que se debe hacer es modificar el atributo 
+protegido **$source**, como en el siguiente ejemplo:
+
+```php
+<?php
+class Cliente extends ActiveRecord {
+    protected $source = 'customers';
+}
+```
+
+Con lo anterior el ActiveRecord mapearía la tabla __customers__ en lugar de
+la tabla __cliente__.
+
 ### Columnas y Atributos
 
-Objetos ActiveRecord corresponden a registros en una tabla de una base de
+Los objetos ActiveRecord corresponden a registros en una tabla de una base de
 datos. Los objetos poseen atributos que corresponden a los campos en estas
 tablas. La clase ActiveRecord automáticamente obtiene la definición de los
 campos de las tablas y los convierte en atributos de la clase asociada. A esto
@@ -96,7 +210,11 @@ Ejemplo:
  //KumbiaPHP 1.0
 $album = new Album();
 $album->id = 2;
-$album->nombre = "Going Under";
+$album->nombre = 'Going Under';
+$album->fecha = '2017-01-01';
+$album->valor = 25;
+$album->artista_id = 123;
+$album->estado = 'A';
 $album->save();
 ```
 
