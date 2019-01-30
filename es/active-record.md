@@ -48,13 +48,21 @@ sucede con los demás archivos de configuración como el config.php y el routes.
 Este archivo almacena la configuración en un array y lo retorna para ser usado
 por el ActiveRecord, se pueden crear tantas conexiones como se necesite, puedes
 tener la de desarrollo, producción, pruebas, etc. Esta se define con la primera llave
-del arreglo $databases por ejemplo:
+del arreglo. Por ejemplo:
 
 ```php
+
+return [
 //Parámetros de conexión para desarrollo
-$databases['development'] = [];
+['development' => ] [
+                    // array de configuración
+                    ];
+
 //Parámetros de conexión para producción
-$databases['production'] = [];
+['production' => ] [
+                    // array de configuración
+                    ];
+]
 ```
 
 Veamos un ejemplo de conexión a desarrollo, donde el servidor de base de datos
@@ -63,7 +71,8 @@ con el usuario root y con la contraseña root **Nunca usen el usuario root en
 producción**:
 
 ```php
-$databases['development'] = [   
+return
+['development' => ] [   
     'host' => 'localhost',
     'username' => 'root',
     'password' => 'root',
@@ -73,8 +82,6 @@ $databases['development'] = [
     //'dsn' => '',
     //'pdo' => 'On',
 ];
-//Siempre al final
-return $databases;
 ```
 
 Explicación de cada parámetro:
@@ -126,7 +133,8 @@ y se realiza modificando el valor del atributo protegido **$database**, veamos u
 ejemplo con la siguiente conexión:
 
 ```php
-$databases['new'] = [   
+return
+['new' => ] [   
     'host' => 'superserver',
     'username' => 'myusername',
     'password' => 'Y)vahu}UvM(jG]#UTa3zAU7',
@@ -136,8 +144,6 @@ $databases['new'] = [
     //'dsn' => '',
     //'pdo' => 'On',
 ];
-//Siempre al final
-return $databases;
 ```
 Y ahora necesitamos que solo los clientes sean consultados y almacenados 
 en el nuevo servidor, entonces el código sería el siguiente:
