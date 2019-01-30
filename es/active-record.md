@@ -51,18 +51,18 @@ tener la de desarrollo, producción, pruebas, etc. Esta se define con la primera
 del arreglo. Por ejemplo:
 
 ```php
-
-return [
+<?php
+return
 //Parámetros de conexión para desarrollo
-['development' => ] [
-                    // array de configuración
-                    ];
-
+['development' => [
+                // array de configuración
+                ]
+];
 //Parámetros de conexión para producción
-['production' => ] [
-                    // array de configuración
-                    ];
-]
+['production' => [
+                // array de configuración
+                ]
+];
 ```
 
 Veamos un ejemplo de conexión a desarrollo, donde el servidor de base de datos
@@ -71,8 +71,9 @@ con el usuario root y con la contraseña root **Nunca usen el usuario root en
 producción**:
 
 ```php
+<?php
 return
-['development' => ] [   
+['development' => [   
     'host' => 'localhost',
     'username' => 'root',
     'password' => 'root',
@@ -81,6 +82,7 @@ return
     'charset' => 'utf8',
     //'dsn' => '',
     //'pdo' => 'On',
+    ]
 ];
 ```
 
@@ -133,8 +135,9 @@ y se realiza modificando el valor del atributo protegido **$database**, veamos u
 ejemplo con la siguiente conexión:
 
 ```php
+<?php
 return
-['new' => ] [   
+['new' => [   
     'host' => 'superserver',
     'username' => 'myusername',
     'password' => 'Y)vahu}UvM(jG]#UTa3zAU7',
@@ -143,6 +146,7 @@ return
     'charset' => 'utf8',
     //'dsn' => '',
     //'pdo' => 'On',
+    ]
 ];
 ```
 Y ahora necesitamos que solo los clientes sean consultados y almacenados 
