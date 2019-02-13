@@ -52,14 +52,14 @@ del arreglo. Por ejemplo:
 
 ```php
 <?php
-return
+return [
 //Parámetros de conexión para desarrollo
-['development' => [
+'development' => [
                 // array de configuración
                 ]
-];
+],
 //Parámetros de conexión para producción
-['production' => [
+'production' => [
                 // array de configuración
                 ]
 ];
@@ -72,8 +72,8 @@ producción**:
 
 ```php
 <?php
-return
-['development' => [   
+return [
+'development' => [   
     'host' => 'localhost',
     'username' => 'root',
     'password' => 'root',
@@ -82,7 +82,7 @@ return
     'charset' => 'utf8',
     //'dsn' => '',
     //'pdo' => 'On',
-    ]
+    ],
 ];
 ```
 
@@ -136,8 +136,8 @@ ejemplo con la siguiente conexión:
 
 ```php
 <?php
-return
-['new' => [   
+return [
+'new' => [   
     'host' => 'superserver',
     'username' => 'myusername',
     'password' => 'Y)vahu}UvM(jG]#UTa3zAU7',
@@ -146,7 +146,7 @@ return
     'charset' => 'utf8',
     //'dsn' => '',
     //'pdo' => 'On',
-    ]
+    ],
 ];
 ```
 Y ahora necesitamos que solo los clientes sean consultados y almacenados 
