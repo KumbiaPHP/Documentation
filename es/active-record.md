@@ -56,12 +56,11 @@ return [
 //Parámetros de conexión para desarrollo
 'development' => [
                 // array de configuración
-                ]
-],
+                ],
 //Parámetros de conexión para producción
 'production' => [
                 // array de configuración
-                ]
+                ],
 ];
 ```
 
