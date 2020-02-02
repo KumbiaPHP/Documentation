@@ -207,7 +207,7 @@ agilizar la carga de la aplicación tal como la metadata de la base datos
 
 ### ¡¡¡ ADVERTENCIA !!!
 Cuando se efectua el cambio de `PRODUCTION = false;` a `PRODUCTION = true;`, 
-es necesario eliminar el contenido del directorio de cache de la aplicación [default/app/tmp/cache/*](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/tmp/cache/) para que se renueve la metadata y no haya problemas al guardar o mostrar la información.
+es necesario eliminar el contenido del directorio de cache de la aplicación [default/app/temp/cache/*](https://github.com/KumbiaPHP/KumbiaPHP/tree/master/default/app/temp/cache) para que se renueve la metadata y no haya problemas al guardar o mostrar la información.
 
 no se deben confundir con la conexión
 a la base de datos que se va usar , 
