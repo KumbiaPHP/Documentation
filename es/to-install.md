@@ -186,7 +186,8 @@ los motores de búsqueda a indexar mejor tu información.
 ## Modos de una Aplicación
 
 KumbiaPHP ofrece dos modos de ejecución de una aplicación el cual es indicado 
-en el archivo _public/index.php_, estos se describen a continuación:
+en el archivo [default/public/index.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/public/index.php), 
+se describen a continuación:
 
 ### Desarrollo
 
@@ -198,12 +199,15 @@ que se cacheen, surtirán efecto inmediatamente.
 
 ### Producción
 
-Asignado en el archivo _public/index.php_ el valor true a la constante PRODUCTION: 
-`const PRODUCTION = true;`, se entra en el modo de producción, en este la cache 
-de kumbiaphp framework esta activada y se cachea información necesaria para 
+Se activa asignando en el archivo [default/public/index.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/public/index.php) 
+el valor true a la constante PRODUCTION, así: `const PRODUCTION = true;`, en este la cache de 
+KumbiaPHP esta activada y se cachea información necesaria para 
 agilizar la carga de la aplicación tal como la metadata de la base datos 
 (información de tablas y campos), asimismo las vistas que el usuario desee cachear.
 
 ### ¡¡¡ ADVERTENCIA !!!
 Cuando se efectua el cambio de `PRODUCTION = false;` a `PRODUCTION = true;`, 
-es necesario eliminar el contenido del directorio de cache de la aplicación _/app/tmp/cache/*_ para que se renueve la metadata y no haya problemas al guardar o mostrar la información.
+es necesario eliminar el contenido del directorio de cache de la aplicación [default/app/tmp/cache/*](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/tmp/cache/) para que se renueve la metadata y no haya problemas al guardar o mostrar la información.
+
+no se deben confundir con la conexión
+a la base de datos que se va usar , 
