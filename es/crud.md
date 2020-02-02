@@ -6,10 +6,10 @@ Este ejemplo, permite de manera sencilla conocer y entender la
 implementación de un CRUD (Create, Read, Update y Delete en inglés) sin la
 necesidad de un Scaffold y un manejo correcto del MVC en KumbiaPHP.
 
-## Configurando database.ini
+## Configuración de conexión a la base de datos
 
-Configurar el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) ,
-con los datos y motor de Base de Datos a utilizar.
+Configurar el archivo [databases.ini o databases.php](active-record.md#configurando-conexión-a-la-base-de-datos) ,
+con los datos y motor de base de datos a utilizar.
 
 ## Modelo
 
