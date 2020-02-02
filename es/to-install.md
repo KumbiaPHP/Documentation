@@ -183,3 +183,27 @@ correcta y también es correcto según nuestra lógica de aplicación. Cuando
 escribes direcciones utilizando este tipo de URLs, estas ayudando también a
 los motores de búsqueda a indexar mejor tu información.
 
+## Modos de una Aplicación
+
+KumbiaPHP ofrece dos modos de ejecución de una aplicación el cual es indicado 
+en el archivo _public/index.php_, estos se describen a continuación:
+
+### Desarrollo
+
+Es el modo por defecto, en este caso el valor de la constante PRODUCTION 
+es false: `const PRODUCTION = false;`. En éste la cache de KumbiaPHP está 
+desactivada y cualquier cambio que se haga en los campos y tablas de la base 
+de datos (adición o eliminación de campos, etc), vistas de la aplicación 
+que se cacheen, surtirán efecto inmediatamente.
+
+### Producción
+
+Asignado en el archivo _public/index.php_ el valor true a la constante PRODUCTION: 
+`const PRODUCTION = true;`, se entra en el modo de producción, en este la cache 
+de kumbiaphp framework esta activada y se cachea información necesaria para 
+agilizar la carga de la aplicación tal como la metadata de la base datos 
+(información de tablas y campos), asimismo las vistas que el usuario desee cachear.
+
+### ¡¡¡ ADVERTENCIA !!!
+Cuando se efectua el cambio de `PRODUCTION = false;` a `PRODUCTION = true;`, 
+es necesario eliminar el contenido del directorio de cache de la aplicación _/app/tmp/cache/*_ para que se renueve la metadata y no haya problemas al guardar o mostrar la información.
