@@ -581,7 +581,7 @@ $suma = (new Producto)->sum("precio", "conditions: estado = 'A'");
 
 ####  count\_by\_sql()
 
-Realiza una sumatoria utilizando lenguaje SQL.
+Realiza un conteo sobre los registros de la entidad utilizando lenguaje SQL.
 
 ```php
 $numero = (new Producto)->count_by_sql("select count(precio) from producto, factura  where factura.codigo = 1124 \
