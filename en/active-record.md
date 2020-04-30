@@ -1,32 +1,85 @@
 # ActiveRecord
 
-It is the main class for the Administration and operation of models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by the functionality of its analog available in Ruby on Rails. ActiveRecord provides an object-relational layer that strictly follows the standard ORM: tables in classes, objects records, and fields in attributes. Facilitates the understanding of the code associated with the database and encapsulates the logic specified making it easier to use for the programmer.
+This is the main class for administration and operation of models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by the functionality of its analog available in Ruby on Rails. ActiveRecord provides an object-relational layer that strictly follows the standard ORM: tables in classes, objects in records, and fields in attributes. Facilitates the understanding of code associated with the database and encapsulates the logic specified making it easier to use for the programmer.
 
 KumbiaPHP uses OOP (Object-oriented programming), so ActiveRecord is a class with ready-to-use methods. These methods make it easier for the user to manage tables in databases; Among them are the next:
 
-Ejemplo:
+Example:
 
 ```php
 <?php
 //KumbiaPHP 1.0
-$cliente = new Cliente();
-$cliente->nit = "808111827-2";
-$cliente->razon_social = "EMPRESA DE TELECOMUNICACIONES XYZ";
-$cliente->save();
+$client = new Client();
+$client->idcode = "808111827-2";
+$client->name = "XYZ COMMUNICATIONS COMPANY";
+$client->save(); //it creates a new record
 ```
 
 ### Advantages of ActiveRecord
 
-- The entities of the Model are most naturally worked as objects.
-- Actions such as inserting, consult, update, delete, etc. of an entity of the model are encapsulated so the code is reduced and becomes more easy to maintain.
-- Easiest Code to Understand and Maintain
-- Reduction in the use of instructions of SQL by 80%, which achieves a high percentage of independence from the database engine.
-- without details unnecessary, the code is more practical and useful
-- "ActiveRecord" protec in a huge percent of SQL injections attacks that your apps can suffer, limited the letters that make it's.
+* The entities of the Model are most naturally worked as objects.
+* Actions such as inserting, consult, update, delete, etc. of an entity of the model are encapsulated so the code is reduced and becomes more easy to maintain.
+* Easiest Code to Understand and Maintain
+* Reduction in the use of instructions of SQL by 80%, which achieves a high percentage of independence from the database engine.
+* without details unnecessary, the code is more practical and useful
+* "ActiveRecord" protec in a huge percent of SQL injections attacks that your apps can suffer, limited the letters that make it's.
 
-### How to Create an ActiveRecord in KumbiaPHP Framework?
+### Configurando conexión a la base de datos
 
-Lo primero es crear un archivo en el directorio models con el mismo nombre de la tabla en la base de datos. Por ejemplo: models/clientes.php Luego creamos una clase con el nombre de la tabla extendiendo alguna de las clases para modelos.
+Para establecer la configuración de conexión a la base de datos, se usa el archivo [default/app/config/databases.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/databases.php). Aun sigue funcionando la configuración en el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) pero está desaconsejado ya que al estar ahora en un archivo PHP funciona mucho más rápido y se puede aprovechar la cache.
+
+**Nota:** KumabiaPHP buscará primero el archivo databases.php para cargar la información si este archivo no existe intentará obtenerla del archivo databases.ini. Lo mismo sucede con los demás archivos de configuración como el config.php y el routes.php.
+
+Este archivo almacena la configuración en un array y lo retorna para ser usado por el ActiveRecord, se pueden crear tantas conexiones como se necesite, puedes tener la de desarrollo, producción, pruebas, etc. Esta se define con la primera llave del arreglo. Por ejemplo:
+
+```php
+<?php
+return [
+//Parámetros de conexión para desarrollo
+'development' => [
+                // array de configuración
+                ],
+//Parámetros de conexión para producción
+'production' => [
+                // array de configuración
+                ],
+];
+```
+
+Veamos un ejemplo de conexión a desarrollo, donde el servidor de base de datos se enuentra en la misma máquina que el servidor web, por defecto se conecta con el usuario root y con la contraseña root **Nunca usen el usuario root en producción**:
+
+```php
+<?php
+return [
+'development' => [   
+    'host' => 'localhost',
+    'username' => 'root',
+    'password' => 'root',
+    'name' => 'test',
+    'type' => 'mysql',
+    'charset' => 'utf8',
+    //'dsn' => '',
+    //'pdo' => 'On',
+    ],
+];
+```
+
+Explicación de cada parámetro:
+
+* **Host:** Ip o nombre del host de la base de datos
+* **Username:** Nombre de usuario con permisos en la base de datos, no es recomendable usar el usuario root
+* **Password:** Clave del usuario de la base de datos
+* **Name:** Nombre de la base de datos
+* **Type:** Tipo de motor de base de datos (mysql, pgsql, oracle o sqlite)
+* **Charset:** Conjunto de caracteres de conexión, por ejemplo 'utf8'
+* **Dsn:** Cadena de conexión a la base de datos (Opcional)
+* **Pdo:** Para activar conexiones PDO (On/Off)
+
+Hay que recordar que al final siempre debe ir el return del array $databases.
+
+### Crear un Modelo ActiveRecord en KumbiaPHP Framework
+
+Lo primero es crear un archivo en el directorio models con el mismo nombre de la tabla en la base de datos. Por ejemplo: models/cliente.php Luego creamos una clase con el nombre de la tabla extendiendo alguna de las clases para modelos.
 
 Ejemplo:
 
@@ -44,13 +97,59 @@ class TipoDeCliente extends ActiveRecord {
 }
  ```
 
+### Cambiar la conexión por defecto
+
+Por defecto KumbiaPHP usa la conexión configurada en **development** esto se puede cambiar en el
+archivo [default/app/config/config.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/config.php)
+modificando el parámetro **database** y tendría efecto en toda la aplicación.
+
+Este cambio también se puede realizar en cada **modelo** que herede de ActiveRecord,
+y se realiza modificando el valor del atributo protegido **$database**, veamos un
+ejemplo con la siguiente conexión:
+
+```php
+<?php
+return [
+'new' => [   
+    'host' => 'superserver',
+    'username' => 'myusername',
+    'password' => 'Y)vahu}UvM(jG]#UTa3zAU7',
+    'name' => 'newdatabase',
+    'type' => 'mysql',
+    'charset' => 'utf8',
+    //'dsn' => '',
+    //'pdo' => 'On',
+    ],
+];
+```
+
+Y ahora necesitamos que solo los clientes sean consultados y almacenados en el nuevo servidor, entonces el código sería el siguiente:
+
+```php
+<?php
+class Cliente extends ActiveRecord {
+    protected $database = 'new';
+}
+```
+
+Donde **new** es el nombre de la configuración al super servidor.
+
+### Cambiar la tabla que está siendo mapeada
+
+Como sabran por convención el ActiveRecord mapea con el nombre de la clase una tabla de la base de datos para armar el objeto, por lo tanto si tenemos la clase **Cliente**, el ActiveRecord espera encontrar una tabla llamada **cliente**, como en el ejemplo anterior. Pero ¿qué se puede hacer si la tabla por motivo de fuerza mayor tiene otro nombre? Supongamos que se llama **customers** y no quieres cambiar el nombre de tu clase. Lo que se debe hacer es modificar el atributo protegido **$source**, como en el siguiente ejemplo:
+
+```php
+<?php
+class Cliente extends ActiveRecord {
+    protected $source = 'customers';
+}
+```
+
+Con lo anterior el ActiveRecord mapearía la tabla **customers** en lugar de la tabla **cliente**.
+
 ### Columnas y Atributos
 
-Objetos ActiveRecord corresponden a registros en una tabla de una base de
-datos. Los objetos poseen atributos que corresponden a los campos en estas
-tablas. La clase ActiveRecord automáticamente obtiene la definición de los
-campos de las tablas y los convierte en atributos de la clase asociada. A esto
-es lo que nos referíamos con mapeo objeto relacional.
+Los objetos ActiveRecord corresponden a registros en una tabla de una base de datos. Los objetos poseen atributos que corresponden a los campos en estas tablas. La clase ActiveRecord automáticamente obtiene la definición de los campos de las tablas y los convierte en atributos de la clase asociada. A esto es lo que nos referíamos con mapeo objeto relacional.
 
 Miremos la tabla Álbum:
 
@@ -83,17 +182,21 @@ Ejemplo:
  //KumbiaPHP 1.0
 $album = new Album();
 $album->id = 2;
-$album->nombre = "Going Under";
+$album->nombre = 'Going Under';
+$album->fecha = '2017-01-01';
+$album->valor = 25;
+$album->artista_id = 123;
+$album->estado = 'A';
 $album->save();
 ```
 
-### Primary keys and the use of IDs
+### Llaves Primarias y el uso de IDs
 
 En los ejemplos mostrados de KumbiaPHP siempre se trabaja una columna llamada id como llave primaria de nuestras tablas. Tal vez, esto no siempre es practico a su parecer, de pronto al crear la tabla clientes la columna de numero de identificación seria una excelente elección, pero en caso de cambiar este valor por otro tendría problemas con el dato que este replicado en otras relaciones (ejemplo facturas), además de esto tendría que validar otras cosas relacionadas con su naturaleza. KumbiaPHP propone el uso de ids como llaves primarias con esto se automatiza muchas tareas de consulta y proporciona una forma de referirse unívocamente a un registro en especial sin depender de la naturaleza de un atributo especifico. Usuarios de Rails se sentirán familiarizados con esta característica.
 
 Esta particularidad también permite a KumbiaPHP entender el modelo entidad relación leyendo los nombres de los atributos de las tablas. Por ejemplo en la tabla album del ejemplo anterior la convención nos dice que id es la llave primaria de esta tabla pero además nos dice que hay una llave foránea a la tabla artista en su campo id.
 
-### Conventions in ActiveRecord
+### Convenciones en ActiveRecord
 
 ActiveRecord posee una serie de convenciones que le sirven para asumir distintas cualidades y relacionar un modelo de datos. Las convenciones son las siguientes:
 
@@ -125,7 +228,7 @@ Los campos terminados en *_in* indican que son fechas y posee la funcionalidad e
 
 A continuación veremos una referencia de los métodos que posee la clase ActiveRecord y su funcionalidad respectiva. Éstos se encuentran organizados alfabéticamente:
 
-### Querys
+### Consultas
 
 Métodos para hacer consulta de registros:
 
@@ -148,7 +251,7 @@ $unicos = (new Usuario)->distinct("estado");
 
 Los parámetros conditions, order y limit funcionan idénticamente que en el método find y permiten modificar la forma o los mismos valores de retorno devueltos por esta.
 
-#### find\_all\_by\_sql (string $sql)
+#### find_all_by_sql (string $sql)
 
 Este método nos permite hacer una consulta por medio de un SQL y el resultado devuelto es un array de objetos de la misma clase con los valores de los registros en estos. La idea es que el uso de este método no sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir a su uso.
 
@@ -160,7 +263,7 @@ $usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo
 
 En este ejemplo consultamos todos los usuarios con una sentencia where especial. La idea es que los usuarios consultados no pueden estar en la entidad ingreso.
 
-#### find\_by\_sql (string $sql)
+#### find_by_sql (string $sql)
 
 Este método nos permite hacer una consulta por medio de un SQL y el resultado devuelto es un objeto que representa el resultado encontrado. La idea es que el uso de este método no sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos mas específicos y tengamos que recurrir al uso de este.
 
@@ -172,7 +275,7 @@ $usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not 
 
 Este ejemplo consulta el primer usuario con una sentencia where especial. La idea es que el usuario consultado no se encuentre en la entidad ingreso.
 
-#### find\_first (string $sql)
+#### find_first (string $sql)
 
 Sintaxis
 
@@ -193,7 +296,7 @@ En este ejemplo buscamos el primer registro cuyo estado sea igual a "A" y ordena
 Con el método find_first podemos buscar un registro en particular a partir de su id de esta forma:
 
 ```php
-$usuario = (new Usuario)->find_first(123);
+$user = (new User)->find_first(123);
 ```
 
 Obtenemos el registro 123 e igualmente devuelve una instancia del mismo objeto ActiveRecord en caso de éxito, o false en caso contrario. KumbiaPHP genera una advertencia cuando los criterios de búsqueda para find\_first devuelven más de un registro, para esto podemos forzar que se devuelva solamente uno, mediante el parámetro limit, de esta forma:
@@ -280,7 +383,7 @@ Podemos ver un ejemplo para **find** usando funciones de resumen y agrupación (
 $resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(*) as num_facturas", "group: agencia_origen, agencia_destino", "having: count(*) > 5");
 ```
 
-#### select\_one (string $select_query)
+#### select_one (string $select_query)
 
 Este método nos permite hacer ciertas consultas como ejecutar funciones en el motor de base de datos sabiendo que éstas devuelven un único registro.
 
@@ -290,7 +393,7 @@ $current_time = (new Usuario)->select_one( "current_time");
 
 En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL, podemos usar este método para esto.
 
-#### select\_one(string $select_query) (static)
+#### select_one(string $select_query) (static)
 
 Este método nos permite hacer ciertas consultas como ejecutar funciones en el motor de base de datos, sabiendo que estas devuelven un solo registro. Este método se puede llamar de forma estática, esto significa que no es necesario que haya una instancia de ActiveRecord para hacer el llamado.
 
@@ -300,7 +403,7 @@ $current_time = ActiveRecord::select_one( "current_time");
 
 En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL, podemos usar este método para esto.
 
-#### exist()
+#### exists()
 
 Este método nos permite verificar si el registro existe o no en la base de datos mediante su id o una condición.
 
@@ -317,7 +420,7 @@ if ($usuario->exists()){
 (new Usuario)->exists(2); // Un Usuario con id->2?
 ```
 
-#### find\_all\_by()
+#### find_all_by()
 
 Este método nos permite realizar una búsqueda por algún campo
 
@@ -325,7 +428,7 @@ Este método nos permite realizar una búsqueda por algún campo
 $resultado = (new Producto)->find_all_by( 'categoria', 'Insumos');
 ```
 
-#### find\_by\__campo_()
+#### find_by__campo_()
 
 Este método nos permite realizar una búsqueda usando el nombre del atributo como nombre de método. Devuelve un único registro.
 
@@ -333,7 +436,7 @@ Este método nos permite realizar una búsqueda usando el nombre del atributo co
 $resultado = (new Producto)->find_by_categoria('Insumos');
 ```
 
-#### find\_all\_by\__campo_()
+#### find_all_by__campo_()
 
 Este método nos permite realizar una búsqueda el nombre del atributo como nombre de método. Devuelve todos los registros que coincidan con la búsqueda.
 
@@ -341,7 +444,7 @@ Este método nos permite realizar una búsqueda el nombre del atributo como nomb
 $resultado = (new Producto)->find_all_by_categoria("Insumos");
 ```
 
-### Counts and Totals
+### Conteos y sumatorias
 
 #### count()
 
@@ -361,16 +464,16 @@ $suma = (new Producto)->sum("precio");
 $suma = (new Producto)->sum("precio", "conditions: estado = 'A'");
 ```
 
-#### count\_by\_sql()
+#### count_by_sql()
 
-Realiza una sumatoria utilizando lenguaje SQL.
+Realiza un conteo sobre los registros de la entidad utilizando lenguaje SQL.
 
 ```php
 $numero = (new Producto)->count_by_sql("select count(precio) from producto, factura  where factura.codigo = 1124 \
     and factura.codigo_producto = producto.codigo_producto");
 ```
 
-### Averages, maximum and minimum
+### Promedios, máximo y mínimo
 
 #### average()
 
@@ -399,7 +502,7 @@ $min = (new Producto)->minimum("precio");
 $min = (new Producto)->minimum("fecha_compra", "conditions: estado = 'A'");
 ```
 
-### Create, update, and deletion of records
+### Creación, actualización y borrado de registros
 
 #### create()
 
@@ -443,7 +546,7 @@ $producto->estado = "C";
 $producto->update();
 ```
 
-#### update\_all()
+#### update_all()
 
 Actualiza uno o más valores dentro de uno o más registros a partir de los atributos y condiciones indicadas.
 
@@ -480,9 +583,9 @@ $exito = $producto->delete();
 $exito = (new Producto)->delete("estado='A'");
 ```
 
-#### delete\_all()
+#### delete_all()
 
-Deletes one or more records from the attributes and conditions. It's return boolean.
+Elimina uno o más registros a partir de los atributos y condiciones indicadas. Retorna boolean.
 
 ```php
 (new Producto)->delete_all( " precio >= 99.99 " );
@@ -490,9 +593,9 @@ Deletes one or more records from the attributes and conditions. It's return bool
 (new Producto)->delete_all( " estado = 'C' " );
 ```
 
-### Validations
+### Validaciones
 
-#### validates\_presence\_of
+#### validates_presence_of
 
 Cuando este método es llamado desde el constructor de una clase ActiveRecord, obliga a que se valide la presencia de los campos definidos en la lista. Los campos marcados como not\_null en la tabla son automáticamente validados.
 
@@ -506,7 +609,7 @@ Cuando este método es llamado desde el constructor de una clase ActiveRecord, o
 
 ```
 
-#### validates\_length\_of
+#### validates_length_of
 
 Cuando este método es llamado desde el constructor de una clase ActiveRecord, obliga a que se valide la longitud de los campos definidos en la lista.
 
@@ -527,7 +630,7 @@ class Clientes extends ActiveRecord {
 }
 ```
 
-#### validates\_numericality\_of
+#### validates_numericality_of
 
 Valida que ciertos atributos tengan un valor numérico antes de insertar ó actualizar.
 
@@ -542,7 +645,7 @@ Valida que ciertos atributos tengan un valor numérico antes de insertar ó actu
  }
 ```
 
-#### validates\_email\_in
+#### validates_email_in
 
 Valida que ciertos atributos tengan un formato de e-mail correcto antes de insertar o actualizar.
 
@@ -557,7 +660,7 @@ Valida que ciertos atributos tengan un formato de e-mail correcto antes de inser
  }
 ```
 
-#### validates\_uniqueness\_of
+#### validates_uniqueness_of
 
 Valida que ciertos atributos tengan un valor único antes de insertar o actualizar.
 
@@ -572,7 +675,7 @@ Valida que ciertos atributos tengan un valor único antes de insertar o actualiz
  }
 ```
 
-#### validates\_date\_in
+#### validates_date_in
 
 Valida que ciertos atributos tengan un formato de fecha acorde al indicado en config/config.ini antes de insertar o actualizar.
 
@@ -586,7 +689,7 @@ Valida que ciertos atributos tengan un formato de fecha acorde al indicado en co
  }
 ```
 
-#### validates\_format\_of
+#### validates_format_of
 
 Valida que el campo tenga determinado formato según una expresión regular antes de insertar o actualizar.
 
@@ -601,7 +704,7 @@ Valida que el campo tenga determinado formato según una expresión regular ante
  }
 ```
 
-### Transactions 
+### Transacciones
 
 #### commit()
 
@@ -638,9 +741,9 @@ $Usuarios->rollback();
 
 **Nota:** Las tablas deben tener el motor de almacenamiento \[InnoDB\][1](http://es.wikipedia.org/wiki/InnoDB)
 
-### Another methods
+### Otros métodos
 
-#### sql(string $sql)
+#### sql (string $sql)
 
 Esta función nos permite ejecutar sentencias SQL directamente en el motor de base de datos. La idea es que el uso de este método no debería ser común en nuestras aplicaciones ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir al uso de éste.
 
@@ -672,31 +775,31 @@ class User extends ActiveRecord {
 
 A continuación otros callbacks que podemos encontrar en ActiveRecord. El orden en el que son presentados es en el que se llaman si están definidos:
 
-#### before\_validation
+#### before_validation
 
 Es llamado justo antes de realizar el proceso de validación por parte de Kumbia. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
-#### before\_validation\_on\_create
+#### before_validation_on_create
 
 Es llamado justo antes de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de inserción en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
-#### before\_validation\_on\_update
+#### before_validation_on_update
 
-Es llamado justo antes de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de actualización en un modelo. You can cancel the action if this method return cancel.
+Es llamado justo antes de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de actualización en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
-#### after\_validation\_on\_create
+#### after_validation_on_create
 
-Es llamado justo después de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de inserción en un modelo. You can cancel the action if this method return cancel.
+Es llamado justo después de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de inserción en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
-#### after\_validation\_on\_update
+#### after_validation_on_update
 
-Es llamado justo después de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de actualización en un modelo. You can cancel the action if this method return cancel.
+Es llamado justo después de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de actualización en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
-#### after\_validation
+#### after_validation
 
 Es llamado justo después de realizar el proceso de validación por parte de Kumbia. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
-#### before\_save
+#### before_save
 
 Es llamado justo antes de realizar el proceso de guardar, metodo **save()** y al momento de editar/actualizar, metodo **update()** en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
@@ -710,35 +813,35 @@ public function before_save() {
 }
 ```
 
-#### before\_update
+#### before_update
 
-Es llamado justo antes de realizar el proceso de actualización cuando se llama el método save o update en un modelo. You can cancel the action if this method return the word 'cancel'. El mismo codigo del before\_save() para before\_update.
+Es llamado justo antes de realizar el proceso de actualización cuando se llama el método save o update en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'. El mismo codigo del before\_save() para before\_update.
 
-#### before\_create
+#### before_create
 
-Es llamado justo antes de realizar el proceso de inserción cuando se llama el método save o create en un modelo. You can cancel this action if this method return the word 'cancel'.
+Es llamado justo antes de realizar el proceso de inserción cuando se llama el método save o create en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
-#### after\_update
+#### after_update
 
 Es llamado justo después de realizar el proceso de actualización cuando se llama el método save o update en un modelo.
 
-#### after\_create
+#### after_create
 
 Es llamado justo después de realizar el proceso de actualización cuando se llama el método save o create en un modelo.
 
-#### after\_save
+#### after_save
 
 Es llamado justo después de realizar el proceso de actualización/inserción cuando se llama el método save, update ó create en un modelo.
 
-#### before\_delete
+#### before_delete
 
 Es llamado justo antes de realizar el proceso de borrado cuando se llama el método delete en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
 
-#### after\_delete
+#### after_delete
 
 Es llamado justo después de realizar el proceso de borrado cuando se llama el método delete en un modelo.
 
-### Associations
+### Asociaciones
 
 #### Introduction
 
@@ -762,7 +865,7 @@ echo $cliente->getCiudad()->nombre;
 
 Gran parte de la magia que tiene ActiveRecord es esto, ya que convierte las llaves foráneas en sentencias de alto nivel, fáciles de comprender y de trabajar.
 
-#### Belongs (belongs\_to)
+#### Belongs (belongs_to)
 
 Este tipo de relación se efectúa con el método “belongs\_to”, en esta la llave foránea se encuentra en la tabla del modelo de donde se invoca el método. Corresponde a una relación uno a uno en el modelo entidad relación.
 
@@ -794,7 +897,7 @@ class Libro extends ActiveRecord {
 }
 ```
 
-#### It has a (has\_one)
+#### Has_one
 
 Este tipo de relación se efectúa con el método “has\_one”, en esta la llave foránea se encuentra en la tabla del modelo con el que se quiere asociar. Corresponde a una relación uno a uno en el modelo entidad relación.
 
@@ -826,7 +929,7 @@ class Persona extends ActiveRecord {
 }
 ```
 
-#### It has many (has\_many)
+#### Has_many
 
 Este tipo de relación se efectúa con el método “has\_many”, en esta la llave foránea se encuentra en la tabla del modelo con el que se quiere asociar. Corresponde a una relación uno a muchos en el modelo entidad relación.
 
@@ -858,7 +961,7 @@ class Persona extends ActiveRecord {
 }
 ```
 
-#### It has and belongs to many (has\_and\_belongs\_to\_many)
+#### Has_and_belongs_to_many
 
 Este tipo de relación se efectúa con el método “has\_and\_belongs\_to\_many”, esta se efectúa a través de una tabla que se encarga de enlazar los dos modelos. Corresponde a una relación muchos a muchos en el modelo entidad relación. Este tipo de relación tiene la desventaja de que no es soportada en el ámbito de múltiples conexiones de ActiveRecord, para lograr que funcione con multiples conexiones, se puede emular a través de dos relaciones has\_many al modelo de la tabla que relaciona.
 
@@ -893,7 +996,7 @@ class Persona extends ActiveRecord {
 }
 ```
 
-### Pagers
+### Paginadores
 
 Para la paginación existen dos funciones encargadas de esto:
 
@@ -932,7 +1035,7 @@ $page = paginate('usuario', 'NOT login=”admin”', 'order: login ASC', 'per_pa
 $page = paginate($this->Usuario, 'NOT login=”admin”', 'order: login ASC', 'per_page: 5', 'page: 1');
 ```
 
-#### Paginate\_by\_sql
+#### Paginate_by_sql
 
 Efectúa paginación a través de una consulta sql. Recibe los siguientes parámetros:
 
@@ -981,7 +1084,7 @@ class Usuario extends ActiveRecord {
 }
 ```
 
-In the *user_controller.php* controller:
+En el controlador *usuario_controller.php*:
 
 ```php
 <?php
