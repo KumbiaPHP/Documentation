@@ -146,3 +146,21 @@ ReWrite is an apache module that allows you to rewrite urls that our users have 
 In addition, with mod-rewrite KumbiaPHP can protect our applications to the possibility that users can see the project directories and can access class files, models, logic, etc., unless they are authorized.
 
 With mod-rewrite the only directory that users can see is public directory (public) of the web server content, the rest remains hidden and only can be viewed when you have made a request to properly and is also correct according to our application logic. When you write addresses using this type of URLs, are also helping the search engines to better index your information.
+
+## Modos de una Aplicación
+
+KumbiaPHP ofrece dos modos de ejecución de una aplicación el cual es indicado en el archivo [default/public/index.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/public/index.php), se describen a continuación:
+
+### Desarrollo
+
+Es el modo por defecto, en este caso el valor de la constante PRODUCTION es false: `const PRODUCTION = false;`. En éste la cache de KumbiaPHP está desactivada y cualquier cambio que se haga en los campos y tablas de la base de datos (adición o eliminación de campos, etc), vistas de la aplicación que se cacheen, surtirán efecto inmediatamente.
+
+### Producción
+
+Se activa asignando en el archivo [default/public/index.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/public/index.php) el valor true a la constante PRODUCTION, así: `const PRODUCTION = true;`, en este la cache de KumbiaPHP esta activada y se cachea información necesaria para agilizar la carga de la aplicación tal como la metadata de la base datos (información de tablas y campos), asimismo las vistas que el usuario desee cachear.
+
+### ¡¡¡ ADVERTENCIA !!!
+
+Cuando se efectua el cambio de `PRODUCTION = false;` a `PRODUCTION = true;`, es necesario eliminar el contenido del directorio de cache de la aplicación [default/app/temp/cache/*](https://github.com/KumbiaPHP/KumbiaPHP/tree/master/default/app/temp/cache) para que se renueve la metadata y no haya problemas al guardar o mostrar la información.
+
+no se deben confundir con la conexión a la base de datos que se va usar ,
