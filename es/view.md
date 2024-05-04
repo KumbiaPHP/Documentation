@@ -881,30 +881,41 @@ Form::hidden($field, $attrs = NULL, $value = NULL)
 echo Form::hidden('id', null, 12);   //Crea un campo oculto con el name="id" y el value="12"  
 ```
 
-#### Form::dbSelect()
+#### Form::dbSelect() (Deprecated)
 
 Crea campo Select que toma los valores de objetos de ActiveRecord, para esta
 versión del framework el uso de este helper ha sido simplificado. Ya no es
 necesario instanciar el modelo.
 
-$field nombre del modelo y campo pk (bajo la convención modelo.campo_id)
+| Argumento | Descripción                                                       | 
+|-----------|-------------------------------------------------------------------|
+| $field    | Nombre del modelo y campo pk (bajo la convención modelo.campo_id) |
+| $show     | Campo que se mostrará                                             |
+| $data     | Array de valores, array('modelo','metodo','param')                |
+| $blank    | campo en blanco                                                   |
+| $attrs    | Atributos de campo                                                |
+| $value    | Valor inicial para el campo                                       |
 
- $show campo que se mostrará
+---
+> El método dbSelect() se va a marcar como **deprecated** (desaconsejado), por lo tanto, su uso ya no es recomendado.
+>
+> Razones:
+> * Es un método mágico innecesario.
+> * Es poco explícito.
+> * Es más lento que usar el select() directamente.
+> * Está completamente acoplado al viejo AR de Kumbia, no se puede usar con otros ORMs no sirve con el nuevo ActiveRecord.
+>  
+> En la siguiente sección de [Form::select()](#formselect) se dan más ejemplos de uso para sustituir Form::dbSelect().
 
- $data array de valores, array('modelo','m e todo','param')
-
-$blank campo en blanco
-
-$attrs atributos de campo
-
-$value valor inicial para el campo
+---
 
 ```php
 Form::dbSelect($field, $show = NULL, $data = NULL, $blank = NULL, $attrs =
 NULL, $value = NULL)  
 ```  
+**Ejemplo**
 
-Vista
+En la vista
 
 ```php
 //la forma más facil, carga el modelo(campo) y muestra el primer campo después del pk(id)
@@ -915,49 +926,186 @@ echo Form::dbSelect('usuarios.campo_id', 'campo');
 
 #### Form::select()
 
-Crea un campo Select (un combobox)
+Crea un campo de tipo select (un combobox)
 
-$field nombre de campo
+| Argumento | Descripción                                | 
+|-----------|--------------------------------------------|
+| $field    | Nombre del campo                           |
+| $data     | Array de valores para la lista desplegable |
+| $attrs    | Atributos de campo                         |
+| $value    | Valor inicial para el campo                |
 
-$data array de valores para la lista desplegable
+```Form::select($field, $data, $attrs = NULL, $value = NULL)```
 
-$attrs atributos de campo
+**Ejemplos**
 
-$value valor inicial para el campo
-
-Form::select($field, $data, $attrs = NULL, $value = NULL)  
+En KumbiaPHP, puedes definir constantes dentro de tus modelos para representar datos que no cambiarán durante la
+ejecución de la aplicación. Las constantes son especialmente útiles para definir opciones fijas como listados de
+categorías, roles de usuarios, o en este caso, nombres de fincas. Esto se realiza utilizando la palabra clave const
+dentro de una clase modelo.
 
 ```php
-$ar2 = array('Abdomen', 'Brazos', 'Cabeza', 'Cuello', 'Genitales', 'Piernas', 'Torax', 'Otros');
+<?php
+
+class Reservas extends ...
+{
+  const FINCA = [
+    1 => 'Sur',
+    2 => 'Norte'
+  ];
+...
+```
+
+Aquí, Reservas es un modelo que puede extender o no de una clase de tu ORM favorito. La constante FINCA se define como
+un array asociativo, facilitando el mantenimiento y acceso a estos valores estáticos a través de la aplicación.
+
+**En la vista del formulario**
+```php
+// Usa la constante FINCA de la clase Reservas
+<?= Form::select('reservas.finca_id', Reservas::FINCA) ?>
+```
+
+En este fragmento:
+
+**'reservas.finca_id'** especifica el nombre del campo en el formulario. Esto se utilizará en el servidor para
+identificar el valor seleccionado por el usuario.
+
+**Reservas::FINCA** pasa el array definido en el modelo Reservas como las opciones del `<select>`. KumbiaPHP
+automáticamente genera las opciones del select usando las claves del array como valores del atributo value y los
+valores del array como el texto visible.
+
+**Resultado:**
+```html
+<select id="reservas_finca_id" name="reservas[finca_id]">
+    <option value="1">Sur</option>
+    <option value="2">Norte</option>
+</select>
+```
+
+Para mostrar la información de la finca en la vista:
+```php
+<?= "Finca ". Reservas::FINCA[$reserva->finca_id] ?>
+````
+
+En KumbiaPHP, el helper `Form::select()` es utilizado para crear un campo de selección `<select>` en HTML de forma fácil y eficiente. Aquí te muestro cómo usar este helper junto con la función de PHP `range()` para generar una lista de opciones numéricas.
+
+**Ejemplo de Uso de `Form::select()` con resultados de funciones o métodos**
+
+El código PHP:
+```php
+<?= Form::select('reservas.pax', range(0, 8)) ?>
+```
+
+**Explicación:**
+- **`Form::select('reservas.pax', range(0, 8))`**: Este código genera un campo `<select>` con el nombre `reservas.pax`.
+- La función `range(0, 8)` en PHP crea un array que incluye los números del 0 al 8. Estos números son utilizados por
+`Form::select()` para crear las opciones del campo select.
+
+El HTML generado por este código será el siguiente:
+```html
+<select id="reservas_pax" name="reservas[pax]">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+</select>
+```
+
+Este enfoque es particularmente útil para campos de formulario donde se necesitan valores numéricos consecutivos, como
+la selección de cantidad de pasajeros, puntuaciones, o cualquier otro rango numérico limitado, facilitando la
+implementación sin necesidad de codificar manualmente cada opción.
+
+**Uso de Arrays de Objetos con `Form::select()`**
+
+En el desarrollo de aplicaciones web utilizando ORMs (Object-Relational Mapping), una práctica común es recuperar datos
+de la base de datos en forma de arrays de objetos. Esto facilita la manipulación de los datos en el contexto de la
+programación orientada a objetos. KumbiaPHP, como muchos otros frameworks modernos, permite utilizar estos datos
+directamente para construir elementos de formulario de manera eficiente.
+
+A continuación, se muestra cómo utilizar este helper con diferentes formas de obtener un array de objetos desde un
+modelo llamado `Fincas`.
+
+#### Ejemplo 1: Instancia de Objeto
+```php
+<?= Form::select('reservas.finca_id', (new Fincas)->mySelect()) ?>
+```
+- **`(new Fincas)->mySelect()`**: Aquí, se crea una instancia del modelo `Fincas` y se llama al método `mySelect()` de esa instancia. Este método debe estar definido en el modelo `Fincas` y estar configurado para retornar un array de objetos, donde cada objeto representa una posible opción para el `<select>`.
+
+#### Ejemplo 2: Método Estático
+```php
+<?= Form::select('reservas.finca_id', Fincas::mySelect()) ?>
+```
+- **`Fincas::mySelect()`**: En esta variante, `mySelect()` es un método estático de la clase `Fincas`. Esto significa que no es necesario crear una instancia del modelo para llamar a este método. Similar al ejemplo anterior, este método debe retornar un array de objetos.
+
+#### Ejemplo 3: Método Estático con Parámetros
+```php
+<?= Form::select('reservas.finca_id', Fincas::mySelect(param1, param2, ...)) ?>
+```
+- **`Fincas::mySelect(param1, param2, ...)`**: Aquí, el método `mySelect()` también es estático pero se llama con uno o más parámetros. Estos parámetros pueden influir en cómo se genera la consulta a la base de datos, permitiendo personalizar el array de objetos retornado. Por ejemplo, podrían determinar qué fincas son retornadas basadas en ciertos criterios como ubicación, tamaño o disponibilidad.
+
+#### HTML Resultado
+
+El HTML generado por cualquiera de estos ejemplos de código se verá como sigue, suponiendo que el método `mySelect()` retorne un array donde cada objeto tiene propiedades `id` y `nombre`:
+
+```html
+<select id="reservas_finca_id" name="reservas[finca_id]">
+    <option value="1">Finca La Estancia</option>
+    <option value="2">Finca El Retiro</option>
+    <!-- más opciones basadas en lo que retorna mySelect() -->
+</select>
+```
+
+**Otros ejemplos**
+
+```php
+$ar2 = ['Abdomen', 'Brazos', 'Cabeza', 'Cuello', 'Genitales', 'Piernas', 'Tórax', 'Otros'];
 //Crea un campo Select (un combobox) con el nombre 'region' y teniendo preseleccionado 'Cuello'  
-echo Form::Select('region', $ar2, null, 'Cuello');   
+echo Form::select('region', $ar2, null, '3');   
  ```  
 
 Resultado:
 
-```php
+```html
 <select id="region" name="region">
-  <option value="0">Abdomen</option>
-  <option value="1">Brazos</option>
-</select>  
+    <option value="0">Abdomen</option>
+    <option value="1">Brazos</option>
+    <option value="2">Cabeza</option>
+    <option value="3" selected>Cuello</option>
+    <option value="4">Genitales</option>
+    <option value="5">Piernas</option>
+    <option value="6">Tórax</option>
+    <option value="7">Otros</option>
+</select>
+
 ```
 
 Otra Posibilidad:
 ```php
-$ar2 = array('Abdomen' => 'Abdomen', 'Brazos' => 'Brazos', 'Cabeza' =>
+$ar2 = ['Abdomen' => 'Abdomen', 'Brazos' => 'Brazos', 'Cabeza' =>
 'Cabeza', 'Cuello' => 'Cuello', 'Genitales' => 'Genitales', 'Piernas' =>
-'Piernas', 'Torax' => 'Torax', 'Otros' => 'Otros');
+'Piernas', 'Torax' => 'Tórax', 'Otros' => 'Otros'];
 
-echo Form::Select('region', $ar2, null, 'Cuello');  
+echo Form::select('region', $ar2, null, 'Cuello');  
 ```
 
 Resultado:
 
-```php
+```html
 <select id="region" name="region">
   <option value="Abdomen">Abdomen</option>
   <option value="Brazos">Brazos</option>
-</select>  
+  <option value="Cabeza">Cabeza</option>
+  <option value="Cuello" selected>Cuello</option>
+  <option value="Genitales">Genitales</option>
+  <option value="Piernas">Piernas</option>
+  <option value="Torax">Tórax</option>
+  <option value="Otros">Otros</option>
+</select>
 ```
 
 #### Form::file()
