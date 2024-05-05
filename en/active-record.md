@@ -24,29 +24,36 @@ $client->save(); //it creates a new record
 * without details unnecessary, the code is more practical and useful
 * "ActiveRecord" protec in a huge percent of SQL injections attacks that your apps can suffer, limited the letters that make it's.
 
-### Configurando conexión a la base de datos
+### Configuring Database Connection
 
-Para establecer la configuración de conexión a la base de datos, se usa el archivo [default/app/config/databases.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/databases.php). Aun sigue funcionando la configuración en el archivo [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini) pero está desaconsejado ya que al estar ahora en un archivo PHP funciona mucho más rápido y se puede aprovechar la cache.
+To configure the database connection, use the file [default/app/config/databases.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/databases.php).
+The configuration in [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini)
+still works, but it's discouraged because using a PHP file is much faster and can leverage caching.
 
-**Nota:** KumabiaPHP buscará primero el archivo databases.php para cargar la información si este archivo no existe intentará obtenerla del archivo databases.ini. Lo mismo sucede con los demás archivos de configuración como el config.php y el routes.php.
+**Note:** KumbiaPHP will first look for the `databases.php` file to load information. If this file doesn't exist, it
+will attempt to obtain it from `databases.ini`. The same applies to other configuration files like `config.php` and
+`routes.php`.
 
-Este archivo almacena la configuración en un array y lo retorna para ser usado por el ActiveRecord, se pueden crear tantas conexiones como se necesite, puedes tener la de desarrollo, producción, pruebas, etc. Esta se define con la primera llave del arreglo. Por ejemplo:
+This file stores the configuration in an array and returns it for use by ActiveRecord. You can create as many
+connections as needed, such as development, production, testing, etc. This is defined with the array's first key. For
+example:
 
 ```php
 <?php
 return [
-//Parámetros de conexión para desarrollo
+// Connection parameters for development
 'development' => [
-                // array de configuración
+                // configuration array
                 ],
-//Parámetros de conexión para producción
+// Connection parameters for production
 'production' => [
-                // array de configuración
+                // configuration array
                 ],
 ];
 ```
 
-Veamos un ejemplo de conexión a desarrollo, donde el servidor de base de datos se enuentra en la misma máquina que el servidor web, por defecto se conecta con el usuario root y con la contraseña root **Nunca usen el usuario root en producción**:
+Here's an example of a development connection where the database server is on the same machine as the web server. By
+default, it connects with the root user and the password "root". **Never use the root user in production**:
 
 ```php
 <?php
@@ -64,48 +71,50 @@ return [
 ];
 ```
 
-Explicación de cada parámetro:
+Explanation of each parameter:
 
-* **Host:** Ip o nombre del host de la base de datos
-* **Username:** Nombre de usuario con permisos en la base de datos, no es recomendable usar el usuario root
-* **Password:** Clave del usuario de la base de datos
-* **Name:** Nombre de la base de datos
-* **Type:** Tipo de motor de base de datos (mysql, pgsql, oracle o sqlite)
-* **Charset:** Conjunto de caracteres de conexión, por ejemplo 'utf8'
-* **Dsn:** Cadena de conexión a la base de datos (Opcional)
-* **Pdo:** Para activar conexiones PDO (On/Off)
+* **Host:** IP or host name of the database
+* **Username:** Username with database permissions (using the root user is not recommended)
+* **Password:** Password for the database user
+* **Name:** Name of the database
+* **Type:** Type of database engine (mysql, pgsql, oracle, or sqlite)
+* **Charset:** Character set for the connection, e.g., 'utf8'
+* **Dsn:** Database connection string (Optional)
+* **Pdo:** To enable PDO connections (On/Off)
 
-Hay que recordar que al final siempre debe ir el return del array $databases.
+Remember that the array `$databases` must always return at the end.
 
-### Crear un Modelo ActiveRecord en KumbiaPHP Framework
+### Creating an ActiveRecord Model in KumbiaPHP Framework
 
-Lo primero es crear un archivo en el directorio models con el mismo nombre de la tabla en la base de datos. Por ejemplo: models/cliente.php Luego creamos una clase con el nombre de la tabla extendiendo alguna de las clases para modelos.
+The first step is to create a file in the models directory with the same name as the table in the database. For
+instance, `models/client.php`. Then, create a class with the table name that extends one of the model classes.
 
-Ejemplo:
+Example:
 
 ```php
 <?php
-class Cliente extends ActiveRecord {
+class Client extends ActiveRecord {
 }
 ```
 
-Si lo que se desea es crear un modelo de una clase que tiene nombre compuesto por ejemplo la clase Tipo de Cliente, por convención en nuestra base de datos esta tabla debe llamarse: tipo_de_cliente y el archivo: models/tipo_de_cliente.php y el código de este modelo es el siguiente:
+If you want to create a model for a table with a compound name, like the `ClientType` class, by convention in our
+database this table should be named `client_type`, and the file should be `models/client_type.php`. The model code would
+be:
 
 ```php
 <?php
-class TipoDeCliente extends ActiveRecord {
+class ClientType extends ActiveRecord {
 }
- ```
+```
 
-### Cambiar la conexión por defecto
+### Changing the Default Connection
 
-Por defecto KumbiaPHP usa la conexión configurada en **development** esto se puede cambiar en el
-archivo [default/app/config/config.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/config.php)
-modificando el parámetro **database** y tendría efecto en toda la aplicación.
+By default, KumbiaPHP uses the connection configured under **development**. This can be changed in the file
+[default/app/config/config.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/config.php) by
+modifying the **database** parameter, which will affect the entire application.
 
-Este cambio también se puede realizar en cada **modelo** que herede de ActiveRecord,
-y se realiza modificando el valor del atributo protegido **$database**, veamos un
-ejemplo con la siguiente conexión:
+This change can also be made in each **model** inheriting from ActiveRecord by modifying the value of the protected
+attribute **$database**. Here's an example using the following connection:
 
 ```php
 <?php
@@ -123,49 +132,54 @@ return [
 ];
 ```
 
-Y ahora necesitamos que solo los clientes sean consultados y almacenados en el nuevo servidor, entonces el código sería el siguiente:
+Now, if only the clients need to be fetched and stored on the new server, the code would look like this:
 
 ```php
 <?php
-class Cliente extends ActiveRecord {
+class Client extends ActiveRecord {
     protected $database = 'new';
 }
 ```
 
-Donde **new** es el nombre de la configuración al super servidor.
+Where **new** is the name of the configuration for the super server.
 
-### Cambiar la tabla que está siendo mapeada
+### Changing the Mapped Table
 
-Como sabran por convención el ActiveRecord mapea con el nombre de la clase una tabla de la base de datos para armar el objeto, por lo tanto si tenemos la clase **Cliente**, el ActiveRecord espera encontrar una tabla llamada **cliente**, como en el ejemplo anterior. Pero ¿qué se puede hacer si la tabla por motivo de fuerza mayor tiene otro nombre? Supongamos que se llama **customers** y no quieres cambiar el nombre de tu clase. Lo que se debe hacer es modificar el atributo protegido **$source**, como en el siguiente ejemplo:
+As you may know, by convention, ActiveRecord maps a database table to the class name to build the object. Thus, if we
+have the **Client** class, ActiveRecord expects to find a table named **client**, as in the previous example. But what
+if the table has a different name for some reason? Let's suppose it's called **customers**, and you don't want to change
+your class name. You should modify the protected attribute **$source**, as shown in the following example:
 
 ```php
 <?php
-class Cliente extends ActiveRecord {
+class Client extends ActiveRecord {
     protected $source = 'customers';
 }
 ```
 
-Con lo anterior el ActiveRecord mapearía la tabla **customers** en lugar de la tabla **cliente**.
+With this change, ActiveRecord would map the **customers** table instead of the **client** table.
 
-### Columnas y Atributos
+### Columns and Attributes
 
-Los objetos ActiveRecord corresponden a registros en una tabla de una base de datos. Los objetos poseen atributos que corresponden a los campos en estas tablas. La clase ActiveRecord automáticamente obtiene la definición de los campos de las tablas y los convierte en atributos de la clase asociada. A esto es lo que nos referíamos con mapeo objeto relacional.
+ActiveRecord objects correspond to records in a database table. These objects have attributes that correspond to fields
+in the table. The ActiveRecord class automatically retrieves the field definitions from the table and converts them into
+attributes of the associated class. This process is known as object-relational mapping.
 
-Miremos la tabla Álbum:
+Let's look at the Album table:
 
 ```sql
 CREATE TABLE album (
     id INTEGER NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    fecha DATE NOT NULL,
-    valor DECIMAL(12,2) NOT NULL,
-    artista_id INTEGER NOT NULL,
-    estado CHAR(1),
+    name VARCHAR(100) NOT NULL,
+    date DATE NOT NULL,
+    value DECIMAL(12,2) NOT NULL,
+    artist_id INTEGER NOT NULL,
+    status CHAR(1),
     PRIMARY KEY(id)
 )
 ```
 
-Podemos crear un modelo ActiveRecord que mapee esta tabla:
+We can create an ActiveRecord model that maps to this table:
 
 ```php
 <?php
@@ -173,56 +187,69 @@ class Album extends ActiveRecord {
 }
 ```
 
-Una instancia de esta clase sera un objeto con los atributos de la tabla album:
+An instance of this class will be an object with the attributes of the album table:
 
-Ejemplo:
+Example:
 
 ```php
 <?php
- //KumbiaPHP 1.0
+// KumbiaPHP 1.0
 $album = new Album();
 $album->id = 2;
-$album->nombre = 'Going Under';
-$album->fecha = '2017-01-01';
-$album->valor = 25;
-$album->artista_id = 123;
-$album->estado = 'A';
+$album->name = 'Going Under';
+$album->date = '2017-01-01';
+$album->value = 25;
+$album->artist_id = 123;
+$album->status = 'A';
 $album->save();
 ```
 
-### Llaves Primarias y el uso de IDs
+### Primary Keys and the Use of IDs
 
-En los ejemplos mostrados de KumbiaPHP siempre se trabaja una columna llamada id como llave primaria de nuestras tablas. Tal vez, esto no siempre es practico a su parecer, de pronto al crear la tabla clientes la columna de numero de identificación seria una excelente elección, pero en caso de cambiar este valor por otro tendría problemas con el dato que este replicado en otras relaciones (ejemplo facturas), además de esto tendría que validar otras cosas relacionadas con su naturaleza. KumbiaPHP propone el uso de ids como llaves primarias con esto se automatiza muchas tareas de consulta y proporciona una forma de referirse unívocamente a un registro en especial sin depender de la naturaleza de un atributo especifico. Usuarios de Rails se sentirán familiarizados con esta característica.
+In the KumbiaPHP examples, a column named `id` is always used as the primary key for our tables. You might think this
+isn't always practical. For example, when creating the `clients` table, the identification number column would be a
+good choice. However, if this value changes, there would be issues with data replicated across other relationships
+(e.g., invoices). Moreover, you'd need to validate other related items due to the nature of this column. KumbiaPHP
+advocates using IDs as primary keys, which automates many query tasks and provides a way to uniquely reference a
+specific record without relying on the nature of a specific attribute. Rails users will be familiar with this feature.
 
-Esta particularidad también permite a KumbiaPHP entender el modelo entidad relación leyendo los nombres de los atributos de las tablas. Por ejemplo en la tabla album del ejemplo anterior la convención nos dice que id es la llave primaria de esta tabla pero además nos dice que hay una llave foránea a la tabla artista en su campo id.
+This approach also allows KumbiaPHP to understand the entity-relationship model by reading the attribute names of the
+tables. For instance, in the `album` table from the previous example, the convention tells us that `id` is the primary
+key of this table. It also tells us that there's a foreign key to the `artist` table in its `id` field.
 
-### Convenciones en ActiveRecord
+### ActiveRecord Conventions
 
-ActiveRecord posee una serie de convenciones que le sirven para asumir distintas cualidades y relacionar un modelo de datos. Las convenciones son las siguientes:
+ActiveRecord has a set of conventions that help it infer various properties and relate to a data model. The conventions
+are as follows:
 
 **id**
 
-Si ActiveRecord encuentra un campo llamado id, ActiveRecord asumira que se trata de la llave primaria de la entidad y que es auto-numérica.
+If ActiveRecord finds a field named `id`, it will assume it is the primary key of the entity and that it is
+auto-incrementing.
 
-**tabla_id**
+**table_id**
 
-Los campos terminados en *_id* indican relaciones foráneas a otras tablas, de esta forma se puede definir fácilmente las relaciones entre las entidades del modelo:
+Fields ending in `*_id*` indicate foreign relationships to other tables, thus defining the relationships between the
+model's entities:
 
-Un campo llamado *clientes_id* en una tabla indica que existe otra tabla llamada clientes y esta contiene un campo id que es foránea a este.
+A field named `clients_id` in a table indicates that another table named `clients` exists and contains a field `id`
+that acts as a foreign key to this field.
 
-**campo_at**
+**field_at**
 
-Los campos terminados en *_at* indican que son fechas y posee la funcionalidad extra que obtienen el valor de fecha actual en una inserción.
+Fields ending in `*_at*` indicate dates and have the extra functionality of automatically receiving the current date
+value when inserted.
 
-*created_at* es un campo fecha
+*created_at* is a date field.
 
-**campo_in**
+**field_in**
 
-Los campos terminados en *_in* indican que son fechas y posee la funcionalidad extra que obtienen el valor de fecha actual en una actualización.
+Fields ending in `*_in*` indicate dates and have the extra functionality of automatically receiving the current date
+value when updated.
 
-*modified_in* es un campo fecha
+*modified_in* is a date field.
 
-**Nota:** Los campos *_at* y *_in* deben ser de tipo fecha (DATE o DATETIME) en el motor de base de datos que se este utilizando.
+**Note:** Fields `*_at*` and `*_in*` should be of type date (DATE or DATETIME) in the database engine being used.
 
 ## ActiveRecord API
 
