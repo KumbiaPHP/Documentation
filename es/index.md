@@ -28,6 +28,7 @@
   - [KumbiaPHP y sus URLs](first-app.md#kumbiaphp-y-sus-urls)
   - [Agregando más contenido](first-app.md#agregando-mas-contenido)
   - [Repitiendo la Historia](first-app.md#repitiendo-la-historia)
+- [Archivo de configuración](configuration.md)
 - [CRUD](crud.md)
     - [Introducción](crud.md#introducción)
     - [Configurando database.ini](crud.md#configurando-database.ini)
@@ -35,6 +36,7 @@
     - [Controller](crud.md#controller)
     - [Vistas](crud.md#vistas)
     - [Probando el CRUD](crud.md#probando-el-crud)
+- [Archivo de configuración](configuration.md)
 
 ## Componentes MCV
 - [El Controlador](controller.md#el-controlador)

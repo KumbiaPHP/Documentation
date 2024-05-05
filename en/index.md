@@ -30,6 +30,7 @@
   - [KumbiaPHP and URLs](first-app.md#kumbiaphp-y-sus-urls)
   - [Add more content](first-app.md#agregando-mas-contenido)
   - [Repeating history](first-app.md#repitiendo-la-historia)
+- [Archivo de configuración](configuration.md)
 - [CRUD](crud.md) - [Intro](crud.md#introducción) - [database.ini configuration](crud.md#configurando-database.ini) - [Model](crud.md#modelo) - [Controller](crud.md#controller) - [Views](crud.md#vistas) - [CRUD test](crud.md#probando-el-crud)
 
 ## MCV components
