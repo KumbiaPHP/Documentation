@@ -28,7 +28,14 @@ Identifies it as a controlling class, and it inherits (extends) the
 Superclass AppController, which acquires the properties of a class
 Controller, there is also the hello() method.
 
-# The view to see the output that sends the controller, it is necessary create the view associated with the action. First, create a directory with the same name of our driver (in this case must be called greeting), and inside it are all views associated with the actions that need to display some information. In our example we call an action called Hello; Therefore, we create a file called * app/views/saludo/hola.phtml*. Once this file is created, add you a little content: "'html < h1 > Hello KumbiaPHP! < / h1 >
+# The view
+To see the output that sends the controller, it is necessary create the view associated with the action. First, create
+a directory with the same name of our driver (in this case must be called greeting), and inside it are all views
+associated with the actions that need to display some information. In our example we call an action called Hello;
+Therefore, we create a file called * app/views/saludo/hola.phtml*. Once this file is created, add you a little content:
+
+```html
+<h1>Hello KumbiaPHP!</h1>
 ```
 
 Then try to access the following URL: http://localhost/kumbiaphp/saludo/hola/ and the result must be as shown Figure 2.2.
