@@ -781,82 +781,167 @@ Form::hidden($field, $attrs = NULL, $value = NULL)
 echo Form:hidden('id',_null,_12);  //Creates a hidden field with the name="id" and value="12"  
 ```
 
-#### Form::dbSelect()
+#### Form::dbSelect() (Deprecated)
 
-Create Select field that takes the values of ActiveRecord objects, for this version of the framework use this helper has been simplified. Necessary to instantiate is no longer the model.
+Creates a Select field that retrieves values from ActiveRecord objects. In this version of the framework, the use of this helper has been simplified. It is no longer necessary to instantiate the model.
 
-$field name of the model and field pk (under the model.filed_id Convention)
+| Argument | Description                                                                   | 
+|----------|-------------------------------------------------------------------------------|
+| $field   | Name of the model and primary key field (under the convention model.field_id) |
+| $show    | Field to be displayed                                                         |
+| $data    | Array of values, array('model', 'method', 'param')                            |
+| $blank   | Empty field                                                                   |
+| $attrs   | Field attributes                                                              |
+| $value   | Initial value for the field                                                   |
 
-$show field that will be displayed
+---
+> The `dbSelect()` method will be marked as **deprecated**; therefore, its use is no longer recommended.
+>
+> Reasons:
+> * It's an unnecessary magic method.
+> * It's not very explicit.
+> * It's slower than directly using `select()`.
+> * It's completely coupled with the old Kumbia AR and cannot be used with other ORMs; it doesn't work with the new ActiveRecord.
+>
+> More usage examples to replace `Form::dbSelect()` can be found in the next section on [Form::select()](#formselect).
 
-$data array of values, array('model','method','param')
-
-$blank field blank
-
-$attrs field attributes
-
-$value value initial for the input
+---
 
 ```php
 Form::dbSelect($field, $show = NULL, $data = NULL, $blank = NULL, $attrs =
 NULL, $value = NULL)  
-```
+```  
+**Example**
 
-View
+In the view:
 
 ```php
-//The easiest way, load the model (field) and displays the first field after the pk (id)
-echo Form:dbSelect('users.role_id');
-//Displays the field name of role
-echo Form:dbSelect('users.role_id', 'name');  
+// the simplest way, loads the model(field) and displays the first field after the pk(id)
+echo Form::dbSelect('users.field_id');
+// displays the field and sorts it in ascending order    
+echo Form::dbSelect('users.field_id', 'field');  
 ```
 
 #### Form::select()
 
-Creates a field select (a drop-down list)
+Creates a select field (a combobox)
 
-$field field name
+| Argument | Description                                | 
+|----------|--------------------------------------------|
+| $field   | Field name                                 |
+| $data    | Array of values for the dropdown list      |
+| $attrs   | Field attributes                           |
+| $value   | Initial value for the field                |
 
-$data array of values for the drop-down list
+```Form::select($field, $data, $attrs = NULL, $value = NULL)```
 
-$attrs field attributes
+**Examples**
 
-$value value initial for the input
-
-Form::select($field, $data, $attrs = NULL, $value = NULL)
-
-```php
-$ar2 = array('Abdomen', 'Arms', 'Head', 'Neck', 'Genitals', 'Legs', 'Chest', 'Others');
-//Create a Select field (a combobox) with the name 'region' and having preselected 'Neck'  
-echo Form::Select('region', $ar2, null, 'Neck');   
- ```  
-
-Result:
+In KumbiaPHP, you can define constants within your models to represent data that won't change during the application's execution. Constants are especially useful for defining fixed options such as category listings, user roles, or, in this case, farm names. This is done using the `const` keyword within a model class.
 
 ```php
-<select id="region" name="region">
-  <option value="0">Abdomen</option>
-  <option value="1">Arms</option>
-</select>  
+<?php
+
+class Reservations extends ...
+{
+  const FARM = [
+    1 => 'South',
+    2 => 'North'
+  ];
+...
 ```
 
-Another Possibility:
+Here, `Reservations` is a model that can optionally extend from a class of your favorite ORM. The `FARM` constant is defined as an associative array, making it easier to maintain and access these static values across the application.
 
+**In the form view**
 ```php
-$ar2 = array('Abdomen' => 'Abdomen', 'Arms' => 'Arms', 'Head' =>
-'Head', 'Neck' => 'Neck', 'Genitals' => 'Genitals', 'Legs' =>
-'Legs', 'Chest' => 'Chest', 'Others' => 'Others');
-
-echo Form::Select('region', $ar2, null, 'Neck');  
+// Uses the FARM constant from the Reservations class
+<?= Form::select('reservations.farm_id', Reservations::FARM) ?>
 ```
 
-Results:
+In this snippet:
 
+**'reservations.farm_id'** specifies the field name in the form. This will be used on the server to identify the value selected by the user.
+
+**Reservations::FARM** passes the array defined in the Reservations model as the options for the `<select>`. KumbiaPHP automatically generates the select options using the array keys as the `value` attribute values and the array values as the visible text.
+
+**Result:**
+```html
+<select id="reservations_farm_id" name="reservations[farm_id]">
+    <option value="1">South</option>
+    <option value="2">North</option>
+</select>
+```
+
+To display the farm information in the view:
 ```php
-<select id="region" name="region">
-  <option value="Abdomen">Abdomen</option>
-  <option value="Arms">Arms</option>
-</select>  
+<?= "Farm ". Reservations::FARM[$reservation->farm_id] ?>
+```
+
+In KumbiaPHP, the `Form::select()` helper is used to create an HTML `<select>` field easily and efficiently. Here's how to use this helper along with the PHP `range()` function to generate a numeric list of options.
+
+**Example Using `Form::select()` with Function or Method Results**
+
+The PHP code:
+```php
+<?= Form::select('reservations.pax', range(0, 8)) ?>
+```
+
+**Explanation:**
+- **`Form::select('reservations.pax', range(0, 8))`**: This code generates a `<select>` field with the name `reservations.pax`.
+- The `range(0, 8)` function in PHP creates an array that includes numbers from 0 to 8. These numbers are used by `Form::select()` to create the select field options.
+
+The HTML generated by this code will be as follows:
+```html
+<select id="reservations_pax" name="reservations[pax]">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+</select>
+```
+
+This approach is particularly useful for form fields where consecutive numeric values are needed, such as selecting the number of passengers, ratings, or any other limited numeric range. It simplifies implementation without needing to hard-code each option manually.
+
+**Using Arrays of Objects with `Form::select()`**
+
+In web application development using ORMs (Object-Relational Mapping), a common practice is to retrieve data from the database as arrays of objects. This makes it easier to handle data in the context of object-oriented programming. KumbiaPHP, like many other modern frameworks, allows you to use this data directly to efficiently build form elements.
+
+Below is how to use this helper with different ways of obtaining an array of objects from a model named `Farms`.
+
+#### Example 1: Object Instance
+```php
+<?= Form::select('reservations.farm_id', (new Farms)->mySelect()) ?>
+```
+- **`(new Farms)->mySelect()`**: Here, an instance of the `Farms` model is created, and the `mySelect()` method is called on that instance. This method should be defined in the `Farms` model and configured to return an array of objects, each representing a possible option for the `<select>`.
+
+#### Example 2: Static Method
+```php
+<?= Form::select('reservations.farm_id', Farms::mySelect()) ?>
+```
+- **`Farms::mySelect()`**: In this variant, `mySelect()` is a static method of the `Farms` class. This means it's not necessary to create an instance of the model to call this method. Similar to the previous example, this method should return an array of objects.
+
+#### Example 3: Static Method with Parameters
+```php
+<?= Form::select('reservations.farm_id', Farms::mySelect(param1, param2, ...)) ?>
+```
+- **`Farms::mySelect(param1, param2, ...)`**: Here, the `mySelect()` method is also static but is called with one or more parameters. These parameters can influence how the database query is generated, allowing customization of the returned object array. For instance, they could determine which farms are returned based on criteria such as location, size, or availability.
+
+#### HTML Output
+
+The HTML generated by any of these code examples will look like this, assuming that the `mySelect()` method returns an array where each object has `id` and `name` properties:
+
+```html
+<select id="reservations_farm_id" name="reservations[farm_id]">
+    <option value="1">Farm La Estancia</option>
+    <option value="2">Farm El Retiro</option>
+    <!-- more options based on what mySelect() returns -->
+</select>
 ```
 
 #### Form::file()
