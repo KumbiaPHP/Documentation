@@ -2,29 +2,29 @@
 
 ## Intro
 
-- [Preface](preface.md#prefacio)
-- [Model, view, controller (MVC)](mvc.md#modelo,-vista,-controlador-mvc)
+- [Preface](preface.md)
+- [Model, view, controller (MVC)](mvc.md)
 
 ## How to start
 
-- [Install KumbiaPHP](to-install.md#instalar-kumbiaphp)
-- [My first app with KumbiaPHP](first-app.md#mi-primera-aplicación-con-kumbiaphp)
+- [Install KumbiaPHP](to-install.md)
+- [My first app with KumbiaPHP](first-app.md)
 
 ## MVC components
 
-- [Controller](controller.md#el-controlador)
-- [Models](model.md#5-modelos)
-- [View](view.md#la-vista)
+- [Controller](controller.md)
+- [Models](model.md)
+- [View](view.md)
 - [CRUD](crud.md)
 
 ## Other Components
 
 - [ActiveRecord](active-record.md)
-- [Parent classes](parent-class.md#clases-padre)
-- [Console](console.md#la-consola)
+- [Parent classes](parent-class.md)
+- [Console](console.md)
 
 ## Appendices
 
-- [Appendices](appendix.md#apendices)
+- [Appendices](appendix.md)
 
 [Full topic list](index.md)
