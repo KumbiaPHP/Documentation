@@ -1,83 +1,93 @@
-# Controlador Frontal
+# Front Controller
 
-Todas las peticiones web son manejadas por un solo Controlador Frontal (front controller), que es el punto de entrada único de toda la aplicación.
+All web requests are handled by a single Front Controller, which is the unique entry point for the entire application.
 
-Cuando el front controller recibe la petición, utiliza el sistema de enrutamiento de KumbiaPHP para asociar el nombre de un controlador y el de la acción mediante la URL escrita por el cliente (usuario u otra aplicación).
+When the front controller receives a request, it uses KumbiaPHP's routing system to associate the name of a controller
+and action with the URL written by the client (user or another application).
 
-Veamos la siguiente URL, esta llama al script index.php  (que es el front controller) y sera entendido como llamada a una acción.
+Consider the following URL, which calls the `index.php` script (the front controller) and will be understood as a call
+to an action.
 
-http://localhost/kumbiaphp/micontroller/miaccion/
+http://localhost/kumbiaphp/mycontroller/myaction/
 
-Debido a la reescritura de URL nunca se hace un llamado de forma explicita al index.php, solo se coloca el controlador, acción y parámetros. Internamente por las reglas reescritura de URL es llamado el front controller. Ver sección [¿Por qué es importante el Mod-Rewrite?](to-install.md#por-qu%C3%A9-es-importante-el-mod-rewrite)
+Because of URL rewriting, the `index.php` file is never explicitly called. Instead, only the controller, action, and
+parameters are provided. Internally, the front controller is called according to the URL rewriting rules. See
+[Why is important Mod-Rewrite?](to-install.md#why-is-important-mod-rewrite).
 
-## Destripando el Front Controller
+## Dissecting the Front Controller
 
-El front controller de KumbiaPHP se encarga de despachar las peticiones, lo que implica algo mas que detectar la acción que se ejecuta. De hecho, ejecuta el código común a todas las acciones, incluyendo:
+The KumbiaPHP front controller is responsible for dispatching requests, which involves more than just identifying which
+action to execute. In fact, it runs the common code for all actions, including:
 
-  1. Define las constantes del núcleo de la aplicación(APP_PATH, CORE_PATH y PUBLIC_PATH).
-  2. Carga e inicializa las clases del núcleo del framework (bootstrap).
-  3. Carga la configuración (Config).
-  4. Decodifica la URL de la petición para determinar la acción a ejecutar y los parámetros de la petición (Router).
-  5. Si la acción no existe, redirecciona a la acción del error 404 ( Router ).
-  6. Activa los filtros (por ejemplo, si la petición necesita autenticación) ( Router ).
-  7. Ejecuta los filtros, primera pasada (before). ( Router )
-  8. Ejecuta la acción ( Router ).
-  9. Ejecuta los filtros, segunda pasada (after) ( Router ).
-  10. Ejecuta la vista y muestra la respuesta (View).
+1. Defines core application constants (`APP_PATH`, `CORE_PATH`, and `PUBLIC_PATH`).
+2. Loads and initializes the core framework classes (bootstrap).
+3. Loads configuration (Config).
+4. Decodes the request URL to determine which action to execute and request parameters (Router).
+5. If the action doesn't exist, it redirects to the 404 error action (Router).
+6. Activates filters (e.g., if the request requires authentication) (Router).
+7. Executes the filters, first pass (before) (Router).
+8. Executes the action (Router).
+9. Executes the filters, second pass (after) (Router).
+10. Executes the view and displays the response (View).
 
-A grande rasgos, este es el proceso del front controller, esto es todo lo que necesitas saber sobre este componente el cual es imprescindible de la arquitectura MVC dentro de KumbiaPHP
+In broad strokes, this is the front controller process. This is all you need to know about this indispensable component
+in the MVC architecture within KumbiaPHP.
 
-## Front Controller por defecto
+## Default Front Controller
 
-El front controller por defecto, llamado _index.php_  y ubicado en el directorio _public/_ del proyecto, es un simple script PHP.```
+The default front controller, called `index.php` and located in the project's `public/` directory, is a simple PHP
+script.
 
-La definición de las constantes corresponde al primer paso descrito en la sección anterior. Después el controlador frontal incluye el bootstrap.php  de la aplicación, que se ocupa de los pasos 2 a 5. Internamente el core de KumbiaPHP con sus componente Router y View ejecutan todos los pasos subsiguientes.
+The definition of constants corresponds to the first step described above. The front controller then includes the
+application's `bootstrap.php`, which handles steps 2 to 5. Internally, KumbiaPHP's core, with its Router and View
+components, handles all the subsequent steps.
 
-Todas las constantes son valores por defecto de la instalación de KumbiaPHP en un ambiente local.
+All constants represent default values for the KumbiaPHP installation in a local environment.
 
-## Constantes de KumbiaPHP
+## KumbiaPHP Constants
 
-Cada constante cumple un objetivo específico con el fin de brindar mayor flexibilidad al momento de crear rutas (paths) en el framework.
+Each constant serves a specific purpose to provide greater flexibility when creating paths in the framework.
 
 ### APP_PATH
 
-Constante que contiene la ruta absoluta al directorio donde se encuentra la aplicación (app), por ejemplo:
+A constant that contains the absolute path to the application's `app` directory. For instance:
 
 ```php
-echo APP_PATH; 
-//la salida es: /var/www/kumbiaphp/default/app/ 
-```
+echo APP_PATH;
+// Output: /var/www/kumbiaphp/default/app/
+``` 
 
-Con esta constante es posible utilizarla para incluir archivos que se encuentre bajo el árbol de directorio de la aplicación, por ejemplo si quiere incluir un archivo que esta en el directorio app/libs/test.php  la forma de hacerlo seria.
+This constant allows you to include files within the application's directory tree. For example, if you want to include a
+file located in the `app/libs/test.php` directory, the way to do so would be:
 
 ```php
-include_once APP_PATH.'libs/test.php' ;
+include_once APP_PATH . 'libs/test.php';
 ```
 
 ### CORE_PATH
 
-Constante que contiene la ruta absoluta al directorio donde se encuentra el core de KumbiaPHP. por ejemplo:
+A constant that contains the absolute path to the KumbiaPHP core directory. For instance:
 
 ```php
 echo CORE_PATH;
-//la salida es: /var/www/kumbiaphp/core/
+// Output: /var/www/kumbiaphp/core/
 ```
 
-Para incluir archivos que se encuentre bajo este árbol de directorios, es el mismo procedimiento que se explicó para la constante APP_PATH.
+To include files from this directory tree, follow the same procedure explained for the `APP_PATH` constant.
 
 ### PUBLIC_PATH
 
-Constante que contiene la URL para el navegador (browser) y apunta al directorio *public/* para enlazar imágenes, CSS, JavaScript y todo lo que sea ruta para el navegador.
+A constant that contains the URL path for the browser and points to the `public/` directory to link images, CSS,
+JavaScript, and any other path required by the browser.
 
 ```php
-//Genera un link que ira al 
-//controller: controller y action: action
-<a href=" <?php echo PUBLIC_PATH ?>controller/action/" title="Mi Link">Mi Link</a>
-
-//Enlaza una imagen que esta en public/img/imagen.jpg
-<img src="<?php echo PUBLIC_PATH ?>img/imagen.jpg" alt="Una Imagen" />
-
-//Enlaza el archivo CSS en public/css/style.css
-<link rel="stylesheet" type="text/css" href=" <?php echo PUBLIC_PATH ?>
-css/style.css"/>
+// Generates a link to the 
+// controller: controller and action: action
+<a href="<?php echo PUBLIC_PATH ?>controller/action/" title="My Link">My Link</a>
+  
+// Links an image located in public/img/image.jpg
+<img src="<?php echo PUBLIC_PATH ?>img/image.jpg" alt="An Image" />
+  
+// Links the CSS file in public/css/style.css
+<link rel="stylesheet" type="text/css" href="<?php echo PUBLIC_PATH ?>css/style.css"/>
 ```
