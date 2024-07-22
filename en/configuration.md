@@ -92,7 +92,7 @@ When configuring this file, it is crucial to ensure that parameters such as `deb
 production environments to maintain security. Additionally, choosing the appropriate caching mechanism and date format
 can significantly improve the application's performance and consistency.
 
-## Configuration: `config/exception.php` File
+## Configuration: `config/exception.php` File (v 1.2)
 
 The `config/exception.php` file in KumbiaPHP allows configuring the IP addresses from which exception details will be
 displayed instead of a generic 404 error. This functionality is especially useful during the development phase, where
