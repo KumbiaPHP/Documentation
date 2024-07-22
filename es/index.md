@@ -36,7 +36,9 @@
     - [Controller](crud.md#controller)
     - [Vistas](crud.md#vistas)
     - [Probando el CRUD](crud.md#probando-el-crud)
-- [Archivo de configuración](configuration.md)
+- [Archivos de configuración](configuration.md)
+  - [config/config.php](configuration.md#configuración-archivo-configconfigphp)
+  - [config/exception.php](configuration.md#configuración-archivo-configexceptionphp)
 
 ## Componentes MCV
 - [El Controlador](controller.md#el-controlador)
