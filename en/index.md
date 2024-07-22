@@ -32,7 +32,7 @@
   - [Repeating history](first-app.md#repitiendo-la-historia)
 - [Configuration files](configuration.md)
   - [config/config.php](configuration.md#configuration-configconfigphp-file)
-  - [config/exception.php](configuration.md#configuration-configexceptionphp-file)
+  - [config/exception.php](configuration.md#configuration-configexceptionphp-file-v-12)
 - [CRUD](crud.md) - [Intro](crud.md#introducción) - [database.ini configuration](crud.md#configurando-database.ini) - [Model](crud.md#modelo) - [Controller](crud.md#controller) - [Views](crud.md#vistas) - [CRUD test](crud.md#probando-el-crud)
 
 ## MCV components
