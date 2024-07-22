@@ -96,7 +96,7 @@ Al configurar este archivo, es fundamental asegurarse de que los parámetros com
 deshabilitados en entornos de producción para mantener la seguridad. Además, elegir el mecanismo de caché y formato de
 fechas adecuado puede mejorar significativamente el rendimiento y la consistencia de la aplicación.
 
-## Configuración: Archivo `config/exception.php`
+## Configuración: Archivo `config/exception.php` (v 1.2)
 
 El archivo `config/exception.php` en KumbiaPHP permite configurar las direcciones IP desde las cuales se mostrarán los
 detalles de las excepciones en lugar de un error 404 genérico. Esta funcionalidad es especialmente útil durante la fase
