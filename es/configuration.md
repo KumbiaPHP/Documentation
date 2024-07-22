@@ -123,7 +123,8 @@ return [
 ### Configuración de IPs Confiables
 El array `trustedIp` debe ser configurado con las direcciones IP desde las cuales se permitirá mostrar los detalles
 completos de las excepciones. Esto es útil cuando se quiere permitir que ciertos desarrolladores o equipos de desarrollo
-accedan a esta información desde ubicaciones específicas.
+accedan a esta información desde ubicaciones específicas. Esta característica está disponible desde la versión 1.2.0 en
+adelante.
 
 **Ejemplo:**
 ```php
