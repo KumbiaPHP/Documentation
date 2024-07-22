@@ -96,7 +96,8 @@ can significantly improve the application's performance and consistency.
 
 The `config/exception.php` file in KumbiaPHP allows configuring the IP addresses from which exception details will be
 displayed instead of a generic 404 error. This functionality is especially useful during the development phase, where
-developers need to see error traces and specific details to debug effectively.
+developers need to see error traces and specific details to debug effectively. This feature is available from version
+1.2.0 onwards.
 
 ### File Location
 
