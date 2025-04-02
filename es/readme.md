@@ -9,6 +9,7 @@
 
 - [Instalar KumbiaPHP](to-install.md)
 - [Mi Primera Aplicación con KumbiaPHP](first-app.md)
+- [Archivos de Configuración](configuration.md)
 
 ## Componentes MVC
 
