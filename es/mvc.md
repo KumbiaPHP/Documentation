@@ -174,7 +174,7 @@ class Cart
 <!-- This view displays the items currently in the cart. -->
 <h1>My Shopping Cart</h1>
 
-<?php if (empty($cartItems)): ?>
+<?php if (! $cartItems): ?>
   <p>Your cart is empty.</p>
   <?php return 1 ?>
 <?php endif ?>
