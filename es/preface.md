@@ -23,11 +23,13 @@ utilizarlo en tus proyectos respetando los términos de dicha licencia. Se sugie
 más recientes posibles, ya que incluyen correcciones, nuevas funcionalidades y mejoras significativas.
 
 ## Sobre la comunidad
-La comunidad de KumbiaPHP está compuesta mayoritariamente por hispano-latinos, lo que da origen a un framework
-totalmente en español. Esta es su mayor diferencia respecto a otros frameworks anglosajones. Con el tiempo se han
-incorporado nuevos sistemas de comunicación: una lista de correo, un foro, un canal de IRC y una Wiki. Todo ello hace
-que la comunidad sea una parte fundamental para enriquecer y mejorar KumbiaPHP.
-Puedes encontrar más información en el [Sitio web oficial de KumbiaPHP](https://www.kumbiaphp.com)
+La comunidad de KumbiaPHP nació principalmente a partir de desarrolladores hispanohablantes, lo que dio origen a un
+framework completamente en español. Sin embargo, hoy en día también existe una comunidad de habla inglesa que contribuye
+a la expansión internacional de KumbiaPHP. Con el tiempo, se han implementado diversos canales de comunicación como una
+lista de correo, un foro, un canal de IRC, una Wiki y ahora también un espacio en Slack, que resulta ser el medio más
+ágil para recibir soporte y conversar con otros usuarios.Este esfuerzo colaborativo hace que la comunidad sea esencial
+para enriquecer y mejorar KumbiaPHP.  
+Para más información, visita el [Sitio web oficial de KumbiaPHP](https://www.kumbiaphp.com).
 
 ## ¿Por qué usar KumbiaPHP Framework?
 Muchas personas se preguntan: ¿cómo funciona este framework?, ¿otro más?, ¿será fácil?, ¿qué tan potente es?, etc. A
@@ -44,8 +46,10 @@ continuación, algunas razones para utilizar KumbiaPHP:
 - Reduce el uso de otros lenguajes. Gracias a los Helpers y a patrones como ActiveRecord, se minimiza la necesidad de
   escribir HTML y SQL (aunque sea en menor porcentaje). KumbiaPHP se encarga de esas tareas, logrando un código más
   claro, natural y menos propenso a errores.
-- ¡Habla español! La documentación, los mensajes de error, los archivos de configuración, la comunidad y los
-  desarrolladores hablan español, evitando la barrera del idioma presente en otros frameworks.
+- ¡Habla español (y también inglés, con más idiomas próximamente)!  
+  KumbiaPHP inició con documentación, mensajes de error y archivos de configuración en español, pero se está
+  introduciendo gradualmente un sistema de internacionalización (i18n) para brindar soporte multilenguaje y llegar a una
+  comunidad global cada vez más amplia.
 - Su curva de aprendizaje es muy corta, especialmente para quienes ya cuenten con experiencia en Programación Orientada
   a Objetos.
 - Parece un juego. Sin notarlo, se aplican múltiples patrones de diseño, que facilitan el trabajo al abstraer, reducir
