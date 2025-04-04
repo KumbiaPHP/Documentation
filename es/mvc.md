@@ -92,7 +92,7 @@ class CartController extends AppController
         $product = (new Product)->find_first($productId);
         
         // If product is found, add it to the cart
-        if ($product->id) {
+        if ($product) {
             // 'Cart' could be a model or a service handling cart operations
             Cart::addProduct($product);
             Flash::valid('Product added to cart successfully!');
@@ -101,7 +101,7 @@ class CartController extends AppController
         }
         
         // Redirect or render the cart view
-        return Redirect::toAction('show');
+        Redirect::toAction('show');
     }
 
     /**
@@ -138,17 +138,11 @@ class Cart
      * Adds a product to the cart items array in the session.
      *
      * @param object $product Product object to be added.
-     * @return void
      */
-    public static function addProduct($product)
+    public static function addProduct(Product $product): void
     {
-        // If 'cart' doesn't exist in the session under our constant namespace, initialize it
-        if (!Session::has('cart', self::SESSION_NAMESPACE)) {
-            Session::set('cart', [], self::SESSION_NAMESPACE);
-        }
-
         // Retrieve the existing cart array from the session
-        $cart = Session::get('cart', self::SESSION_NAMESPACE);
+        $cart = Session::get('cart', self::SESSION_NAMESPACE) ?? [];
 
         // Append the new product data
         $cart[] = [
@@ -164,17 +158,12 @@ class Cart
     /**
      * Retrieves all items from the cart stored in the session.
      *
-     * @return array An array of cart items.
      */
-    public static function getItems()
+    public static function getItems(): array
     {
-        // If 'cart' is not defined in the session, return an empty array
-        if (!Session::has('cart', self::SESSION_NAMESPACE)) {
-            return [];
-        }
 
-        // Otherwise, get the cart items from the session
-        return Session::get('cart', self::SESSION_NAMESPACE);
+        // Get the cart items from the session
+        return Session::get('cart', self::SESSION_NAMESPACE) ?? [];
     }
 }
 
@@ -187,15 +176,15 @@ class Cart
 
 <?php if (empty($cartItems)): ?>
   <p>Your cart is empty.</p>
-  <?php return 1; ?>
-<?php endif; ?>
+  <?php return 1 ?>
+<?php endif ?>
 
 <ul>
     <?php foreach ($cartItems as $item): ?>
         <li>
             <?= $item['name'] ?> - $<?= number_format($item['price'], 2) ?>
         </li>
-    <?php endforeach; ?>
+    <?php endforeach ?>
 </ul>
 
 ```
