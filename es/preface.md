@@ -1,74 +1,108 @@
 # Prefacio
 
-## Agradecimietos
-Este manual es para agradecer a los que con su tiempo y apoyo, en gran o en poca medida, han ayudado a que este framework sea cada día mejor. A toda la comunidad que rodea a KumbiaPHP, con sus preguntas, notificaciones de errores (Bug’s), aportes, críticas, etc., a todos ellos ¡Gracias!.
+## Agradecimientos
+Este manual está dedicado a quienes, con su tiempo y apoyo (sea mucho o poco), han contribuido a que este framework
+mejore día a día. A toda la comunidad que rodea a KumbiaPHP, con sus preguntas, reportes de errores (bugs), aportes y
+críticas, ¡muchas gracias!
 
 ## Acerca del Manual
-El libro de KumbiaPHP intenta comunicar todo lo que este framework puede ayudar en su trabajo diario como desarrollador. Le permite descubrir todos los aspectos de KumbiaPHP y aprender porque KumbiaPHP puede ser la herramienta que estaba esperando para empezar a desarrollar su proyecto. Este libro se encuentra en etapa de continuo desarrollo, diseño gráfico, revisión ortográfica y gramática, contenidos, etc. Tal como sucede con el framework, por lo cual se aconseja siempre disponer de la última versión.
+El libro de KumbiaPHP busca mostrar cómo este framework puede ayudar en el trabajo diario de un desarrollador. Permite
+descubrir las distintas facetas de KumbiaPHP y conocer por qué puede ser la herramienta que estaba esperando para
+iniciar su proyecto. Se encuentra en constante desarrollo (diseño gráfico, revisión ortográfica y gramatical,
+contenidos, etc.), al igual que el framework, por lo que se recomienda mantener siempre la última versión actualizada.
 
-Esta versión del manual ha cambiado mucho de la anterior. Gracias a la comunidad se han reflejado cuestiones que se repetían en el grupo, en el foro y en el chat. También se detectó el mal uso del MVC, y no se aprovechaban las facilidades del POO. Se ha intentado mejorar esos puntos recurrentes de consulta, así como mejorar el entendimiento de uso, para que creen mejores y más mantenibles aplicaciones.
+En esta edición del manual se han realizado grandes cambios respecto a la anterior. Gracias a la comunidad se
+identificaron dudas recurrentes en el grupo, el foro y el chat. También se detectó el uso inadecuado del patrón MVC y la
+falta de aprovechamiento de las facilidades de la Programación Orientada a Objetos (POO). Se ha procurado abordar estos
+aspectos y mejorar la comprensión de uso, de modo que puedan crearse aplicaciones más mantenibles y de mayor calidad.
 
 ## Acerca de KumbiaPHP
-KumbiaPHP es un producto latino para el mundo. Programar debe ser tan bueno como bailar y KumbiaPHP es un baile, un baile para programar. KumbiaPHP es un framework de libre uso bajo licencia new BSD. Por lo tanto, puedes usar KumbiaPHP para tus proyectos siempre y cuando tengas en cuenta la licencia. Te aconsejamos que siempre uses versiones estables y lo más recientes posibles, ya que se incluyen correcciones, nuevas funcionalidades y otras mejoras interesantes.
+KumbiaPHP es un producto latino para el mundo. La programación debería ser tan placentera como un baile, y KumbiaPHP
+hace que programar sea tan ameno como bailar. Es un framework de libre uso bajo licencia New BSD, por lo que puedes
+utilizarlo en tus proyectos respetando los términos de dicha licencia. Se sugiere siempre usar versiones estables y lo
+más recientes posibles, ya que incluyen correcciones, nuevas funcionalidades y mejoras significativas.
 
 ## Sobre la comunidad
-La comunidad de KumbiaPHP esta formada en su gran mayoría por gente hispano-latina, de la cual nace un framework completamente en español. Y donde radica su mayor diferencia respecto a otros frameworks que son, de forma nativa, anglosajones. Por otra parte se ha intentado, con el tiempo, aportar nuevos sistemas de comunicación, así que se cuenta con una lista de correo, el foro, canal de IRC y una WiKi. Esperamos que todo esto haga que la comunidad sea una parte importante y vital para enriquecer y mejorar KumbiaPHP.
-Puedes encontrar más información en el [Sitio web oficial de KumbiaPHP](http://www.kumbiaphp.com)
+La comunidad de KumbiaPHP está compuesta mayoritariamente por hispano-latinos, lo que da origen a un framework
+totalmente en español. Esta es su mayor diferencia respecto a otros frameworks anglosajones. Con el tiempo se han
+incorporado nuevos sistemas de comunicación: una lista de correo, un foro, un canal de IRC y una Wiki. Todo ello hace
+que la comunidad sea una parte fundamental para enriquecer y mejorar KumbiaPHP.
+Puedes encontrar más información en el [Sitio web oficial de KumbiaPHP](https://www.kumbiaphp.com)
 
-## ¿Porque usar KumbiaPHP Framework?
-Mucha gente pregunta ¿cómo es este framework?, ¿otro más?, ¿será fácil? ¿qué tan potente es? etc. Pues aquí algunas razones para utilizar KumbiaPHP:
+## ¿Por qué usar KumbiaPHP Framework?
+Muchas personas se preguntan: ¿cómo funciona este framework?, ¿otro más?, ¿será fácil?, ¿qué tan potente es?, etc. A
+continuación, algunas razones para utilizar KumbiaPHP:
 
-- Es muy fácil de usar (Zero-Config). Empezar con KumbiaPHP es demasiado fácil, es solo descomprimir y empezar a trabajar, esta filosofía también es conocida como "Convención sobre Configuración".
-- Agiliza el Trabajo, crear una aplicación muy funcional con KumbiaPHP es cuestión de horas o minutos, así que podemos darle gusto a nuestros clientes sin que afecte nuestro tiempo. Gracias a las múltiples herramientas que proporciona el framework para agilizar el trabajo podemos hacer más en menos tiempo.
-- Separar la lógica de la presentación, una de las mejores prácticas de desarrollo orientado a la Web es separar la lógica de los datos y la presentación, con KumbiaPHP es sencillo aplicar el patrón MVC (Modelo, Vista, Controlador) y hacer nuestras aplicaciones más fáciles de mantener y de escalar.
-- Reducción del uso de otros lenguajes, gracias a los Helpers y a otros patrones como ActiveRecord evitamos el uso de lenguajes HTML y SQL (en menor porcentaje). KumbiaPHP hace esto por nosotros, con esto logramos código mas claro, natural y con menos errores.
-- ¡Habla Español! La documentación, mensajes de error, archivos de configuración, comunidad, desarrolladores ¡hablan español!, con esto no tenemos que entender a medias, como con otros frameworks que nos toca quedarnos cruzados de manos porque no podemos pedir ayuda.
-- La curva de aprendizaje de KumbiaPHP es muy corta, y si a esto le agregamos experiencia en el manejo de Programación Orientada a Objetos, será mas rápida.
-- Parece un juego, sin darnos cuenta aplicamos los patrones de diseño; los patrones de diseño son herramientas que facilitan el trabajo realizando abstracción, reduciendo código o haciendo más fácil de entender la aplicación. Cuando trabajas con KumbiaPHP aplicas muchos patrones y al final te das cuenta que eran más fáciles de usar de lo que se piensa.
-- Software Libre, No tienes que preocuparte por licenciar nada, KumbiaPHP promueve las comunidades de aprendizaje, el conocimiento es de todos y cada uno sabe como aprovecharlo mejor.
-- Aplicaciones Robustas, ¿no sabía que tenía una?. Las aplicaciones de hoy día requieren arquitecturas robustas. KumbiaPHP proporciona una arquitectura fácil de aprender y de implementar, sin complicarnos con conceptos y sin sacrificar calidad.
+- Es muy fácil de usar (Zero-Config). Empezar con KumbiaPHP es sencillísimo: basta con descomprimir y comenzar a
+  trabajar. Esta filosofía se conoce como “Convención sobre Configuración”.
+- Agiliza el trabajo. Crear una aplicación muy funcional con KumbiaPHP puede tomar solo minutos u horas, lo que permite
+  complacer a los clientes sin sacrificar demasiado tiempo. Gracias a las múltiples herramientas que ofrece, se puede
+  hacer más en menos tiempo.
+- Separa la lógica de la presentación. Una de las mejores prácticas en el desarrollo web es separar la lógica de datos
+  de la presentación. Con KumbiaPHP, implementar el patrón MVC (Modelo, Vista y Controlador) es sencillo, lo que
+  facilita el mantenimiento y la escalabilidad de las aplicaciones.
+- Reduce el uso de otros lenguajes. Gracias a los Helpers y a patrones como ActiveRecord, se minimiza la necesidad de
+  escribir HTML y SQL (aunque sea en menor porcentaje). KumbiaPHP se encarga de esas tareas, logrando un código más
+  claro, natural y menos propenso a errores.
+- ¡Habla español! La documentación, los mensajes de error, los archivos de configuración, la comunidad y los
+  desarrolladores hablan español, evitando la barrera del idioma presente en otros frameworks.
+- Su curva de aprendizaje es muy corta, especialmente para quienes ya cuenten con experiencia en Programación Orientada
+  a Objetos.
+- Parece un juego. Sin notarlo, se aplican múltiples patrones de diseño, que facilitan el trabajo al abstraer, reducir
+  código y hacer la aplicación más sencilla de entender. Trabajar con KumbiaPHP implica aplicar muchos patrones de
+  manera casi natural.
+- Es Software Libre. No hay que preocuparse por licencias adicionales, y KumbiaPHP promueve las comunidades de
+  aprendizaje, donde el conocimiento es de todos y cada quien sabe cómo aprovecharlo mejor.
+- Permite crear aplicaciones robustas. Las aplicaciones actuales requieren arquitecturas sólidas. KumbiaPHP ofrece una
+  arquitectura sencilla de aprender e implementar, sin complicar con conceptos excesivos y sin sacrificar calidad.
 
 ## ¿Qué aporta KumbiaPHP?
-KumbiaPHP es un esfuerzo por producir un framework que ayude a reducir el tiempo de desarrollo de una aplicación web sin producir efectos sobre los programadores, basándonos en principios claves, que siempre recordamos.
+KumbiaPHP es un esfuerzo por producir un framework que reduzca el tiempo de desarrollo de una aplicación web, sin
+repercutir negativamente en los programadores, apoyándose en principios clave que siempre tenemos presentes:
 
-- KISS «Mantenlo simple, estúpido» (Keep It Simple, Stupid). 
-- DRY No te repitas, en inglés Don’t Repeat Yourself, también conocido como Una vez y sólo una. 
-- Convención sobre configuración.
+- KISS («Mantenlo simple, estúpido» o Keep It Simple, Stupid).  
+- DRY (Don’t Repeat Yourself, también conocido como “Una vez y solo una”).  
+- Convención sobre configuración.  
 - Velocidad.
 
-Además KumbiaPHP esta fundamentado en las siguientes premisas:
+Además, KumbiaPHP se fundamenta en las siguientes premisas:
 
-- Fácil de aprender.
-- Fácil de instalar y configurar.
-- Compatible con muchas plataformas.
-- Listo para aplicaciones comerciales.
-- Simple en la mayor parte de casos pero flexible para adaptarse a casos más complejos.
-- Soportar muchas características de aplicaciones web actuales.
-- Soportar las prácticas y patrones de programación más productivos y eficientes.
-- Producir aplicaciones fáciles de mantener.
+- Fácil de aprender.  
+- Fácil de instalar y configurar.  
+- Compatible con muchas plataformas.  
+- Listo para aplicaciones comerciales.  
+- Sencillo en la mayoría de los casos, pero flexible para adaptarse a situaciones más complejas.  
+- Soporte de numerosas características para aplicaciones web actuales.  
+- Aplicación de prácticas y patrones de programación productivos y eficientes.  
+- Producción de aplicaciones fáciles de mantener.  
 - Basado en Software Libre.
 
-Lo principal es producir aplicaciones que sean prácticas para el usuario final y no sólo para el programador. La mayor parte de tareas que le quiten tiempo al desarrollador deberían ser automatizadas por KumbiaPHP, para que pueda enfocarse en la lógica de negocio de su aplicación. No deberíamos reinventar la rueda cada vez que se afronte un nuevo proyecto de software.
+El objetivo principal es lograr aplicaciones prácticas para el usuario final y no solo para el programador. La mayoría
+de las tareas que consumen tiempo al desarrollador deberían automatizarse con KumbiaPHP, de modo que se pueda enfocar en
+la lógica de negocio de su aplicación. No se debería reinventar la rueda cada vez que se inicia un nuevo proyecto de
+software.
 
-Para satisfacer estos objetivos KumbiaPHP está escrito en PHP5. Además ha sido probado en aplicaciones reales que trabajan en diversas áreas con variedad de demanda y funcionalidad. Es compatible con las bases de datos disponibles actuales mas usadas:
+Para lograr estos objetivos, KumbiaPHP está escrito en PHP5 (plenamente compatible con PHP 8.0) y ha sido probado en
+aplicaciones reales que abarcan diversas áreas con una amplia variedad de demandas y funcionalidades. Es compatible con
+las bases de datos más utilizadas en la actualidad:
 
-- MySQL.
-- PostgreSQL.
-- Oracle.
-- SQLite.
+- MySQL  
+- PostgreSQL  
+- Oracle  
+- SQLite  
 
-El modelo de objetos de KumbiaPHP es utilizado en las siguientes capas:
+El modelo de objetos de KumbiaPHP se aplica en las siguientes capas:
 
-- [Lógica de la aplicación](model.md)
-- [Abstracción de la base de datos y mapeo Objeto-Relacional](active-record.md)
+- [Lógica de la aplicación](model.md)  
+- [Abstracción de la base de datos y mapeo Objeto-Relacional](active-record.md)  
 
-Características comunes de aplicaciones Web que son automatizadas por KumbiaPHP:
+Entre las características comunes de las aplicaciones web que KumbiaPHP automatiza se encuentran:
 
-- Plantillas (TemplateView).
-- Validación y persistencia de formularios.
-- Administración de caché.
-- Scaffolding.
-- Front Controller.
-- Interacción AJAX.
-- Generación de formularios.
-- Seguridad.
+- Plantillas (TemplateView).  
+- Validación y persistencia de formularios.  
+- Administración de caché.  
+- Scaffolding.  
+- Front Controller.  
+- Interacción AJAX.  
+- Generación de formularios.  
+- Seguridad.  
