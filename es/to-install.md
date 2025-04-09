@@ -1,213 +1,109 @@
 # Instalar KumbiaPHP
 
-En esta sección, se explican los pasos a seguir, para poner a funcionar el
-framework en nuestro ambiente de desarrollo.
+En esta sección se explican los pasos necesarios para poner en funcionamiento el framework en tu entorno de desarrollo.
+
+> ⚠️ **Advertencia**  
+>
+> Esta instalación es un entorno de pruebas, pensado para experimentar con KumbiaPHP en un servidor local. No está
+> recomendada para el desarrollo de aplicaciones que vayan a ser publicadas en producción.
 
 ## Requisitos
 
-Como se mencionó arriba KumbiaPHP es muy fácil y en este sentido los
-requerimientos para hacer funcionar el framework son mínimos, a continuación
-se listan:
+Como se mencionó anteriormente, KumbiaPHP es muy fácil de usar y, en ese sentido, los requisitos para hacerlo funcionar
+son mínimos, y solo es necesario un intérprete de [**PHP versión 8.0**](https://www.php.net/) o superior.
 
-  * Interprete PHP versión 5.4 o superior.
-  * Servidor Web con soporte de reescritura de URL (Apache, Nginx, Cherokee, Lighttpd, Internet Information Server (IIS)).
-  * Manejador de base de datos soportado por KumbiaPHP.
+## Pasos para instalación
 
-Para instalar KumbiaPHP Framework, se debe descargar su archivo comprimido
-desde la sección de descarga http://www.kumbiaphp.com/blog/manuales-y-descargas/ para
-obtener la versión mas reciente del framework. Una vez descargado el archivo,
-es esencial asegurarse que tiene la extensión .tgz para usuarios Linux y .zip
-para usuarios de Windows, ya que de otro modo no se descomprimirá
-correctamente.
+1. Descarga el archivo comprimido de KumbiaPHP desde la sección de descargas en
+   [kumbiaphp.com](http://www.kumbiaphp.com/blog/manuales-y-descargas/) para obtener la versión más reciente del
+   framework.
 
-A continuación se descomprime su contenido en el directorio raíz del servidor
-web (DocumentRoot). Para asegurar cierta uniformidad en el documento, en este
-capitulo se supone que se ha descomprimido el paquete del framework en el
-directorio kumbiaphp/ . Teniendo una estructura como la siguiente:
-```
--- KumbiaPHP-master  
-    |-- core 
-    |-- vendors 
-    |-- default  
-        |-- app  
-        |-- public  
-        |-- .htaccess  
-        `-- index.php  
-```
+   Asegúrate de que el archivo tenga la extensión `.tgz` si usas Linux, o `.zip` si usas Windows, ya que de otro modo
+   podría no descomprimirse correctamente.
 
-## Configurar Apache
+2. Una vez descargado, descomprime su contenido en el directorio de tu preferencia. Para mantener la uniformidad en este
+   manual, supondremos que el paquete ha sido descomprimido en un directorio llamado `kumbiaphp/`, con una estructura
+   similar a la siguiente:
 
-KumbiaPHP Framework utiliza un módulo para la reescritura de URLs haciéndolas
-mas comprensibles y fáciles de recordar en nuestras aplicaciones. Por esto, el
-módulo debe ser configurado e instalado, en este sentido debe chequear que el
-módulo esté habilitado, en las siguientes secciones se explica como hacerlo.
+    ```
+    kumbiaphp/
+    ├── core/
+    ├── vendor/
+    └── default/
+        ├── app/
+        ├── public/
+        │   ├── .htaccess
+        │   └── index.php
+        ├── .htaccess
+        └── index.php
+    ```
 
-### Habilitando mod_rewrite de Apache en GNU/Linux (Debian, Ubuntu y derivados)
+3. Abre una consola y navega hasta el directorio `default/app`:
 
-Nos aseguramos de activar el mod_rewrite  de esta manera y como usuario
-administrador desde la consola.
-```bash
-  > a2enmod rewrite
-  Enabling module rewrite.
-  Run '/etc/init.d/apache2 restart' to activate new configuration!
-```  
-  
-Lo anterior indica que se ha habilitado el mod_rewrite  de Apache, pero aun
-falta indicarle a Apache que interprete los archivos .htaccess  que son los
-encargados de hacer uso del rewrite y a su vez tienen las reglas de
-reescritura de las URLs.
+    ```bash
+    cd kumbiaphp/default/app
+    ```
 
-Como usuario administrador editamos el siguiente archivo.
-``` bash
- > vi /etc/apache2/sites-enabled/000-default  
-```
-  
-```apacheconf
-<Directory "/to/document/root">  
-    Options Indexes FollowSymLinks
-    AllowOverride None
-    Order allow,deny
-    Allow from all
-</Directory>  
-```
-  
-Para que los .htaccess tengan efectos, se ha de sustituir
-*AllowOverride None*
-por *AllowOverride All*, de esta manera Apache puede interpretar estos archivos.
+4. Ejecuta el servidor de desarrollo incluido:
 
-Hecho esto, queda reiniciar el servicio de apache.
+    ```bash
+    ./bin/phpserver
+    ```
 
-```bash
- >/etc/init.d/apache2 restart  
-```
+    Este comando inicia un servidor web local que utiliza el servidor embebido de PHP, facilitando así la ejecución
+    inmediata de la aplicación sin necesidad de configuraciones adicionales.
 
-A continuación, se prueba todas las configuraciones realizadas mediante la
-siguiente URL.
+5. Abre tu navegador web y accede a la siguiente dirección:
 
-http://localhost/kumbiaphp/  
+    ```
+    http://0.0.0.1:8001/
+    ```
 
-  
-Si todo ha ido bien, debería ver una página de bienvenida, con lo que la instalación rápida se puede dar por
-concluida.
+    o
 
-![](../images/image12.png)
+    ```
+    http://127.0.0.1:8001/
+    ```
 
-Figura 2.1: Instalación exitosa de KumbiaPHP
+    Si todo ha ido bien, deberías ver una página de bienvenida indicando que la instalación fue exitosa.
 
-Esto es un entorno de pruebas el cual esta pensado para practicar con
-KumbiaPHP en un servidor local, no para desarrollar aplicaciones complejas que
-terminan siendo publicadas en la web.
+    ![Instalación exitosa](../images/successful-installation.jpg)
 
-## Configurar Nginx
-
-Usando `$_SERVER['PATH_INFO']`:
-
-```nginx
-server {
-    listen      80;
-    server_name localhost.dev;
-    root        /var/www/kumbiaphp;
-    index       index.php index.html index.htm;
-
-    location / {
-        try_files $uri $uri/ /index.php;
-    }
-
-    location ~ \.php {
-        #fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
-        fastcgi_pass  127.0.0.1:9000;
-        fastcgi_index /index.php;
-
-        include fastcgi_params;
-        fastcgi_split_path_info       ^(.+\.php)(/.+)$;
-        fastcgi_param PATH_INFO       $fastcgi_path_info;
-        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-
-    location ~ /\. {
-        deny all;
-    }
-}
-```
-
-Usando `$_GET['_url']`:
-
-```nginx
-server {
-    listen      80;
-    server_name localhost.dev;
-    root        /var/www/kumbiaphp;
-    index       index.php index.html index.htm;
-
-    location / {
-        try_files $uri $uri/ /index.php?_url=$uri&$args;
-    }
-
-    location ~ \.php {
-        #fastcgi_pass  unix:/run/php-fpm/php-fpm.sock;
-        fastcgi_pass  127.0.0.1:9000;
-        fastcgi_index /index.php;
-
-        include fastcgi_params;
-        fastcgi_split_path_info       ^(.+\.php)(/.+)$;
-        fastcgi_param PATH_INFO       $fastcgi_path_info;
-        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    }
-
-    location ~ /\. {
-        deny all;
-    }
-}
-```
-
-
-### ¿Por qué es importante el Mod-Rewrite?
-
-ReWrite es un módulo de apache que permite reescribir las urls que han
-utilizado nuestros usuarios. KumbiaPHP Framework encapsula esta complejidad
-permitiendo usar URLs bonitas o limpias como las que vemos en blogs o en
-muchos sitios donde no aparecen los ?, los & ni las extensiones del servidor
-(.php, .asp, .aspx, etc).
-
-Además de esto, con mod-rewrite KumbiaPHP puede proteger nuestras
-aplicaciones ante la posibilidad de que los usuarios puedan ver los
-directorios del proyecto y puedan acceder a archivos de clases, modelos,
-lógica, etc., sin que sean autorizados.
-
-Con mod-rewrite  el único directorio que pueden ver los usuarios es el
-contenido del directorio público (public) del servidor web, el resto permanece
-oculto y solo puede ser visualizado cuando ha realizado una petición en forma
-correcta y también es correcto según nuestra lógica de aplicación. Cuando
-escribes direcciones utilizando este tipo de URLs, estas ayudando también a
-los motores de búsqueda a indexar mejor tu información.
+> ℹ️ **Información**  
+>
+> **Alternativa: Usar Apache**, si lo prefieres, puedes utilizar un servidor web tradicional como Apache. Para ello,
+> consulta la sección dedicada a la [instalación de KumbiaPHP en Apache](apache-setup.md), donde encontrarás
+> instrucciones detalladas.
 
 ## Modos de una Aplicación
 
-KumbiaPHP ofrece dos modos de ejecución de una aplicación el cual es indicado 
-en el archivo [default/public/index.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/public/index.php), 
-se describen a continuación:
+KumbiaPHP ofrece dos modos de ejecución para una aplicación, definidos en el archivo
+[default/public/index.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/public/index.php):
 
-### Desarrollo
+### Modo Desarrollo
 
-Es el modo por defecto, en este caso el valor de la constante PRODUCTION 
-es false: `const PRODUCTION = false;`. En éste la cache de KumbiaPHP está 
-desactivada y cualquier cambio que se haga en los campos y tablas de la base 
-de datos (adición o eliminación de campos, etc), vistas de la aplicación 
-que se cacheen, surtirán efecto inmediatamente.
+Este es el modo por defecto. La constante `PRODUCTION` está definida como `false`:
 
-### Producción
+```php
+const PRODUCTION = false;
+```
 
-Se activa asignando en el archivo [default/public/index.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/public/index.php) 
-el valor true a la constante PRODUCTION, así: `const PRODUCTION = true;`, en este la cache de 
-KumbiaPHP esta activada y se cachea información necesaria para 
-agilizar la carga de la aplicación tal como la metadata de la base datos 
-(información de tablas y campos), asimismo las vistas que el usuario desee cachear.
+En este modo, la caché de KumbiaPHP está desactivada. Los cambios realizados en las tablas o campos de la base de datos,
+así como en las vistas, se reflejan de inmediato.
 
-### ¡¡¡ ADVERTENCIA !!!
-Cuando se efectua el cambio de `PRODUCTION = false;` a `PRODUCTION = true;`, 
-es necesario eliminar el contenido del directorio de cache de la aplicación [default/app/temp/cache/*](https://github.com/KumbiaPHP/KumbiaPHP/tree/master/default/app/temp/cache) para que se renueve la metadata y no haya problemas al guardar o mostrar la información.
+### Modo Producción
 
-no se deben confundir con la conexión
-a la base de datos que se va usar , 
+Para activarlo, cambia la constante `PRODUCTION` a `true`:
+
+```php
+const PRODUCTION = true;
+```
+
+En este modo, KumbiaPHP activa su sistema de caché, almacenando información clave como la metadata de la base de datos
+(nombres de tablas, campos, etc.) y las vistas que decidas cachear para mejorar el rendimiento.
+
+> ⚠️ **Advertencia**
+>
+> Cuando cambies `PRODUCTION` de `false` a `true`, debes eliminar manualmente el contenido del directorio de caché en
+  `default/app/temp/cache/` para asegurar que la metadata sea renovada correctamente. Si no lo haces, podrías
+  experimentar errores al guardar o mostrar información.
