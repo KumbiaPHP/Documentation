@@ -156,7 +156,7 @@ class GreetingsController extends AppController
 Editamos la vista `hello.phtml`:
 
 ```php
-<h1>Hola <?= $name ?>, ¡Qué lindo es utilizar KumbiaPHP! ¿Cierto?</h1>
+<h1>Hola <?= h($name) ?>, ¡Qué lindo es utilizar KumbiaPHP! ¿Cierto?</h1>
 <p>Fecha y hora actual: <?= $date ?></p>
 ```
 
@@ -165,6 +165,9 @@ Al ingresar en `http://127.0.0.1:8001/greetings/hello/CaChi/`, se mostrará un s
 
 ![](../images/kumbiaphp-greetings-hello-cachi.png)
 *Figura 5: Saludando al usuario*
+
+> 💡 **Nota:** KumbiaPHP incluye la función h() como atajo de htmlspecialchars(). Se recomienda envolver los valores
+dinámicos en h() para evitar problemas de seguridad (XSS) y garantizar que se respete el charset de la aplicación.
 
 ## Añadiendo una nueva acción: goodbye()
 
@@ -206,7 +209,7 @@ class GreetingsController extends AppController
 Ahora creamos la vista `app/views/greetings/goodbye.phtml`:
 
 ```php
-<h1>¡Adiós <?= $name ?>! 👋</h1>
+<h1>¡Adiós <?= h($name) ?>! 👋</h1>
 <p>Esperamos verte pronto de nuevo.</p>
 <?= Html::linkAction('hello/' . $name, 'Volver a saludar') ?>
 ```
