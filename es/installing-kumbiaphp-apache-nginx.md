@@ -47,9 +47,9 @@ Esta sección proporciona instrucciones para instalar y configurar KumbiaPHP uti
 ```apache
 <VirtualHost *:80>
     ServerName kumbia.fw
-    DocumentRoot /var/www/kumbiaphp/default/public
+    DocumentRoot /var/www/kumbiafw/default/public
 
-    <Directory /var/www/kumbiaphp/default/public>
+    <Directory /var/www/kumbiafw/default/public>
         AllowOverride All
         Require all granted
     </Directory>
