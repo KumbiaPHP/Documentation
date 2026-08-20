@@ -75,6 +75,44 @@ version 8.0**](https://www.php.net/) interpreter or higher.
 > [Installing KumbiaPHP on Web Servers (Apache and Nginx)](installing-kumbiaphp-apache-nginx.md), where you will find
 > detailed instructions.
 
+## Installation with Composer
+
+In addition to manual installation, you can install KumbiaPHP using [**Composer**](https://getcomposer.org/), the standard
+dependency manager for PHP. This option is simpler and makes it easier to keep the framework up to date.
+
+1. Open a terminal in the directory where you want to create your project and run:
+
+   ```bash
+   composer create-project kumbia/framework myapp
+   ```
+
+   * `kumbia/framework` is KumbiaPHP's official Composer package.
+   * `myapp` will be the name of your project directory. You can replace it with the name you prefer.
+
+   Composer will download the latest stable version of KumbiaPHP together with its dependencies.
+
+2. Go to the newly created project directory:
+
+   ```bash
+   cd myapp/default/app
+   ```
+
+3. Start the development server:
+
+   ```bash
+   ./bin/phpserver
+   ```
+
+   This command starts a local server on port **8001** by default.
+
+4. Open your web browser and go to:
+
+   ```
+   http://127.0.0.1:8001/
+   ```
+
+If everything went well, you should see the KumbiaPHP welcome page confirming that the installation was successful.
+
 ## Application Modes
 
 KumbiaPHP offers two execution modes for an application, defined in the

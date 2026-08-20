@@ -1,168 +1,241 @@
-# My first app with KumbiaPHP
+# My First Application with KumbiaPHP
 
-After you are ready with the KumbiaPHP installation, you can see the welcome page. Now it is time to create your first Hello World application. The goal is that you understand the basic components of the MVC (Model-View-Controller) architecture.
+After configuring KumbiaPHP and [viewing its welcome page](to-install.md), we will create a first example. Its goal is to
+understand the basic elements needed to use the framework and, at the same time, understand the
+**[MVC (Model-View-Controller)](mvc.md)** architecture.
 
-## Hello KumbiaPHP!
+## First Greeting with KumbiaPHP
 
-Now write the famous "Hello World!" but with a small change: say "Hello KumbiaPHP!". Thinking about this, remember the MVC model, according to this, KumbiaPHP should accept a petition, seeking driver and, in this, an action that serves the request. Then, KumbiaPHP uses that information to find the view associated with the request.
+In this example, we will create the classic "Hello World!" message, with one variation: we will say **"Hello KumbiaPHP!"**.
+Let's recall how the MVC model works:
 
-## Controller
+* KumbiaPHP receives a request.
+* It looks for the specified **controller**.
+* Within the controller, it locates the **action** that must handle the request.
+* Finally, it uses that information to find the associated **view** and display the result.
 
-Now add content to the controller app/controllers/controller/saludo_controller.php
+## Creating the First Controller
+
+Create a controller in `app/controllers/greetings_controller.php`:
 
 ```php
 <?php
-/** 
- * Greeting Controller
+/**
+ * Controller for greetings
  */
-class GreetingController extends AppController {
-    public function hello() {
-
+class GreetingsController extends AppController
+{
+    /**
+     * Default greeting action
+     *
+     * @return void
+     */
+    public function hello()
+    {
     }
 }
- ```
+```
 
-In the code we have the definition of the class GreetingController, note that
-Is also the Controller suffix at the end of the class declaration, this
-Identifies it as a controlling class, and it inherits (extends) the
-Superclass AppController, which acquires the properties of a class
-Controller, there is also the hello() method.
+This code defines the **GreetingsController** class.
 
-# The view
-To see the output that sends the controller, it is necessary create the view associated with the action. First, create
-a directory with the same name of our driver (in this case must be called greeting), and inside it are all views
-associated with the actions that need to display some information. In our example we call an action called Hello;
-Therefore, we create a file called * app/views/saludo/hola.phtml*. Once this file is created, add you a little content:
+* The `Controller` suffix indicates that this is a controller.
+* It inherits from the **AppController** base class, which provides the features needed to handle requests.
+* It includes the `hello()` method, which acts as the main action in this example.
+
+## Designing the Associated View
+
+To display what the controller sends, create the **associated view**.
+
+1. Create a directory with the same name as the controller: `app/views/greetings/`.
+2. Inside this directory, add a file named `hello.phtml`, since the defined action is called `hello()`.
+
+View contents:
 
 ```html
 <h1>Hello KumbiaPHP!</h1>
 ```
 
-Then try to access the following URL: http://localhost/kumbiaphp/saludo/hola/ and the result must be as shown Figure 2.2.
+When accessing `http://127.0.0.1:8001/greetings/hello/`, the message will be displayed as shown in Figure 1.
 
-![](../images/image06.png) Figure 2.2: View contents of hello.phtml
+![](../images/kumbiaphp-greetings.png)
+*Figure 1: Contents of the hello.phtml view*
 
 ## KumbiaPHP and URLs
 
-To understand the functioning of the framework it is important to understand their URLs, Figure 2.3 shows a typical URL in KumbiaPHP.
+In KumbiaPHP, URLs indicate which controller and action should be executed. Thanks to its URL-rewriting system and the
+use of a front controller, URLs are cleaner, easier to read, and friendlier to [SEO](https://en.wikipedia.org/wiki/Search_engine_optimization).
 
-![](../images/image08.png) Figure 2.3: URL in KumbiaPHP
+### Anatomy of a KumbiaPHP URL
 
-In KumbiaPHP .php extensions there is this because in the first instance there is rewriting of URLs and also has a front-controller responsible for receiving all requests (more I will later explain in detail).
+In a typical URL, each segment has a meaning: the domain, the controller, the action, and, optionally, the parameters.
 
-Any other information passed by URL is taken as the parameter of the action, with regard to our application as shown in Figure 2.4.
+![](../images/kumbia-url-anatomy.png)
+*Figure 2: KumbiaPHP URL*
 
-![](../images/image05.png) Figure 2.4: URL with parameters
+In KumbiaPHP:
 
-This is useful to avoid having to send form parameters GET? var = value & var2 = value2 (that is, in the traditional way how PHP has been used), which reveals information about the architecture of software that is available on the server. In addition, make that our URL look bad and ugly for SEO.
+* `.php` extensions are not used because all requests are processed by the front controller.
+* Additional URL segments are interpreted as arguments passed directly to the action method.
 
-## Add more content
+### URL Parameters
 
-We will add some dynamic to our project, so it's not so boring. We will show the time and date, using the date() function.
+Any value that appears after the action name is considered a **parameter**. These parameters are passed as arguments to the
+corresponding controller method.
 
-We changed a bit the driver *app/controllers/greeting_controller.php*
+Example:
+
+![](../images/kumbia-url-anatomy-params.png)
+*Figure 3: URL with parameters*
+
+Instead of using traditional parameters such as `?var=value&var2=value2`—which are long and difficult to read—KumbiaPHP
+provides **clearer and more organized URLs**. This avoids exposing internal system details and improves the user
+experience and SEO.
+
+## Making the Greeting More Dynamic
+
+To make the greeting more dynamic, display the **current date and time**. Edit the controller:
 
 ```php
 <?php
 /**
- *  Controller
- */ 
-class GreetingController extends AppController {
-    /** 
-     * Method to say hello
-     */
-    public function hello() { 
-       $this->date = date("Y-m-d H:i");
-   }
-}
-```
-
-KumbiaPHP implements the instance variables, which means that all attributes (public) defined in the controller, it happened automatically in sight, in the preceding code have the attribute $this->date this happened to the view as a variable called $date.
-
-In the view that was created in the section 2.1.3.3 and Add.
-
-```php
-<h1>Hello KumbiaPHP!</h1>
-<?php echo $date ?>
-```
-
-Now, if we http://localhost/kumbiaphp/greeting/hello/, we will get the time and date from the time the request is made as shown in Figure 2.5.
-
-![](../images/image02.png) Figure 2.5: Time and date of request
-
-To add warmth to the topic, we will ask the user name via parameter 2.1.3.4, go back to edit the controller *greeting_controller.php*
-
-```php
-<?php
-/** 
- * Greeting Controller
- */ 
-class GreetingController extends AppController
+ * Controller for greetings
+ */
+class GreetingsController extends AppController
 {
-    /** 
-     * Method to say hello
-     * @param string $name
-     */ 
-    public function hello($name)
-   {
-       $this->date = date("Y-m-d H:i");
-       $this->name = $name;
-   }
-}
-```
-
-Edit the view *app/views/greeting/hello.phtml*
-
-```php
-<h1>Hello <?php echo $name ?> , How nice is to use KumbiaPHP!
-right?</h1>
-<?php echo $date ?> 
-```
-
-If we now go to *http://localhost/kumbiaphp/greeting/hello/CaChi/*, show us in the web browser the greeting along with the registered name and the current date, as shown in Figure 2.6.
-
-![](../images/image09.png) Figure 2.6: Greeting to the user
-
-## Repeating history
-
-Now go another action called goodbye() and as the name suggests will do the reverse process to greet, i.e. Say goodbye to users.
-
-```php
-<?php
-/** 
- * Greeting Controller
- */ 
-class GreetingController extends AppController {
-    /** 
-     * Method to say hello
-     * @param string $name
-     */ 
-    public function hello($name) {
-       $this->date = date("Y-m-d H:i");
-       $this->name = $name;
-   }
-    /** 
-     * Method to say goodbye
-     */ 
-    public function goodbye() {
-
+    /**
+     * Greeting action with date
+     *
+     * @return void
+     */
+    public function hello()
+    {
+        $this->date = date("Y-m-d H:i");
     }
 }
 ```
 
-Add a new view to present the contents of the action goodbye() and if we recall what was explained in the section 2.1.3.3 we should create a view *app/views/saludo/adios.phtml* with the following contents.
+In KumbiaPHP, all **public variables** defined in the controller are automatically passed to the view as available
+variables. In this case, `$this->date` will be available in the view as `$date`.
+
+Edit `app/views/greetings/hello.phtml`:
 
 ```php
-<h1>Ops! has gone :( </h1>
-<?php echo Html::link('greeting/hello/CaChi/', 'To greet again') ?>
+<h1>Hello KumbiaPHP!</h1>
+<?= $date ?>
 ```
 
-If you enter the following link *http://localhost/kumbiaphp/greeting/goodbye/* you will see a new text, and a link to the hello() action, as shown in Figure 2.7.
+Now, when visiting `http://127.0.0.1:8001/greetings/hello/` again, the current date and time will be displayed (Figure 4).
 
-![](../images/image04.png) Figure 2.7: View goodbye to the user.
+![](../images/kumbiaphp-greetings-date.png)
+*Figure 4: Date and time of the request*
 
-Html: link (), is one of the many helper offering KumbiaPHP to facilitate at the time of scheduled hearings. We could write the HTML code directly, by placing *[back to say hello](kumbiaphp/saludo/hola/CaChi/)*, but this can lead to a problem, imagine you would rename his project in kumbiaphp demo, we would have to modify all the links, KumbiaPHP helpers solve these problems.
+> 💡 **Note**: The short `<?= ?>` syntax is equivalent to `<?php echo ?>`, but it is more concise and readable when
+> printing variables in views.
 
-To write the code of our "Hello KumbiaPHP!" don't need but a controller and a view. We don't need models, since we are not working with information from a database or other type of more complex information processing.
+### Passing Parameters in the URL
 
-We are located in the directory */path/to/kumbiaphp/app/controllers/*. Here are our drivers (for more details, read the documentation on the app directory). To create a handler, it is important to keep in mind the conventions of name which uses the Framework. We will call our driver *saludo_controller.php*. Note the suffix *_controller.php* this is part of the Naming Convention, and makes that KumbiaPHP identifies this file as a driver.
+We can improve the greeting further by asking the user for their name as a parameter. Modify the controller:
+
+```php
+<?php
+/**
+ * Controller for greetings
+ */
+class GreetingsController extends AppController
+{
+    /**
+     * Greeting action with name and date
+     *
+     * @param string $name User name
+     * @return void
+     */
+    public function hello($name)
+    {
+        $this->date = date("Y-m-d H:i");
+        $this->name = $name;
+    }
+}
+```
+
+Edit the `hello.phtml` view:
+
+```php
+<h1>Hello <?= h($name) ?>, how nice it is to use KumbiaPHP! Right?</h1>
+<p>Current date and time: <?= $date ?></p>
+```
+
+When visiting `http://127.0.0.1:8001/greetings/hello/CaChi/`, a personalized greeting and the current date will be
+displayed (Figure 5).
+
+![](../images/kumbiaphp-greetings-hello-cachi.png)
+*Figure 5: Greeting the user*
+
+> 💡 **Note:** KumbiaPHP includes the `h()` function as a shortcut for `htmlspecialchars()`. Wrapping dynamic values in
+> `h()` is recommended to help prevent security issues (XSS) and ensure that the application's charset is respected.
+
+## Adding a New Action: goodbye()
+
+So far, we have created the `hello()` action and its associated view. To complete the example, add a second action to the
+same controller: `goodbye()`. This new action shows how to reuse the same logic we have learned (controller + view), but
+this time to say goodbye instead of hello.
+
+```php
+<?php
+/**
+ * Controller for greetings
+ */
+class GreetingsController extends AppController
+{
+    /**
+     * Greeting action with name and date
+     *
+     * @param string $name User name
+     * @return void
+     */
+    public function hello($name)
+    {
+        $this->date = date("Y-m-d H:i");
+        $this->name = $name;
+    }
+
+    /**
+     * Farewell action
+     *
+     * @param string $name User name
+     * @return void
+     */
+    public function goodbye($name)
+    {
+        $this->name = $name;
+    }
+}
+```
+
+Now create the `app/views/greetings/goodbye.phtml` view:
+
+```php
+<h1>Goodbye <?= h($name) ?>! 👋</h1>
+<p>We hope to see you again soon.</p>
+<?= Html::linkAction('hello/' . $name, 'Back to greeting') ?>
+```
+
+If we access `http://127.0.0.1:8001/greetings/goodbye/CaChi`, we will see the farewell message with a link to return to
+the greeting (Figure 6).
+
+![](../images/kumbiaphp-greetings-goodbye.png)
+*Figure 6: Farewell to the user*
+
+The `Html::linkAction()` method is a **helper** that makes it easier to create links. Instead of writing the following
+manually:
+
+```html
+<a href="/greetings/hello/CaChi/">Back to greeting</a>
+```
+
+...we use a cleaner and more maintainable approach. If we change the controller name, we will not have to update every link
+manually.
+
+With this first example, we have learned how to create a controller and its associated views in KumbiaPHP, how URLs are
+structured, and how parameters are passed to actions. A simple greeting and farewell illustrate the MVC architecture,
+the passing of variables to views, and the use of helpers that simplify the code. With these foundations, we are ready to
+develop more complete applications with KumbiaPHP.
