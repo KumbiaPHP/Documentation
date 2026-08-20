@@ -1,14 +1,14 @@
 # ActiveRecord
 
-This is the main class for administration and operation of models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by the functionality of its analog available in Ruby on Rails. ActiveRecord provides an object-relational layer that strictly follows the standard ORM: tables in classes, objects in records, and fields in attributes. Facilitates the understanding of code associated with the database and encapsulates the logic specified making it easier to use for the programmer.
+This is the main class for managing and operating models. ActiveRecord is an implementation of this programming pattern and is heavily influenced by its counterpart in Ruby on Rails. ActiveRecord provides an object-relational layer that follows the ORM standard: tables become classes, records become objects, and fields become attributes. It makes database-related code easier to understand and encapsulates the specified logic so that it is easier for programmers to use.
 
-KumbiaPHP uses OOP (Object-oriented programming), so ActiveRecord is a class with ready-to-use methods. These methods make it easier for the user to manage tables in databases; Among them are the next:
+KumbiaPHP uses OOP (object-oriented programming), so ActiveRecord is a class with ready-to-use methods. These methods make it easier to manage database tables, including the following:
 
 Example:
 
 ```php
 <?php
-//KumbiaPHP 1.0
+// KumbiaPHP 1.0
 $client = new Client();
 $client->idcode = "808111827-2";
 $client->name = "XYZ COMMUNICATIONS COMPANY";
@@ -17,12 +17,12 @@ $client->save(); //it creates a new record
 
 ### Advantages of ActiveRecord
 
-* The entities of the Model are most naturally worked as objects.
-* Actions such as inserting, consult, update, delete, etc. of an entity of the model are encapsulated so the code is reduced and becomes more easy to maintain.
-* Easiest Code to Understand and Maintain
-* Reduction in the use of instructions of SQL by 80%, which achieves a high percentage of independence from the database engine.
-* without details unnecessary, the code is more practical and useful
-* "ActiveRecord" protec in a huge percent of SQL injections attacks that your apps can suffer, limited the letters that make it's.
+* Model entities can be handled naturally as objects.
+* Actions such as inserting, querying, updating, and deleting a model entity are encapsulated, reducing the amount of code and making it easier to maintain.
+* The code is easier to understand and maintain.
+* SQL usage is reduced by approximately 80%, providing a high degree of independence from the database engine.
+* With fewer unnecessary details, the code is more practical and useful.
+* ActiveRecord protects applications against a large proportion of SQL injection attacks by escaping characters that could facilitate them.
 
 ### Configuring Database Connection
 
@@ -82,7 +82,7 @@ Explanation of each parameter:
 * **Dsn:** Database connection string (Optional)
 * **Pdo:** To enable PDO connections (On/Off)
 
-Remember that the array `$databases` must always return at the end.
+Remember that the file must always return the `$databases` array at the end.
 
 ### Creating an ActiveRecord Model in KumbiaPHP Framework
 
@@ -141,7 +141,7 @@ class Client extends ActiveRecord {
 }
 ```
 
-Where **new** is the name of the configuration for the super server.
+Here, **new** is the name of the configuration for the super server.
 
 ### Changing the Mapped Table
 
@@ -253,98 +253,98 @@ value when updated.
 
 ## ActiveRecord API
 
-A continuación veremos una referencia de los métodos que posee la clase ActiveRecord y su funcionalidad respectiva. Éstos se encuentran organizados alfabéticamente:
+The following is a reference of the methods provided by the ActiveRecord class and their respective functionality. They are organized alphabetically.
 
-### Consultas
+### Queries
 
-Métodos para hacer consulta de registros:
+Methods for querying records:
 
-#### distinct ()
+#### distinct()
 
-Este método ejecuta una consulta de distinción única en la entidad, funciona igual que un "select unique campo" viéndolo desde la perspectiva del SQL. El objetivo es devolver un array con los valores únicos del campo especificado como parámetro.
+This method performs a distinct query on the entity. From an SQL perspective, it works like `select unique field`. Its purpose is to return an array containing the unique values of the field specified as a parameter.
 
-Sintaxis
+Syntax
 
 ```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
+distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
 ```
 
-Ejemplo:
+Example:
 
 ```php
 $unicos = (new Usuario)->distinct("estado");
 # array('A', 'I', 'N')  
 ```
 
-Los parámetros conditions, order y limit funcionan idénticamente que en el método find y permiten modificar la forma o los mismos valores de retorno devueltos por esta.
+The `conditions`, `order`, and `limit` parameters work in the same way as they do in `find` and allow you to modify the query and its returned values.
 
-#### find_all_by_sql (string $sql)
+#### find_all_by_sql(string $sql)
 
-Este método nos permite hacer una consulta por medio de un SQL y el resultado devuelto es un array de objetos de la misma clase con los valores de los registros en estos. La idea es que el uso de este método no sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir a su uso.
+This method performs a query using SQL. It returns an array of objects of the same class, populated with the values from the records. It should not be used frequently because ActiveRecord eliminates much of the need for SQL, but it is useful when a more specific query is required.
 
-Ejemplo:
+Example:
 
 ```php
-$usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)")
+$usuarios = (new Usuario)->find_all_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso)");
 ```
 
-En este ejemplo consultamos todos los usuarios con una sentencia where especial. La idea es que los usuarios consultados no pueden estar en la entidad ingreso.
+This example queries all users with a special `where` clause. The queried users must not be present in the `ingreso` entity.
 
-#### find_by_sql (string $sql)
+#### find_by_sql(string $sql)
 
-Este método nos permite hacer una consulta por medio de un SQL y el resultado devuelto es un objeto que representa el resultado encontrado. La idea es que el uso de este método no sea tan común en nuestras aplicaciones, ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos mas específicos y tengamos que recurrir al uso de este.
+This method performs a query using SQL and returns an object representing the result. It should not be used frequently because ActiveRecord eliminates much of the need for SQL, but it is useful when a more specific query is required.
 
-Ejemplo:
+Example:
 
 ```php
 $usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not in (select codigo from ingreso) limit 1" );  
 ```
 
-Este ejemplo consulta el primer usuario con una sentencia where especial. La idea es que el usuario consultado no se encuentre en la entidad ingreso.
+This example queries the first user with a special `where` clause. The queried user must not be present in the `ingreso` entity.
 
-#### find_first (string $sql)
+#### find_first()
 
-Sintaxis
+Syntax
 
 ```php
 find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ] )  
 ```
 
-El método "find\_first" devuelve el primer registro de una entidad o la primera ocurrencia de acuerdo a unos criterios de búsqueda u ordenamiento. Los parámetros son todos opcionales y su orden no es relevante, cuando se invoca sin parámetros devuelve el primer registro insertado en la entidad. Este método es muy flexible y puede ser usado de muchas formas:
+The `find_first` method returns the first record in an entity, or the first occurrence matching the specified search or sort criteria. All parameters are optional and their order is not significant. When called without parameters, it returns the first record inserted into the entity. This method is very flexible and can be used in many ways:
 
-Ejemplo:
+Example:
 
 ```php
 $usuario = (new Usuario)->find_first( "conditions: estado='A'", "order: fecha desc");
 ```
 
-En este ejemplo buscamos el primer registro cuyo estado sea igual a "A" y ordenado descendentemente, el resultado de este, se carga a la variable $usuarios. Devuelve una instancia del mismo objeto ActiveRecord en caso de éxito o false en caso contrario.
+This example searches for the first record whose status is equal to `"A"`, sorted in descending order. The result is loaded into the `$usuario` variable. It returns an instance of the same ActiveRecord object on success or `false` otherwise.
 
-Con el método find_first podemos buscar un registro en particular a partir de su id de esta forma:
+With `find_first`, you can search for a specific record by its ID:
 
 ```php
-$user = (new User)->find_first(123);
+$usuario = (new Usuario)->find_first(123);
 ```
 
-Obtenemos el registro 123 e igualmente devuelve una instancia del mismo objeto ActiveRecord en caso de éxito, o false en caso contrario. KumbiaPHP genera una advertencia cuando los criterios de búsqueda para find\_first devuelven más de un registro, para esto podemos forzar que se devuelva solamente uno, mediante el parámetro limit, de esta forma:
+This retrieves record 123 and likewise returns an instance of the same ActiveRecord object on success or `false` otherwise. KumbiaPHP generates a warning when the search criteria for `find_first` return more than one record. You can force it to return only one record with the `limit` parameter:
 
 ```php
 $usuario = (new Usuario)->find_first( "conditions: estado='A'", "limit: 1" );
 ```
 
-Cuando queremos consultar, sólo algunos de los atributos de la entidad, podemos utilizar el parámetro columns:
+To query only some of the entity's attributes, use the `columns` parameter:
 
 ```php
 $usuario = (new Usuario)->find_first( "columns: nombre, estado");
 ```
 
-Cuando especificamos el primer parámetro de tipo string, ActiveRecord asumirá que son las condiciones de búsqueda para find_first:
+When the first parameter is a string, ActiveRecord assumes that it contains the search conditions for `find_first`:
 
 ```php
 $usuario = (new Usuario)->find_first( "estado='A'" );
 ```
 
-De esta forma podemos también deducir que estas 2 sentencias arrojarían el mismo resultado:
+Therefore, the following two statements produce the same result:
 
 ```php
 $usuario = (new Usuario)->find_first( "id='123'" );
@@ -356,83 +356,83 @@ $usuario = (new Usuario)->find_first(123);
 
 #### find()
 
-Sintaxis
+Syntax
 
 ```php
 find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
 ```
 
-El método "find" es el principal método de búsqueda de ActiveRecord, devuelve todas los registros de una entidad o el conjunto de ocurrencias de acuerdo a unos criterios de búsqueda. Los parámetros son todos opcionales y su orden no es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando se invoca sin parámetros devuelve todos los registros en la entidad.
+The `find` method is ActiveRecord's primary search method. It returns all records in an entity or the set of occurrences matching the search criteria. All parameters are optional and their order is not significant; they may be combined or omitted as needed. When called without parameters, it returns all records in the entity.
 
-No hay que olvidarse de incluir un espacio después de los dos puntos (:) en cada parámetro.
+Remember to include a space after the colon (`:`) in each parameter.
 
-Ejemplo:
+Example:
 
 ```php
 $usuarios = (new Usuario)->find( "conditions: estado='A'", "order: fecha desc");
 ```
 
-En este ejemplo buscamos todos los registros cuyo estado sea igual a "A" y devuelva estos ordenados descendentemente, el resultado de este es un array de objetos de la misma clase con los valores de los registros cargados en ellos. En caso de no hayan registros devuelve un array vacío.
+This example searches for all records whose status is equal to `"A"`, ordered in descending order. The result is an array of objects of the same class, populated with the record values. If no records are found, it returns an empty array.
 
-Con el método find podemos buscar un registro en particular a partir de su id de esta forma:
+With `find`, you can search for a specific record by its ID:
 
 ```php
 $usuario = (new Usuario)->find(123);
 ```
 
-Obtenemos el registro 123 e igualmente devuelve una instancia del mismo objeto ActiveRecord en caso de éxito, o false en caso contrario. Como es un solo registro no devuelve un array, sino que los valores de este se cargan en la misma variable si existe el registro.
+This retrieves record 123 and likewise returns an instance of the same ActiveRecord object on success or `false` otherwise. Because this is a single record, the method does not return an array; if the record exists, its values are loaded into the same variable.
 
-Para limitar el número de registros devueltos, podemos usar el parámetro limit:
+To limit the number of returned records, use the `limit` parameter:
 
 ```php
 $usuarios = (new Usuario)->find("conditions: estado='A'", 'limit: 5', 'offset: 1');
 ```
 
-Cuando queremos consultar sólo algunos de los atributos de la entidad podemos utilizar el parámetro columns :
+To query only some of the entity's attributes, use the `columns` parameter:
 
 ```php
 $usuarios = (new Usuario)->find("columns: nombre, estado");
 ```
 
-Cuando especificamos el primer parámetro de tipo string, ActiveRecord asume que son las condiciones de búsqueda para find:
+When the first parameter is a string, ActiveRecord assumes that it contains the search conditions for `find`:
 
 ```php
 $usuarios = (new Usuario)->find( "estado='A'");
 ```
 
-Se puede utilizar la propiedad count para saber cuántos registros fueron devueltos en la búsqueda.
+You can use the `count` property to determine how many records were returned by the search.
 
-Nota: No es necesario usar find('id: $id'), se puede usar directamente find($id)
+Note: It is not necessary to use `find('id: $id')`; you can use `find($id)` directly.
 
-Podemos ver un ejemplo para **find** usando funciones de resumen y agrupación (aplicables también a **find_first**)
+The following is an example of using aggregate and grouping functions with **find**; the same approach also applies to **find_first**.
 
 ```php
 $resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(*) as num_facturas", "group: agencia_origen, agencia_destino", "having: count(*) > 5");
 ```
 
-#### select_one (string $select_query)
+#### select_one(string $select_query)
 
-Este método nos permite hacer ciertas consultas como ejecutar funciones en el motor de base de datos sabiendo que éstas devuelven un único registro.
+This method allows you to execute queries such as database-engine functions when you know that they return a single record.
 
 ```php
 $current_time = (new Usuario)->select_one( "current_time");
 ```
 
-En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL, podemos usar este método para esto.
+In this example, the method is used to obtain the current server time returned by MySQL.
 
 #### select_one(string $select_query) (static)
 
-Este método nos permite hacer ciertas consultas como ejecutar funciones en el motor de base de datos, sabiendo que estas devuelven un solo registro. Este método se puede llamar de forma estática, esto significa que no es necesario que haya una instancia de ActiveRecord para hacer el llamado.
+This method allows you to execute queries such as database-engine functions when you know that they return a single record. It can be called statically, so an ActiveRecord instance is not required.
 
 ```php
 $current_time = ActiveRecord::select_one( "current_time");
 ```
 
-En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL, podemos usar este método para esto.
+In this example, the method is called statically to obtain the current server time returned by MySQL.
 
 #### exists()
 
-Este método nos permite verificar si el registro existe o no en la base de datos mediante su id o una condición.
+This method checks whether a record exists in the database by its ID or a condition.
 
 ```php
 $usuario = new Usuario();
@@ -440,42 +440,42 @@ $usuario = new Usuario();
 $usuario->id  = 3;
 
 if ($usuario->exists()){
-  //El usuario con id igual a 3 si existe
+  // The user with ID 3 exists.
 }
 
 (new Usuario)->exists( "nombre='Juan Perez'")
-(new Usuario)->exists(2); // Un Usuario con id->2?
+  (new Usuario)->exists(2); // A Usuario with ID 2?
 ```
 
 #### find_all_by()
 
-Este método nos permite realizar una búsqueda por algún campo
+This method searches by a field.
 
 ```php
 $resultado = (new Producto)->find_all_by( 'categoria', 'Insumos');
 ```
 
-#### find_by__campo_()
+#### find_by__field_()
 
-Este método nos permite realizar una búsqueda usando el nombre del atributo como nombre de método. Devuelve un único registro.
+This method searches by using the attribute name as part of the method name. It returns a single record.
 
 ```php
 $resultado = (new Producto)->find_by_categoria('Insumos');
 ```
 
-#### find_all_by__campo_()
+#### find_all_by__field_()
 
-Este método nos permite realizar una búsqueda el nombre del atributo como nombre de método. Devuelve todos los registros que coincidan con la búsqueda.
+This method searches by using the attribute name as part of the method name. It returns all records that match the search.
 
 ```php
 $resultado = (new Producto)->find_all_by_categoria("Insumos");
 ```
 
-### Conteos y sumatorias
+### Counts and sums
 
 #### count()
 
-Realiza un conteo sobre los registros de la entidad con o sin alguna condición adicional. Emula la función de agrupamiento count. Se puede usar los mismos parámetros que find.
+Counts the entity's records with or without an additional condition. It emulates the SQL `count` aggregate function and accepts the same parameters as `find`.
 
 ```php
 $numero_registros = (new Cliente)->count();
@@ -484,7 +484,7 @@ $numero_registros = (new Cliente)->count("ciudad = 'BOGOTA'");
 
 #### sum()
 
-Realiza una sumatoria sobre los valores numéricos del atributo de alguna entidad, emula la función de agrupamiento sum en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Calculates the sum of the numeric values of an entity attribute. It emulates the SQL `sum` aggregate function and accepts the same parameters as `find`.
 
 ```php
 $suma = (new Producto)->sum("precio");
@@ -493,18 +493,18 @@ $suma = (new Producto)->sum("precio", "conditions: estado = 'A'");
 
 #### count_by_sql()
 
-Realiza un conteo sobre los registros de la entidad utilizando lenguaje SQL.
+Counts the entity's records using SQL.
 
 ```php
 $numero = (new Producto)->count_by_sql("select count(precio) from producto, factura  where factura.codigo = 1124 \
     and factura.codigo_producto = producto.codigo_producto");
 ```
 
-### Promedios, máximo y mínimo
+### Averages, maximum, and minimum
 
 #### average()
 
-Realiza el cálculo del promedio sobre los valores numéricos del atributo de alguna entidad, emula la función de agrupamiento avg en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Calculates the average of the numeric values of an entity attribute. It emulates the SQL `avg` aggregate function and accepts the same parameters as `find`.
 
 ```php
 $promedio = (new Producto)->average("precio");
@@ -513,7 +513,7 @@ $promedio = (new Producto)->average("precio", "conditions: estado = 'A'");
 
 #### maximum()
 
-Realiza el cálculo del valor máximo sobre los valores del atributo de alguna entidad, emula la función de agrupamiento max en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Calculates the maximum value of an entity attribute. It emulates the SQL `max` aggregate function and accepts the same parameters as `find`.
 
 ```php
 $max = (new Producto)->maximum("precio");
@@ -522,18 +522,18 @@ $max = (new Producto)->maximum("fecha_compra", "conditions: estado = 'A'");
 
 #### minimum()
 
-Realiza el cálculo del valor mínimo sobre los valores del atributo de alguna entidad, emula la función de agrupamiento min en el lenguaje SQL. Se puede usar los mismos parámetros que find.
+Calculates the minimum value of an entity attribute. It emulates the SQL `min` aggregate function and accepts the same parameters as `find`.
 
 ```php
 $min = (new Producto)->minimum("precio");
 $min = (new Producto)->minimum("fecha_compra", "conditions: estado = 'A'");
 ```
 
-### Creación, actualización y borrado de registros
+### Creating, updating, and deleting records
 
 #### create()
 
-Crea un registro a partir de los datos indicados en el modelo. Retorna boolean.
+Creates a record from the data provided to the model. Returns a boolean.
 
 ```php
 $data = array ( "nombre" => "Cereal", "precio" => 9.99, "estado" => "A" );
@@ -548,7 +548,7 @@ $exito = $producto->create();
 
 #### save()
 
-Actualiza o crea un registro a partir de los datos indicados en el modelo. Crea el registro cuando el elemento a guardar no existe o cuando no se indica el atributo de clave primaria. Actualiza cuando el registro existe. Retorna boolean.
+Updates or creates a record from the data provided to the model. It creates the record when the item to save does not exist or when the primary-key attribute is not provided. It updates the record when it already exists. Returns a boolean.
 
 ```php
 $data = array ("nombre" => "Cereal", "precio" => 9.99, "estado" => "A" );
@@ -562,7 +562,7 @@ $exito = $producto->save();
 
 #### update()
 
-Actualiza un registro a partir de los datos indicados en el modelo. Retorna boolean.
+Updates a record from the data provided to the model. Returns a boolean.
 
 ```php
 $data = array ("nombre" => "Cereal Integral", "precio" => 8.99, "estado" => "A", "id" => 123);
@@ -575,44 +575,44 @@ $producto->update();
 
 #### update_all()
 
-Actualiza uno o más valores dentro de uno o más registros a partir de los atributos y condiciones indicadas.
+Updates one or more values in one or more records according to the specified attributes and conditions.
 
-Ejemplos:
+Examples:
 
 ```php
 (new Producto)->update_all("precio = precio * 1.2");
 ```
 
-Actualiza el atributo precio aumentándolo en un 20% para todos los registros de la entidad producto.
+Increases the `precio` attribute by 20% for every record in the `producto` entity.
 
 ```php
 (new Producto)->update_all("precio = precio * 1.2", "estado = 'A'", "limit: 100");
 ```
 
-Actualiza el atributo precio aumentándolo en un 20% para 100 registros de la entidad producto donde el atributo estado es 'A'.
+Increases the `precio` attribute by 20% for 100 records in the `producto` entity where the `estado` attribute is `A`.
 
 ```php
 (new Producto)->update_all( "precio = 0, estado='C'", "estado = 'B'");
 ```
 
-Actualiza el atributo precio a 0 y el estado a 'C' para todos los registros de la entidad producto donde el atributo estado es 'B'.
+Sets the `precio` attribute to 0 and `estado` to `C` for every record in the `producto` entity where `estado` is `B`.
 
 #### delete()
 
-Elimina uno o más registros a partir de los atributos y condiciones indicadas. Retorna boolean.
+Deletes one or more records according to the specified attributes and conditions. Returns a boolean.
 
 ```php
 $producto = (new Producto)->find(123);
 $exito = $producto->delete();
 
-(new Producto)->delete(123); //elimina el registro por su ID
+(new Producto)->delete(123); // deletes the record by its ID
 
 $exito = (new Producto)->delete("estado='A'");
 ```
 
 #### delete_all()
 
-Elimina uno o más registros a partir de los atributos y condiciones indicadas. Retorna boolean.
+Deletes one or more records according to the specified attributes and conditions. Returns a boolean.
 
 ```php
 (new Producto)->delete_all( " precio >= 99.99 " );
@@ -620,16 +620,16 @@ Elimina uno o más registros a partir de los atributos y condiciones indicadas. 
 (new Producto)->delete_all( " estado = 'C' " );
 ```
 
-### Validaciones
+### Validations
 
 #### validates_presence_of
 
-Cuando este método es llamado desde el constructor de una clase ActiveRecord, obliga a que se valide la presencia de los campos definidos en la lista. Los campos marcados como not\_null en la tabla son automáticamente validados.
+When this method is called from an ActiveRecord class constructor, it requires the fields defined in the list to be present. Fields marked as `not_null` in the table are validated automatically.
 
 ```php
 <?php
  class Clientes extends ActiveRecord {
-   protected function initialize{
+   protected function initialize(){
     $this->validates_presence_of("cedula");
    }
  }
@@ -638,20 +638,20 @@ Cuando este método es llamado desde el constructor de una clase ActiveRecord, o
 
 #### validates_length_of
 
-Cuando este método es llamado desde el constructor de una clase ActiveRecord, obliga a que se valide la longitud de los campos definidos en la lista.
+When this method is called from an ActiveRecord class constructor, it requires the length of the fields defined in the list to be validated.
 
-El parámetro minimum indica que se debe validar que el valor a insertar o actualizar no sea menor de ese tamaño. El parámetro maximum indica que el valor a insertar/actualizar no puede ser mayor al indicado. El parámetro too\_short indica el mensaje personalizado que ActiveRecord mostrará en caso de que falle la validación cuando es menor y too\_long cuando es muy largo.
+The `minimum` parameter validates that the value being inserted or updated is not shorter than the specified length. The `maximum` parameter validates that the value is not longer than the specified length. The `too_short` parameter specifies the custom message that ActiveRecord displays when the value is too short, and `too_long` specifies the message displayed when it is too long.
 
 ```php
 <?php
 class Clientes extends ActiveRecord {
 
   protected function initialize(){
-   $this->validates_length_of("nombre", "minumum: 15", "too_short: El nombre debe tener al menos 15 caracteres");
-   $this->validates_length_of("nombre", "maximum: 40", "too_long: El nombre debe tener maximo 40 caracteres");
+   $this->validates_length_of("nombre", "minimum: 15", "too_short: The name must contain at least 15 characters");
+   $this->validates_length_of("nombre", "maximum: 40", "too_long: The name must contain at most 40 characters");
    $this->validates_length_of("nombre", "in: 15:40",
-      "too_short: El nombre debe tener al menos 15 caracteres",
-      "too_long: El nombre debe tener maximo 40 caracteres"
+       "too_short: The name must contain at least 15 characters",
+       "too_long: The name must contain at most 40 characters"
    );
   }
 }
@@ -659,13 +659,13 @@ class Clientes extends ActiveRecord {
 
 #### validates_numericality_of
 
-Valida que ciertos atributos tengan un valor numérico antes de insertar ó actualizar.
+Validates that specific attributes have a numeric value before insertion or update.
 
 ```php
 <?php
  class Productos extends ActiveRecord {
 
-   protected function initialize{
+   protected function initialize(){
     $this->validates_numericality_of("precio");
    }
 
@@ -674,7 +674,7 @@ Valida que ciertos atributos tengan un valor numérico antes de insertar ó actu
 
 #### validates_email_in
 
-Valida que ciertos atributos tengan un formato de e-mail correcto antes de insertar o actualizar.
+Validates that specific attributes have a valid email format before insertion or update.
 
 ```php
 <?php
@@ -689,13 +689,13 @@ Valida que ciertos atributos tengan un formato de e-mail correcto antes de inser
 
 #### validates_uniqueness_of
 
-Valida que ciertos atributos tengan un valor único antes de insertar o actualizar.
+Validates that specific attributes have a unique value before insertion or update.
 
 ```php
 <?php
  class Clientes extends ActiveRecord {
 
-   protected function initialize{
+   protected function initialize(){
     $this->validates_uniqueness_of("cedula");
    }
 
@@ -704,7 +704,7 @@ Valida que ciertos atributos tengan un valor único antes de insertar o actualiz
 
 #### validates_date_in
 
-Valida que ciertos atributos tengan un formato de fecha acorde al indicado en config/config.ini antes de insertar o actualizar.
+Validates that specific attributes have a date format matching the one specified in `config/config.ini` before insertion or update.
 
 ```php
 <?php
@@ -718,26 +718,26 @@ Valida que ciertos atributos tengan un formato de fecha acorde al indicado en co
 
 #### validates_format_of
 
-Valida que el campo tenga determinado formato según una expresión regular antes de insertar o actualizar.
+Validates that a field has a specific format according to a regular expression before insertion or update.
 
 ```php
 <?php
  class Clientes extends ActiveRecord {
 
    protected function initialize(){
-    $this->validates_format_of("email", "^(+)@((?:[?a?z0?9]+\.)+[a?z]{2,})$");
+     $this->validates_format_of("email", "^[^@]+@((?:[a-z0-9]+\.)+[a-z]{2,})$");
    }
 
  }
 ```
 
-### Transacciones
+### Transactions
 
 #### commit()
 
-Este método nos permite confirmar una transacción iniciada por el método begin en el motor de base de datos, si este lo permite. Devuelve true en caso de éxito y false en caso contrario.
+This method commits a transaction started by `begin` in the database engine, if supported. It returns `true` on success and `false` otherwise.
 
-Ejemplo:
+Example:
 
 ```php
 $Usuarios = new Usuarios();
@@ -746,9 +746,9 @@ $Usuarios->commit();
 
 #### begin()
 
-Este método nos permite crear una transacción en el motor de base de datos, si este lo permite. Devuelve true en caso de éxito y false en caso contrario.
+This method creates a transaction in the database engine, if supported. It returns `true` on success and `false` otherwise.
 
-Ejemplo:
+Example:
 
 ```php
 $Usuarios = new Usuarios();
@@ -757,84 +757,84 @@ $Usuarios->begin();
 
 #### rollback()
 
-Este método nos permite anular una transacción iniciada por el método begin en el motor de base de datos, sí este lo permite. Devuelve true en caso de éxito y false en caso contrario.
+This method rolls back a transaction started by `begin` in the database engine, if supported. It returns `true` on success and `false` otherwise.
 
-Ejemplo:
+Example:
 
 ```php
 $Usuarios = new Usuarios();
 $Usuarios->rollback();
 ```
 
-**Nota:** Las tablas deben tener el motor de almacenamiento \[InnoDB\][1](http://es.wikipedia.org/wiki/InnoDB)
+**Note:** Tables must use the [InnoDB](https://en.wikipedia.org/wiki/InnoDB) storage engine.
 
-### Otros métodos
+### Other methods
 
-#### sql (string $sql)
+#### sql(string $sql)
 
-Esta función nos permite ejecutar sentencias SQL directamente en el motor de base de datos. La idea es que el uso de este método no debería ser común en nuestras aplicaciones ya que ActiveRecord se encarga de eliminar el uso del SQL en gran porcentaje, pero hay momentos en que es necesario que seamos más específicos y tengamos que recurrir al uso de éste.
+This function executes SQL statements directly in the database engine. It should not be used frequently because ActiveRecord eliminates much of the need for SQL, but it is useful when a more specific query is required.
 
 ### Callbacks
 
 #### Introduction
 
-El ActiveRecord controla el ciclo de vida de los objetos creados y leídos, supervisando cuando se modifican, se almacenan o se borran. Usando callbacks (o eventos), el ActiveRecord nos permite intervenir en esta supervisión. Podemos escribir el código que pueda ser invocado en cualquier evento significativo en la vida de un objeto. Con los callbacks podemos realizar validación compleja, revisar los valores que vienen desde y hacia la base de datos, e incluso evitar que ciertas operaciones finalicen. Un ejemplo de estos callbacks puede ser una validación en productos que evita que productos ‘activos’ sean borrados.
+ActiveRecord controls the life cycle of created and read objects, monitoring when they are modified, saved, or deleted. Using callbacks (or events), ActiveRecord lets you intervene in this monitoring. You can write code that is invoked at any significant event in an object's life. Callbacks can perform complex validation, inspect values moving to and from the database, and even prevent certain operations from completing. For example, a callback can prevent active products from being deleted.
 
 ```php
 <?php
 class User extends ActiveRecord {
 
-     public $before_delete = “no_borrar_activos”;
+     public $before_delete = "no_borrar_activos";
 
      public function no_borrar_activos(){
-        if($this->estado==’A’){
-          Flash::error(‘No se puede borrar Productos Activos’);
-          return ‘cancel’;
+         if($this->estado == 'A'){
+           Flash::error('Active products cannot be deleted');
+           return 'cancel';
         }
      }
 
      public function after_delete(){
-          Flash::success("Se borro el usuario $this->nombre");
+           Flash::success("User $this->nombre was deleted");
      }
 
 }
 ```
 
-A continuación otros callbacks que podemos encontrar en ActiveRecord. El orden en el que son presentados es en el que se llaman si están definidos:
+The following callbacks are also available in ActiveRecord. They are listed in the order in which they are called when defined:
 
 #### before_validation
 
-Es llamado justo antes de realizar el proceso de validación por parte de Kumbia. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately before Kumbia performs validation. The current action can be canceled when this method returns the word `cancel`.
 
 #### before_validation_on_create
 
-Es llamado justo antes de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de inserción en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately before Kumbia performs validation, but only when a model record is being inserted. The current action can be canceled when this method returns the word `cancel`.
 
 #### before_validation_on_update
 
-Es llamado justo antes de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de actualización en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately before Kumbia performs validation, but only when a model record is being updated. The current action can be canceled when this method returns the word `cancel`.
 
 #### after_validation_on_create
 
-Es llamado justo después de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de inserción en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately after Kumbia performs validation, but only when a model record is being inserted. The current action can be canceled when this method returns the word `cancel`.
 
 #### after_validation_on_update
 
-Es llamado justo después de realizar el proceso de validación por parte de Kumbia, sólo cuando se realiza un proceso de actualización en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately after Kumbia performs validation, but only when a model record is being updated. The current action can be canceled when this method returns the word `cancel`.
 
 #### after_validation
 
-Es llamado justo después de realizar el proceso de validación por parte de Kumbia. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately after Kumbia performs validation. The current action can be canceled when this method returns the word `cancel`.
 
 #### before_save
 
-Es llamado justo antes de realizar el proceso de guardar, metodo **save()** y al momento de editar/actualizar, metodo **update()** en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately before a model is saved through **save()**, and when it is edited or updated through **update()**. The current action can be canceled when this method returns the word `cancel`.
 
 ```php
 public function before_save() {            
     $rs = $this->find_first("cedula = $this->cedula");
     if($rs) {
-        Flash::warning("Ya existe un usuario registrado bajo esta cedula");
+         Flash::warning("A user with this ID number is already registered");
         return 'cancel';
     }                
 }
@@ -842,71 +842,71 @@ public function before_save() {
 
 #### before_update
 
-Es llamado justo antes de realizar el proceso de actualización cuando se llama el método save o update en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'. El mismo codigo del before\_save() para before\_update.
+Called immediately before a model is updated when the `save` or `update` method is called. The current action can be canceled when this method returns the word `cancel`. The code is the same as for `before_save()`.
 
 #### before_create
 
-Es llamado justo antes de realizar el proceso de inserción cuando se llama el método save o create en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately before a model is inserted when the `save` or `create` method is called. The current action can be canceled when this method returns the word `cancel`.
 
 #### after_update
 
-Es llamado justo después de realizar el proceso de actualización cuando se llama el método save o update en un modelo.
+Called immediately after a model is updated when the `save` or `update` method is called.
 
 #### after_create
 
-Es llamado justo después de realizar el proceso de actualización cuando se llama el método save o create en un modelo.
+Called immediately after a model is inserted when the `save` or `create` method is called.
 
 #### after_save
 
-Es llamado justo después de realizar el proceso de actualización/inserción cuando se llama el método save, update ó create en un modelo.
+Called immediately after a model is updated or inserted when the `save`, `update`, or `create` method is called.
 
 #### before_delete
 
-Es llamado justo antes de realizar el proceso de borrado cuando se llama el método delete en un modelo. Se puede cancelar la acción que se esté realizando si este método devuelve la palabra 'cancel'.
+Called immediately before a model is deleted when the `delete` method is called. The current action can be canceled when this method returns the word `cancel`.
 
 #### after_delete
 
-Es llamado justo después de realizar el proceso de borrado cuando se llama el método delete en un modelo.
+Called immediately after a model is deleted when the `delete` method is called.
 
-### Asociaciones
+### Associations
 
 #### Introduction
 
-Muchas aplicaciones trabajan con múltiples tablas en una base de datos y normalmente hay relaciones entre esas tablas. Por ejemplo, una ciudad puede ser el hogar de muchos clientes pero un cliente solo tiene una ciudad. En un esquema de base de datos, estas relaciones son enlazadas mediante el uso de llaves primarias y foráneas.
+Many applications use multiple database tables, and those tables usually have relationships. For example, a city can be home to many clients, while a client has only one city. In a database schema, these relationships are linked through primary and foreign keys.
 
-Como ActiveRecord trabaja con la convención: La llave foránea tiene el nombre de la tabla y termina en id, así: ciudad\_id, esto es una relación a la tabla ciudad a su llave primaria id.
+ActiveRecord follows the convention that a foreign key is named after the table and ends in `id`; for example, `ciudad_id` relates to the `ciudad` table through its `id` primary key.
 
-Así que, sabiendo esto, quisiéramos que en vez de decir:
+With this convention, instead of writing:
 
 ```php
 $ciudad_id = $cliente->ciudad_id;
-$ciudad = $Ciudad->find($ciudad_id);
+$ciudad = (new Ciudad)->find($ciudad_id);
 echo $ciudad->nombre;
 ```
 
-Mejor sería:
+it would be better to write:
 
 ```php
 echo $cliente->getCiudad()->nombre;
 ```
 
-Gran parte de la magia que tiene ActiveRecord es esto, ya que convierte las llaves foráneas en sentencias de alto nivel, fáciles de comprender y de trabajar.
+This is part of ActiveRecord's convenience: it turns foreign keys into high-level statements that are easier to understand and use.
 
-#### Belongs (belongs_to)
+#### Belongs to (belongs_to)
 
-Este tipo de relación se efectúa con el método “belongs\_to”, en esta la llave foránea se encuentra en la tabla del modelo de donde se invoca el método. Corresponde a una relación uno a uno en el modelo entidad relación.
+This relationship is defined with the `belongs_to` method. The foreign key is in the table of the model from which the method is called. It represents a one-to-one relationship in the entity-relationship model.
 
 belongs\_to($relation)
 
-$relation (string): nombre de la relación.
+$relation (string): relationship name.
 
-**Parámetros con nombre:**
+**Named parameters:**
 
-model: Nombre del tipo de modelo que debe retornar la consulta de la relación. Por defecto se considera un modelo que corresponda al nombre de la relación. Ejemplo: Si $relation='auto\_volador', entonces model=AutoVolador
+model: Type of model that the relationship query must return. By default, the model corresponding to the relationship name is used. For example, if `$relation='auto_volador'`, then `model=AutoVolador`.
 
-fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
+fk: Foreign-key name used for the relationship. By default, the relationship name with the `_id` suffix is used. For example, if `$relation='auto_volador'`, then `fk=auto_volador_id`.
 
-**Ejemplos de uso:**
+**Usage examples:**
 
 ```php
 $this->belongs_to('persona');
@@ -914,7 +914,7 @@ $this->belongs_to('vendedor', 'model: Persona');
 $this->belongs_to('funcionario', 'model: Persona', 'fk: persona_id');
 ```
 
-**En el modelo Libro:**
+**In the `Libro` model:**
 
 ```php
 class Libro extends ActiveRecord {
@@ -924,21 +924,21 @@ class Libro extends ActiveRecord {
 }
 ```
 
-#### Has_one
+#### Has one
 
-Este tipo de relación se efectúa con el método “has\_one”, en esta la llave foránea se encuentra en la tabla del modelo con el que se quiere asociar. Corresponde a una relación uno a uno en el modelo entidad relación.
+This relationship is defined with the `has_one` method. The foreign key is in the table of the model being associated. It represents a one-to-one relationship in the entity-relationship model.
 
 has\_one($relation)
 
-$relation (string): nombre de la relación.
+$relation (string): relationship name.
 
-**Parámetros con nombre:**
+**Named parameters:**
 
-model: Nombre del tipo de modelo que debe retornar la consulta de la relación. Por defecto se considera un modelo que corresponda al nombre de la relación. Ejemplo: Si $relation='auto\_volador', entonces model=AutoVolador
+model: Type of model that the relationship query must return. By default, the model corresponding to the relationship name is used. For example, if `$relation='auto_volador'`, then `model=AutoVolador`.
 
-fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
+fk: Foreign-key name used for the relationship. By default, the relationship name with the `_id` suffix is used. For example, if `$relation='auto_volador'`, then `fk=auto_volador_id`.
 
-**Ejemplos de uso:**
+**Usage examples:**
 
 ```php
 $this->has_one('persona');
@@ -946,7 +946,7 @@ $this->has_one('vendedor', 'model: Persona');
 $this->has_one('funcionario', 'model: Persona', 'fk: personal_id');
 ```
 
-En el modelo Persona:
+In the `Persona` model:
 
 ```php
 class Persona extends ActiveRecord {
@@ -956,21 +956,21 @@ class Persona extends ActiveRecord {
 }
 ```
 
-#### Has_many
+#### Has many
 
-Este tipo de relación se efectúa con el método “has\_many”, en esta la llave foránea se encuentra en la tabla del modelo con el que se quiere asociar. Corresponde a una relación uno a muchos en el modelo entidad relación.
+This relationship is defined with the `has_many` method. The foreign key is in the table of the model being associated. It represents a one-to-many relationship in the entity-relationship model.
 
 has\_many($relation)
 
-$relation (string): nombre de la relación.
+$relation (string): relationship name.
 
-**Parámetros con nombre:**
+**Named parameters:**
 
-model: Nombre del tipo de modelo que debe retornar la consulta de la relación. Por defecto se considera un modelo que corresponda al nombre de la relación. Ejemplo: Si $relation='auto\_volador', entonces model=AutoVolador
+model: Type of model that the relationship query must return. By default, the model corresponding to the relationship name is used. For example, if `$relation='auto_volador'`, then `model=AutoVolador`.
 
-fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
+fk: Foreign-key name used for the relationship. By default, the relationship name with the `_id` suffix is used. For example, if `$relation='auto_volador'`, then `fk=auto_volador_id`.
 
-**Ejemplos de uso:**
+**Usage examples:**
 
 ```php
 $this->has_many('persona');
@@ -978,7 +978,7 @@ $this->has_many('vendedor', 'model: Persona');
 $this->has_many('funcionario', 'model: Persona', 'fk: personal_id');
 ```
 
-En el modelo Persona:
+In the `Persona` model:
 
 ```php
 class Persona extends ActiveRecord {
@@ -988,32 +988,32 @@ class Persona extends ActiveRecord {
 }
 ```
 
-#### Has_and_belongs_to_many
+#### Has and belongs to many
 
-Este tipo de relación se efectúa con el método “has\_and\_belongs\_to\_many”, esta se efectúa a través de una tabla que se encarga de enlazar los dos modelos. Corresponde a una relación muchos a muchos en el modelo entidad relación. Este tipo de relación tiene la desventaja de que no es soportada en el ámbito de múltiples conexiones de ActiveRecord, para lograr que funcione con multiples conexiones, se puede emular a través de dos relaciones has\_many al modelo de la tabla que relaciona.
+This relationship is defined with the `has_and_belongs_to_many` method through a table that links the two models. It represents a many-to-many relationship in the entity-relationship model. A limitation is that this relationship is not supported across multiple ActiveRecord connections. To make it work with multiple connections, you can emulate it through two `has_many` relationships to the model represented by the linking table.
 
 has\_and\_belongs\_to\_many($relation)
 
-$relation (string): nombre de la relación.
+$relation (string): relationship name.
 
-**Parámetros con nombre:**
+**Named parameters:**
 
-model: Nombre del tipo de modelo que debe retornar la consulta de la relación. Por defecto se considera un modelo que corresponda al nombre de la relación. Ejemplo: Si $relation='auto\_volador', entonces model=AutoVolador
+model: Type of model that the relationship query must return. By default, the model corresponding to the relationship name is used. For example, if `$relation='auto_volador'`, then `model=AutoVolador`.
 
-fk: nombre de la llave foránea mediante la cual se relaciona. Por defecto se considera el nombre de la relación con el sufijo “\_id”. Ejemplo: Si $relation='auto\_volador', entonces fk=auto\_volador\_id.
+fk: Foreign-key name used for the relationship. By default, the relationship name with the `_id` suffix is used. For example, if `$relation='auto_volador'`, then `fk=auto_volador_id`.
 
-key: nombre del campo que contendrá el valor de la llave primaria en la tabla intermedia que contendrá los campos de la relación. Por defecto corresponde al nombre del modelo con que se va a relacionar con el sufijo “\_id”.
+key: Field that contains the primary-key value in the intermediate table containing the relationship fields. By default, it is the related model name with the `_id` suffix.
 
-through: tabla a través de la cual se establece la relación muchos a muchos. Por defecto se forma por el nombre de la tabla del modelo que tiene el nombre de tabla mas largo y como prefijo un “\_” y el nombre de la tabla del otro modelo.
+through: Table through which the many-to-many relationship is established. By default, it is formed from the name of the model table with the longer name, prefixed with `_`, followed by the other model table name.
 
-**Ejemplos de uso:**
+**Usage examples:**
 
 ```php
 $this->has_and_belongs_to_many('persona');
 $this->has_and_belongs_to_many('cargos', 'model: Cargo', 'fk: id_cargo', 'key: id_persona', 'through: cargo_persona');
 ```
 
-**En el modelo Persona:**
+**In the `Persona` model:**
 
 ```php
 class Persona extends ActiveRecord {
@@ -1023,76 +1023,76 @@ class Persona extends ActiveRecord {
 }
 ```
 
-### Paginadores
+### Paginators
 
-Para la paginación existen dos funciones encargadas de esto:
+Pagination is handled by two functions:
 
 #### Paginate
 
-Este es capaz de paginar arrays o modelos, recibe los siguientes parámetros:
+This function can paginate arrays or models and accepts the following parameters.
 
-Para array:
+For an array:
 
-**$s** : array a paginar.
+**$s**: array to paginate.
 
-**page**: numero de página.
+**page**: page number.
 
-**per\_page**: cantidad de elementos por página.
+**per_page**: number of items per page.
 
-**Ejemplo:**
+**Example:**
 
 ```php
 $page = paginate($s, 'per_page: 5', 'page: 1');
 ```
 
-Para modelo:
+For a model:
 
-**$s**: string con nombre de modelo u objeto ActiveRecord.
+**$s**: model name as a string or an ActiveRecord object.
 
-**page**: número de página.
+**page**: page number.
 
-**per\_page**: cantidad de elementos por página.
+**per_page**: number of items per page.
 
-Asimismo recibe todos los parámetros que pueden utilizarse en el método “find” de ActiveRecord.
+It also accepts all parameters that can be used with the ActiveRecord `find` method.
 
-**Ejemplos:**
+**Examples:**
 
 ```php
-$page = paginate('usuario', 'NOT login=”admin”', 'order: login ASC', 'per_page: 5', 'page: 1');
-$page = paginate($this->Usuario, 'NOT login=”admin”', 'order: login ASC', 'per_page: 5', 'page: 1');
+$page = paginate('usuario', 'NOT login="admin"', 'order: login ASC', 'per_page: 5', 'page: 1');
+$page = paginate($this->Usuario, 'NOT login="admin"', 'order: login ASC', 'per_page: 5', 'page: 1');
 ```
 
 #### Paginate_by_sql
 
-Efectúa paginación a través de una consulta sql. Recibe los siguientes parámetros:
+Paginates through an SQL query. It accepts the following parameters:
 
-**$model**: string nombre de modelo o objeto ActiveRecord.
+**$model**: model name as a string or an ActiveRecord object.
 
-**$sql**: string consulta sql.
+**$sql**: SQL query as a string.
 
-**Ejemplo:**
+**Example:**
 
 ```php
-$page = paginate_by_sql('usuario', 'SELECT * FROM usuario WHERE nombre LIKE “%emilio%” ', 'per_page: 5', 'page: 1');
+$page = paginate_by_sql('usuario', 'SELECT * FROM usuario WHERE nombre LIKE "%emilio%" ', 'per_page: 5', 'page: 1');
 ```
 
-Ambos tipos de paginadores retornan un objeto “page”, este objeto “page” es creado a partir de stdClass, contiene los siguientes atributos:
+Both paginators return a `page` object created from `stdClass`. It contains the following attributes:
 
-**next**: número de página siguiente, si no hay pagina siguiente vale “false”.
+**next**: next page number, or `false` when there is no next page.
 
-**prev**: número de página anterior, si no hay pagina anterior vale “false”.
+**prev**: previous page number, or `false` when there is no previous page.
 
-**current**: número de página actual.
+**current**: current page number.
 
-**total**: número de paginas totales.
+**total**: total number of pages.
 
-**items**: array de elementos paginados.
+**items**: array of paginated items.
 
 #### Paging in ActiveRecord
 
-ActiveRecord ya trae integrado los métodos paginate y paginate\_by\_sql, se comportan igual que paginate y paginate\_by\_sql, sin embargo no es necesario pasar el modelo a paginar ya que por defecto toman el modelo que invoca.
+ActiveRecord also includes the `paginate` and `paginate_by_sql` methods. They behave like the standalone functions, but you do not need to pass the model to paginate because they use the calling model by default.
 
-**Ejemplo:**
+**Example:**
 
 ```php
 $page = $this->Usuario->paginate('per_page: 5', 'page: 1');
@@ -1100,9 +1100,9 @@ $page = $this->Usuario->paginate('per_page: 5', 'page: 1');
 
 #### Full example of use of the pager:
 
-Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, aprovecharemos la persistencia de datos del controlador para hacer una paginación inmune a inyección sql.
+Suppose there is a `usuario` table with its corresponding `Usuario` model. The following controller paginates a list of users and allows searching by name. It uses controller data persistence to make pagination resistant to SQL injection.
 
-El modelo *usuario.php*:
+The *usuario.php* model:
 
 ```php
 <?php
@@ -1111,7 +1111,7 @@ class Usuario extends ActiveRecord {
 }
 ```
 
-En el controlador *usuario_controller.php*:
+In the *usuario_controller.php* controller:
 
 ```php
 <?php
@@ -1123,20 +1123,20 @@ class UsuarioController extends AppController{
     private $_per_page = 10;
 
     /**
-     * Formulario de busqueda
+      * Search form
      * */
     public function index() {
         Input::delete();
     }
 
     /**
-     * Paginador
+      * Paginator
      * */
     public function listar($page = '') {
 
         $usuario = new Usuario();
         /**
-         * Cuando se efectua la búsqueda por primera vez
+         * When the search is performed for the first time
          * */
         if (Input::hasPost('usuario')) {
             $data = Input::post('usuario');
@@ -1144,25 +1144,25 @@ class UsuarioController extends AppController{
                 $this->conditions = " nombre LIKE '%{$data['nombre']}%' ";
             }
             /**
-             * Paginador con condiciones o sin condiciones
+             * Paginator with or without conditions
              * */
             if (isset($this->conditions) && $this->conditions) {
                 $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", 'page: 1');
             } else {
-                $this->page = $usuario->paginate("per_page: $this>_per_page", 'page: 1');
+                $this->page = $usuario->paginate("per_page: $this->_per_page", 'page: 1');
             }
-        } elseif ($page = 'next' && isset($this->page) && $this->page->next) {
+        } elseif ($page === 'next' && isset($this->page) && $this->page->next) {
             /**
-             * Paginador de pagina siguiente
+             * Paginator for the next page
              * */
             if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this>_per_page", "page: {$this->page->next}");
+                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", "page: {$this->page->next}");
             } else {
                 $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->next}");
             }
-        } elseif ($page = 'prev' && isset($this->page) && $this->page->prev) {
+        } elseif ($page === 'prev' && isset($this->page) && $this->page->prev) {
             /**
-             * Paginador de pagina anterior
+             * Paginator for the previous page
              * */
             if (isset($this->conditions) && $this->conditions) {
                 $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", "page: {$this->page->prev}");
@@ -1174,16 +1174,16 @@ class UsuarioController extends AppController{
 }
 ```
 
-En la vista *index.pthml*
+In the *index.phtml* view:
 
 ```php
 <?= Form::open('usuario/listar') ?>
 <?= Form::text('usuario.nombre') ?>
-<?= Form::submit('Consultar') ?>
+<?= Form::submit('Search') ?>
 <?= Form::close() ?>
 ```
 
-En la vista *listar.phtml*
+In the *listar.phtml* view:
 
 ```php
 <table>
@@ -1199,6 +1199,6 @@ En la vista *listar.phtml*
     <?php endforeach; ?>
 </table>
 <br>
-<?php if ($page->prev) echo Html::linkAction('listar/prev', 'Anterior') ?>
-<?php if ($page->next) echo ' | ' . Html::linkAction('listar/next', 'Siguiente') ?>
+<?php if ($page->prev) echo Html::linkAction('listar/prev', 'Previous') ?>
+<?php if ($page->next) echo ' | ' . Html::linkAction('listar/next', 'Next') ?>
 ```
