@@ -30,7 +30,7 @@ $cliente->save();
  * Código más fácil de Entender y Mantener
  * Reducción del uso del SQL en un 80%, con lo que se logra un alto porcentaje de independencia del motor de base de datos.
  * Menos "detalles", más práctico y util
- * ActiveRecord protege en un gran porcentaje de ataques de SQL inyection que puedan llegar a sufrir tus aplicaciones escapando caracteres que puedan facilitar estos ataques.
+ * ActiveRecord reduce el uso de SQL, pero no parametriza automáticamente las condiciones ni las consultas SQL recibidas como texto. No se deben interpolar datos no confiables en esas cadenas.
 
 ### Configurando conexión a la base de datos
 
@@ -293,6 +293,8 @@ alfabéticamente:
 ###  Consultas
 
 Métodos para hacer consulta de registros:
+
+**Advertencia de seguridad:** Las condiciones de `find()`, `find_first()`, `count()` y `paginate()` se incorporan al SQL como texto. `find_by_sql()`, `find_all_by_sql()`, `count_by_sql()`, `paginate_by_sql()` y `sql()` reciben SQL completo y no enlazan parámetros. No interpoles datos de `Input::post()`, `$_GET`, `$_POST` u otra fuente no confiable en esas cadenas. El filtrado o la sanitización de la entrada no sustituyen la parametrización SQL. `add_quotes()` genera un literal usando `addslashes()`; no es un mecanismo de parámetros enlazados ni una garantía portable. `h()` solo escapa HTML al renderizar y no protege las consultas SQL.
 
 ####  distinct ()
 
@@ -1116,6 +1118,8 @@ class Persona extends ActiveRecord {
 
 Para la paginación existen dos funciones encargadas de esto:
 
+**Limitación de seguridad:** la paginación no modifica las condiciones ni parametriza el SQL. Guardar una condición en `Session` solo conserva el texto; no evita la inyección SQL.
+
 #### Paginate
 
 Este es capaz de paginar arrays o modelos, recibe los siguientes parámetros:
@@ -1155,6 +1159,8 @@ $page = paginate($this->Usuario, 'NOT login=”admin”', 'order: login ASC', 'p
 
 Efectúa paginación a través de una consulta sql. Recibe los siguientes parámetros:
 
+La consulta recibida se ejecuta directamente para contar y obtener los registros; no concatene en ella datos no confiables.
+
 **$model**: string nombre de modelo o objeto ActiveRecord.
 
 **$sql**: string consulta sql.
@@ -1190,6 +1196,8 @@ $page = $this->Usuario->paginate('per_page: 5', 'page: 1');
 #### Ejemplo completo de uso del paginador:
 
 Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, guardaremos la búsqueda y la página actual en la sesión para conservarlas entre peticiones.
+
+**Advertencia:** la línea que construye `$conditions` interpola el valor recibido por POST en SQL y es insegura. La sesión solo conserva esa cadena; no la escapa ni la parametriza. Los métodos `paginate()` y `find()` de este ejemplo no ofrecen parámetros enlazados para esa condición, por lo que esta construcción no debe usarse con datos de una petición.
 
 El modelo *usuario.php*:
 
@@ -1299,3 +1307,5 @@ En la vista *listar.phtml*
 <?php if ($page->prev) echo Html::linkAction('listar/prev', 'Anterior') ?>
 <?php if ($page->next) echo ' | ' . Html::linkAction('listar/next', 'Siguiente') ?>
 ```
+
+`h($p->nombre)` solo escapa el valor al generar HTML; no modifica la consulta SQL del controlador ni hace segura la interpolación de `nombre`.
