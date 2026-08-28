@@ -724,7 +724,7 @@ Cuando este método es llamado desde el constructor de una clase ActiveRecord, o
 ```php
 <?php
  class Clientes extends ActiveRecord {
-   protected function initialize{
+   protected function initialize() {
     $this->validates_presence_of("cedula");
    }
  }
@@ -735,19 +735,17 @@ Cuando este método es llamado desde el constructor de una clase ActiveRecord, o
 
 Cuando este método es llamado desde el constructor de una clase ActiveRecord, obliga a que se valide la longitud de los campos definidos en la lista.
 
-El parámetro minimum indica que se debe validar que el valor a insertar o actualizar no sea menor de ese tamaño. El parámetro maximum indica que el valor a insertar/actualizar no puede ser mayor al indicado. El parámetro too\_short indica el mensaje personalizado que ActiveRecord mostrará en caso de que falle la validación cuando es menor y too\_long cuando es muy largo.
+El segundo argumento indica la longitud máxima y el tercero la mínima (por defecto, 0). Los mensajes opcionales se pasan como un arreglo asociativo en el cuarto argumento.
 
 ```php
 <?php
 class Clientes extends ActiveRecord {
 
-  protected function initialize(){
-   $this->validates_length_of("nombre", "minumum: 15", "too_short: El nombre debe tener al menos 15 caracteres");
-   $this->validates_length_of("nombre", "maximum: 40", "too_long: El nombre debe tener maximo 40 caracteres");
-   $this->validates_length_of("nombre", "in: 15:40",
-      "too_short: El nombre debe tener al menos 15 caracteres",
-      "too_long: El nombre debe tener maximo 40 caracteres"
-   );
+  protected function initialize() {
+    $this->validates_length_of("nombre", 40, 15, array(
+      "too_short" => "El nombre debe tener al menos 15 caracteres",
+      "too_long" => "El nombre no puede tener más de 40 caracteres"
+    ));
   }
 }
 ```
@@ -760,7 +758,7 @@ Valida que ciertos atributos tengan un valor numérico antes de insertar ó actu
 <?php
  class Productos extends ActiveRecord {
 
-   protected function initialize{
+   protected function initialize() {
     $this->validates_numericality_of("precio");
    }
 
@@ -790,7 +788,7 @@ Valida que ciertos atributos tengan un valor único antes de insertar o actualiz
 <?php
  class Clientes extends ActiveRecord {
 
-   protected function initialize{
+   protected function initialize() {
     $this->validates_uniqueness_of("cedula");
    }
 
@@ -820,7 +818,7 @@ Valida que el campo tenga determinado formato según una expresión regular ante
  class Clientes extends ActiveRecord {
 
    protected function initialize(){
-    $this->validates_format_of("email", "^(+)@((?:[?a?z0?9]+\.)+[a?z]{2,})$");
+    $this->validates_format_of("email", '/^[^@\s]+@((?:[a-z0-9]+\.)+[a-z]{2,})$/i');
    }
 
  }
@@ -876,17 +874,17 @@ El ActiveRecord controla el ciclo de vida de los objetos creados y leídos, supe
 <?php
 class User extends ActiveRecord {
 
-     public $before_delete = “no_borrar_activos”;
+     public $before_delete = "no_borrar_activos";
 
      public function no_borrar_activos(){
-        if($this->estado==’A’){
-          Flash::error(‘No se puede borrar Productos Activos’);
-          return ‘cancel’;
+        if($this->estado == 'A'){
+          Flash::error('No se puede borrar Productos Activos');
+          return 'cancel';
         }
      }
 
      public function after_delete(){
-          Flash::success("Se borro el usuario $this->nombre");
+          Flash::valid("Se borro el usuario $this->nombre");
      }
 
 }
