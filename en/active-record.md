@@ -22,17 +22,16 @@ $client->save(); //it creates a new record
 * The code is easier to understand and maintain.
 * SQL usage is reduced by approximately 80%, providing a high degree of independence from the database engine.
 * With fewer unnecessary details, the code is more practical and useful.
-* ActiveRecord protects applications against a large proportion of SQL injection attacks by escaping characters that could facilitate them.
+* ActiveRecord reduces the use of SQL, but it does not automatically parameterize conditions or SQL queries received as text. Do not interpolate untrusted data into those strings.
 
 ### Configuring Database Connection
 
 To configure the database connection, use the file [default/app/config/databases.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/databases.php).
-The configuration in [databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini)
-still works, but it's discouraged because using a PHP file is much faster and can leverage caching.
+The configuration in `databases.ini` remains supported as a fallback when `databases.php` does not exist, but using the PHP file is recommended.
 
-**Note:** KumbiaPHP will first look for the `databases.php` file to load information. If this file doesn't exist, it
-will attempt to obtain it from `databases.ini`. The same applies to other configuration files like `config.php` and
-`routes.php`.
+**Note:** KumbiaPHP first looks for `APP_PATH/config/<file>.php`; if it does not exist, it loads
+`APP_PATH/config/<file>.ini` as legacy compatibility. In the application template, the current paths are
+`default/app/config/databases.php`, `default/app/config/config.php`, and `default/app/config/routes.php`.
 
 This file stores the configuration in an array and returns it for use by ActiveRecord. You can create as many
 connections as needed, such as development, production, testing, etc. This is defined with the array's first key. For
@@ -237,15 +236,13 @@ that acts as a foreign key to this field.
 
 **field_at**
 
-Fields ending in `*_at*` indicate dates and have the extra functionality of automatically receiving the current date
-value when inserted.
+Fields ending in `*_at*` automatically receive the current date and time when inserted. Oracle uses only the date.
 
 *created_at* is a date field.
 
 **field_in**
 
-Fields ending in `*_in*` indicate dates and have the extra functionality of automatically receiving the current date
-value when updated.
+Fields ending in `*_in*` automatically receive the current date and time when updated. Oracle uses only the date.
 
 *modified_in* is a date field.
 
@@ -259,15 +256,19 @@ The following is a reference of the methods provided by the ActiveRecord class a
 
 Methods for querying records:
 
+**Security warning:** Conditions for `find()`, `find_first()`, `count()`, and `paginate()` are added to SQL as text. `find_by_sql()`, `find_all_by_sql()`, `count_by_sql()`, `paginate_by_sql()`, and `sql()` receive complete SQL and do not bind parameters. Do not interpolate data from `Input::post()`, `$_GET`, `$_POST`, or any other untrusted source into these strings. Filtering or sanitizing input is not a substitute for SQL parameterization. `add_quotes()` creates a literal using `addslashes()`; it is not a bound-parameter mechanism or a portable guarantee. `h()` only escapes HTML during rendering and does not protect SQL queries.
+
 #### distinct()
 
-This method performs a distinct query on the entity. From an SQL perspective, it works like `select unique field`. Its purpose is to return an array containing the unique values of the field specified as a parameter.
+This method performs a distinct query on the entity. From an SQL perspective, it works like `SELECT DISTINCT field`. Its purpose is to return an array containing the unique values of the field specified as a parameter.
 
 Syntax
 
-```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
+```text
+distinct([string $attribute], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
 ```
+
+The implementation signature is `distinct($what = '')`; the first argument identifies the attribute, followed by optional named parameters.
 
 Example:
 
@@ -306,11 +307,13 @@ This example queries the first user with a special `where` clause. The queried u
 
 Syntax
 
-```php
-find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ] )  
+```text
+find_first([mixed $what], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ],[ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ] )
 ```
 
-The `find_first` method returns the first record in an entity, or the first occurrence matching the specified search or sort criteria. All parameters are optional and their order is not significant. When called without parameters, it returns the first record inserted into the entity. This method is very flexible and can be used in many ways:
+The implementation signature is `find_first($what = '')`, and it accepts the same named parameters as `find`.
+
+The `find_first` method returns the first record in an entity, or the first occurrence matching the specified search or sort criteria. All parameters are optional and their order is not significant. When called without parameters, it limits the query to one record; use the `order` parameter to determine which record is returned. This method is very flexible and can be used in many ways:
 
 Example:
 
@@ -326,10 +329,10 @@ With `find_first`, you can search for a specific record by its ID:
 $usuario = (new Usuario)->find_first(123);
 ```
 
-This retrieves record 123 and likewise returns an instance of the same ActiveRecord object on success or `false` otherwise. KumbiaPHP generates a warning when the search criteria for `find_first` return more than one record. You can force it to return only one record with the `limit` parameter:
+This retrieves record 123 and likewise returns an instance of the same ActiveRecord object on success or `false` otherwise. KumbiaPHP forces `limit` to 1, so it does not need to be specified. If multiple records match, use the `order` parameter to determine which one is returned:
 
 ```php
-$usuario = (new Usuario)->find_first( "conditions: estado='A'", "limit: 1" );
+$usuario = (new Usuario)->find_first( "conditions: estado='A'", "order: id desc" );
 ```
 
 To query only some of the entity's attributes, use the `columns` parameter:
@@ -358,11 +361,11 @@ $usuario = (new Usuario)->find_first(123);
 
 Syntax
 
-```php
-find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
+```text
+find([mixed $what], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
 ```
 
-The `find` method is ActiveRecord's primary search method. It returns all records in an entity or the set of occurrences matching the search criteria. All parameters are optional and their order is not significant; they may be combined or omitted as needed. When called without parameters, it returns all records in the entity.
+The `find` method is ActiveRecord's primary search method. Its implemented signature is `find($what = '')`: it accepts a numeric ID or strings containing named parameters. The available options are `conditions`, `order`, `limit`, `columns`, `join`, `group`, `having`, `distinct`, and `offset`; they may be combined or omitted, and their order is not significant. When called without parameters, it returns an array containing all instances of the entity.
 
 Remember to include a space after the colon (`:`) in each parameter.
 
@@ -380,7 +383,7 @@ With `find`, you can search for a specific record by its ID:
 $usuario = (new Usuario)->find(123);
 ```
 
-This retrieves record 123 and likewise returns an instance of the same ActiveRecord object on success or `false` otherwise. Because this is a single record, the method does not return an array; if the record exists, its values are loaded into the same variable.
+This retrieves record 123 and likewise returns an instance of the same ActiveRecord object if it exists, or `false` otherwise. In this form it does not return an array; the record's values are loaded into the returned instance.
 
 To limit the number of returned records, use the `limit` parameter:
 
@@ -402,7 +405,7 @@ $usuarios = (new Usuario)->find( "estado='A'");
 
 You can use the `count` property to determine how many records were returned by the search.
 
-Note: It is not necessary to use `find('id: $id')`; you can use `find($id)` directly.
+Note: To search by a numeric ID, use `find($id)`. `id` is not a named parameter that `find()` translates into a condition.
 
 The following is an example of using aggregate and grouping functions with **find**; the same approach also applies to **find_first**.
 
@@ -410,25 +413,15 @@ The following is an example of using aggregate and grouping functions with **fin
 $resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(*) as num_facturas", "group: agencia_origen, agencia_destino", "having: count(*) > 5");
 ```
 
-#### select_one(string $select_query)
+#### static_select_one(string $sql)
 
-This method allows you to execute queries such as database-engine functions when you know that they return a single record.
-
-```php
-$current_time = (new Usuario)->select_one( "current_time");
-```
-
-In this example, the method is used to obtain the current server time returned by MySQL.
-
-#### select_one(string $select_query) (static)
-
-This method allows you to execute queries such as database-engine functions when you know that they return a single record. It can be called statically, so an ActiveRecord instance is not required.
+In this version, the available API is called `static_select_one()`; there is no separate `select_one()` method. This static method uses the default connection, executes `SELECT <sql>`, and returns the value from the first column of the first record. The argument must be an SQL expression, not a complete query.
 
 ```php
-$current_time = ActiveRecord::select_one( "current_time");
+$current_time = ActiveRecord::static_select_one('CURRENT_TIME');
 ```
 
-In this example, the method is called statically to obtain the current server time returned by MySQL.
+This example obtains the current time returned by the database engine without creating a model instance.
 
 #### exists()
 
@@ -640,19 +633,17 @@ When this method is called from an ActiveRecord class constructor, it requires t
 
 When this method is called from an ActiveRecord class constructor, it requires the length of the fields defined in the list to be validated.
 
-The `minimum` parameter validates that the value being inserted or updated is not shorter than the specified length. The `maximum` parameter validates that the value is not longer than the specified length. The `too_short` parameter specifies the custom message that ActiveRecord displays when the value is too short, and `too_long` specifies the message displayed when it is too long.
+The second argument specifies the maximum length and the third specifies the minimum length (0 by default). Optional messages are passed as an associative array in the fourth argument.
 
 ```php
 <?php
 class Clientes extends ActiveRecord {
 
-  protected function initialize(){
-   $this->validates_length_of("nombre", "minimum: 15", "too_short: The name must contain at least 15 characters");
-   $this->validates_length_of("nombre", "maximum: 40", "too_long: The name must contain at most 40 characters");
-   $this->validates_length_of("nombre", "in: 15:40",
-       "too_short: The name must contain at least 15 characters",
-       "too_long: The name must contain at most 40 characters"
-   );
+  protected function initialize() {
+    $this->validates_length_of("nombre", 40, 15, array(
+      "too_short" => "The name must contain at least 15 characters",
+      "too_long" => "The name must contain at most 40 characters"
+    ));
   }
 }
 ```
@@ -704,7 +695,7 @@ Validates that specific attributes have a unique value before insertion or updat
 
 #### validates_date_in
 
-Validates that specific attributes have a date format matching the one specified in `config/config.ini` before insertion or update.
+Validates that specific attributes have four-digit years, months from `01` to `12`, and days from `01` to `31`, separated by `-` or `/`, before insertion or update. The rule is defined in ActiveRecord and is not read from a configuration file.
 
 ```php
 <?php
@@ -725,7 +716,7 @@ Validates that a field has a specific format according to a regular expression b
  class Clientes extends ActiveRecord {
 
    protected function initialize(){
-     $this->validates_format_of("email", "^[^@]+@((?:[a-z0-9]+\.)+[a-z]{2,})$");
+     $this->validates_format_of("email", '/^[^@\s]+@((?:[a-z0-9]+\.)+[a-z]{2,})$/i');
    }
 
  }
@@ -794,7 +785,7 @@ class User extends ActiveRecord {
      }
 
      public function after_delete(){
-           Flash::success("User $this->nombre was deleted");
+            Flash::valid("User $this->nombre was deleted");
      }
 
 }
@@ -831,12 +822,16 @@ Called immediately after Kumbia performs validation. The current action can be c
 Called immediately before a model is saved through **save()**, and when it is edited or updated through **update()**. The current action can be canceled when this method returns the word `cancel`.
 
 ```php
-public function before_save() {            
-    $rs = $this->find_first("cedula = $this->cedula");
-    if($rs) {
-         Flash::warning("A user with this ID number is already registered");
-        return 'cancel';
-    }                
+<?php
+class User extends ActiveRecord {
+
+    public function before_save() {
+        $rs = $this->find_first("cedula = $this->cedula");
+        if($rs) {
+            Flash::warning("A user with this ID number is already registered");
+            return 'cancel';
+        }
+    }
 }
 ```
 
@@ -1027,6 +1022,8 @@ class Persona extends ActiveRecord {
 
 Pagination is handled by two functions:
 
+**Security limitation:** Pagination does not modify conditions or parameterize SQL. Storing a condition in `Session` only preserves the text; it does not prevent SQL injection.
+
 #### Paginate
 
 This function can paginate arrays or models and accepts the following parameters.
@@ -1066,6 +1063,8 @@ $page = paginate($this->Usuario, 'NOT login="admin"', 'order: login ASC', 'per_p
 
 Paginates through an SQL query. It accepts the following parameters:
 
+The received query is executed directly to count and retrieve records; do not concatenate untrusted data into it.
+
 **$model**: model name as a string or an ActiveRecord object.
 
 **$sql**: SQL query as a string.
@@ -1100,7 +1099,9 @@ $page = $this->Usuario->paginate('per_page: 5', 'page: 1');
 
 #### Full example of use of the pager:
 
-Suppose there is a `usuario` table with its corresponding `Usuario` model. The following controller paginates a list of users and allows searching by name. It uses controller data persistence to make pagination resistant to SQL injection.
+Suppose there is a `usuario` table with its corresponding `Usuario` model. The following controller paginates a list of users and allows searching by name. It stores the search and current page in the session so they persist between requests.
+
+**Warning:** The line that builds `$conditions` interpolates the value received from POST into SQL and is unsafe. The session only preserves that string; it does not escape or parameterize it. The `paginate()` and `find()` methods in this example do not provide bound parameters for that condition, so this construction must not be used with request data.
 
 The *usuario.php* model:
 
@@ -1135,41 +1136,49 @@ class UsuarioController extends AppController{
     public function listar($page = '') {
 
         $usuario = new Usuario();
+        $conditions = Session::get('usuario_conditions') ?: '';
+        $current_page = (int) Session::get('usuario_page');
+        if ($current_page < 1) {
+            $current_page = 1;
+        }
+
         /**
          * When the search is performed for the first time
          * */
         if (Input::hasPost('usuario')) {
             $data = Input::post('usuario');
-            if ($data['nombre']) {
-                $this->conditions = " nombre LIKE '%{$data['nombre']}%' ";
+            if (!empty($data['nombre'])) {
+                $conditions = " nombre LIKE '%{$data['nombre']}%' ";
             }
+            Session::set('usuario_conditions', $conditions);
+            $current_page = 1;
+        } elseif ($page === 'next' || $page === 'prev') {
             /**
-             * Paginator with or without conditions
+             * Check the current page before navigating so the next and previous
+             * limits returned by the paginator are preserved.
              * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", 'page: 1');
+            if ($conditions) {
+                $this->page = $usuario->paginate($conditions, "per_page: $this->_per_page", "page: $current_page");
             } else {
-                $this->page = $usuario->paginate("per_page: $this->_per_page", 'page: 1');
+                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: $current_page");
             }
-        } elseif ($page === 'next' && isset($this->page) && $this->page->next) {
-            /**
-             * Paginator for the next page
-             * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", "page: {$this->page->next}");
-            } else {
-                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->next}");
-            }
-        } elseif ($page === 'prev' && isset($this->page) && $this->page->prev) {
-            /**
-             * Paginator for the previous page
-             * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", "page: {$this->page->prev}");
-            } else {
-                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->prev}");
+
+            if ($page === 'next' && $this->page->next) {
+                $current_page = $this->page->next;
+            } elseif ($page === 'prev' && $this->page->prev) {
+                $current_page = $this->page->prev;
             }
         }
+
+        /**
+         * Paginator with or without conditions
+         * */
+        if ($conditions) {
+            $this->page = $usuario->paginate($conditions, "per_page: $this->_per_page", "page: $current_page");
+        } else {
+            $this->page = $usuario->paginate("per_page: $this->_per_page", "page: $current_page");
+        }
+        Session::set('usuario_page', $this->page->current);
     }
 }
 ```
@@ -1202,3 +1211,5 @@ In the *listar.phtml* view:
 <?php if ($page->prev) echo Html::linkAction('listar/prev', 'Previous') ?>
 <?php if ($page->next) echo ' | ' . Html::linkAction('listar/next', 'Next') ?>
 ```
+
+`h($p->nombre)` only escapes the value when generating HTML; it does not modify the controller's SQL query or make the interpolation of `nombre` safe.
