@@ -1189,7 +1189,7 @@ $page = $this->Usuario->paginate('per_page: 5', 'page: 1');
 
 #### Ejemplo completo de uso del paginador:
 
-Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, aprovecharemos la persistencia de datos del controlador para hacer una paginación inmune a inyección sql.
+Tenemos una tabla usuario con su correspondiente modelo Usuario, entonces creemos un controlador el cual pagine una lista de usuarios y asimismo permita buscar por nombre, guardaremos la búsqueda y la página actual en la sesión para conservarlas entre peticiones.
 
 El modelo *usuario.php*:
 
@@ -1225,46 +1225,53 @@ class UsuarioController extends AppController{
     public function listar($page = '') {
 
         $usuario = new Usuario();
+        $conditions = Session::get('usuario_conditions') ?: '';
+        $current_page = (int) Session::get('usuario_page');
+        if ($current_page < 1) {
+            $current_page = 1;
+        }
+
         /**
          * Cuando se efectua la búsqueda por primera vez
          * */
         if (Input::hasPost('usuario')) {
             $data = Input::post('usuario');
-            if ($data['nombre']) {
-                $this->conditions = " nombre LIKE '%{$data['nombre']}%' ";
+            if (!empty($data['nombre'])) {
+                $conditions = " nombre LIKE '%{$data['nombre']}%' ";
             }
+            Session::set('usuario_conditions', $conditions);
+            $current_page = 1;
+        } elseif ($page === 'next' || $page === 'prev') {
             /**
-             * Paginador con condiciones o sin condiciones
+             * Comprobamos la página actual antes de navegar para conservar
+             * los límites next y prev que devuelve el paginador.
              * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", 'page: 1');
+            if ($conditions) {
+                $this->page = $usuario->paginate($conditions, "per_page: $this->_per_page", "page: $current_page");
             } else {
-                $this->page = $usuario->paginate("per_page: $this>_per_page", 'page: 1');
+                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: $current_page");
             }
-        } elseif ($page = 'next' && isset($this->page) && $this->page->next) {
-            /**
-             * Paginador de pagina siguiente
-             * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this>_per_page", "page: {$this->page->next}");
-            } else {
-                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->next}");
-            }
-        } elseif ($page = 'prev' && isset($this->page) && $this->page->prev) {
-            /**
-             * Paginador de pagina anterior
-             * */
-            if (isset($this->conditions) && $this->conditions) {
-                $this->page = $usuario->paginate($this->conditions, "per_page: $this->_per_page", "page: {$this->page->prev}");
-            } else {
-                $this->page = $usuario->paginate("per_page: $this->_per_page", "page: {$this->page->prev}");
+            if ($page === 'next' && $this->page->next) {
+                $current_page = $this->page->next;
+            } elseif ($page === 'prev' && $this->page->prev) {
+                $current_page = $this->page->prev;
             }
         }
+
+        /**
+         * Paginador con condiciones o sin condiciones
+         * */
+        if ($conditions) {
+            $this->page = $usuario->paginate($conditions, "per_page: $this->_per_page", "page: $current_page");
+        } else {
+            $this->page = $usuario->paginate("per_page: $this->_per_page", "page: $current_page");
+        }
+        Session::set('usuario_page', $this->page->current);
     }
 }
 ```
 
-En la vista *index.pthml*
+En la vista *index.phtml*
 
 ```php
 <?= Form::open('usuario/listar') ?>
