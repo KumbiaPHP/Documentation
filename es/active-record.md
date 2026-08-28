@@ -36,14 +36,13 @@ $cliente->save();
 
 Para establecer la configuración de conexión a la base de datos, se usa el archivo
 [default/app/config/databases.php](https://github.com/KumbiaPHP/KumbiaPHP/blob/master/default/app/config/databases.php).
-Aun sigue funcionando la configuración en el archivo
-[databases.ini](http://wiki.kumbiaphp.com/KumbiaPHP_Framework_Versi%C3%B3n_1.0_Spirit#databases.ini)
-pero está desaconsejado ya que al estar ahora en un archivo PHP funciona mucho más rápido
-y se puede aprovechar la cache. 
+La configuración en `databases.ini` sigue siendo compatible como respaldo cuando no
+existe `databases.php`, pero se recomienda usar el archivo PHP.
 
-**Nota:** KumabiaPHP buscará primero el archivo databases.php para cargar la información
-si este archivo no existe intentará obtenerla del archivo databases.ini. Lo mismo
-sucede con los demás archivos de configuración como el config.php y el routes.php.
+**Nota:** KumbiaPHP busca primero `APP_PATH/config/<archivo>.php`; si no existe,
+carga `APP_PATH/config/<archivo>.ini` como compatibilidad heredada. En la plantilla,
+las rutas actuales son `default/app/config/databases.php`,
+`default/app/config/config.php` y `default/app/config/routes.php`.
 
 Este archivo almacena la configuración en un array y lo retorna para ser usado
 por el ActiveRecord, se pueden crear tantas conexiones como se necesite, puedes
@@ -269,15 +268,15 @@ llamada clientes y esta contiene un campo id que es foránea a este.
 
 **campo_at**
 
-Los campos terminados en *_at* indican que son fechas y posee la funcionalidad
-extra que obtienen el valor de fecha actual en una inserción.
+Los campos cuyos nombres terminan en *_at* reciben automáticamente la fecha y
+hora actual al insertar; para Oracle se usa solo la fecha.
 
 *created_at* es un campo fecha
 
 **campo_in**
 
-Los campos terminados en *_in* indican que son fechas y posee la funcionalidad
-extra que obtienen el valor de fecha actual en una actualización.
+Los campos cuyos nombres terminan en *_in* reciben automáticamente la fecha y
+hora actual al actualizar; para Oracle se usa solo la fecha.
 
 *modified_in* es un campo fecha
 
@@ -305,7 +304,7 @@ como parámetro.
 
 Sintaxis
 ```php
-distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "column: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
+distinct([string $atributo_entidad], [ "conditions: …" ], [ "order: …" ], ["limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "offset: …" ])
 ```
 
 Ejemplo:
@@ -353,7 +352,7 @@ $usuario = (new Usuario)->find_by_sql( "select * from usuarios where codigo not 
 Este ejemplo consulta el primer usuario con una sentencia where especial.
 La idea es que el usuario consultado no se encuentre en la entidad ingreso.
 
-####  find\_first (string $sql)
+####  find\_first()
 
 Sintaxis
 ```php
@@ -362,9 +361,10 @@ find_first([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …
 
 El método "find\_first" devuelve el primer registro de una entidad o la primera
 ocurrencia de acuerdo a unos criterios de búsqueda u ordenamiento. Los
-parámetros son todos opcionales y su orden no es relevante, cuando se invoca
-sin parámetros devuelve el primer registro insertado en la entidad. Este
-método es muy flexible y puede ser usado de muchas formas:
+parámetros son todos opcionales y su orden no es relevante. Cuando se invoca
+sin parámetros, limita la consulta a un registro; usa el parámetro `order` para
+definir cuál registro debe devolverse. Este método es muy flexible y puede ser
+usado de muchas formas:
 
 Ejemplo:
 ```php
@@ -384,13 +384,12 @@ $usuario = (new Usuario)->find_first(123);
 ```
 
 Obtenemos el registro 123 e igualmente devuelve una instancia del mismo
-objeto ActiveRecord en caso de éxito, o false en caso contrario. KumbiaPHP genera
-una advertencia cuando los criterios de búsqueda para find\_first devuelven más
-de un registro, para esto podemos forzar que se devuelva solamente uno,
-mediante el parámetro limit, de esta forma:
+objeto ActiveRecord en caso de éxito, o false en caso contrario. KumbiaPHP
+fuerza `limit` a 1, por lo que no es necesario indicarlo. Si coinciden varios,
+usa el parámetro `order` para definir cuál debe devolverse:
 
 ```php
-$usuario = (new Usuario)->find_first( "conditions: estado='A'", "limit: 1" );
+$usuario = (new Usuario)->find_first( "conditions: estado='A'", "order: id desc" );
 ```
 
 Cuando queremos consultar, sólo algunos de los atributos de la entidad, podemos
@@ -425,11 +424,12 @@ Sintaxis
 find([integer $id], [ "conditions: …" ], [ "order: …" ], [ "limit: …" ], [ "columns: …" ], [ "join: …" ], [ "group: …" ], [ "having: …" ], [ "distinct: …" ], [ "offset: …" ])
 ```
 
-El método "find" es el principal método de búsqueda de ActiveRecord, devuelve
-todas los registros de una entidad o el conjunto de ocurrencias de acuerdo a
-unos criterios de búsqueda. Los parámetros son todos opcionales y su orden no
-es relevante, incluso pueden ser combinados u omitidos si es necesario. Cuando
-se invoca sin parámetros devuelve todos los registros en la entidad.
+El método "find" es el principal método de búsqueda de ActiveRecord. La firma
+implementada es `find($what = '')`: recibe un ID numérico o cadenas con
+parámetros nombrados. Las opciones disponibles son `conditions`, `order`,
+`limit`, `columns`, `join`, `group`, `having`, `distinct` y `offset`; pueden
+combinarse u omitirse y su orden no es relevante. Cuando se invoca sin
+parámetros devuelve un array con todas las instancias de la entidad.
 
 No hay que olvidarse de incluir un espacio después de los dos puntos (:) en
 cada parámetro.
@@ -452,9 +452,8 @@ $usuario = (new Usuario)->find(123);
 ```
 
 Obtenemos el registro 123 e igualmente devuelve una instancia del mismo
-objeto ActiveRecord en caso de éxito, o false en caso contrario. Como es un
-solo registro no devuelve un array, sino que los valores de este se cargan en
-la misma variable si existe el registro.
+objeto ActiveRecord si existe, o false si no existe. En esta forma no devuelve
+un array: los valores del registro se cargan en la instancia devuelta.
 
 Para limitar el número de registros devueltos, podemos usar el parámetro limit:
 
@@ -479,8 +478,8 @@ $usuarios = (new Usuario)->find( "estado='A'");
 Se puede utilizar la propiedad count para saber cuántos registros fueron
 devueltos en la búsqueda.
 
-Nota: No es necesario usar find('id: $id'), se puede usar directamente
-find($id)
+Nota: para buscar por un ID numérico usa `find($id)`. `id` no es un parámetro
+con nombre que `find()` traduzca en una condición.
 
 Podemos ver un ejemplo para __find__ usando funciones de resumen y agrupación (aplicables también a __find_first__)
 ```php
@@ -488,31 +487,20 @@ $resumen = (new Factura)->find("columns: agencia_origen, agencia_destino, count(
 ```
 
 
-#### select\_one (string $select_query)
+#### static\_select\_one(string $sql)
 
-Este método nos permite hacer ciertas consultas como ejecutar funciones en el
-motor de base de datos sabiendo que éstas devuelven un único registro.
-
-```php
-$current_time = (new Usuario)->select_one( "current_time");
-```  
-
-En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL,
-podemos usar este método para esto.
-
-####  select\_one(string $select_query) (static)
-
-Este método nos permite hacer ciertas consultas como ejecutar funciones en el
-motor de base de datos, sabiendo que estas devuelven un solo registro. Este
-método se puede llamar de forma estática, esto significa que no es necesario
-que haya una instancia de ActiveRecord para hacer el llamado.
+En esta versión, la API disponible se llama `static_select_one()`; no existe
+un método `select_one()` separado. Es un método estático que usa la conexión
+predeterminada, ejecuta `SELECT <sql>` y devuelve el valor de la primera columna
+del primer registro. El argumento debe ser una expresión SQL, no una consulta
+completa.
 
 ```php
-$current_time = ActiveRecord::select_one( "current_time");
+$current_time = ActiveRecord::static_select_one('CURRENT_TIME');
 ```
 
-En el ejemplo, queremos saber la hora actual del servidor devuelta desde MySQL,
-podemos usar este método para esto.
+En el ejemplo, obtenemos la hora actual devuelta por el motor de base de datos
+sin crear una instancia de un modelo.
 
 ####  exists()
 
@@ -799,7 +787,10 @@ Valida que ciertos atributos tengan un valor único antes de insertar o actualiz
 
 #### validates\_date\_in
 
-Valida que ciertos atributos tengan un formato de fecha acorde al indicado en config/config.ini antes de insertar o actualizar.
+Valida que ciertos atributos tengan cuatro dígitos de año, mes entre `01` y
+`12` y día entre `01` y `31`, separados por `-` o `/`, antes de insertar o
+actualizar. La regla está definida en ActiveRecord y no se lee de un archivo de
+configuración.
 
 ```php
 <?php
