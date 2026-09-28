@@ -610,9 +610,9 @@ y [Destripando el Front Controller](front-controller.md#destripando-el-front-con
 [Paginadores](active-record.md#paginadores) y [Paginando en ActiveRecord](active-record.md#paginando-en-activerecord).
 - Vistas y formularios: [Pasando datos a la vista](view.md#pasando-datos-a-la-vista),
 [Buffer de salida](view.md#buffer-de-salida), [Clase Form](view.md#clase-form),
-[`Form::open()`](view.md#form::open), [`Form::text()`](view.md#form::text),
-[`Form::hidden()`](view.md#form::hidden), [`Form::submit()`](view.md#form::submit)
-y [`Form::close()`](view.md#form::close).
+[`Form::open()`](view.md#formopen), [`Form::text()`](view.md#formtext),
+[`Form::hidden()`](view.md#formhidden), [`Form::submit()`](view.md#formsubmit)
+y [`Form::close()`](view.md#formclose).
 - Paginación reutilizable: [Partials de paginación](appendix.md#partials-de-paginación).
 
 Estas referencias explican cada componente por separado; el tutorial los
