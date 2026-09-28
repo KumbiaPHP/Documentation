@@ -45,13 +45,13 @@ por defecto indicado en el config.ini.
 ```php
 <?php  
 // cache por defecto  
-$data = Cache:: driver ()-> get ( 'data' );  
+$data = Cache::driver()->get('data');  
   
 // manejador para memcache  
-$data_memcache = Cache:: driver ( 'memcache' )-> get ( 'data' );  
+$data_memcache = Cache::driver('memcache')->get('data');  
   
 // manejador para cache con APC  
-$data_apc = Cache:: driver ( 'APC' )-> get ( 'data' );  
+$data_apc = Cache::driver('APC')->get('data');  
 ```
   
 ---  
@@ -125,7 +125,7 @@ es necesario crear una instancia de la clase Logger. Esta clase dispone de una
 variedad de métodos para manejar distintos tipos de Log.
 
 ```php
-<?php  Logger:: error ( 'Mensaje de Error' ) ?>  
+<?php Logger::error('Mensaje de Error') ?>  
 ```  
 ---  
   
@@ -138,7 +138,7 @@ nombre puede ser cambiado si así lo deseamos a través de un parámetro
 adicional al método.
 
 ```php
-<?php  Logger:: error ( 'Mensaje de Error' , 'mi_log' ) ?>  
+<?php Logger::error('Mensaje de Error', 'mi_log') ?>  
 ```  
 ---  
   
@@ -229,7 +229,7 @@ La clase Session es para facilitar  el manejo de la sesiones.
 Crear o especifica el valor para un índice de la sesión actual.
 
 ```php
-<?php  Session:: set ( 'usuario' , 'Administrador' ); ?>  
+<?php Session::set('usuario', 'Administrador'); ?>  
 ```
 ---  
   
@@ -239,7 +239,7 @@ Obtener el valor para un índice de la sesión actual.
 
 ```php
 <?php  
-Session:: get ( 'usuario' ); //retorna 'Administrador'  
+Session::get('usuario'); //retorna 'Administrador'  
 ?>  
 ```
 ---  
@@ -249,7 +249,7 @@ Session:: get ( 'usuario' ); //retorna 'Administrador'
 Elimina el valor para un índice de la sesión actual.
 
 ```php
-<?php  Session:: delete ( 'usuario' ); ?>  
+<?php Session::delete('usuario'); ?>  
 ```
 ---  
   
@@ -259,7 +259,7 @@ Verifica que este definido el índice en la sesión actual.
 
 ```php
 <?php  
-Session:: has ( 'id_usuario' ); //retorna false.  
+Session::has('id_usuario'); //retorna false.  
 ?>  
 ```
 ---  
