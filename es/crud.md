@@ -605,14 +605,14 @@ Usa estas secciones como referencia canónica cuando necesites profundizar:
 y [Destripando el Front Controller](front-controller.md#destripando-el-front-controller).
 - Controladores: [Acciones y vistas](controller.md#acciones-y-vistas) y
 [Convenciones y creación de un Controlador](controller.md#convenciones-y-creación-de-un-controlador).
-- Datos: [ActiveRecord](active-record.md#activerecord), [create()](active-record.md#create),
-[update()](active-record.md#update), [delete()](active-record.md#delete),
+- Datos: [ActiveRecord](active-record.md#activerecord), [`create()`](active-record.md#create),
+[`update()`](active-record.md#update), [`delete()`](active-record.md#delete),
 [Paginadores](active-record.md#paginadores) y [Paginando en ActiveRecord](active-record.md#paginando-en-activerecord).
 - Vistas y formularios: [Pasando datos a la vista](view.md#pasando-datos-a-la-vista),
 [Buffer de salida](view.md#buffer-de-salida), [Clase Form](view.md#clase-form),
-[Form::open()](view.md#form::open), [Form::text()](view.md#form::text),
-[Form::hidden()](view.md#form::hidden), [Form::submit()](view.md#form::submit)
-y [Form::close()](view.md#form::close).
+[`Form::open()`](view.md#form::open), [`Form::text()`](view.md#form::text),
+[`Form::hidden()`](view.md#form::hidden), [`Form::submit()`](view.md#form::submit)
+y [`Form::close()`](view.md#form::close).
 - Paginación reutilizable: [Partials de paginación](appendix.md#partials-de-paginación).
 
 Estas referencias explican cada componente por separado; el tutorial los
