@@ -42,6 +42,7 @@ Este método permite obtener un manejador de cache especifico (APC, file,
 nixfile, sqlite, memsqlite). Si no se indica, se obtiene el manejador de cache
 por defecto indicado en el config.ini.
 
+```php
 <?php  
 // cache por defecto  
 $data = Cache:: driver ()-> get ( 'data' );  
@@ -51,7 +52,7 @@ $data_memcache = Cache:: driver ( 'memcache' )-> get ( 'data' );
   
 // manejador para cache con APC  
 $data_apc = Cache:: driver ( 'APC' )-> get ( 'data' );  
-
+```
   
 ---  
   
@@ -74,6 +75,7 @@ siguiente:
   * Si no se especifica $lifetime , entonces se cachea por tiempo indefinido.
   * Si no se especifica $id y  $group , entonces se toma los indicados al invocar por última vez el método get .
 
+```php
 <?php
 
 $data = Cache::driver()->get('saludo');
@@ -85,7 +87,7 @@ if(!$data) {
 }
 
 echo $data;
-
+```
 
   
 ---  
@@ -96,14 +98,15 @@ Muestra buffer de salida cacheado, o en caso contrario inicia cacheo de buffer
 de salida hasta que se invoque el método end. Este método se utiliza
 frecuentemente para cachear un fragmento de vista.
 
+```php
 <?php if(Cache::driver()->start('+1 day', 'saludo')): ?>
 
     Hola <?php echo $usuario ?>
 
     <?php Cache::driver()->end() ?>
 
-<?php endif; ?>  
-  
+<?php endif ?>  
+```  
 ---  
   
 ###  end ($save=true)
@@ -121,8 +124,9 @@ ayLoKbZFpNDBDXgXAA)  fue reescrita de forma estática, esto quiere decir ya no
 es necesario crear una instancia de la clase Logger. Esta clase dispone de una
 variedad de métodos para manejar distintos tipos de Log.
 
+```php
 <?php  Logger:: error ( 'Mensaje de Error' ) ?>  
-  
+```  
 ---  
   
 La salida de la instrucción anterior sera lo siguiente:
@@ -133,8 +137,9 @@ Por defecto los archivos log tienen el siguiente nombre logDDMMYYY.txt este
 nombre puede ser cambiado si así lo deseamos a través de un parámetro
 adicional al método.
 
+```php
 <?php  Logger:: error ( 'Mensaje de Error' , 'mi_log' ) ?>  
-  
+```  
 ---  
   
 Se puede apreciar el segundo parámetro ahora el archivo tendrá como nombre
@@ -171,8 +176,9 @@ Permite enviar un mensaje de error al usuario. Por defecto es un mensaje de
 letras color rojo y fondo color rosa pero estos pueden ser alterados en la
 clase css en public /css/style.css llamada error.
 
+```php
 Flash::error("Ha ocurrido un error");  
-  
+```
 ---  
   
 ###  Flash::valid($text)
@@ -181,8 +187,9 @@ Permite enviar un mensaje de éxito al usuario. Por defecto es un mensaje de
 letras color verdes y fondo color verde pastel pero estos pueden ser alterados
 en la clase css en public/css/style.css  llamada valid .
 
+```php
 Flash::valid("Se realizo el proceso correctamente");  
-  
+```
 ---  
   
 ###  Flash::info($text)
@@ -191,8 +198,9 @@ Permite enviar un mensaje de información al usuario. Por defecto es un mensaje
 de letras color azules y fondo color azul pastel; pero estos pueden ser
 alterados en la clase css en public/css/style.css  llamada info .
 
+```php
 Flash::info("No hay resultados en la busqueda");  
-  
+```  
 ---  
   
 ###  Flash::warning($text)
@@ -201,8 +209,9 @@ Permite enviar un mensaje de advertencia al usuario. Por defecto es un mensaje
 de letras color azules y fondo color azul pastel pero estos pueden ser
 alterados en la clase css en public/css/style.css  llamada warning .
 
+```php
 Flash::warning("Advertencia: No ha iniciado sesión en el sistema");  
-  
+```
 ---  
   
 ###  Flash::show($name, $text)
@@ -219,36 +228,40 @@ La clase Session es para facilitar  el manejo de la sesiones.
 
 Crear o especifica el valor para un índice de la sesión actual.
 
+```php
 <?php  Session:: set ( 'usuario' , 'Administrador' ); ?>  
-  
+```
 ---  
   
 ###  Session::get($index, $namespace='default')
 
 Obtener el valor para un índice de la sesión actual.
 
+```php
 <?php  
 Session:: get ( 'usuario' ); //retorna 'Administrador'  
 ?>  
-  
+```
 ---  
   
 ###  Session::delete($index, $namespace='default')
 
 Elimina el valor para un índice de la sesión actual.
 
+```php
 <?php  Session:: delete ( 'usuario' ); ?>  
-  
+```
 ---  
   
 ###  Session::has($index, $namespace='default')
 
 Verifica que este definido el índice en la sesión actual.
 
+```php
 <?php  
 Session:: has ( 'id_usuario' ); //retorna false.  
 ?>  
-  
+```
 ---  
   
 NOTA: $namespace es un espacio individual en el cual se pueden contener las
@@ -264,12 +277,13 @@ La clase load permite la carga de librerías en KumbiaPHP.
 
 Permite cargar una librería del núcleo de KumbiaPHP.
 
+```php
 <?php
 
 // Carga la librería cache
 
 Load::coreLib('cache');
-
+```
 
   
 ---  
@@ -279,12 +293,13 @@ Load::coreLib('cache');
 Permite cargar una librería de aplicación. Las librerías de aplicación se
 ubican en el directorio "app/libs".
 
+```php
 <?php
 
 // Carga el archivo app/libs/split.php
 
 Load::lib('split');
-
+```
 
   
 ---  
@@ -292,13 +307,14 @@ Load::lib('split');
 En caso de que no exista la librería intenta cargar una del núcleo con el
 nombre indicado.
 
+```php
 <?php
 
 /* Carga el archivo "app/libs/auth2.php" si existe, en caso contrario, cargara
 la librería del núcleo auth2 */
 
 Load::lib('auth2');
-
+```
 
   
 ---  
@@ -306,12 +322,13 @@ Load::lib('auth2');
 Para agrupar librerías debes colocarlas en un subdirectorio y anteceder el
 nombre del directorio en la ruta al momento de cargarla.
 
+```php
 <?php
 
 // Carga el archivo app/libs/controllers/auth_controller.php
 
 Load::lib('controllers/auth_controller.php');
-
+```
 
   
 ---  
@@ -320,12 +337,13 @@ Load::lib('controllers/auth_controller.php');
 
 Carga e instancia el modelo indicado. Retorna la instancia del modelo.
 
+```php
 <?php
 
 // Carga e instancia el modelo usuario.php
 
 $usuario = Load::model('usuario');
-
+```
 
   
 ---  
@@ -333,12 +351,13 @@ $usuario = Load::model('usuario');
 Para agrupar modelos debes colocarlos en un subdirectorio y anteceder el
 nombre del directorio en la ruta al momento de cargarlo.
 
+```php
 <?php
 
 // Carga e instancia el modelo 'partes_vehiculo/motor.php"
 
 $motor = Load::model('partes_vehiculo/motor.php');
-
+```
 
   
 ---  
@@ -356,10 +375,11 @@ indicarse el tipo de adaptador se utiliza el adaptador predeterminado.
 
 Ejemplo:
 
+```php
 <?php
 
 $auth = Auth2::factory('model');
-
+```
 
   
 ---  
@@ -379,8 +399,9 @@ setDefault($adapter)
 
 Ejemplo:
 
+```php
 Auth2::setDefault('model');
-  
+```
 ---  
   
 ###  Como trabaja la autenticacion
@@ -395,6 +416,7 @@ cuyo valor debe ser "auth".
 
 El formulario para autenticación debe tener la siguiente estructura básica:
 
+```php
 <?php echo Form::open() ?>
 
     <input name="mode" type="hidden" value="auth">
@@ -408,7 +430,7 @@ El formulario para autenticación debe tener la siguiente estructura básica:
     <?php echo Form::pass('password') ?>
 
 <?php echo Form::close() ?>
-  
+```
 ---  
   
 De manera predeterminada Auth2 toma para el nombre de usuario el campo "login"
@@ -436,8 +458,9 @@ setModel($model)
 
 Ejemplo:
 
+```php
 $auth->setModel('usuario');  
-  
+```
 ---  
   
 ####  identify()
@@ -451,8 +474,9 @@ identify()
 
 Ejemplo:
 
+```php
 $valid = $auth->identify();  
-  
+```
 ---  
   
 ####  logout()
@@ -463,8 +487,9 @@ logout()
 
 Ejemplo:
 
+```php
 $auth->logout();  
-  
+```
 ---  
   
 ####  setFields()
@@ -478,8 +503,9 @@ setFields($fields)
 
 Ejemplo:
 
+```php
 $auth->setFields(array('id', 'usuario'));  
-  
+```
 ---  
   
 ####  setSessionNamespace()
@@ -492,8 +518,9 @@ setSessionNamespace($namespace)
 
 Ejemplo:
 
+```php
 $auth->setSessionNamespace('auth');
-  
+```
 ---  
   
 ####  isValid()
@@ -506,8 +533,9 @@ isValid()
 
 Ejemplo:
 
+```php
 $valid = $auth->isValid();
-  
+```
 ---  
   
 ####  getError()
@@ -520,8 +548,9 @@ getError()
 
 Ejemplo:
 
+```php
 if(!$auth->identify()) Flash::error($auth->getError());  
-  
+```
 ---  
   
 ####  setAlgos()
@@ -535,8 +564,9 @@ setAlgos($algos)
 
 Ejemplo:
 
+```php
 $auth->setAlgos('md5');
-  
+```
 ---  
   
 ####  setKey()
@@ -551,10 +581,10 @@ setKey($key)
 
 Ejemplo:
 
+```php
 $auth->setKey('usuario_logged');
-  
----  
-  
+```
+---    
 ####  setCheckSession()
 
 Indica que no se inicie sesión desde un navegador distinto con la misma IP.
@@ -565,8 +595,9 @@ setCheckSession($check)
 
 Ejemplo:
 
+```php
 $auth->setCheckSession(true);
-  
+```
 ---  
   
 ####  setPass()
@@ -581,8 +612,9 @@ setPass($field)
 
 Ejemplo:
 
+```php
 $auth->setPass('clave');
-  
+```
 ---  
   
 ####  setLogin()
@@ -597,23 +629,26 @@ setLogin($field)
 
 Ejemplo:
 
+```php
 $auth->setLogin('usuario');
-  
+```
 ---  
   
 ####  Obtener los campos cargados en sesión
 
 Los campos se obtienen por medio del método Session::get .
 
+```php
 $id = Session::get('id');
-  
+```
 ---  
   
 Si se ha especificado un namespace  de sesión, entonces debe indicarlo al
 invocar el método.
 
+```php
 $id = Session::get('id', 'mi_namespace');  
-  
+```
 ---  
   
 ####  Ejemplo
@@ -622,6 +657,7 @@ La vista:
 
 app/views/acceso/login.phtml
 
+```php
 <?php echo Form::open() ?>
 
     <input name="mode" type="hidden" value="auth">
@@ -635,13 +671,14 @@ app/views/acceso/login.phtml
     <?php echo Form::pass('password') ?>
 
 <?php echo Form::close() ?>  
-  
+```
 ---  
   
 El controlador:
 
 app/controllers/auth_controller.php
 
+```php
 <?php
 
 class AuthController extends AppController
@@ -677,12 +714,13 @@ class AuthController extends AppController
 }
 
 ?>  
-  
+```
 ---  
   
 Para validar que el usuario este autenticado, basta con adicionar en cualquier
 acción del controlador o en el método before_filter  el siguiente código:
 
+```php
 if(!Load::model('usuario')->logged()) {
 
     Router::toAction('auth/login');
@@ -690,13 +728,14 @@ if(!Load::model('usuario')->logged()) {
     return false;
 
 }
-  
+```
 ---  
   
 El modelo:
 
 app/models/usuario.php
 
+```php
 <?php
 
 // Carga de la librería auth2
@@ -768,6 +807,4 @@ class Usuario extends ActiveRecord
     }
 
 }
-
-
-  
+```
