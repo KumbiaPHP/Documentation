@@ -273,8 +273,8 @@ redirige al controlador actual.
 Las acciones se convierten en vistas con el mismo nombre por convención. Para
 ampliar esta parte, consulta [Acciones y vistas](controller.md#acciones-y-vistas)
 y [Convenciones y creación de un Controlador](controller.md#convenciones-y-creación-de-un-controlador).
-La referencia de las operaciones está en [create()](active-record.md#create),
-[update()](active-record.md#update) y [delete()](active-record.md#delete).
+La referencia de las operaciones está en [`create()`](active-record.md#create),
+[`update()`](active-record.md#update) y [`delete()`](active-record.md#delete).
 
 ## Paso 4: crear las vistas
 
@@ -382,9 +382,9 @@ En una petición `GET`, el controlador asigna el registro a `$this->menus` y
 los helpers del formulario toman de allí los valores iniciales. El campo oculto
 conserva el identificador para que `update()` sepa qué registro actualizar.
 Consulta [Clase Form](view.md#clase-form) y sus referencias de
-[Form::open()](view.md#form::open), [Form::text()](view.md#form::text),
-[Form::hidden()](view.md#form::hidden), [Form::submit()](view.md#form::submit)
-y [Form::close()](view.md#form::close) si necesitas más opciones.
+[`Form::open()`](view.md#form::open), [`Form::text()`](view.md#form::text),
+[`Form::hidden()`](view.md#form::hidden), [`Form::submit()`](view.md#form::submit)
+y [`Form::close()`](view.md#form::close) si necesitas más opciones.
 
 ![Editor de código mostrando las vistas index.phtml, create.phtml y edit.phtml del CRUD de menus](../images/crud/kumbiaphp-index-create-edit-views.jpg)
 
