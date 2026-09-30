@@ -301,7 +301,7 @@ Crea `[app]/views/menus/index.phtml`:
             <li>
                 <?= Html::linkAction("edit/$item->id/", 'Editar') ?>
                 <?= Html::linkAction("del/$item->id/", 'Borrar') ?>
-                <strong><?= h(($item->nombre) ?> - <?= h($item->titulo) ?></strong>
+                <strong><?= h($item->nombre) ?> - <?= h($item->titulo) ?></strong>
             </li>
         <?php endforeach ?>
         </ul>
