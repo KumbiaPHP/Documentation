@@ -310,17 +310,17 @@ Crea `[app]/views/menus/index.phtml`:
     <?php endif ?>
 
     <p>
-        Página <?= (int) $listMenus->current ?>
-        de <?= (int) $listMenus->total ?>
+        Página <?= $listMenus->current ?>
+        de <?= $listMenus->total ?>
     </p>
 
     <nav aria-label="Paginación">
         <?php if ($listMenus->prev): ?>
-            <?= Html::linkAction('index/' . (int) $listMenus->prev . '/', '<< Anterior') ?>
+            <?= Html::linkAction('index/' . $listMenus->prev . '/', '<< Anterior') ?>
         <?php endif ?>
 
         <?php if ($listMenus->next): ?>
-            <?= Html::linkAction('index/' . (int) $listMenus->next . '/', 'Siguiente >>') ?>
+            <?= Html::linkAction('index/' . $listMenus->next . '/', 'Siguiente >>') ?>
         <?php endif ?>
     </nav>
 </div>
