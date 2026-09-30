@@ -299,9 +299,9 @@ Crea `[app]/views/menus/index.phtml`:
         <ul>
         <?php foreach ($listMenus->items as $item): ?>
             <li>
-                <?= Html::linkAction('edit/' . (int) $item->id . '/', 'Editar') ?>
-                <?= Html::linkAction('del/' . (int) $item->id . '/', 'Borrar') ?>
-                <strong><?= h((string) $item->nombre) ?> - <?= h((string) $item->titulo) ?></strong>
+                <?= Html::linkAction('edit/' . $item->id . '/', 'Editar') ?>
+                <?= Html::linkAction('del/' . $item->id . '/', 'Borrar') ?>
+                <strong><?= h(($item->nombre) ?> - <?= h($item->titulo) ?></strong>
             </li>
         <?php endforeach ?>
         </ul>
