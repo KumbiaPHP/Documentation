@@ -342,11 +342,13 @@ Crea `[app]/views/menus/create.phtml`:
 
 <?= Form::open() ?>
 
-<label for="menus_nombre">Nombre</label>
-<?= Form::text('menus.nombre') ?>
+<label>Nombre
+  <?= Form::text('menus.nombre') ?>
+</label>
 
-<label for="menus_titulo">Título</label>
-<?= Form::text('menus.titulo') ?>
+<label>Título
+  <?= Form::text('menus.titulo') ?>
+</label>
 
 <?= Form::submit('Agregar') ?>
 <?= Form::close() ?>
@@ -367,11 +369,13 @@ Crea `[app]/views/menus/edit.phtml`:
 
 <?= Form::open() ?>
 
-<label for="menus_nombre">Nombre</label>
-<?= Form::text('menus.nombre') ?>
+<label>Nombre
+  <?= Form::text('menus.nombre') ?>
+</label>
 
-<label for="menus_titulo">Título</label>
-<?= Form::text('menus.titulo') ?>
+<label>Título
+  <?= Form::text('menus.titulo') ?>
+</label>
 
 <?= Form::hidden('menus.id') ?>
 <?= Form::submit('Actualizar') ?>
