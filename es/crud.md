@@ -327,8 +327,7 @@ Crea `[app]/views/menus/index.phtml`:
 ```
 
 `Html::linkAction()` crea enlaces hacia otra acción del controlador actual.
-Los identificadores usados en las rutas se convierten a entero y los valores
-de la tabla se escapan con `h()` antes de insertarlos en HTML. `h()` protege el
+Los valores de la tabla se escapan con `h()` antes de insertarlos en HTML. `h()` protege el
 contexto HTML; no sustituye la validación ni parametrización de consultas SQL.
 
 ### 4.2 Creación: `create.phtml`
