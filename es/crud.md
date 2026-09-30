@@ -299,8 +299,8 @@ Crea `[app]/views/menus/index.phtml`:
         <ul>
         <?php foreach ($listMenus->items as $item): ?>
             <li>
-                <?= Html::linkAction('edit/' . $item->id . '/', 'Editar') ?>
-                <?= Html::linkAction('del/' . $item->id . '/', 'Borrar') ?>
+                <?= Html::linkAction("edit/$item->id/", 'Editar') ?>
+                <?= Html::linkAction("del/$item->id/", 'Borrar') ?>
                 <strong><?= h(($item->nombre) ?> - <?= h($item->titulo) ?></strong>
             </li>
         <?php endforeach ?>
@@ -316,11 +316,11 @@ Crea `[app]/views/menus/index.phtml`:
 
     <nav aria-label="Paginación">
         <?php if ($listMenus->prev): ?>
-            <?= Html::linkAction('index/' . $listMenus->prev . '/', '<< Anterior') ?>
+            <?= Html::linkAction("index/$listMenus->prev/", '<< Anterior') ?>
         <?php endif ?>
 
         <?php if ($listMenus->next): ?>
-            <?= Html::linkAction('index/' . $listMenus->next . '/', 'Siguiente >>') ?>
+            <?= Html::linkAction("index/$listMenus->next/", 'Siguiente >>') ?>
         <?php endif ?>
     </nav>
 </div>
