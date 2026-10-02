@@ -310,11 +310,11 @@ Crea `[app]/views/menus/index.phtml`:
     </p>
 
     <nav aria-label="Paginación">
-        <?php if ($listMenus->prev): ?>
+        <?php if($listMenus->prev): ?>
             <?= Html::linkAction("index/$listMenus->prev/", '<< Anterior') ?>
         <?php endif ?>
 
-        <?php if ($listMenus->next): ?>
+        <?php if($listMenus->next): ?>
             <?= Html::linkAction("index/$listMenus->next/", 'Siguiente >>') ?>
         <?php endif ?>
     </nav>
