@@ -305,9 +305,7 @@ Crea `[app]/views/menus/index.phtml`:
             </li>
         <?php endforeach ?>
         </ul>
-    <p>
-        Página <?= "$listMenus->current de $listMenus->total" ?>
-    </p>
+    <p>Página <?= "$listMenus->current de $listMenus->total" ?></p>
 
     <nav aria-label="Paginación">
         <?php if($listMenus->prev): ?>
