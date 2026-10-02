@@ -288,7 +288,7 @@ explica el papel de `View::content()`.
 Crea `[app]/views/menus/index.phtml`:
 
 ```php
-<div class="content">
+<section class="content">
     <?php View::content() ?>
 
     <h3>Menús</h3>
@@ -320,7 +320,7 @@ Crea `[app]/views/menus/index.phtml`:
 <?php else: ?>
     <p>No hay menús para mostrar.</p>
 <?php endif ?>
-</div>
+</section>
 ```
 
 `Html::linkAction()` crea enlaces hacia otra acción del controlador actual.
