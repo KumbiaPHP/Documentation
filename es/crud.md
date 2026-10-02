@@ -310,8 +310,7 @@ Crea `[app]/views/menus/index.phtml`:
     <?php endif ?>
 
     <p>
-        Página <?= $listMenus->current ?>
-        de <?= $listMenus->total ?>
+        Página <?= "$listMenus->current de $listMenus->total" ?>
     </p>
 
     <nav aria-label="Paginación">
