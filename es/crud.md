@@ -318,7 +318,7 @@ Crea `[app]/views/menus/index.phtml`:
     </nav>
 
 <?php else: ?>
-    <h4>No hay menús para mostrar.</h4>
+    <h4>⚠️​ No hay menús para mostrar.</h4>
 <?php endif ?>
 </section>
 ```
