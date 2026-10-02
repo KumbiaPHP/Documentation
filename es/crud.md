@@ -295,7 +295,7 @@ Crea `[app]/views/menus/index.phtml`:
 
     <p><?= Html::linkAction('create/', 'Agregar menú') ?></p>
 
-    <?php if ($listMenus->items): ?>
+<?php if ($listMenus->items): ?>
         <ul>
         <?php foreach ($listMenus->items as $item): ?>
             <li>
@@ -319,9 +319,9 @@ Crea `[app]/views/menus/index.phtml`:
         <?php endif ?>
     </nav>
 
-    <?php else: ?>
-        <p>No hay menús para mostrar.</p>
-    <?php endif ?>
+<?php else: ?>
+    <p>No hay menús para mostrar.</p>
+<?php endif ?>
 </div>
 ```
 
