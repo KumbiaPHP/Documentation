@@ -319,6 +319,7 @@ Crea `[app]/views/menus/index.phtml`:
 
 <?php else: ?>
     <h4>⚠️​ No hay menús para mostrar.</h4>
+    <p>Añade un <?= Html::linkAction('create/', 'nuevo menú') ?></p>
 <?php endif ?>
 </section>
 ```
