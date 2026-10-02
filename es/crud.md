@@ -305,10 +305,6 @@ Crea `[app]/views/menus/index.phtml`:
             </li>
         <?php endforeach ?>
         </ul>
-    <?php else: ?>
-        <p>No hay menús para mostrar.</p>
-    <?php endif ?>
-
     <p>
         Página <?= "$listMenus->current de $listMenus->total" ?>
     </p>
@@ -322,6 +318,10 @@ Crea `[app]/views/menus/index.phtml`:
             <?= Html::linkAction("index/$listMenus->next/", 'Siguiente >>') ?>
         <?php endif ?>
     </nav>
+
+    <?php else: ?>
+        <p>No hay menús para mostrar.</p>
+    <?php endif ?>
 </div>
 ```
 
